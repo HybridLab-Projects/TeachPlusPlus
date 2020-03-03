@@ -26,6 +26,10 @@
     "eslint-plugin-vue": "^6.1.2",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
+    "stylelint": "^13.2.0",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-scss": "^3.14.2",
+    "stylelint-webpack-plugin": "^1.2.3",
     "vue-cli-plugin-vuetober": "^3.0.0",
     "vue-template-compiler": "^2.6.11"
   }

@@ -1,0 +1,31 @@
+{
+    "extends": "stylelint-config-recommended-scss",
+    "rules": {
+      "block-opening-brace-space-before": "always",
+      "block-opening-brace-newline-after": "always",
+      "block-closing-brace-newline-before": "always",
+      "declaration-colon-space-after": "always",
+      "declaration-colon-space-before": "never",
+      "value-list-comma-newline-after": "always-multi-line",
+      "value-list-comma-space-after": "always-single-line",
+      "value-list-comma-space-before": "never",
+      "indentation": 2,
+
+
+
+      "max-nesting-depth": 4,
+      "no-descending-specificity": null,
+      "property-no-unknown": [
+        true,
+        {
+          "ignoreProperties": ["user-drag", "font-smooth"]
+        }
+      ],
+      "selector-pseudo-element-no-unknown": [
+        true,
+        {
+          "ignorePseudoElements": ["v-deep"]
+        }
+      ]
+    }
+  }
