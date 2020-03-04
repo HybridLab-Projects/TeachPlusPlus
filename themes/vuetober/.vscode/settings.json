@@ -1,0 +1,73 @@
+{
+// EDITOR
+  // ----------------------------------------
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[javascript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
+  "[typescript]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
+  "[vue]": { "editor.defaultFormatter": "dbaeumer.vscode-eslint" },
+  "[scss]": { "editor.defaultFormatter": "stylelint.vscode-stylelint" },
+  "[css]": { "editor.defaultFormatter": "stylelint.vscode-stylelint" },
+  "editor.codeActionsOnSave": {
+    // https://github.com/microsoft/vscode-eslint/blob/master/README.md#release-notes
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+
+  "editor.formatOnSave": false,
+  "javascript.format.enable": false,
+
+  // ESLINT
+  // ----------------------------------------
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.options": {
+    "extensions": [".html", ".js", ".ts", ".vue"]
+  },
+
+
+  // VETUR
+  // Disable rules if user has extension installed and enabled.
+  // ----------------------------------------
+  "vetur.validation.template": false,
+  "vetur.validation.style": false,
+  "vetur.format.defaultFormatter.html": "none",
+  "vetur.format.defaultFormatter.css": "none",
+  "vetur.format.defaultFormatter.scss": "none",
+  "vetur.format.defaultFormatter.js": "none",
+  "vetur.format.defaultFormatter.ts": "none",
+
+  // HTML
+  // ----------------------------------------
+  "html.format.enable": false,
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html"
+  },
+
+  // STYLELINT
+  // ----------------------------------------
+  "stylelint.enable": true,
+  "css.validate": false,
+  "scss.validate": false,
+
+  // FILES
+  // ----------------------------------------
+  "files.exclude": {
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/dist": true
+  },
+  "files.associations": {
+    ".babelrc": "jsonc",
+    ".eslintrc": "jsonc",
+    ".markdownlintrc": "jsonc",
+    "*.config.js": "javascript",
+    "*.spec.js": "javascript",
+    "*.vue": "vue"
+  },
+  // The default end of line character. Use \n for LF and \r\n for CRLF.
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true
+}
