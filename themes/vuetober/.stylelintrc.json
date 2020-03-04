@@ -13,6 +13,7 @@
       "at-rule-semicolon-newline-after": "always",
       "indentation": 2,
 
+      "no-empty-source": null,
 
 
       "max-nesting-depth": 4,
