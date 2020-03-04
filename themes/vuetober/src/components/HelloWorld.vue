@@ -11,6 +11,18 @@
       >vue-cli documentation</a>.
     </p>
     <h3>Installed CLI Plugins</h3>
+    <div>
+      <b-button>Button</b-button>
+      <b-button variant="danger">
+        Button
+      </b-button>
+      <b-button variant="success">
+        Button
+      </b-button>
+      <b-button variant="outline-primary">
+        Button
+      </b-button>
+    </div>
     <ul>
       <li>
         <a
@@ -143,7 +155,7 @@ li {
   display: inline-block;
   margin: 0 10px;
   a {
-    margin: 5
+    margin: 5;
   }
 
 }
