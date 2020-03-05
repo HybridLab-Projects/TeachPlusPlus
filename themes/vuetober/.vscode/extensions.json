@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+      // ESLint - Integrates ESLint JavaScript into VS Code.
+      "dbaeumer.vscode-eslint",
+      // Vetur - Syntax highlight for Vue.js
+      "octref.vetur",
+      // stylelint - Modern CSS/SCSS/Less linter
+      "stylelint.vscode-stylelint",
+    ]
+  }
