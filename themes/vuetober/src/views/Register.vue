@@ -59,7 +59,7 @@
         />
         <BCheckboxWithValidation
           v-model="user.confirmation"
-          rules="required"
+          :rules="{ required: { allowFalse: false } }"
         >
           Suhlas
         </BCheckboxWithValidation>
