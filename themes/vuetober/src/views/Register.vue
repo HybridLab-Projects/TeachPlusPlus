@@ -40,7 +40,7 @@
         />
 
         <BTextInputWithValidation
-          rules="required|min:8"
+          rules="required|min:8|upperCase|containsNumber"
           type="password"
           label="Heslo"
           name="Heslo"

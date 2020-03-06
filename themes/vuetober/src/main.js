@@ -23,6 +23,8 @@ Object.keys(rules).forEach((rule) => {
   });
 });
 
+extend('upperCase', (value) => value !== value.toLowerCase());
+extend('containsNumber', (value) => /\d/.test(value));
 Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.prototype.$http = Axios;
