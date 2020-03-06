@@ -71,6 +71,9 @@
         >
           Submit
         </b-button>
+        <p v-if="error">
+          {{ error }}
+        </p>
       </b-form>
     </ValidationObserver>
   </b-container>
@@ -99,14 +102,16 @@ export default {
         password_confirmation: '',
         confirmation: false,
       },
+      error: '',
     };
   },
   methods: {
     onSubmit() {
+      this.error = '';
       const { user } = this;
       this.$store.dispatch('register', user)
         .then(() => this.$router.push('login'))
-        .catch((err) => console.log(err.response.data.error));
+        .catch((err) => { this.error = err.response.data.error; });
     },
   },
 };
