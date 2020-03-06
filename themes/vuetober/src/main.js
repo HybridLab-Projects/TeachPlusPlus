@@ -7,6 +7,8 @@ import { ValidationProvider, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import { messages } from 'vee-validate/dist/locale/en.json';
 
+import Axios from 'axios';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -22,6 +24,12 @@ Object.keys(rules).forEach((rule) => {
 });
 
 Vue.component('ValidationProvider', ValidationProvider);
+
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem('token');
+if (token) {
+  Vue.prototype.$http.defaults.headers.common.Authorization = token;
+}
 
 Vue.config.productionTip = false;
 

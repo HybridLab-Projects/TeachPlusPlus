@@ -2,7 +2,7 @@
   <b-container>
     <h1>REGISTER</h1>
     <ValidationObserver v-slot="{ passes }">
-      <b-form @submit.prevent="passes(onSubmit)">
+      <b-form @submit.enter.prevent="passes(onSubmit)">
         <BTextInputWithValidation
           rules="required|alpha"
           type="text"
@@ -54,7 +54,7 @@
           type="password"
           label="Potvrdenie hesla "
           name="Potvrdenie hesla"
-          v-model="user.passwordAgain"
+          v-model="user.password_confirmation"
           placeholder="Potvrď heslo"
         />
         <BCheckboxWithValidation
@@ -96,14 +96,17 @@ export default {
         username: '',
         email: '',
         password: '',
-        passwordAgain: '',
+        password_confirmation: '',
         confirmation: false,
       },
     };
   },
   methods: {
     onSubmit() {
-      console.log(this.user);
+      const { user } = this;
+      this.$store.dispatch('register', user)
+        .then(() => this.$router.push('login'))
+        .catch((err) => console.log(err.response.data.error));
     },
   },
 };
