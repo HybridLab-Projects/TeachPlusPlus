@@ -11,3 +11,9 @@
 9. Prejdi do vuetobru - **cd themes/vuetober**
 10. Nainštaluj npm packages - **npm install** a spusti server - **npm run serve**
 11. Zapni laragon
+
+Dalšie príkazy:
+git pull - stiahnes vsetky zmeny co sa udiali - vzdy pred tym ako zacnem kodit 
+git add .  - pridam vsetky zmenene subory 
+git commit -m "sprava" - zapise vsetky pridane subory do gitu
+git push origin vetva - posle vsetky zmeny vo vetve na github
