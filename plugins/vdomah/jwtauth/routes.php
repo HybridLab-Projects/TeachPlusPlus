@@ -71,7 +71,7 @@ Route::group(['prefix' => 'api'], function() {
     });
 
     Route::post('/signup', function () {
-        $credentials = Input::only('email', 'password', 'password_confirmation');
+        $credentials = Input::only('name', 'surname', 'username', 'email', 'password', 'password_confirmation');
 
         try {
             $userModel = UserModel::create($credentials);
