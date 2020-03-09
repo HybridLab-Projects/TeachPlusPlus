@@ -76,11 +76,11 @@ export default new Vuex.Store({
     },
     logout({ commit, state }) {
       return new Promise((resolve, reject) => {
+        commit('logout');
+        localStorage.removeItem('token');
+        delete Axios.defaults.headers.common.Authorization;
         Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
           .then((res) => {
-            commit('logout');
-            localStorage.removeItem('token');
-            delete Axios.defaults.headers.common.Authorization;
             resolve();
           })
           .catch((err) => {
