@@ -5,7 +5,7 @@ import './custom.scss';
 
 import { ValidationProvider, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
-import { messages } from 'vee-validate/dist/locale/en.json';
+import { messages } from 'vee-validate/dist/locale/sk.json';
 
 import Axios from 'axios';
 
@@ -23,8 +23,14 @@ Object.keys(rules).forEach((rule) => {
   });
 });
 
-extend('upperCase', (value) => value !== value.toLowerCase());
-extend('containsNumber', (value) => /\d/.test(value));
+extend('upperCase', {
+  validate: (value) => value !== value.toLowerCase(),
+  message: '{_field_} musí obsahovať veľké písmeno',
+});
+extend('containsNumber', {
+  validate: (value) => /\d/.test(value),
+  message: '{_field_} musí obsahovať číslicu',
+});
 Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.prototype.$http = Axios;
