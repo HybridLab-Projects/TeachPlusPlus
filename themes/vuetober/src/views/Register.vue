@@ -2,7 +2,7 @@
   <b-container>
     <h1>REGISTER</h1>
     <ValidationObserver v-slot="{ passes }">
-      <b-form @submit.enter.prevent="passes(onSubmit)">
+      <b-form @submit.enter.prevent="passes(onRegister)">
         <BTextInputWithValidation
           rules="required|alpha"
           type="text"
@@ -22,7 +22,7 @@
         />
 
         <BTextInputWithValidation
-          rules="required|alpha"
+          rules="required"
           type="text"
           label="Používateľské meno"
           name="Používateľské meno"
@@ -71,9 +71,14 @@
         >
           Submit
         </b-button>
-        <p v-if="error">
+        <b-alert
+          show
+          variant="danger"
+          v-if="error"
+          class="mt-3"
+        >
           {{ error }}
-        </p>
+        </b-alert>
       </b-form>
     </ValidationObserver>
   </b-container>
@@ -106,7 +111,7 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
+    onRegister() {
       this.error = '';
       const { user } = this;
       this.$store.dispatch('register', user)
