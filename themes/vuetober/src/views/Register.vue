@@ -115,7 +115,7 @@ export default {
       this.error = '';
       const { user } = this;
       this.$store.dispatch('register', user)
-        .then(() => this.$router.push('login'))
+        .then(() => this.$router.push('teachers'))
         .catch((err) => { this.error = err.response.data.error; });
     },
   },

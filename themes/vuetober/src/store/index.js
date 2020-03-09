@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
-    user: localStorage.getItem('user') || {},
+    user: JSON.parse(localStorage.getItem('user')) || {},
   },
   mutations: {
     auth_request(state) {
@@ -74,9 +74,9 @@ export default new Vuex.Store({
           });
       });
     },
-    logout({ commit }, token) {
+    logout({ commit, state }) {
       return new Promise((resolve, reject) => {
-        Axios({ url: '/api/invalidate', data: token, method: 'POST' })
+        Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
           .then((res) => {
             commit('logout');
             localStorage.removeItem('token');
