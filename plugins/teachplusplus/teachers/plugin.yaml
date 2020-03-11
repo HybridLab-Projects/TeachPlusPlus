@@ -1,0 +1,11 @@
+plugin:
+    name: 'teachplusplus.teachers::lang.plugin.name'
+    description: 'teachplusplus.teachers::lang.plugin.description'
+    author: TeachPlusPlus
+    icon: oc-icon-book
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Teachers
+        url: teachplusplus/teachers/teachers
+        icon: icon-users

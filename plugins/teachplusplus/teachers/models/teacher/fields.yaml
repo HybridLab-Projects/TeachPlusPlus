@@ -1,0 +1,9 @@
+fields:
+    name:
+        label: 'teachers name'
+        span: full
+        type: text
+    surname:
+        label: 'teachers surname'
+        span: full
+        type: text
