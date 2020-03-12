@@ -9,3 +9,8 @@ navigation:
         label: Teachers
         url: teachplusplus/teachers/teachers
         icon: icon-users
+        sideMenu:
+            side-menu-item:
+                label: Subjects
+                url: teachplusplus/teachers/subjects
+                icon: icon-list

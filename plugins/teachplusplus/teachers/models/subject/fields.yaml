@@ -1,0 +1,9 @@
+fields:
+    subject_name:
+        label: 'Subject name'
+        span: auto
+        type: text
+    short:
+        label: Short
+        span: right
+        type: text

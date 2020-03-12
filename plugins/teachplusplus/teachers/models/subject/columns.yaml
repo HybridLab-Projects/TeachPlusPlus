@@ -1,0 +1,11 @@
+columns:
+    subject_name:
+        label: Subject
+        type: text
+        searchable: true
+        sortable: true
+    short:
+        label: Short
+        type: text
+        searchable: true
+        sortable: true
