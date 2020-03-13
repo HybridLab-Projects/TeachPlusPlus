@@ -7,3 +7,9 @@ fields:
         label: 'teachers surname'
         span: full
         type: text
+    subject:
+        label: Subject
+        span: auto
+        nameFrom: subject_name
+        descriptionFrom: description
+        type: relation
