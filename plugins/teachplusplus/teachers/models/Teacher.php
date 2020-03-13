@@ -15,11 +15,26 @@ class Teacher extends Model
      */
     public $timestamps = false;
 
+    
+
 
     /**
      * @var string The database table used by the model.
      */
     public $table = 'teachplusplus_teachers_';
+
+    public $belongsToMany =[
+
+        'subject' =>[
+            'Teachplusplus\teachers\models\Subject',
+            'table' => 'teachplusplus_teachers_teachers_subjects',
+            'order' => 'subject_name'
+
+        ]
+        ];
+
+       
+
 
     /**
      * @var array Validation rules

@@ -21,6 +21,7 @@ class Subject extends Model
      */
     public $table = 'teachplusplus_teachers_subjects';
 
+   
     /**
      * @var array Validation rules
      */
