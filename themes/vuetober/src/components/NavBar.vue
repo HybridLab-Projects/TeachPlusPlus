@@ -16,7 +16,7 @@
           src="https://placekitten.com/g/30/30"
           class="d-inline-block align-top"
           alt="Kitten"
-        > Teach++
+        > <strong>Teach++</strong>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse" />
@@ -28,7 +28,9 @@
         <b-navbar-nav
           class="ml-auto"
         >
-          <p class="registracka_text">
+          <p
+            class="my-auto"
+          >
             Ešte nemáš účet?
           </p>
           <b-nav-item
@@ -36,7 +38,7 @@
             v-if="!isLoggedIn"
           >
             <b-button
-              variant="outline-primary"
+              variant="outline-danger"
               class="registracia_btn"
             >
               Registrácia
@@ -76,27 +78,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.brand {
-  color: #000;
-}
-.brand:hover {
-  color: #000;
-}
+  .brand {
+    color: #000;
+  }
 
-.registracka_text {
-  margin: auto;
-  color: #6F6E6E;
-  font-weight: bolder;
-}
-
-.registracia_btn {
-  margin: auto;
-  color: #f23e6e;
-  border-color: #f23e6e;
-}
-
-.registracia_btn:hover {
-  color: #ffffff;
-  background-color: #f23e6e;
-}
+  .navbar-toggler-icon {
+    color: black;
+  }
 </style>

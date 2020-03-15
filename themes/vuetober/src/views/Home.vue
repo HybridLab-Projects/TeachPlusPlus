@@ -18,9 +18,6 @@ export default {
 
 <style lang="scss" scoped>
   .startingpage_style {
-    display: table;
-    height: 100vh;
-    background-color: #5e5cfc;
     overflow: hidden;
   }
 </style>
