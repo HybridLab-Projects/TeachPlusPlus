@@ -11,12 +11,13 @@
  * - jsdiff (diff.js)
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // TEMPALTE DIFF CLASS DEFINITION
     // ============================
 
-    var TemplateDiff = function(element, options) {
+    var TemplateDiff = function (element, options) {
         this.options   = options
         this.$el       = $(element)
 
@@ -31,7 +32,7 @@
         diffType: 'lines' // chars, words, lines
     }
 
-    TemplateDiff.prototype.init = function() {
+    TemplateDiff.prototype.init = function () {
         var
             oldValue = $('[data-field-name="'+this.options.oldFieldName+'"] .form-control '+this.options.contentTag).html(),
             newValue = $('[data-field-name="'+this.options.newFieldName+'"] .form-control '+this.options.contentTag).html()
@@ -42,13 +43,12 @@
         this.diffStrings(oldValue, newValue)
     }
 
-    TemplateDiff.prototype.diffStrings = function(oldValue, newValue) {
+    TemplateDiff.prototype.diffStrings = function (oldValue, newValue) {
         var result = this.$el.get(0)
         var diffType = 'diff' + this.options.diffType[0].toUpperCase() + this.options.diffType.slice(1)
         var diff = JsDiff[diffType](oldValue, newValue)
         var fragment = document.createDocumentFragment();
         for (var i=0; i < diff.length; i++) {
-
             if (diff[i].added && diff[i + 1] && diff[i + 1].removed) {
                 var swap = diff[i];
                 diff[i] = diff[i + 1];
@@ -85,9 +85,15 @@
             var $this   = $(this)
             var data    = $this.data('oc.example')
             var options = $.extend({}, TemplateDiff.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.example', (data = new TemplateDiff(this, options)))
-            if (typeof option == 'string') result = data[option].apply(data, args)
-            if (typeof result != 'undefined') return false
+            if (!data) {
+                $this.data('oc.example', (data = new TemplateDiff(this, options)))
+                if (typeof option == 'string') {
+                    result = data[option].apply(data, args)
+                    if (typeof result != 'undefined') {
+                        return false
+                    }
+                }
+            }
         })
         
         return result ? result : this

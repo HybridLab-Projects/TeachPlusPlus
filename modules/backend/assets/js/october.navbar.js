@@ -9,9 +9,9 @@
  * - VerticalMenu (october.verticalmenu.js)
  */
 
-(function($){
-    $(document).ready(function(){
-        $('nav.navbar').each(function(){
+(function ($) {
+    $(document).ready(function () {
+        $('nav.navbar').each(function () {
             var
                 navbar = $(this),
                 nav = $('ul.nav', navbar),
@@ -28,10 +28,12 @@
                 template: '<div class="tooltip mainmenu-tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
             })
             .on('show.bs.tooltip', function (e) {
-                if (isMobile) e.preventDefault()
+                if (isMobile) {
+                    e.preventDefault()
+                }
             })
 
-            $('[data-calculate-width]', navbar).one('oc.widthFixed', function() {
+            $('[data-calculate-width]', navbar).one('oc.widthFixed', function () {
                 var dragScroll = $('[data-control=toolbar]', navbar).data('oc.dragScroll')
                 if (dragScroll) {
                     dragScroll.goToElement($('ul.nav > li.active', navbar), undefined, {'duration': 0})

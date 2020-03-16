@@ -22,7 +22,8 @@
  * JavaScript API:
  * $('#filename').inputPreset({inputPreset: '#name', inputPresetType: 'file'})
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var VIETNAMESE_MAP = {
         'Á': 'A', 'À': 'A', 'Ã': 'A', 'Ả': 'A', 'Ạ': 'A', 'Ắ': 'A', 'Ằ': 'A', 'Ẵ':
@@ -35,12 +36,12 @@
         'U', 'Ứ': 'U', 'Ừ': 'U', 'Ử': 'U', 'Ữ': 'U', 'Ự': 'U', 'Ý': 'Y', 'Ỳ': 'Y',
         'Ỷ': 'Y', 'Ỹ': 'Y', 'Ỵ': 'Y', 'á': 'a', 'à': 'a', 'ã': 'a', 'ả': 'a', 'ạ':
         'a', 'ắ': 'a', 'ằ': 'a', 'ẵ': 'a', 'ẳ': 'a', 'ặ': 'a', 'ấ': 'a', 'ầ': 'a',
-        'ẫ': 'a', 'ẩ': 'a', 'ậ': 'a', 'đ': 'd', 'é': 'e', 'è': 'e', 'ẽ': 'e', 'ẻ': 
-        'e', 'ẹ': 'e', 'ế': 'e', 'ề': 'e', 'ễ': 'e', 'ể': 'e', 'ệ': 'e', 'ó': 'o', 
-        'ò': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o', 'ố': 'o', 'ồ': 'o', 'ổ': 'o', 'ỗ': 
-        'o', 'ộ': 'o', 'ơ': 'o', 'ớ': 'o', 'ờ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o', 
-        'í': 'i', 'ì': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i', 'ú': 'u', 'ù': 'u', 'ủ': 
-        'u', 'ũ': 'u', 'ụ': 'u', 'ư': 'u', 'ứ': 'u', 'ừ': 'u', 'ử': 'u', 'ữ': 'u', 
+        'ẫ': 'a', 'ẩ': 'a', 'ậ': 'a', 'đ': 'd', 'é': 'e', 'è': 'e', 'ẽ': 'e', 'ẻ':
+        'e', 'ẹ': 'e', 'ế': 'e', 'ề': 'e', 'ễ': 'e', 'ể': 'e', 'ệ': 'e', 'ó': 'o',
+        'ò': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o', 'ố': 'o', 'ồ': 'o', 'ổ': 'o', 'ỗ':
+        'o', 'ộ': 'o', 'ơ': 'o', 'ớ': 'o', 'ờ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
+        'í': 'i', 'ì': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i', 'ú': 'u', 'ù': 'u', 'ủ':
+        'u', 'ũ': 'u', 'ụ': 'u', 'ư': 'u', 'ứ': 'u', 'ừ': 'u', 'ử': 'u', 'ữ': 'u',
         'ự': 'u', 'ý': 'y', 'ỳ': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y'
     },
     LATIN_MAP = {
@@ -169,13 +170,13 @@
     var locale = $('meta[name="backend-locale"]').attr('content')
 
     var Downcoder = {
-        Initialize: function() {
+        Initialize: function () {
             if (Downcoder.map) {
                 return;
             }
             Downcoder.map = {};
             Downcoder.chars = [];
-            if(typeof SPECIFIC_MAPS[locale] === 'object') {
+            if (typeof SPECIFIC_MAPS[locale] === 'object') {
                 ALL_MAPS.push(SPECIFIC_MAPS[locale]);
             }
             for (var i=0; i<ALL_MAPS.length; i++) {
@@ -208,53 +209,57 @@
             self = this,
             prefix = ''
 
-        if (options.inputPresetPrefixInput !== undefined)
+        if (options.inputPresetPrefixInput !== undefined) {
             prefix = $(options.inputPresetPrefixInput, parent).val()
 
-        if (prefix === undefined)
-            prefix = ''
+            if (prefix === undefined) {
+                prefix = ''
 
-        // Do not update the element if it already has a value and the value doesn't match the prefix
-        if ($el.val().length && $el.val() != prefix)
-            return
-
-        $el.val(prefix).trigger('oc.inputPreset.afterUpdate')
-
-        this.$src = $(options.inputPreset, parent)
-
-        this.$src.on('input paste', function(event) { 
-            if (self.cancelled) 
-                return 
- 
-            var timeout = event.type === 'paste' ? 100 : 0 
-            var updateValue = function(self, el, prefix) { 
-                if (el.data('update') === false) {
+            // Do not update the element if it already has a value and the value doesn't match the prefix
+                if ($el.val().length && $el.val() != prefix) {
                     return
-                }
-                el   
-                    .val(prefix + self.formatValue()) 
-                    .trigger('oc.inputPreset.afterUpdate') 
-            } 
- 
-            var src = $(this) 
-            setTimeout(function() { 
-                $el.trigger('oc.inputPreset.beforeUpdate', [src]) 
-                setTimeout(updateValue, 100, self, $el, prefix) 
-            }, timeout) 
-        }) 
 
-        this.$el.on('change', function() {
-            self.cancelled = true
-        })
+                    $el.val(prefix).trigger('oc.inputPreset.afterUpdate')
+
+                    this.$src = $(options.inputPreset, parent)
+
+                    this.$src.on('input paste', function (event) {
+                        if (self.cancelled) {
+                            return
+ 
+                            var timeout = event.type === 'paste' ? 100 : 0
+                            var updateValue = function (self, el, prefix) {
+                                if (el.data('update') === false) {
+                                    return
+                                }
+                                el
+                                .val(prefix + self.formatValue())
+                                .trigger('oc.inputPreset.afterUpdate')
+                            }
+                        }
+ 
+                        var src = $(this)
+                        setTimeout(function () {
+                            $el.trigger('oc.inputPreset.beforeUpdate', [src])
+                            setTimeout(updateValue, 100, self, $el, prefix)
+                        }, timeout)
+                    })
+
+                    this.$el.on('change', function () {
+                        self.cancelled = true
+                    })
+                }
+            }
+        }
     }
 
-    InputPreset.prototype.formatNamespace = function() {
+    InputPreset.prototype.formatNamespace = function () {
         var value = this.toCamel(this.$src.val())
 
         return value.substr(0, 1).toUpperCase() + value.substr(1)
     }
 
-    InputPreset.prototype.formatValue = function() {
+    InputPreset.prototype.formatValue = function () {
         if (this.options.inputPresetType == 'exact') {
             return this.$src.val();
         }
@@ -276,16 +281,16 @@
         return value.replace(/\s/gi, "-")
     }
 
-    InputPreset.prototype.toCamel = function(slug, numChars) {
+    InputPreset.prototype.toCamel = function (slug, numChars) {
 
         Downcoder.Initialize()
-        slug = slug.replace(Downcoder.regex, function(m) {
+        slug = slug.replace(Downcoder.regex, function (m) {
             return Downcoder.map[m]
         })
 
         slug = this.removeStopWords(slug);
         slug = slug.toLowerCase()
-        slug = slug.replace(/(\b|-)\w/g, function(m) {
+        slug = slug.replace(/(\b|-)\w/g, function (m) {
             return m.toUpperCase();
         });
         slug = slug.replace(/[^-\w\s]/g, '')
@@ -295,10 +300,10 @@
         return slug.substring(0, numChars)
     }
 
-    InputPreset.prototype.slugify = function(slug, numChars) {
+    InputPreset.prototype.slugify = function (slug, numChars) {
 
         Downcoder.Initialize()
-        slug = slug.replace(Downcoder.regex, function(m) {
+        slug = slug.replace(Downcoder.regex, function (m) {
             return Downcoder.map[m]
         })
 
@@ -310,7 +315,7 @@
         return slug.substring(0, numChars)
     }
 
-    InputPreset.prototype.removeStopWords = function(str) {
+    InputPreset.prototype.removeStopWords = function (str) {
         if (this.options.inputPresetRemoveWords) {
             var regex = new RegExp('\\b(' + removeList.join('|') + ')\\b', 'gi')
             str = str.replace(regex, '')
@@ -338,7 +343,9 @@
             var data  = $this.data('oc.inputPreset')
             var options = $.extend({}, InputPreset.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) $this.data('oc.inputPreset', (data = new InputPreset(this, options)))
+            if (!data) {
+                $this.data('oc.inputPreset', (data = new InputPreset(this, options)))
+            }
         })
     }
 
@@ -355,7 +362,7 @@
     // INPUT CONVERTER DATA-API
     // ===============
 
-    $(document).render(function() {
+    $(document).render(function () {
         $('[data-input-preset]').inputPreset()
     })
 

@@ -1,20 +1,21 @@
 /*
  * Inspector text editor class.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.propertyEditors.popupBase,
         BaseProto = Base.prototype
 
-    var TextEditor = function(inspector, propertyDefinition, containerCell, group) {
+    var TextEditor = function (inspector, propertyDefinition, containerCell, group) {
         Base.call(this, inspector, propertyDefinition, containerCell, group)
     }
 
     TextEditor.prototype = Object.create(BaseProto)
     TextEditor.prototype.constructor = Base
 
-    TextEditor.prototype.setLinkText = function(link, value) {
-        var value = value !== undefined ? value 
+    TextEditor.prototype.setLinkText = function (link, value) {
+        var value = value !== undefined ? value
                 : this.inspector.getPropertyValue(this.propertyDefinition.property)
 
         if (value === undefined) {
@@ -24,7 +25,7 @@
         if (!value) {
             value = this.propertyDefinition.placeholder
             $.oc.foundation.element.addClass(link, 'placeholder')
-        } 
+        }
         else {
             $.oc.foundation.element.removeClass(link, 'placeholder')
         }
@@ -38,7 +39,7 @@
         link.textContent = value
     }
 
-    TextEditor.prototype.getPopupContent = function() {
+    TextEditor.prototype.getPopupContent = function () {
         return '<form>                                                                                  \
                 <div class="modal-header">                                                              \
                     <button type="button" class="close" data-dismiss="popup">&times;</button>           \
@@ -57,7 +58,7 @@
                 </form>'
     }
 
-    TextEditor.prototype.configureComment = function(popup) {
+    TextEditor.prototype.configureComment = function (popup) {
         if (!this.propertyDefinition.description) {
             return
         }
@@ -66,7 +67,7 @@
         descriptionElement.text(this.propertyDefinition.description)
     }
 
-    TextEditor.prototype.configurePopup = function(popup) {
+    TextEditor.prototype.configurePopup = function (popup) {
         var $textarea = $(popup).find('textarea'),
             value = this.inspector.getPropertyValue(this.propertyDefinition.property)
 
@@ -84,7 +85,7 @@
         this.configureComment(popup)
     }
 
-    TextEditor.prototype.handleSubmit = function($form) {
+    TextEditor.prototype.handleSubmit = function ($form) {
         var $textarea = $form.find('textarea'),
             link = this.getLink(),
             value = $.trim($textarea.val())

@@ -4,40 +4,44 @@
  * The helpers are used mostly by the Inspector Surface.
  *
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // NAMESPACES
     // ============================
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    if ($.oc.inspector === undefined)
-        $.oc.inspector = {}
+        if ($.oc.inspector === undefined) {
+            $.oc.inspector = {}
 
-    $.oc.inspector.engine = {}
+            $.oc.inspector.engine = {}
 
-    // CLASS DEFINITION
-    // ============================
+        // CLASS DEFINITION
+        // ============================
 
-    function findGroup(group, properties) {
-        for (var i = 0, len = properties.length; i < len; i++) {
-            var property = properties[i]
+            function findGroup(group, properties)
+            {
+                for (var i = 0, len = properties.length; i < len; i++) {
+                    var property = properties[i]
 
-            if (property.itemType !== undefined && property.itemType == 'group' && property.title == group) {
-                return property
+                    if (property.itemType !== undefined && property.itemType == 'group' && property.title == group) {
+                        return property
+                    }
+                }
+
+                return null
             }
         }
-
-        return null
     }
 
-    $.oc.inspector.engine.processPropertyGroups = function(properties) {
+    $.oc.inspector.engine.processPropertyGroups = function (properties) {
         var fields = [],
             result = {
                 hasGroups: false,
                 properties: []
-            },
+        },
             groupIndex = 0
 
         for (var i = 0, len = properties.length; i < len; i++) {
@@ -48,7 +52,7 @@
             }
         }
 
-        properties.sort(function(a, b){
+        properties.sort(function (a, b) {
             return a['sortOrder'] - b['sortOrder']
         })
 

@@ -10,14 +10,15 @@
  * Dependancies:
  * - Froala Editor (froala_editor.js)
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
     // RICHEDITOR CLASS DEFINITION
     // ============================
 
-    var RichEditor = function(element, options) {
+    var RichEditor = function (element, options) {
         this.options     = options
         this.$el         = $(element)
         this.$textarea   = this.$el.find('>textarea:first')
@@ -55,7 +56,7 @@
         readOnly: false
     }
 
-    RichEditor.prototype.init = function() {
+    RichEditor.prototype.init = function () {
         var self = this;
 
         this.$el.one('dispose-control', this.proxy(this.dispose))
@@ -73,7 +74,7 @@
         this.initFroala()
     }
 
-    RichEditor.prototype.initFroala = function() {
+    RichEditor.prototype.initFroala = function () {
         var froalaOptions = {
             editorClass: 'control-richeditor',
             language: this.options.editorLang,
@@ -93,39 +94,39 @@
         froalaOptions.imageStyles = this.options.imageStyles
             ? this.options.imageStyles
             : {
-              'oc-img-rounded': 'Rounded',
-              'oc-img-bordered': 'Bordered'
-            }
+                'oc-img-rounded': 'Rounded',
+                'oc-img-bordered': 'Bordered'
+        }
 
         froalaOptions.linkStyles = this.options.linkStyles
             ? this.options.linkStyles
             : {
-              'oc-link-green': 'Green',
-              'oc-link-strong': 'Thick'
-            }
+                'oc-link-green': 'Green',
+                'oc-link-strong': 'Thick'
+        }
 
         froalaOptions.paragraphStyles = this.options.paragraphStyles
             ? this.options.paragraphStyles
             : {
-              'oc-text-gray': 'Gray',
-              'oc-text-bordered': 'Bordered',
-              'oc-text-spaced': 'Spaced',
-              'oc-text-uppercase': 'Uppercase'
-            }
+                'oc-text-gray': 'Gray',
+                'oc-text-bordered': 'Bordered',
+                'oc-text-spaced': 'Spaced',
+                'oc-text-uppercase': 'Uppercase'
+        }
 
         froalaOptions.tableStyles = this.options.tableStyles
             ? this.options.tableStyles
             : {
-              'oc-dashed-borders': 'Dashed Borders',
-              'oc-alternate-rows': 'Alternate Rows'
-            }
+                'oc-dashed-borders': 'Dashed Borders',
+                'oc-alternate-rows': 'Alternate Rows'
+        }
 
         froalaOptions.tableCellStyles = this.options.tableCellStyles
             ? this.options.tableCellStyles
             : {
-              'oc-cell-highlighted': 'Highlighted',
-              'oc-cell-thick-border': 'Thick'
-            }
+                'oc-cell-highlighted': 'Highlighted',
+                'oc-cell-thick-border': 'Thick'
+        }
 
         froalaOptions.toolbarButtonsMD = froalaOptions.toolbarButtons
         froalaOptions.toolbarButtonsSM = froalaOptions.toolbarButtons
@@ -195,7 +196,7 @@
         this.$el.on('keydown', '.fr-view figure', this.proxy(this.onFigureKeydown))
     }
 
-    RichEditor.prototype.dispose = function() {
+    RichEditor.prototype.dispose = function () {
         this.unregisterHandlers()
 
         this.$textarea.froalaEditor('destroy')
@@ -211,7 +212,7 @@
         BaseProto.dispose.call(this)
     }
 
-    RichEditor.prototype.unregisterHandlers = function() {
+    RichEditor.prototype.unregisterHandlers = function () {
         this.$el.off('keydown', '.fr-view figure', this.proxy(this.onFigureKeydown))
 
         this.$textarea.off('froalaEditor.initialized', this.proxy(this.build))
@@ -225,7 +226,7 @@
         this.$el.off('dispose-control', this.proxy(this.dispose))
     }
 
-    RichEditor.prototype.build = function(event, editor) {
+    RichEditor.prototype.build = function (event, editor) {
         this.updateLayout()
 
         $(window).on('resize', this.proxy(this.updateLayout))
@@ -237,35 +238,35 @@
         this.$textarea.trigger('init.oc.richeditor', [this])
     }
 
-    RichEditor.prototype.isCodeViewActive = function() {
+    RichEditor.prototype.isCodeViewActive = function () {
         return this.editor && this.editor.codeView && this.editor.codeView.isActive()
     }
 
-    RichEditor.prototype.getElement = function() {
+    RichEditor.prototype.getElement = function () {
         return this.$el
     }
 
-    RichEditor.prototype.getEditor = function() {
+    RichEditor.prototype.getEditor = function () {
         return this.editor
     }
 
-    RichEditor.prototype.getTextarea = function() {
+    RichEditor.prototype.getTextarea = function () {
         return this.$textarea
     }
 
-    RichEditor.prototype.getContent = function() {
+    RichEditor.prototype.getContent = function () {
         return this.editor.html.get()
     }
 
-    RichEditor.prototype.setContent = function(html) {
+    RichEditor.prototype.setContent = function (html) {
         this.editor.html.set(html)
     }
 
-    RichEditor.prototype.syncContent = function() {
+    RichEditor.prototype.syncContent = function () {
         this.editor.events.trigger('contentChanged')
     }
 
-    RichEditor.prototype.updateLayout = function() {
+    RichEditor.prototype.updateLayout = function () {
         var $editor = $('.fr-wrapper', this.$el),
             $codeEditor = $('.fr-code', this.$el),
             $toolbar = $('.fr-toolbar', this.$el),
@@ -286,38 +287,38 @@
         }
     }
 
-    RichEditor.prototype.insertHtml = function(html) {
+    RichEditor.prototype.insertHtml = function (html) {
         this.editor.html.insert(html)
         this.editor.selection.restore()
     }
 
-    RichEditor.prototype.insertElement = function($el) {
+    RichEditor.prototype.insertElement = function ($el) {
         this.insertHtml($('<div />').append($el.clone()).remove().html())
     }
 
     /*
      * Inserts non-editable block (used for snippets, audio and video)
      */
-    RichEditor.prototype.insertUiBlock = function($node) {
+    RichEditor.prototype.insertUiBlock = function ($node) {
         this.$textarea.froalaEditor('figures.insert', $node)
     }
 
-    RichEditor.prototype.insertVideo = function(url, title) {
+    RichEditor.prototype.insertVideo = function (url, title) {
         this.$textarea.froalaEditor('figures.insertVideo', url, title)
     }
 
-    RichEditor.prototype.insertAudio = function(url, title) {
+    RichEditor.prototype.insertAudio = function (url, title) {
         this.$textarea.froalaEditor('figures.insertAudio', url, title)
     }
 
     // EVENT HANDLERS
     // ============================
 
-    RichEditor.prototype.onSetContent = function(ev, editor) {
+    RichEditor.prototype.onSetContent = function (ev, editor) {
         this.$textarea.trigger('setContent.oc.richeditor', [this])
     }
 
-    RichEditor.prototype.onSyncContent = function(ev, editor, html) {
+    RichEditor.prototype.onSyncContent = function (ev, editor, html) {
         // Beautify HTML.
         if (editor.codeBeautifier) {
             html = editor.codeBeautifier.run(html, editor.opts.codeBeautifierOptions)
@@ -332,19 +333,19 @@
         return container.html
     }
 
-    RichEditor.prototype.onFocus = function() {
+    RichEditor.prototype.onFocus = function () {
         this.$el.addClass('editor-focus')
     }
 
-    RichEditor.prototype.onBlur = function() {
+    RichEditor.prototype.onBlur = function () {
         this.$el.removeClass('editor-focus')
     }
 
-    RichEditor.prototype.onFigureKeydown = function(ev) {
+    RichEditor.prototype.onFigureKeydown = function (ev) {
         this.$textarea.trigger('figureKeydown.oc.richeditor', [ev, this])
     }
 
-    RichEditor.prototype.onKeydown = function(ev, editor, keyEv) {
+    RichEditor.prototype.onKeydown = function (ev, editor, keyEv) {
         this.$textarea.trigger('keydown.oc.richeditor', [keyEv, this])
 
         if (ev.isDefaultPrevented()) {
@@ -352,7 +353,7 @@
         }
     }
 
-    RichEditor.prototype.onChange = function(ev) {
+    RichEditor.prototype.onChange = function (ev) {
         this.$form.trigger('change')
     }
 
@@ -361,7 +362,7 @@
      * The onSyncContent() method (above) is involved into this call,
      * so the resulting HTML is (optionally) beautified.
      */
-    RichEditor.prototype.onFormBeforeRequest = function(ev) {
+    RichEditor.prototype.onFormBeforeRequest = function (ev) {
         if (!this.editor) {
             return
         }
@@ -384,9 +385,15 @@
             var $this   = $(this)
             var data    = $this.data('oc.richEditor')
             var options = $.extend({}, RichEditor.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.richEditor', (data = new RichEditor(this, options)))
-            if (typeof option == 'string') result = data[option].apply(data, args)
-            if (typeof result != 'undefined') return false
+            if (!data) {
+                $this.data('oc.richEditor', (data = new RichEditor(this, options)))
+                if (typeof option == 'string') {
+                    result = data[option].apply(data, args)
+                    if (typeof result != 'undefined') {
+                        return false
+                    }
+                }
+            }
         })
 
         return result ? result : this
@@ -397,14 +404,14 @@
     // RICHEDITOR NO CONFLICT
     // =================
 
-    $.fn.richEditor.noConflict = function() {
+    $.fn.richEditor.noConflict = function () {
         $.fn.richEditor = old
         return this
     }
 
     // RICHEDITOR DATA-API
     // ===============
-    $(document).render(function() {
+    $(document).render(function () {
         $('[data-control="richeditor"]').richEditor()
     })
 
@@ -412,10 +419,10 @@
     // BUTTON DEFINITIONS
     // =================
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    $.oc.richEditorButtons = [
+        $.oc.richEditorButtons = [
         'paragraphFormat',
         'paragraphStyle',
         'quote',
@@ -433,6 +440,6 @@
         'insertHR',
         'fullscreen',
         'html'
-    ]
-
+        ]
+    }
 }(window.jQuery);

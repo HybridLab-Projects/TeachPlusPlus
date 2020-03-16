@@ -5,7 +5,8 @@
  * - Waterfall plugin (waterfall.js)
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var UpdateProcess = function () {
 
@@ -13,21 +14,21 @@
         this.init()
     }
 
-    UpdateProcess.prototype.init = function() {
+    UpdateProcess.prototype.init = function () {
         var self = this
         this.activeStep = null
         this.updateSteps = null
     }
 
-    UpdateProcess.prototype.check = function() {
+    UpdateProcess.prototype.check = function () {
         var $form = $('#updateForm'),
             self = this
 
-        $form.request('onCheckForUpdates').done(function() {
+        $form.request('onCheckForUpdates').done(function () {
             self.evalConfirmedUpdates()
         })
 
-        $form.on('change', '[data-important-update-select]', function() {
+        $form.on('change', '[data-important-update-select]', function () {
             var $el = $(this),
                 selectedValue = $el.val(),
                 $updateItem = $el.closest('.update-item')
@@ -48,11 +49,11 @@
         })
     }
 
-    UpdateProcess.prototype.evalConfirmedUpdates = function() {
+    UpdateProcess.prototype.evalConfirmedUpdates = function () {
         var $form = $('#updateForm'),
             hasConfirmed = false
 
-        $('[data-important-update-select]', $form).each(function() {
+        $('[data-important-update-select]', $form).each(function () {
             if ($(this).val() == '') {
                 hasConfirmed = true
             }
@@ -68,14 +69,14 @@
         }
     }
 
-    UpdateProcess.prototype.execute = function(steps) {
+    UpdateProcess.prototype.execute = function (steps) {
         this.updateSteps = steps
         this.runUpdate()
     }
 
-    UpdateProcess.prototype.runUpdate = function(fromStep) {
+    UpdateProcess.prototype.runUpdate = function (fromStep) {
         $.waterfall.apply(this, this.buildEventChain(this.updateSteps, fromStep))
-            .fail(function(reason){
+            .fail(function (reason) {
                 var
                     template = $('#executeFailed').html(),
                     html = Mustache.to_html(template, { reason: reason })
@@ -85,19 +86,19 @@
             })
     }
 
-    UpdateProcess.prototype.retryUpdate = function() {
+    UpdateProcess.prototype.retryUpdate = function () {
         $('#executeActivity').show()
         $('#executeStatus').html('')
 
         this.runUpdate(this.activeStep)
     }
 
-    UpdateProcess.prototype.buildEventChain = function(steps, fromStep) {
+    UpdateProcess.prototype.buildEventChain = function (steps, fromStep) {
         var self = this,
             eventChain = [],
             skipStep = fromStep ? true : false
 
-        $.each(steps, function(index, step){
+        $.each(steps, function (index, step) {
 
             if (step == fromStep) {
                 skipStep = false
@@ -107,7 +108,7 @@
                 return true // Continue
             }
 
-            eventChain.push(function(){
+            eventChain.push(function () {
                 var deferred = $.Deferred()
 
                 self.activeStep = step
@@ -115,15 +116,18 @@
 
                 $.request('onExecuteStep', {
                     data: step,
-                    success: function(data){
-                        setTimeout(function() { deferred.resolve() }, 600)
+                    success: function (data) {
+                        setTimeout(function () {
+                            deferred.resolve() }, 600)
 
-                        if (step.code == 'completeUpdate' || step.code == 'completeInstall')
+                        if (step.code == 'completeUpdate' || step.code == 'completeInstall') {
                             this.success(data)
-                        else
-                            self.setLoadingBar(false)
+                            else {
+                                self.setLoadingBar(false)
+                            }
+                        }
                     },
-                    error: function(data){
+                    error: function (data) {
                         self.setLoadingBar(false)
                         deferred.reject(data.responseText)
                     }
@@ -136,22 +140,26 @@
         return eventChain
     }
 
-    UpdateProcess.prototype.setLoadingBar = function(state, message) {
+    UpdateProcess.prototype.setLoadingBar = function (state, message) {
         var loadingBar = $('#executeLoadingBar'),
             messageDiv = $('#executeMessage')
 
-        if (state)
+        if (state) {
             loadingBar.removeClass('bar-loaded')
-        else
-            loadingBar.addClass('bar-loaded')
+            else {
+                loadingBar.addClass('bar-loaded')
 
-        if (message)
-            messageDiv.text(message)
+                if (message) {
+                    messageDiv.text(message)
+                }
+            }
+        }
     }
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    $.oc.updateProcess = new UpdateProcess;
+        $.oc.updateProcess = new UpdateProcess;
+    }
 
 }(window.jQuery);

@@ -12,7 +12,8 @@
  * - Some other plugin (filename.js)
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
@@ -28,7 +29,7 @@
     MediaFinder.prototype = Object.create(BaseProto)
     MediaFinder.prototype.constructor = MediaFinder
 
-    MediaFinder.prototype.init = function() {
+    MediaFinder.prototype.init = function () {
         if (this.options.isMulti === null) {
             this.options.isMulti = this.$el.hasClass('is-multi')
         }
@@ -62,7 +63,7 @@
         this.$findValue = $('[data-find-value]', this.$el)
     }
 
-    MediaFinder.prototype.dispose = function() {
+    MediaFinder.prototype.dispose = function () {
         this.$el.off('click', '.find-button', this.proxy(this.onClickFindButton))
         this.$el.off('click', '.find-remove-button', this.proxy(this.onClickRemoveButton))
         this.$el.off('dispose-control', this.proxy(this.dispose))
@@ -71,32 +72,32 @@
         this.$findValue = null
         this.$el = null
 
-        // In some cases options could contain callbacks, 
+        // In some cases options could contain callbacks,
         // so it's better to clean them up too.
         this.options = null
 
         BaseProto.dispose.call(this)
     }
 
-    MediaFinder.prototype.setValue = function(value) {
+    MediaFinder.prototype.setValue = function (value) {
         // set value and trigger change event, so that wrapping implementations
         // like mlmediafinder can listen for changes.
         this.$findValue.val(value).trigger('change')
     }
 
-    MediaFinder.prototype.onClickRemoveButton = function() {
+    MediaFinder.prototype.onClickRemoveButton = function () {
         this.setValue('')
 
         this.evalIsPopulated()
     }
 
-    MediaFinder.prototype.onClickFindButton = function() {
+    MediaFinder.prototype.onClickFindButton = function () {
         var self = this
 
         new $.oc.mediaManager.popup({
             alias: 'ocmediamanager',
             cropAndInsertButton: true,
-            onInsert: function(items) {
+            onInsert: function (items) {
                 if (!items.length) {
                     alert('Please select image(s) to insert.')
                     return
@@ -127,7 +128,7 @@
         })
     }
 
-    MediaFinder.prototype.evalIsPopulated = function() {
+    MediaFinder.prototype.evalIsPopulated = function () {
         var isPopulated = !!this.$findValue.val()
         this.$el.toggleClass('is-populated', isPopulated)
         $('[data-find-file-name]', this.$el).text(this.$findValue.val().substring(1))
@@ -144,26 +145,30 @@
 
     var old = $.fn.mediaFinder
 
-    $.fn.mediaFinder = function(option) {
+    $.fn.mediaFinder = function (option) {
         var args = arguments;
 
-        return this.each(function() {
+        return this.each(function () {
             var $this   = $(this)
             var data    = $this.data('oc.mediaFinder')
             var options = $.extend({}, MediaFinder.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.mediaFinder', (data = new MediaFinder(this, options)))
-            if (typeof option == 'string') data[option].apply(data, args)
+            if (!data) {
+                $this.data('oc.mediaFinder', (data = new MediaFinder(this, options)))
+                if (typeof option == 'string') {
+                    data[option].apply(data, args)
+                }
+            }
         })
-      }
+    }
 
     $.fn.mediaFinder.Constructor = MediaFinder
 
-    $.fn.mediaFinder.noConflict = function() {
+    $.fn.mediaFinder.noConflict = function () {
         $.fn.mediaFinder = old
         return this
     }
 
-    $(document).render(function() {
+    $(document).render(function () {
         $('[data-control="mediafinder"]').mediaFinder()
     })
 

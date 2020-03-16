@@ -61,14 +61,14 @@ describe('modules/system/assets/js/framework.js', function () {
                     }
                 })
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a successful response from the server
                 requests[1].respond(
@@ -94,14 +94,14 @@ describe('modules/system/assets/js/framework.js', function () {
                     }
                 })
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a 404 Not Found response from the server
                 requests[1].respond(
@@ -133,14 +133,14 @@ describe('modules/system/assets/js/framework.js', function () {
                     }
                 })
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a response from the server that includes a partial change via ID
                 requests[1].respond(
@@ -174,14 +174,14 @@ describe('modules/system/assets/js/framework.js', function () {
                     }
                 })
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a response from the server that includes a partial change via a class
                 requests[1].respond(
@@ -217,14 +217,14 @@ describe('modules/system/assets/js/framework.js', function () {
                     redirect: '/test/success',
                 })
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a successful response from the server
                 requests[1].respond(
@@ -253,18 +253,18 @@ describe('modules/system/assets/js/framework.js', function () {
                     }
                 })
 
-                try {
-                    assert(
-                        requests[1].requestBody === 'test1=First&test2=Second',
-                        'Data incorrect or not included in request'
-                    )
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestBody === 'test1=First&test2=Second',
+                    'Data incorrect or not included in request'
+                )
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a successful response from the server
                 requests[1].respond(
@@ -282,12 +282,12 @@ describe('modules/system/assets/js/framework.js', function () {
         it('can call a beforeUpdate handler', function (done) {
             const beforeUpdate = function (data, status, jqXHR) {
             }
-            const beforeUpdateSpy = sinon.spy(beforeUpdate)
+                const beforeUpdateSpy = sinon.spy(beforeUpdate)
 
-            window.frameworkScript.onload = () => {
-                window.$.request('test::onTest', {
-                    beforeUpdate: beforeUpdateSpy
-                })
+                window.frameworkScript.onload = () => {
+                    window.$.request('test::onTest', {
+                        beforeUpdate: beforeUpdateSpy
+                    })
 
                 try {
                     assert(
@@ -303,10 +303,10 @@ describe('modules/system/assets/js/framework.js', function () {
                     200,
                     {
                         'Content-Type': 'application/json'
-                    },
+                        },
                     JSON.stringify({
                         'successful': true
-                    })
+                        })
                 )
 
                 try {
@@ -414,14 +414,14 @@ describe('modules/system/assets/js/framework.js', function () {
 
                 window.$('a#standard').click()
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a successful response from the server
                 requests[1].respond(
@@ -445,14 +445,14 @@ describe('modules/system/assets/js/framework.js', function () {
 
                 window.$('a#standard').click()
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a 404 Not Found response from the server
                 requests[1].respond(
@@ -485,14 +485,14 @@ describe('modules/system/assets/js/framework.js', function () {
 
                 window.$('a#standard').click()
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a response from the server that includes a partial change via ID
                 requests[1].respond(
@@ -526,14 +526,14 @@ describe('modules/system/assets/js/framework.js', function () {
 
                 window.$('a#standard').click()
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a response from the server that includes a partial change via a class
                 requests[1].respond(
@@ -600,14 +600,14 @@ describe('modules/system/assets/js/framework.js', function () {
 
                 window.$('a#dataLink').click()
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a successful response from the server
                 requests[1].respond(
@@ -632,14 +632,14 @@ describe('modules/system/assets/js/framework.js', function () {
 
                 window.$('a#dataLink').click()
 
-                try {
-                    assert(
-                        requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
-                        'Incorrect October request handler'
-                    )
-                } catch (e) {
-                    done(e)
-                }
+            try {
+                assert(
+                    requests[1].requestHeaders['X-OCTOBER-REQUEST-HANDLER'] === 'test::onTest',
+                    'Incorrect October request handler'
+                )
+            } catch (e) {
+                done(e)
+            }
 
                 // Mock a successful response from the server
                 requests[1].respond(
@@ -652,21 +652,21 @@ describe('modules/system/assets/js/framework.js', function () {
                     })
                 )
 
-                try {
-                    assert(
-                        window.beforeUpdateSpy.withArgs(
-                            window.$('a#dataLink').get(),
-                            {
-                                'successful': true
+            try {
+                assert(
+                    window.beforeUpdateSpy.withArgs(
+                        window.$('a#dataLink').get(),
+                        {
+                            'successful': true
                             },
-                            'success'
-                        ).calledOnce,
-                        'beforeUpdate handler never called, or incorrect arguments provided'
-                    )
-                    done()
-                } catch (e) {
-                    done(e)
-                }
+                        'success'
+                    ).calledOnce,
+                    'beforeUpdate handler never called, or incorrect arguments provided'
+                )
+                done()
+            } catch (e) {
+                done(e)
+            }
             }
         })
     })

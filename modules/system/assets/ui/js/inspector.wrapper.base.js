@@ -1,58 +1,61 @@
 /*
  * Inspector wrapper base class.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // NAMESPACES
     // ============================
 
-    if ($.oc.inspector === undefined)
+    if ($.oc.inspector === undefined) {
         $.oc.inspector = {}
 
-    if ($.oc.inspector.wrappers === undefined)
-        $.oc.inspector.wrappers = {}
+        if ($.oc.inspector.wrappers === undefined) {
+            $.oc.inspector.wrappers = {}
 
-    // CLASS DEFINITION
-    // ============================
+        // CLASS DEFINITION
+        // ============================
 
-    var Base = $.oc.foundation.base,
-        BaseProto = Base.prototype
+            var Base = $.oc.foundation.base,
+            BaseProto = Base.prototype
 
-    var BaseWrapper = function($element, sourceWrapper, options) {
-        this.$element = $element
+            var BaseWrapper = function ($element, sourceWrapper, options) {
+                this.$element = $element
 
-        this.options = $.extend({}, BaseWrapper.DEFAULTS, typeof options == 'object' && options)
-        this.switched = false
-        this.configuration = null
+                this.options = $.extend({}, BaseWrapper.DEFAULTS, typeof options == 'object' && options)
+                this.switched = false
+                this.configuration = null
 
-        Base.call(this)
+                Base.call(this)
 
-        if (!sourceWrapper) {
-            if (!this.triggerShowingAndInit()) {
-                // this.init() is called inside triggerShowing()
+                if (!sourceWrapper) {
+                    if (!this.triggerShowingAndInit()) {
+                        // this.init() is called inside triggerShowing()
 
-                return
+                        return
+                    }
+
+                    this.surface = null
+                    this.title = null
+                    this.description = null
+                }
+                else {
+                    this.surface = sourceWrapper.surface
+                    this.title = sourceWrapper.title
+                    this.description = sourceWrapper.description
+
+                    sourceWrapper = null
+
+                    this.init()
+                }
             }
-
-            this.surface = null
-            this.title = null
-            this.description = null
-        } 
-        else {
-            this.surface = sourceWrapper.surface
-            this.title = sourceWrapper.title
-            this.description = sourceWrapper.description
-
-            sourceWrapper = null
-
-            this.init()
         }
     }
 
     BaseWrapper.prototype = Object.create(BaseProto)
     BaseWrapper.prototype.constructor = Base
 
-    BaseWrapper.prototype.dispose = function() {
+    BaseWrapper.prototype.dispose = function () {
         if (!this.switched) {
             this.$element.removeClass('inspector-open')
             this.setInspectorVisibleFlag(false)
@@ -73,7 +76,7 @@
         BaseProto.dispose.call(this)
     }
 
-    BaseWrapper.prototype.init = function() {
+    BaseWrapper.prototype.init = function () {
         // Wrappers can create a new surface or inject an existing
         // surface to the UI they manage.
         //
@@ -96,11 +99,11 @@
     // Helper methods
     //
 
-    BaseWrapper.prototype.getElementValuesInput = function() {
+    BaseWrapper.prototype.getElementValuesInput = function () {
         return this.$element.find('> input[data-inspector-values]')
     }
 
-    BaseWrapper.prototype.normalizePropertyCode = function(code, configuration) {
+    BaseWrapper.prototype.normalizePropertyCode = function (code, configuration) {
         var lowerCaseCode = code.toLowerCase()
 
         for (var index in configuration) {
@@ -114,11 +117,11 @@
         return code
     }
 
-    BaseWrapper.prototype.isExternalParametersEditorEnabled = function() {
+    BaseWrapper.prototype.isExternalParametersEditorEnabled = function () {
         return this.$element.closest('[data-inspector-external-parameters]').length > 0
     }
 
-    BaseWrapper.prototype.initSurface = function(containerElement, properties, values) {
+    BaseWrapper.prototype.initSurface = function (containerElement, properties, values) {
         var options = this.$element.data() || {}
 
         options.enableExternalParameterEditor = this.isExternalParametersEditorEnabled()
@@ -129,10 +132,11 @@
             properties,
             values,
             $.oc.inspector.helpers.generateElementUniqueId(this.$element.get(0)),
-            options)
+            options
+        )
     }
 
-    BaseWrapper.prototype.isLiveUpdateEnabled = function() {
+    BaseWrapper.prototype.isLiveUpdateEnabled = function () {
         return false
     }
 
@@ -140,19 +144,19 @@
     // Wrapper API
     //
 
-    BaseWrapper.prototype.createSurfaceAndUi = function(properties, values) {
+    BaseWrapper.prototype.createSurfaceAndUi = function (properties, values) {
 
     }
 
-    BaseWrapper.prototype.setInspectorVisibleFlag = function(value) {
+    BaseWrapper.prototype.setInspectorVisibleFlag = function (value) {
         this.$element.data('oc.inspectorVisible', value)
     }
 
-    BaseWrapper.prototype.adoptSurface = function() {
+    BaseWrapper.prototype.adoptSurface = function () {
         this.surface.options.onGetInspectableElement = this.proxy(this.onGetInspectableElement)
     }
 
-    BaseWrapper.prototype.cleanupAfterSwitch = function() {
+    BaseWrapper.prototype.cleanupAfterSwitch = function () {
         this.switched = true
         this.dispose()
     }
@@ -161,7 +165,7 @@
     // Values
     //
 
-    BaseWrapper.prototype.loadValues = function(configuration) {
+    BaseWrapper.prototype.loadValues = function (configuration) {
         var $valuesField = this.getElementValuesInput()
 
         if ($valuesField.length > 0) {
@@ -186,8 +190,8 @@
                 // Important - values contained in data-property-xxx attributes are
                 // considered strings and never parsed with JSON. The use of the
                 // data-property-xxx attributes is very limited - they're only
-                // used in Pages for creating snippets from partials, where properties 
-                // are created with a table UI widget, which doesn't allow creating 
+                // used in Pages for creating snippets from partials, where properties
+                // are created with a table UI widget, which doesn't allow creating
                 // properties of any complex types.
                 //
                 // There is no a technically reliable way to determine when a string
@@ -206,10 +210,10 @@
         return values
     }
 
-    BaseWrapper.prototype.applyValues = function(liveUpdateMode) {
+    BaseWrapper.prototype.applyValues = function (liveUpdateMode) {
         var $valuesField = this.getElementValuesInput(),
-            values = liveUpdateMode ? 
-                        this.surface.getValidValues() : 
+            values = liveUpdateMode ?
+                        this.surface.getValidValues() :
                         this.surface.getValues()
 
         if (liveUpdateMode) {
@@ -224,7 +228,7 @@
                 }
             }
 
-            // Properties that use settings like ignoreIfPropertyEmpty could 
+            // Properties that use settings like ignoreIfPropertyEmpty could
             // be removed from the list returned by getValidValues(). Removed
             // properties should be removed from the result list.
 
@@ -242,7 +246,7 @@
 
         if ($valuesField.length > 0) {
             $valuesField.val(JSON.stringify(values))
-        } 
+        }
         else {
             for (var property in values) {
                 var value = values[property]
@@ -255,7 +259,7 @@
             }
         }
 
-        // In the live update mode the livechange event is triggered 
+        // In the live update mode the livechange event is triggered
         // regardless of whether Surface properties match or don't match
         // the original properties of the inspectable element. Without it
         // there could be undesirable side effects.
@@ -290,13 +294,13 @@
     // Configuration
     //
 
-    BaseWrapper.prototype.loadConfiguration = function() {
+    BaseWrapper.prototype.loadConfiguration = function () {
         var configString = this.$element.data('inspector-config'),
             result = {
                 properties: {},
                 title: null,
                 description: null
-            }
+        }
 
         result.title = this.$element.data('inspector-title')
         result.description = this.$element.data('inspector-description')
@@ -324,23 +328,24 @@
         $.oc.stripeLoadIndicator.show()
         $form.request('onGetInspectorConfiguration', {
             data: data
-        }).done(function inspectorConfigurationRequestDoneClosure(data) {
+        }).done(function inspectorConfigurationRequestDoneClosure(data)
+        {
             self.onConfigurartionRequestDone(data, result)
-        }).always(function() {
+        }).always(function () {
             $.oc.stripeLoadIndicator.hide()
         })
     }
 
-    BaseWrapper.prototype.parseConfiguration = function(configuration) {
+    BaseWrapper.prototype.parseConfiguration = function (configuration) {
         if (!$.isArray(configuration) && !$.isPlainObject(configuration)) {
             if ($.trim(configuration) === 0) {
                 return {}
             }
 
             try {
-               return JSON.parse(configuration)
+                return JSON.parse(configuration)
             }
-            catch(err) {
+            catch (err) {
                 throw new Error('Error parsing Inspector configuration. ' + err)
             }
         }
@@ -349,7 +354,7 @@
         }
     }
 
-    BaseWrapper.prototype.configurationLoaded = function(configuration) {
+    BaseWrapper.prototype.configurationLoaded = function (configuration) {
         var values = this.loadValues(configuration.properties)
 
         this.title = configuration.title
@@ -359,7 +364,7 @@
         this.createSurfaceAndUi(configuration.properties, values)
     }
 
-    BaseWrapper.prototype.onConfigurartionRequestDone = function(data, result) {
+    BaseWrapper.prototype.onConfigurartionRequestDone = function (data, result) {
         result.properties = this.parseConfiguration(data.configuration.properties)
 
         if (data.configuration.title !== undefined) {
@@ -377,7 +382,7 @@
     // Events
     //
 
-    BaseWrapper.prototype.triggerShowingAndInit = function() {
+    BaseWrapper.prototype.triggerShowingAndInit = function () {
         var e = $.Event('showing.oc.inspector')
 
         this.$element.trigger(e, [{callback: this.proxy(this.init)}])
@@ -392,7 +397,7 @@
         }
     }
 
-    BaseWrapper.prototype.triggerHiding = function() {
+    BaseWrapper.prototype.triggerHiding = function () {
         var hidingEvent = $.Event('hiding.oc.inspector'),
             values = this.surface.getValues()
 
@@ -400,7 +405,7 @@
         return !hidingEvent.isDefaultPrevented();
     }
 
-    BaseWrapper.prototype.onGetInspectableElement = function() {
+    BaseWrapper.prototype.onGetInspectableElement = function () {
         return this.$element
     }
 

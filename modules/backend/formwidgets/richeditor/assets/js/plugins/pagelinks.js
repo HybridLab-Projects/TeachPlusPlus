@@ -4,7 +4,8 @@
 
 var richeditorPageLinksPlugin
 
-function richeditorPageLinksSelectPage($form) {
+function richeditorPageLinksSelectPage($form)
+{
     richeditorPageLinksPlugin.setLinkValueFromPopup($form)
 }
 
@@ -17,7 +18,8 @@ $.FroalaEditor.DEFAULTS.key = 'JA6B2B5A1qB1F1F4D3I1A15A11D3E6B5dVh1VCQWa1EOQFe1N
 (function ($) {
     $.FroalaEditor.PLUGINS.pageLinks = function (editor) {
 
-        function setLinkValueFromPopup($form) {
+        function setLinkValueFromPopup($form)
+        {
             var $select = $('select[name=pagelink]', $form)
 
             var link = {
@@ -26,14 +28,15 @@ $.FroalaEditor.DEFAULTS.key = 'JA6B2B5A1qB1F1F4D3I1A15A11D3E6B5dVh1VCQWa1EOQFe1N
             }
 
             // Wait for popup to close
-            setTimeout(function() {
+            setTimeout(function () {
                 editor.popups.show('link.insert')
 
                 setLinkValue(link)
             }, 300)
         }
 
-        function setLinkValue(link) {
+        function setLinkValue(link)
+        {
             var $popup = editor.popups.get('link.insert');
             var text_inputs = $popup.find('input.fr-link-attr[type="text"]');
             var check_inputs = $popup.find('input.fr-link-attr[type="checkbox"]');
@@ -56,7 +59,8 @@ $.FroalaEditor.DEFAULTS.key = 'JA6B2B5A1qB1F1F4D3I1A15A11D3E6B5dVh1VCQWa1EOQFe1N
             }
         }
 
-        function insertLink() {
+        function insertLink()
+        {
             richeditorPageLinksPlugin = this
 
             editor.$el.popup({
@@ -67,7 +71,8 @@ $.FroalaEditor.DEFAULTS.key = 'JA6B2B5A1qB1F1F4D3I1A15A11D3E6B5dVh1VCQWa1EOQFe1N
         /**
          * Init.
          */
-        function _init () {
+        function _init()
+        {
         }
 
         return {

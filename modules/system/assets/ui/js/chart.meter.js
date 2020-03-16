@@ -1,8 +1,8 @@
 /*
- * The goal meter plugin. 
+ * The goal meter plugin.
  *
  * Applies the goal meter style to a scoreboard item.
- * 
+ *
  * Data attributes:
  * - data-control="goal-meter" - enables the goal meter plugin
  * - data-value - sets the value, in percents
@@ -11,10 +11,11 @@
  * $('.scoreboard .goal-meter').goalMeter({value: 20})
  * $('.scoreboard .goal-meter').goalMeter(10) // Sets the current value
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var GoalMeter = function (element, options) {
-        var 
+        var
             $el = this.$el = $(element),
             self = this;
 
@@ -25,12 +26,12 @@
 
         $('p', this.$el).first().before(this.$indicatorOuter)
 
-        window.setTimeout(function(){
+        window.setTimeout(function () {
             self.update(self.options.value)
         }, 200)
     }
 
-    GoalMeter.prototype.update = function(value) {
+    GoalMeter.prototype.update = function (value) {
         this.$indicatorBar.css('height', value + '%')
     }
 
@@ -49,10 +50,12 @@
             var data  = $this.data('oc.goalMeter')
             var options = $.extend({}, GoalMeter.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) 
+            if (!data) {
                 $this.data('oc.goalMeter', (data = new GoalMeter(this, options)))
-            else
-                data.update(option)
+                else {
+                    data.update(option)
+                }
+            }
         })
     }
 

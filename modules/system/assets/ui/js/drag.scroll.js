@@ -34,7 +34,8 @@
  * - modernizr/modernizr
  * - mousewheel/mousewheel
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -71,7 +72,7 @@
          */
         var $scrollSelect = this.options.scrollSelector ? $(this.options.scrollSelector, $el) : $el
 
-        $scrollSelect.mousewheel(function(event){
+        $scrollSelect.mousewheel(function (event) {
             if (!self.options.useScroll) {
                 return;
             }
@@ -94,7 +95,7 @@
         })
 
         if (this.options.useDrag) {
-            $el.on('mousedown.dragScroll', this.options.dragSelector, function(event){
+            $el.on('mousedown.dragScroll', this.options.dragSelector, function (event) {
                 if (event.target && event.target.tagName === 'INPUT') {
                     return // Don't prevent clicking inputs in the toolbar
                 }
@@ -109,7 +110,7 @@
         }
 
         if (Modernizr.touchevents) {
-            $el.on('touchstart.dragScroll', this.options.dragSelector, function(event){
+            $el.on('touchstart.dragScroll', this.options.dragSelector, function (event) {
                 var touchEvent = event.originalEvent
                 if (touchEvent.touches.length == 1) {
                     startDrag(touchEvent.touches[0])
@@ -118,7 +119,7 @@
             })
         }
 
-        $el.on('click.dragScroll', function() {
+        $el.on('click.dragScroll', function () {
             // Do not handle item clicks while dragging
             if ($(document.body).hasClass(self.options.dragClass)) {
                 return false
@@ -131,12 +132,13 @@
         /*
          * Internal event, drag has started
          */
-        function startDrag(event) {
+        function startDrag(event)
+        {
             dragStart = event[eventElementName]
             startOffset = self.options.vertical ? $el.scrollTop() : $el.scrollLeft()
 
             if (Modernizr.touchevents) {
-                $(window).on('touchmove.dragScroll', function(event) {
+                $(window).on('touchmove.dragScroll', function (event) {
                     var touchEvent = event.originalEvent
                     moveDrag(touchEvent.touches[0])
                     if (!isNative) {
@@ -144,17 +146,17 @@
                     }
                 })
 
-                $(window).on('touchend.dragScroll', function(event) {
+                $(window).on('touchend.dragScroll', function (event) {
                     stopDrag()
                 })
             }
 
-            $(window).on('mousemove.dragScroll', function(event) {
+            $(window).on('mousemove.dragScroll', function (event) {
                 moveDrag(event)
                 return false
             })
 
-            $(window).on('mouseup.dragScroll', function(mouseUpEvent) {
+            $(window).on('mouseup.dragScroll', function (mouseUpEvent) {
                 var isClick = event.pageX == mouseUpEvent.pageX && event.pageY == mouseUpEvent.pageY
                 stopDrag(isClick)
                 return false
@@ -164,7 +166,8 @@
         /*
          * Internal event, drag is active
          */
-        function moveDrag(event) {
+        function moveDrag(event)
+        {
             var current = event[eventElementName],
                 offset = dragStart - current
 
@@ -190,7 +193,8 @@
         /*
          * Internal event, drag has ended
          */
-        function stopDrag(click) {
+        function stopDrag(click)
+        {
             $(window).off('.dragScroll')
 
             dragging = false;
@@ -202,7 +206,7 @@
                 self.fixScrollClasses()
             }
 
-            window.setTimeout(function(){
+            window.setTimeout(function () {
                 if (!click) {
                     $(document.body).removeClass(self.options.dragClass)
                     $el.trigger('stop.oc.dragScroll')
@@ -215,7 +219,8 @@
         /*
          * Scroll wheel has moved by supplied offset
          */
-        function scrollWheel(offset) {
+        function scrollWheel(offset)
+        {
             startOffset = self.options.vertical ? el.scrollTop : el.scrollLeft
 
             self.options.vertical
@@ -230,10 +235,11 @@
             self.options.drag()
 
             if (scrolled) {
-                if (self.wheelUpdateTimer !== undefined && self.wheelUpdateTimer !== false)
+                if (self.wheelUpdateTimer !== undefined && self.wheelUpdateTimer !== false) {
                     window.clearInterval(self.wheelUpdateTimer);
+                }
 
-                self.wheelUpdateTimer = window.setTimeout(function() {
+                self.wheelUpdateTimer = window.setTimeout(function () {
                     self.wheelUpdateTimer = false;
                     self.fixScrollClasses()
                 }, 100);
@@ -259,12 +265,12 @@
         scrollSelector: null,
         dragSelector: null,
         dragClass: 'drag',
-        start: function() {},
-        drag: function() {},
-        stop: function() {}
+        start: function () {},
+        drag: function () {},
+        stop: function () {}
     }
 
-    DragScroll.prototype.fixScrollClasses = function() {
+    DragScroll.prototype.fixScrollClasses = function () {
         var isStart = this.isStart(),
             isEnd = this.isEnd()
 
@@ -276,7 +282,7 @@
         this.isScrollable = !isStart || !isEnd
     }
 
-    DragScroll.prototype.isStart = function() {
+    DragScroll.prototype.isStart = function () {
         if (!this.options.vertical) {
             return this.el.scrollLeft() <= 0;
         }
@@ -285,7 +291,7 @@
         }
     }
 
-    DragScroll.prototype.isEnd = function() {
+    DragScroll.prototype.isEnd = function () {
         if (!this.options.vertical) {
             return (this.el[0].scrollWidth - (this.el.scrollLeft() + this.el.width())) <= 0
         }
@@ -294,7 +300,7 @@
         }
     }
 
-    DragScroll.prototype.goToStart = function() {
+    DragScroll.prototype.goToStart = function () {
         if (!this.options.vertical) {
             return this.el.scrollLeft(0)
         }
@@ -307,7 +313,7 @@
      * Determines if the element with the class 'active' is hidden before the viewport -
      * on the left or on the top, depending on whether the scrollbar is horizontal or vertical.
      */
-    DragScroll.prototype.isActiveAfter = function() {
+    DragScroll.prototype.isActiveAfter = function () {
         var activeElement = $('.active', this.el);
         if (activeElement.length == 0) {
             return false
@@ -325,7 +331,7 @@
      * Determines if the element with the class 'active' is hidden after the viewport -
      * on the right or on the bottom, depending on whether the scrollbar is horizontal or vertical.
      */
-    DragScroll.prototype.isActiveBefore = function() {
+    DragScroll.prototype.isActiveBefore = function () {
         var activeElement = $('.active', this.el);
         if (activeElement.length == 0) {
             return false
@@ -339,21 +345,23 @@
         }
     }
 
-    DragScroll.prototype.goToElement = function(element, callback, options) {
+    DragScroll.prototype.goToElement = function (element, callback, options) {
         var $el = $(element)
-        if (!$el.length)
+        if (!$el.length) {
             return;
+        }
 
         var self = this,
             params = {
                 duration: 300,
                 queue: false,
-                complete: function(){
+                complete: function () {
                     self.fixScrollClasses()
-                    if (callback !== undefined)
+                    if (callback !== undefined) {
                         callback()
+                    }
                 }
-            }
+        }
 
         params = $.extend(params, options || {})
 
@@ -396,7 +404,7 @@
         }
     }
 
-    DragScroll.prototype.dispose = function() {
+    DragScroll.prototype.dispose = function () {
         this.scrollClassContainer = null
 
         $(document).off('ready', this.proxy(this.fixScrollClasses))
@@ -422,13 +430,16 @@
             var data  = $this.data('oc.dragScroll')
             var options = typeof option == 'object' && option
 
-            if (!data) $this.data('oc.dragScroll', (data = new DragScroll(this, options)))
-            if (typeof option == 'string') {
-                var methodArgs = [];
-                for (var i=1; i<args.length; i++)
-                    methodArgs.push(args[i])
+            if (!data) {
+                $this.data('oc.dragScroll', (data = new DragScroll(this, options)))
+                if (typeof option == 'string') {
+                    var methodArgs = [];
+                    for (var i=1; i<args.length; i++) {
+                        methodArgs.push(args[i])
 
-                data[option].apply(data, methodArgs)
+                        data[option].apply(data, methodArgs)
+                    }
+                }
             }
         })
     }

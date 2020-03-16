@@ -1,7 +1,8 @@
 /*
  * Inspector popup wrapper.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // CLASS DEFINITION
     // ============================
@@ -9,7 +10,7 @@
     var Base = $.oc.inspector.wrappers.base,
         BaseProto = Base.prototype
 
-    var InspectorPopup = function($element, surface, options) {
+    var InspectorPopup = function ($element, surface, options) {
         this.$popoverContainer = null
         this.popoverObj = null
         this.cleaningUp = false
@@ -20,7 +21,7 @@
     InspectorPopup.prototype = Object.create(BaseProto)
     InspectorPopup.prototype.constructor = Base
 
-    InspectorPopup.prototype.dispose = function() {
+    InspectorPopup.prototype.dispose = function () {
         this.unregisterHandlers()
 
         this.$popoverContainer = null
@@ -29,7 +30,7 @@
         BaseProto.dispose.call(this)
     }
 
-    InspectorPopup.prototype.createSurfaceAndUi = function(properties, values, title, description) {
+    InspectorPopup.prototype.createSurfaceAndUi = function (properties, values, title, description) {
         this.showPopover()
 
         this.initSurface(this.$popoverContainer.find('[data-surface-container]').get(0), properties, values)
@@ -38,7 +39,7 @@
         this.registerPopupHandlers()
     }
 
-    InspectorPopup.prototype.adoptSurface = function() {
+    InspectorPopup.prototype.adoptSurface = function () {
         this.showPopover()
 
         this.surface.moveToContainer(this.$popoverContainer.find('[data-surface-container]').get(0))
@@ -49,7 +50,7 @@
         BaseProto.adoptSurface.call(this)
     }
 
-    InspectorPopup.prototype.cleanupAfterSwitch = function() {
+    InspectorPopup.prototype.cleanupAfterSwitch = function () {
         this.cleaningUp = true
         this.switched = true
 
@@ -59,7 +60,7 @@
         // disposing happens in onHide() triggered by forceClose()
     }
 
-    InspectorPopup.prototype.getPopoverContents = function() {
+    InspectorPopup.prototype.getPopoverContents = function () {
         return '<div class="popover-head">                          \
                     <h3 data-inspector-title></h3>                  \
                     <p data-inspector-description></p>              \
@@ -72,12 +73,12 @@
                 <form>'
     }
 
-    InspectorPopup.prototype.showPopover = function() {
+    InspectorPopup.prototype.showPopover = function () {
         var offset = this.$element.data('inspector-offset'),
             offsetX = this.$element.data('inspector-offset-x'),
             offsetY = this.$element.data('inspector-offset-y'),
             placement = this.$element.data('inspector-placement'),
-            fallbackPlacement = this.$element.data('inspector-fallback-placement') 
+            fallbackPlacement = this.$element.data('inspector-fallback-placement')
 
         if (offset === undefined) {
             offset = 15
@@ -126,17 +127,17 @@
         this.$popoverContainer.find('[data-inspector-description]').text(this.description)
     }
 
-    InspectorPopup.prototype.repositionPopover = function() {
+    InspectorPopup.prototype.repositionPopover = function () {
         this.popoverObj.reposition()
         this.$popoverContainer.removeClass('inspector-temporary-placement')
         this.$popoverContainer.find('div[data-surface-container] > div').trigger('focus-control')
     }
 
-    InspectorPopup.prototype.forceClose = function() {
+    InspectorPopup.prototype.forceClose = function () {
         this.$popoverContainer.trigger('close.oc.popover')
     }
 
-    InspectorPopup.prototype.registerPopupHandlers = function() {
+    InspectorPopup.prototype.registerPopupHandlers = function () {
         this.surface.options.onPopupDisplayed = this.proxy(this.onPopupEditorDisplayed)
         this.surface.options.onPopupHidden = this.proxy(this.onPopupEditorHidden)
         this.popoverObj.options.onCheckDocumentClickTarget = this.proxy(this.onCheckDocumentClickTarget)
@@ -150,7 +151,7 @@
         }
     }
 
-    InspectorPopup.prototype.unregisterHandlers = function() {
+    InspectorPopup.prototype.unregisterHandlers = function () {
         this.popoverObj.options.onCheckDocumentClickTarget = null
 
         this.$element.off('hiding.oc.popover', this.proxy(this.onBeforeHide))
@@ -165,7 +166,7 @@
         this.surface.options.onPopupHidden = null
     }
 
-    InspectorPopup.prototype.onBeforeHide = function(ev) {
+    InspectorPopup.prototype.onBeforeHide = function (ev) {
         if (this.cleaningUp) {
             return
         }
@@ -183,33 +184,33 @@
         this.applyValues()
     }
 
-    InspectorPopup.prototype.onHide = function(ev) {
+    InspectorPopup.prototype.onHide = function (ev) {
         this.dispose()
     }
 
-    InspectorPopup.prototype.onPopoverKeyDown = function(ev) {
-        if(ev.key === 'Enter') {
+    InspectorPopup.prototype.onPopoverKeyDown = function (ev) {
+        if (ev.key === 'Enter') {
             $(ev.currentTarget).trigger('close.oc.popover')
         }
     }
 
-    InspectorPopup.prototype.onPopupEditorDisplayed = function() {
+    InspectorPopup.prototype.onPopupEditorDisplayed = function () {
         this.popoverObj.options.closeOnPageClick = false
         this.popoverObj.options.closeOnEsc = false
     }
 
-    InspectorPopup.prototype.onPopupEditorHidden = function() {
+    InspectorPopup.prototype.onPopupEditorHidden = function () {
         this.popoverObj.options.closeOnPageClick = true
         this.popoverObj.options.closeOnEsc = true
     }
 
-    InspectorPopup.prototype.onCheckDocumentClickTarget = function(element) {
+    InspectorPopup.prototype.onCheckDocumentClickTarget = function (element) {
         if ($.contains(this.$element, element) || this.$element.get(0) === element) {
             return true
         }
     }
 
-    InspectorPopup.prototype.onMoveToContainer = function() {
+    InspectorPopup.prototype.onMoveToContainer = function () {
         $.oc.inspector.manager.switchToContainer(this)
     }
 

@@ -1,12 +1,13 @@
 /*
  * Inspector required validator.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.validators.base,
         BaseProto = Base.prototype
 
-    var RequiredValidator = function(options) {
+    var RequiredValidator = function (options) {
         Base.call(this, options)
 
         this.defaultMessage = 'The property is required.'
@@ -15,7 +16,7 @@
     RequiredValidator.prototype = Object.create(BaseProto)
     RequiredValidator.prototype.constructor = Base
 
-    RequiredValidator.prototype.isValid = function(value) {
+    RequiredValidator.prototype.isValid = function (value) {
         if (value === undefined || value === null) {
             return this.getMessage()
         }

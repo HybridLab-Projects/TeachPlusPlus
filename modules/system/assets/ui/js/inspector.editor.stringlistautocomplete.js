@@ -3,12 +3,13 @@
  *
  * TODO: validation is not implemented in this editor. See the Dictionary editor for reference.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.propertyEditors.popupBase,
         BaseProto = Base.prototype
 
-    var StringListAutocomplete = function(inspector, propertyDefinition, containerCell, group) {
+    var StringListAutocomplete = function (inspector, propertyDefinition, containerCell, group) {
         this.items = null
 
         Base.call(this, inspector, propertyDefinition, containerCell, group)
@@ -17,20 +18,20 @@
     StringListAutocomplete.prototype = Object.create(BaseProto)
     StringListAutocomplete.prototype.constructor = Base
 
-    StringListAutocomplete.prototype.dispose = function() {
+    StringListAutocomplete.prototype.dispose = function () {
         BaseProto.dispose.call(this)
     }
 
-    StringListAutocomplete.prototype.init = function() {
+    StringListAutocomplete.prototype.init = function () {
         BaseProto.init.call(this)
     }
 
-    StringListAutocomplete.prototype.supportsExternalParameterEditor = function() {
+    StringListAutocomplete.prototype.supportsExternalParameterEditor = function () {
         return false
     }
 
-    StringListAutocomplete.prototype.setLinkText = function(link, value) {
-        var value = value !== undefined ? value 
+    StringListAutocomplete.prototype.setLinkText = function (link, value) {
+        var value = value !== undefined ? value
                 : this.inspector.getPropertyValue(this.propertyDefinition.property)
 
         if (value === undefined) {
@@ -48,7 +49,7 @@
             }
 
             link.textContent = value
-        } 
+        }
         else {
             $.oc.foundation.element.removeClass(link, 'placeholder')
     
@@ -56,7 +57,7 @@
         }
     }
 
-    StringListAutocomplete.prototype.checkValueType = function(value) {
+    StringListAutocomplete.prototype.checkValueType = function (value) {
         if (value && Object.prototype.toString.call(value) !== '[object Array]') {
             this.throwError('The string list value should be an array.')
         }
@@ -66,7 +67,7 @@
     // Popup editor methods
     //
 
-    StringListAutocomplete.prototype.getPopupContent = function() {
+    StringListAutocomplete.prototype.getPopupContent = function () {
         return '<form>                                                                                  \
                 <div class="modal-header">                                                              \
                     <button type="button" class="close" data-dismiss="popup">&times;</button>           \
@@ -108,7 +109,7 @@
                 </form>'
     }
 
-    StringListAutocomplete.prototype.configurePopup = function(popup) {
+    StringListAutocomplete.prototype.configurePopup = function (popup) {
         this.initAutocomplete()
 
         this.buildItemsTable(popup.get(0))
@@ -116,7 +117,7 @@
         this.focusFirstInput()
     }
 
-    StringListAutocomplete.prototype.handleSubmit = function($form) {
+    StringListAutocomplete.prototype.handleSubmit = function ($form) {
         return this.applyValues()
     }
 
@@ -124,7 +125,7 @@
     // Building and row management
     //
 
-    StringListAutocomplete.prototype.buildItemsTable = function(popup) {
+    StringListAutocomplete.prototype.buildItemsTable = function (popup) {
         var table = popup.querySelector('table.inspector-dictionary-table'),
             tbody = document.createElement('tbody'),
             items = this.inspector.getPropertyValue(this.propertyDefinition.property)
@@ -150,7 +151,7 @@
         this.updateScrollpads()
     }
 
-    StringListAutocomplete.prototype.buildTableRow = function(value) {
+    StringListAutocomplete.prototype.buildTableRow = function (value) {
         var row = document.createElement('tr'),
             valueCell = document.createElement('td')
 
@@ -161,11 +162,11 @@
         return row
     }
 
-    StringListAutocomplete.prototype.buildEmptyRow = function() {
+    StringListAutocomplete.prototype.buildEmptyRow = function () {
         return this.buildTableRow(null)
     }
 
-    StringListAutocomplete.prototype.createInput = function(container, value) {
+    StringListAutocomplete.prototype.createInput = function (container, value) {
         var input = document.createElement('input'),
             controlContainer = document.createElement('div')
 
@@ -177,7 +178,7 @@
         container.appendChild(controlContainer)
     }
 
-    StringListAutocomplete.prototype.setActiveCell = function(input) {
+    StringListAutocomplete.prototype.setActiveCell = function (input) {
         var activeCells = this.popup.querySelectorAll('td.active')
 
         for (var i = activeCells.length-1; i >= 0; i--) {
@@ -190,7 +191,7 @@
         this.buildAutoComplete(input)
     }
 
-    StringListAutocomplete.prototype.createItem = function() {
+    StringListAutocomplete.prototype.createItem = function () {
         var activeRow = this.getActiveRow(),
             newRow = this.buildEmptyRow(),
             tbody = this.getTableBody(),
@@ -202,7 +203,7 @@
         this.updateScrollpads()
     }
 
-    StringListAutocomplete.prototype.deleteItem = function() {
+    StringListAutocomplete.prototype.deleteItem = function () {
         var activeRow = this.getActiveRow(),
             tbody = this.getTableBody()
 
@@ -231,7 +232,7 @@
         this.updateScrollpads()
     }
 
-    StringListAutocomplete.prototype.applyValues = function() {
+    StringListAutocomplete.prototype.applyValues = function () {
         var tbody = this.getTableBody(),
             dataRows = tbody.querySelectorAll('tr'),
             link = this.getLink(),
@@ -257,7 +258,7 @@
     // Helpers
     //
 
-    StringListAutocomplete.prototype.getValueKeys = function(value) {
+    StringListAutocomplete.prototype.getValueKeys = function (value) {
         var result = []
 
         for (var key in value) {
@@ -267,7 +268,7 @@
         return result
     }
 
-    StringListAutocomplete.prototype.getActiveRow = function() {
+    StringListAutocomplete.prototype.getActiveRow = function () {
         var activeCell = this.popup.querySelector('td.active')
 
         if (!activeCell) {
@@ -277,15 +278,15 @@
         return activeCell.parentNode
     }
 
-    StringListAutocomplete.prototype.getTableBody = function() {
+    StringListAutocomplete.prototype.getTableBody = function () {
         return this.popup.querySelector('table.inspector-dictionary-table tbody')
     }
 
-    StringListAutocomplete.prototype.updateScrollpads = function() {
+    StringListAutocomplete.prototype.updateScrollpads = function () {
         $('.control-scrollpad', this.popup).scrollpad('update')
     }
 
-    StringListAutocomplete.prototype.focusFirstInput = function() {
+    StringListAutocomplete.prototype.focusFirstInput = function () {
         var input = this.popup.querySelector('td input')
 
         if (input) {
@@ -294,20 +295,20 @@
         }
     }
 
-    StringListAutocomplete.prototype.getEditorCell = function(cell) {
+    StringListAutocomplete.prototype.getEditorCell = function (cell) {
         return cell.parentNode.parentNode // cell / div / td
     }
 
-    StringListAutocomplete.prototype.getEditorRow = function(cell) {
+    StringListAutocomplete.prototype.getEditorRow = function (cell) {
         return cell.parentNode.parentNode.parentNode // cell / div / td / tr
     }
 
-    StringListAutocomplete.prototype.focusAndMakeActive = function(input) {
+    StringListAutocomplete.prototype.focusAndMakeActive = function (input) {
         input.focus()
         this.setActiveCell(input)
     }
 
-    StringListAutocomplete.prototype.getRowInputByIndex = function(row, index) {
+    StringListAutocomplete.prototype.getRowInputByIndex = function (row, index) {
         return row.cells[index].querySelector('input')
     }
 
@@ -315,7 +316,7 @@
     // Navigation
     //
 
-    StringListAutocomplete.prototype.navigateDown = function(ev) {
+    StringListAutocomplete.prototype.navigateDown = function (ev) {
         var cell = this.getEditorCell(ev.currentTarget),
             row = this.getEditorRow(ev.currentTarget),
             nextRow = row.nextElementSibling
@@ -329,7 +330,7 @@
         this.focusAndMakeActive(newActiveEditor)
     }
 
-    StringListAutocomplete.prototype.navigateUp = function(ev) {
+    StringListAutocomplete.prototype.navigateUp = function (ev) {
         var cell = this.getEditorCell(ev.currentTarget),
             row = this.getEditorRow(ev.currentTarget),
             prevRow = row.previousElementSibling
@@ -347,7 +348,7 @@
     // Autocomplete
     //
 
-    StringListAutocomplete.prototype.initAutocomplete = function() {
+    StringListAutocomplete.prototype.initAutocomplete = function () {
         if (this.propertyDefinition.items !== undefined) {
             this.items = this.prepareItems(this.propertyDefinition.items)
             this.initializeAutocompleteForCurrentInput()
@@ -357,7 +358,7 @@
         }
     }
 
-    StringListAutocomplete.prototype.initializeAutocompleteForCurrentInput = function() {
+    StringListAutocomplete.prototype.initializeAutocompleteForCurrentInput = function () {
         var activeElement = document.activeElement
 
         if (!activeElement) {
@@ -378,7 +379,7 @@
         }
     }
 
-    StringListAutocomplete.prototype.buildAutoComplete = function(input) {
+    StringListAutocomplete.prototype.buildAutoComplete = function (input) {
         if (this.items === null) {
             return
         }
@@ -391,7 +392,7 @@
         })
     }
 
-    StringListAutocomplete.prototype.removeAutocomplete = function(input) {
+    StringListAutocomplete.prototype.removeAutocomplete = function (input) {
         var $input = $(input)
 
         if (!$input.data('autocomplete')) {
@@ -401,7 +402,7 @@
         $input.autocomplete('destroy')
     }
 
-    StringListAutocomplete.prototype.prepareItems = function(items) {
+    StringListAutocomplete.prototype.prepareItems = function (items) {
         var result = {}
 
         if ($.isArray(items)) {
@@ -416,7 +417,7 @@
         return result
     }
 
-    StringListAutocomplete.prototype.loadDynamicItems = function() {
+    StringListAutocomplete.prototype.loadDynamicItems = function () {
         if (this.isDisposed()) {
             return
         }
@@ -437,7 +438,7 @@
         .done(this.proxy(this.itemsRequestDone))
     }
 
-    StringListAutocomplete.prototype.triggerGetItems = function(values) {
+    StringListAutocomplete.prototype.triggerGetItems = function (values) {
         var $inspectable = this.getInspectableElement()
         if (!$inspectable) {
             return true
@@ -446,7 +447,7 @@
         var itemsEvent = $.Event('autocompleteitems.oc.inspector')
 
         $inspectable.trigger(itemsEvent, [{
-            values: values, 
+            values: values,
             callback: this.proxy(this.itemsRequestDone),
             property: this.inspector.getPropertyPath(this.propertyDefinition.property),
             propertyDefinition: this.propertyDefinition
@@ -459,7 +460,7 @@
         return true
     }
 
-    StringListAutocomplete.prototype.itemsRequestDone = function(data) {
+    StringListAutocomplete.prototype.itemsRequestDone = function (data) {
         if (this.isDisposed()) {
             // Handle the case when the asynchronous request finishes after
             // the editor is disposed
@@ -478,7 +479,7 @@
         this.initializeAutocompleteForCurrentInput()
     }
 
-    StringListAutocomplete.prototype.removeAutocompleteFromAllRows = function() {
+    StringListAutocomplete.prototype.removeAutocompleteFromAllRows = function () {
         var inputs = this.popup.querySelector('td input.form-control')
 
         for (var i=inputs.length-1; i>=0; i--) {
@@ -490,7 +491,7 @@
     // Event handlers
     //
 
-    StringListAutocomplete.prototype.onPopupShown = function(ev, link, popup) {
+    StringListAutocomplete.prototype.onPopupShown = function (ev, link, popup) {
         BaseProto.onPopupShown.call(this,ev, link, popup)
 
         popup.on('focus.inspector', 'td input', this.proxy(this.onFocus))
@@ -499,7 +500,7 @@
         popup.on('click.inspector', '[data-cmd]', this.proxy(this.onCommand))
     }
 
-    StringListAutocomplete.prototype.onPopupHidden = function(ev, link, popup) {
+    StringListAutocomplete.prototype.onPopupHidden = function (ev, link, popup) {
         popup.off('.inspector', 'td input')
         popup.off('.inspector', '[data-cmd]', this.proxy(this.onCommand))
 
@@ -509,11 +510,11 @@
         BaseProto.onPopupHidden.call(this, ev, link, popup)
     }
 
-    StringListAutocomplete.prototype.onFocus = function(ev) {
+    StringListAutocomplete.prototype.onFocus = function (ev) {
         this.setActiveCell(ev.currentTarget)
     }
 
-    StringListAutocomplete.prototype.onBlur = function(ev) {
+    StringListAutocomplete.prototype.onBlur = function (ev) {
         if ($(ev.relatedTarget).closest('ul.inspector-autocomplete').length > 0) {
             // Do not close the autocomplete results if a drop-down
             // menu item was clicked
@@ -523,20 +524,20 @@
         this.removeAutocomplete(ev.currentTarget)
     }
 
-    StringListAutocomplete.prototype.onCommand = function(ev) {
+    StringListAutocomplete.prototype.onCommand = function (ev) {
         var command = ev.currentTarget.getAttribute('data-cmd')
 
         switch (command) {
-            case 'create-item' : 
+            case 'create-item' :
                 this.createItem()
             break;
-            case 'delete-item' : 
+            case 'delete-item' :
                 this.deleteItem()
             break;
         }
     }
 
-    StringListAutocomplete.prototype.onKeyDown = function(ev) {
+    StringListAutocomplete.prototype.onKeyDown = function (ev) {
         if (ev.key === 'ArrowDown') {
             return this.navigateDown(ev)
         }

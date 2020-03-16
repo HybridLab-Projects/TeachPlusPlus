@@ -5,8 +5,9 @@
  * Copyright 2016-2020 Alexey Bobkov, Samuel Georges
  * ======================================================================== */
 
-+function ($) { "use strict";
-    if ($.oc === undefined)
++function ($) {
+    "use strict";
+    if ($.oc === undefined) {
         $.oc = {}
 
     // @todo Provide an interface for configuration
@@ -14,17 +15,18 @@
     // - Custom stripe loader color
     // - Flash message interval
 
-    var LOADER_CLASS = 'oc-loading';
+        var LOADER_CLASS = 'oc-loading';
+    }
 
     // FLASH HANDLING
     // ============================
 
-    $(document).on('ajaxSetup', '[data-request][data-request-flash]', function(event, context) {
-        context.options.handleErrorMessage = function(message) {
+    $(document).on('ajaxSetup', '[data-request][data-request-flash]', function (event, context) {
+        context.options.handleErrorMessage = function (message) {
             $.oc.flashMsg({ text: message, class: 'error' })
         }
 
-        context.options.handleFlashMessage = function(message, type) {
+        context.options.handleFlashMessage = function (message, type) {
             $.oc.flashMsg({ text: message, class: type })
         }
     })
@@ -32,13 +34,13 @@
     // FORM VALIDATION
     // ============================
 
-    $(document).on('ajaxValidation', '[data-request][data-request-validate]', function(event, context, errorMsg, fields) {
+    $(document).on('ajaxValidation', '[data-request][data-request-validate]', function (event, context, errorMsg, fields) {
         var $this = $(this).closest('form'),
             $container = $('[data-validate-error]', $this),
             messages = [],
             $field
 
-        $.each(fields, function(fieldName, fieldMessages) {
+        $.each(fields, function (fieldName, fieldMessages) {
             $field = $('[data-validate-for="'+fieldName+'"]', $this)
             messages = $.merge(messages, fieldMessages)
             if (!!$field.length) {
@@ -62,7 +64,7 @@
             if (!!$oldMessages.length) {
                 var $clone = $oldMessages.first()
 
-                $.each(messages, function(key, message) {
+                $.each(messages, function (key, message) {
                     $clone.clone().text(message).insertAfter($clone)
                 })
 
@@ -73,12 +75,12 @@
             }
         }
 
-        $this.one('ajaxError', function(event){
+        $this.one('ajaxError', function (event) {
             event.preventDefault()
         })
     })
 
-    $(document).on('ajaxPromise', '[data-request][data-request-validate]', function() {
+    $(document).on('ajaxPromise', '[data-request][data-request-validate]', function () {
         var $this = $(this).closest('form')
         $('[data-validate-for]', $this).removeClass('visible')
         $('[data-validate-error]', $this).removeClass('visible')
@@ -88,7 +90,7 @@
     // ============================
 
     $(document)
-        .on('ajaxPromise', '[data-request]', function() {
+        .on('ajaxPromise', '[data-request]', function () {
             var $target = $(this)
 
             if ($target.data('attach-loading') !== undefined) {
@@ -103,7 +105,7 @@
                     .prop('disabled', true)
             }
         })
-        .on('ajaxFail ajaxDone', '[data-request]', function() {
+        .on('ajaxFail ajaxDone', '[data-request]', function () {
             var $target = $(this)
 
             if ($target.data('attach-loading') !== undefined) {
@@ -122,7 +124,7 @@
     // STRIPE LOAD INDICATOR
     // ============================
 
-    var StripeLoadIndicator = function() {
+    var StripeLoadIndicator = function () {
         var self = this
         this.counter = 0
         this.indicator = $('<div/>').addClass('stripe-loading-indicator loaded')
@@ -130,12 +132,12 @@
                             .append($('<div />').addClass('stripe-loaded'))
         this.stripe = this.indicator.find('.stripe')
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(document.body).append(self.indicator)
         })
     }
 
-    StripeLoadIndicator.prototype.show = function() {
+    StripeLoadIndicator.prototype.show = function () {
         this.counter++
 
         // Restart the animation
@@ -149,7 +151,7 @@
         $(document.body).addClass('oc-loading')
     }
 
-    StripeLoadIndicator.prototype.hide = function(force) {
+    StripeLoadIndicator.prototype.hide = function (force) {
         this.counter--
 
         if (force !== undefined && force) {
@@ -168,7 +170,7 @@
     // ============================
 
     $(document)
-        .on('ajaxPromise', '[data-request]', function(event) {
+        .on('ajaxPromise', '[data-request]', function (event) {
             // Prevent this event from bubbling up to a non-related data-request
             // element, for example a <form> tag wrapping a <button> tag
             event.stopPropagation()
@@ -178,12 +180,13 @@
             // This code will cover instances where the element has been removed
             // from the DOM, making the resolution event below an orphan.
             var $el = $(this)
-            $(window).one('ajaxUpdateComplete', function() {
-                if ($el.closest('html').length === 0)
+            $(window).one('ajaxUpdateComplete', function () {
+                if ($el.closest('html').length === 0) {
                     $.oc.stripeLoadIndicator.hide()
-             })
+                }
+            })
         })
-        .on('ajaxFail ajaxDone', '[data-request]', function(event) {
+        .on('ajaxFail ajaxDone', '[data-request]', function (event) {
             event.stopPropagation()
             $.oc.stripeLoadIndicator.hide()
         })
@@ -211,17 +214,19 @@
 
         $(document.body).append($element)
 
-        setTimeout(function() {
+        setTimeout(function () {
             $element.addClass('in')
         }, 100)
 
         var timer = window.setTimeout(remove, options.interval * 1000)
 
-        function removeElement() {
+        function removeElement()
+        {
             $element.remove()
         }
 
-        function remove() {
+        function remove()
+        {
             window.clearInterval(timer)
 
             $element.removeClass('in')
@@ -239,18 +244,18 @@
         interval: 5
     }
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    $.oc.flashMsg = FlashMessage
+        $.oc.flashMsg = FlashMessage
 
     // FLASH MESSAGE DATA-API
     // ===============
 
-    $(document).render(function(){
-        $('[data-control=flash-message]').each(function(){
-            $.oc.flashMsg($(this).data(), this)
+        $(document).render(function () {
+            $('[data-control=flash-message]').each(function () {
+                $.oc.flashMsg($(this).data(), this)
+            })
         })
-    })
-
+    }
 }(window.jQuery);

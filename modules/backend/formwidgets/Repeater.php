@@ -415,7 +415,7 @@ class Repeater extends FormWidgetBase
         if ($this->alias === $widgetName) {
             // This repeater has made the AJAX request
             self::$onAddItemCalled = true;
-        } else if (strpos($widgetName, $this->alias . 'Form') === 0) {
+        } elseif (strpos($widgetName, $this->alias . 'Form') === 0) {
             // A child repeater has made the AJAX request
 
             // Get index from AJAX handler

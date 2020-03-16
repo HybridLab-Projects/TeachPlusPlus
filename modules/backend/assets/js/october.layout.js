@@ -1,27 +1,28 @@
-(function($){
-    var OctoberLayout = function() {
+(function ($) {
+    var OctoberLayout = function () {
         this.$accountMenuOverlay = null
     }
 
-    OctoberLayout.prototype.setPageTitle = function(title) {
+    OctoberLayout.prototype.setPageTitle = function (title) {
         var $title = $('title')
 
-        if (this.pageTitleTemplate === undefined)
+        if (this.pageTitleTemplate === undefined) {
             this.pageTitleTemplate = $title.data('titleTemplate')
 
-        $title.text(this.pageTitleTemplate.replace('%s', title))
+            $title.text(this.pageTitleTemplate.replace('%s', title))
+        }
     }
 
-    OctoberLayout.prototype.updateLayout = function(title) {
+    OctoberLayout.prototype.updateLayout = function (title) {
         var $children, $el, fixedWidth, margin
 
-        $('[data-calculate-width]').each(function(){
+        $('[data-calculate-width]').each(function () {
             $children = $(this).children()
 
             if ($children.length > 0) {
                 fixedWidth = 0
 
-                $children.each(function() {
+                $children.each(function () {
                     $el = $(this)
                     margin = $el.data('oc.layoutMargin')
 
@@ -38,7 +39,7 @@
         })
     }
 
-    OctoberLayout.prototype.toggleAccountMenu = function(el) {
+    OctoberLayout.prototype.toggleAccountMenu = function (el) {
         var self = this,
             $el = $(el),
             $parent = $(el).parent(),
@@ -57,7 +58,7 @@
             $parent.addClass('highlight')
             $menu.addClass('active')
 
-            self.$accountMenuOverlay.one('click', function(){
+            self.$accountMenuOverlay.one('click', function () {
                 self.$accountMenuOverlay.remove()
                 $menu.removeClass('active')
                 $parent.removeClass('highlight')
@@ -65,20 +66,21 @@
         }
     }
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    $.oc.layout = new OctoberLayout()
+        $.oc.layout = new OctoberLayout()
 
-    $(document).ready(function(){
-        $.oc.layout.updateLayout()
+        $(document).ready(function () {
+            $.oc.layout.updateLayout()
 
-        window.setTimeout($.oc.layout.updateLayout, 100)
-    })
-    $(window).on('resize', function() {
-        $.oc.layout.updateLayout()
-    })
-    $(window).on('oc.updateUi', function() {
-        $.oc.layout.updateLayout()
-    })
+            window.setTimeout($.oc.layout.updateLayout, 100)
+        })
+        $(window).on('resize', function () {
+            $.oc.layout.updateLayout()
+        })
+        $(window).on('oc.updateUi', function () {
+            $.oc.layout.updateLayout()
+        })
+    }
 })(jQuery);

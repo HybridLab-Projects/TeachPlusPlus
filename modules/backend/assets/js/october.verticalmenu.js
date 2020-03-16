@@ -1,13 +1,14 @@
 /*
- * Creates a vertical responsive menu. 
+ * Creates a vertical responsive menu.
  *
  * JavaScript API:
  * $('#menu').verticalMenu()
  *
- * Dependences: 
+ * Dependences:
  * - Drag Scroll (october.dragscroll.js)
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var VerticalMenu = function (element, toggle, options) {
         this.$el = $(element)
@@ -30,7 +31,7 @@
         /*
          * Handle the menu toggle click
          */
-        this.toggle.click(function() {
+        this.toggle.click(function () {
             if (!self.body.hasClass(self.options.bodyMenuOpenClass)) {
                 var wrapperWidth = self.wrapper.outerWidth()
 
@@ -48,7 +49,7 @@
                 self.menuPanel.animate({'width': self.options.menuWidth}, {
                     duration: 200,
                     queue: false,
-                    complete: function() {
+                    complete: function () {
                         self.menuElement.css('width', self.options.menuWidth)
                     }
                 })
@@ -60,7 +61,7 @@
             return false
         })
 
-        this.wrapper.click(function() {
+        this.wrapper.click(function () {
             if (self.body.hasClass(self.options.bodyMenuOpenClass)) {
                 closeMenu()
                 return false
@@ -70,7 +71,7 @@
         /*
          * Disable the menu if the window is wider than the breakpoint width
          */
-        $(window).resize(function() {
+        $(window).resize(function () {
             if (self.body.hasClass(self.options.bodyMenuOpenClass)) {
                 if ($(window).width() > self.breakpoint) {
                     hideMenu()
@@ -84,22 +85,26 @@
         this.menuElement.dragScroll({
             vertical: true,
             useNative: true,
-            start: function(){self.menuElement.addClass('drag')},
-            stop: function(){self.menuElement.removeClass('drag')},
+            start: function () {
+                self.menuElement.addClass('drag')},
+            stop: function () {
+                self.menuElement.removeClass('drag')},
             scrollClassContainer: self.menuPanel,
             scrollMarkerContainer: self.menuContainer
         })
 
-        this.menuElement.on('click', function() {
+        this.menuElement.on('click', function () {
             // Do not handle menu item clicks while dragging
-            if (self.menuElement.hasClass('drag'))
+            if (self.menuElement.hasClass('drag')) {
                 return false
+            }
         })
 
         /*
          * Internal event, completely hides the menu
          */
-        function hideMenu() {
+        function hideMenu()
+        {
             self.body.removeClass(self.options.bodyMenuOpenClass)
             self.wrapper.css({
                 'position': 'static',
@@ -115,7 +120,8 @@
         /*
          * Internal event, smoothly collapses the menu
          */
-        function closeMenu() {
+        function closeMenu()
+        {
             self.wrapper.animate({'left': 0}, { duration: 200, queue: false})
             self.menuPanel.animate({'width': 0}, { duration: 200, queue: false, complete: hideMenu })
             self.menuElement.animate({'width': 0}, { duration: 200, queue: false })
@@ -141,10 +147,14 @@
             var data  = $this.data('oc.verticalMenu')
             var options = typeof option == 'object' && option
 
-            if (!data) $this.data('oc.verticalMenu', (data = new VerticalMenu(this, toggleSelector, options)))
-            if (typeof option == 'string') data[option].call($this)
+            if (!data) {
+                $this.data('oc.verticalMenu', (data = new VerticalMenu(this, toggleSelector, options)))
+                if (typeof option == 'string') {
+                    data[option].call($this)
+                }
+            }
         })
-      }
+    }
 
     $.fn.verticalMenu.Constructor = VerticalMenu
 
