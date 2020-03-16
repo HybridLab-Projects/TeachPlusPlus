@@ -1,9 +1,9 @@
 <?php
-
 use Teachplusplus\Teachers\Models\Teacher;
+
 Route::get('api/teacher', function(){
 
-    $teachers = Teacher::with('subject')-get();
+    $teachers = Teacher::with('subject')->get();
 
     return $teachers;
 });
