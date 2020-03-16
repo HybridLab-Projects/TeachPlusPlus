@@ -1,19 +1,31 @@
 <?php
 
-use Teachplusplus\Teachers\Controllers\Teachers;
 use Teachplusplus\Teachers\Models\Teacher;
 
-Route::get('api/teacher', function () {
-    $teachers = Teacher::all();
-     $arr=array();
+/*Route::get('/api/teacher/{id}', function ($id) {
+    
+    $teacher = Teacher::find($id);
+    
+    return $teacher;
+});
 
-    foreach ($teachers as $teacher) {
-        $arr[] = array(
-            'id' => $teacher['id'],
-            'name' => $teacher['name'],
-            'surname' => $teacher['surname'],
-            'subject' => $teacher->subject
-        );
-    }
-    return $arr;
+use Teachplusplus\Teachers\Models\Subject;
+
+Route::get('api/subject/{id}', function ($id) {
+
+    $subject = Subject::find($id);
+    return $subject;
+});
+*/
+Route::get('api/teachers', function(){
+
+    $teachers = Teacher::with('subject')-get();
+
+    return $teachers;
+});
+
+Route::get('api/teacher/{id}',function($id){
+
+    $teacher = Teacher::with('subject')->findOrFail($id);
+return $teacher;
 });
