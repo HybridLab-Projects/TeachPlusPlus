@@ -14,8 +14,7 @@ class BuilderTableUpdateTeachplusplusTeachersSubjects extends Migration
     
     public function down()
     {
-        Schema::table('teachplusplus_teachers_subjects', function($table)
-        {
+        Schema::table('teachplusplus_teachers_subjects', function ($table) {
             $table->renameColumn('subject_name', 'name');
         });
     }
