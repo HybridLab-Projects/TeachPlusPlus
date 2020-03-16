@@ -1,6 +1,6 @@
 /*
  * ColorPicker plugin
- * 
+ *
  * Data attributes:
  * - data-control="colorpicker" - enables the plugin on an element
  * - data-data-locker="input#locker" - Input element to store and restore the chosen color
@@ -12,12 +12,13 @@
  * - Some other plugin (filename.js)
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // COLORPICKER CLASS DEFINITION
     // ============================
 
-    var ColorPicker = function(element, options) {
+    var ColorPicker = function (element, options) {
         this.options   = options
         this.$el       = $(element)
 
@@ -31,7 +32,7 @@
         dataLocker: null
     }
 
-    ColorPicker.prototype.init = function() {
+    ColorPicker.prototype.init = function () {
         var self = this
         this.$dataLocker  = $(this.options.dataLocker, this.$el)
         this.$colorList = $('>ul', this.$el)
@@ -39,7 +40,7 @@
         this.$customColorSpan = $('>span', this.$customColor)
         this.originalColor = this.$customColor.data('hexColor')
 
-        this.$colorList.on('click', '>li', function(){
+        this.$colorList.on('click', '>li', function () {
             self.selectColor(this)
             self.$dataLocker.trigger('change')
         })
@@ -57,18 +58,18 @@
                 chooseText: $.oc.lang.get('colorpicker.choose', 'Ok'),
                 cancelText: '⨯',
                 appendTo: 'parent',
-                hide: function(color) {
+                hide: function (color) {
                     var hex = color ? color.toHexString() : ''
                     self.$customColorSpan.css('background', hex)
                 },
-                show: function(color) {
+                show: function (color) {
                     self.selectColor(self.$customColor)
                 },
-                move: function(color) {
+                move: function (color) {
                     var hex = color ? color.toHexString() : ''
                     self.$customColorSpan.css('background', hex)
                 },
-                change: function(color) {
+                change: function (color) {
                     var hex = color ? color.toHexString() : ''
                     self.setCustomColor(hex)
                 }
@@ -76,7 +77,7 @@
         }
     }
 
-    ColorPicker.prototype.setCustomColor = function(hexColor) {
+    ColorPicker.prototype.setCustomColor = function (hexColor) {
         if (this.$customColor.length) {
             this.$customColor.data('hexColor', hexColor)
             this.$customColor.spectrum('set', hexColor)
@@ -85,11 +86,11 @@
         this.setColor(hexColor)
     }
 
-    ColorPicker.prototype.setColor = function(hexColor) {
+    ColorPicker.prototype.setColor = function (hexColor) {
         this.$dataLocker.val(hexColor)
     }
 
-    ColorPicker.prototype.selectColor = function(el) {
+    ColorPicker.prototype.selectColor = function (el) {
         var $item = $(el)
 
         $item
@@ -98,7 +99,7 @@
 
         this.setColor($item.data('hexColor'))
 
-        if($item.data('hexColor').length > 0) {
+        if ($item.data('hexColor').length > 0) {
             $item.addClass('sp-clear-display')
         }
     }
@@ -114,9 +115,15 @@
             var $this   = $(this)
             var data    = $this.data('oc.colorpicker')
             var options = $.extend({}, ColorPicker.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.colorpicker', (data = new ColorPicker(this, options)))
-            if (typeof option == 'string') result = data[option].apply(data, args)
-            if (typeof result != 'undefined') return false
+            if (!data) {
+                $this.data('oc.colorpicker', (data = new ColorPicker(this, options)))
+                if (typeof option == 'string') {
+                    result = data[option].apply(data, args)
+                    if (typeof result != 'undefined') {
+                        return false
+                    }
+                }
+            }
         })
 
         return result ? result : this
@@ -135,7 +142,7 @@
     // COLORPICKER DATA-API
     // ===============
 
-    $(document).render(function() {
+    $(document).render(function () {
         $('[data-control="colorpicker"]').colorPicker()
     })
 

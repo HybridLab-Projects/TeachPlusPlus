@@ -1,9 +1,10 @@
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
-    var PermissionEditor = function() {
+    var PermissionEditor = function () {
         Base.call(this)
 
         this.init()
@@ -12,7 +13,7 @@
     PermissionEditor.prototype = Object.create(BaseProto)
     PermissionEditor.prototype.constructor = PermissionEditor
 
-    PermissionEditor.prototype.init = function() {
+    PermissionEditor.prototype.init = function () {
         $(document).on('click', '.permissioneditor table td.permission-name', this.proxy(this.onPermissionNameClick))
         $(document).on('click', '.permissioneditor table tr.mode-checkbox input[type=checkbox]', this.proxy(this.onPermissionCheckboxClick))
         $(document).on('click', '.permissioneditor table tr.mode-radio input[type=radio]', this.proxy(this.onPermissionRadioClick))
@@ -21,7 +22,7 @@
     // EVENT HANDLERS
     // ============================
 
-    PermissionEditor.prototype.onPermissionNameClick = function(ev) {
+    PermissionEditor.prototype.onPermissionNameClick = function (ev) {
         var $row = $(ev.target).closest('tr'),
             $checkbox = $row.find('input[type=checkbox]')
 
@@ -51,13 +52,13 @@
         }
     }
 
-    PermissionEditor.prototype.onPermissionCheckboxClick = function(ev) {
+    PermissionEditor.prototype.onPermissionCheckboxClick = function (ev) {
         var $row = $(ev.target).closest('tr')
 
         $row.toggleClass('disabled', !ev.target.checked)
     }
 
-    PermissionEditor.prototype.onPermissionRadioClick = function(ev) {
+    PermissionEditor.prototype.onPermissionRadioClick = function (ev) {
         var $row = $(ev.target).closest('tr')
 
         $row.toggleClass('disabled', ev.target.value == -1)
@@ -66,7 +67,7 @@
     // INITIALIZATION
     // ============================
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         new PermissionEditor()
     })
 

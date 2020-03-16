@@ -5,25 +5,26 @@
  * If updates that affect references to this.inspector and propertyDefinition are done,
  * the propertyEditors.set class implementation should be reviewed.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.propertyEditors.base,
         BaseProto = Base.prototype
 
-    var CheckboxEditor = function(inspector, propertyDefinition, containerCell, group) {
+    var CheckboxEditor = function (inspector, propertyDefinition, containerCell, group) {
         Base.call(this, inspector, propertyDefinition, containerCell, group)
     }
 
     CheckboxEditor.prototype = Object.create(BaseProto)
     CheckboxEditor.prototype.constructor = Base
 
-    CheckboxEditor.prototype.dispose = function() {
+    CheckboxEditor.prototype.dispose = function () {
         this.unregisterHandlers()
 
         BaseProto.dispose.call(this)
     }
 
-    CheckboxEditor.prototype.build = function() {
+    CheckboxEditor.prototype.build = function () {
         var editor = document.createElement('input'),
             container = document.createElement('div'),
             value = this.inspector.getPropertyValue(this.propertyDefinition.property),
@@ -49,7 +50,7 @@
             if (this.propertyDefinition.default !== undefined) {
                 isChecked = this.normalizeCheckedValue(this.propertyDefinition.default)
             }
-        } 
+        }
         else {
             isChecked = this.normalizeCheckedValue(value)
         }
@@ -59,27 +60,27 @@
         this.containerCell.appendChild(container)
     }
 
-    CheckboxEditor.prototype.normalizeCheckedValue = function(value) {
-         if (value == '0' || value == 'false') {
-             return false
-         }
+    CheckboxEditor.prototype.normalizeCheckedValue = function (value) {
+        if (value == '0' || value == 'false') {
+            return false
+        }
 
         return value
     }
 
-    CheckboxEditor.prototype.getInput = function() {
+    CheckboxEditor.prototype.getInput = function () {
         return this.containerCell.querySelector('input')
     }
 
-    CheckboxEditor.prototype.focus = function() {
+    CheckboxEditor.prototype.focus = function () {
         this.getInput().parentNode.focus()
     }
 
-    CheckboxEditor.prototype.updateDisplayedValue = function(value) {
+    CheckboxEditor.prototype.updateDisplayedValue = function (value) {
         this.getInput().checked = this.normalizeCheckedValue(value)
     }
 
-    CheckboxEditor.prototype.isEmptyValue = function(value) {
+    CheckboxEditor.prototype.isEmptyValue = function (value) {
         if (value === 0 || value === '0' || value === 'false') {
             return true
         }
@@ -87,19 +88,19 @@
         return BaseProto.isEmptyValue.call(this, value)
     }
 
-    CheckboxEditor.prototype.registerHandlers = function() {
+    CheckboxEditor.prototype.registerHandlers = function () {
         var input = this.getInput()
 
         input.addEventListener('change', this.proxy(this.onInputChange))
     }
 
-    CheckboxEditor.prototype.unregisterHandlers = function() {
+    CheckboxEditor.prototype.unregisterHandlers = function () {
         var input = this.getInput()
 
         input.removeEventListener('change', this.proxy(this.onInputChange))
     }
 
-    CheckboxEditor.prototype.onInputChange = function() {
+    CheckboxEditor.prototype.onInputChange = function () {
         var isChecked = this.getInput().checked
 
         this.inspector.setPropertyValue(this.propertyDefinition.property, isChecked ? 1 : 0)

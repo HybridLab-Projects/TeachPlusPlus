@@ -16,7 +16,8 @@
  *  - modernizr/modernizr
  *  - storm/popover
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var FilterWidget = function (element, options) {
         this.$el = $(element);
@@ -44,7 +45,7 @@
     /*
      * Get popover template
      */
-    FilterWidget.prototype.getPopoverTemplate = function() {
+    FilterWidget.prototype.getPopoverTemplate = function () {
         return '                                                                                                       \
                 <form>                                                                                                 \
                     <input type="hidden" name="scopeName"  value="{{ scopeName }}" />                                  \
@@ -91,13 +92,13 @@
             '
     }
 
-    FilterWidget.prototype.init = function() {
+    FilterWidget.prototype.init = function () {
         var self = this
 
         this.bindDependants()
 
         // Setup event handler on type: checkbox scopes
-        this.$el.on('change', '.filter-scope input[type="checkbox"]', function(){
+        this.$el.on('change', '.filter-scope input[type="checkbox"]', function () {
             var $scope = $(this).closest('.filter-scope')
 
             if ($scope.hasClass('is-indeterminate')) {
@@ -109,40 +110,42 @@
         })
 
         // Apply classes to type: checkbox scopes that are active from the server
-        $('.filter-scope input[type="checkbox"]', this.$el).each(function() {
+        $('.filter-scope input[type="checkbox"]', this.$el).each(function () {
             $(this)
                 .closest('.filter-scope')
                 .toggleClass('active', $(this).is(':checked'))
         })
 
         // Setup click handler on type: group scopes
-        this.$el.on('click', 'a.filter-scope', function(){
+        this.$el.on('click', 'a.filter-scope', function () {
             var $scope = $(this),
                 scopeName = $scope.data('scope-name')
 
             // Second click closes the filter scope
-            if ($scope.hasClass('filter-scope-open')) return
+            if ($scope.hasClass('filter-scope-open')) {
+                return
 
-            self.$activeScope = $scope
-            self.activeScopeName = scopeName
-            self.isActiveScopeDirty = false
-            self.displayPopover($scope)
-            $scope.addClass('filter-scope-open')
+                self.$activeScope = $scope
+                self.activeScopeName = scopeName
+                self.isActiveScopeDirty = false
+                self.displayPopover($scope)
+                $scope.addClass('filter-scope-open')
+            }
         })
 
         // Setup event handlers on type: group scopes' controls
-        this.$el.on('show.oc.popover', 'a.filter-scope', function(event){
+        this.$el.on('show.oc.popover', 'a.filter-scope', function (event) {
             self.focusSearch()
 
-            $(event.relatedTarget).on('click', '#controlFilterPopover .filter-items > ul > li', function(){
+            $(event.relatedTarget).on('click', '#controlFilterPopover .filter-items > ul > li', function () {
                 self.selectItem($(this))
             })
 
-            $(event.relatedTarget).on('click', '#controlFilterPopover .filter-active-items > ul > li', function(){
+            $(event.relatedTarget).on('click', '#controlFilterPopover .filter-active-items > ul > li', function () {
                 self.selectItem($(this), true)
             })
 
-            $(event.relatedTarget).on('ajaxDone', '#controlFilterPopover input.filter-search-input', function(event, context, data){
+            $(event.relatedTarget).on('ajaxDone', '#controlFilterPopover input.filter-search-input', function (event, context, data) {
                 self.filterAvailable(data.scopeName, data.options.available)
             })
 
@@ -158,21 +161,22 @@
         })
 
         // Setup event handler to apply selected options when closing the type: group scope popup
-        this.$el.on('hide.oc.popover', 'a.filter-scope', function(){
+        this.$el.on('hide.oc.popover', 'a.filter-scope', function () {
             var $scope = $(this)
             self.pushOptions(self.activeScopeName)
             self.activeScopeName = null
             self.$activeScope = null
 
             // Second click closes the filter scope
-            setTimeout(function() { $scope.removeClass('filter-scope-open') }, 200)
+            setTimeout(function () {
+                $scope.removeClass('filter-scope-open') }, 200)
         })
     }
 
     /*
      * Bind dependant scopes
      */
-    FilterWidget.prototype.bindDependants = function() {
+    FilterWidget.prototype.bindDependants = function () {
         if (!$('[data-scope-depends]', this.$el).length) {
             return;
         }
@@ -184,11 +188,11 @@
         /*
          * Map master and slave scope
          */
-        scopeElements.filter('[data-scope-depends]').each(function() {
+        scopeElements.filter('[data-scope-depends]').each(function () {
             var name = $(this).data('scope-name'),
                 depends = $(this).data('scope-depends')
 
-            $.each(depends, function(index, depend){
+            $.each(depends, function (index, depend) {
                 if (!scopeMap[depend]) {
                     scopeMap[depend] = { scopes: [] }
                 }
@@ -200,7 +204,7 @@
         /*
          * When a master is updated, refresh its slaves
          */
-        $.each(scopeMap, function(scopeName, toRefresh){
+        $.each(scopeMap, function (scopeName, toRefresh) {
             scopeElements.filter('[data-scope-name="'+scopeName+'"]')
                 .on('change.oc.filterScope', $.proxy(self.onRefreshDependants, self, scopeName, toRefresh))
         })
@@ -210,7 +214,7 @@
      * Refresh a dependancy scope
      * Uses a throttle to prevent duplicate calls and click spamming
      */
-    FilterWidget.prototype.onRefreshDependants = function(scopeName, toRefresh) {
+    FilterWidget.prototype.onRefreshDependants = function (scopeName, toRefresh) {
         var self = this,
             scopeElements = this.$el.find('.filter-scope')
 
@@ -218,7 +222,7 @@
             window.clearTimeout(this.dependantUpdateTimers[scopeName])
         }
 
-        this.dependantUpdateTimers[scopeName] = window.setTimeout(function() {
+        this.dependantUpdateTimers[scopeName] = window.setTimeout(function () {
             $.each(toRefresh.scopes, function (index, dependantScope) {
                 self.scopeValues[dependantScope] = null
                 var $scope = self.$el.find('[data-scope-name="'+dependantScope+'"]')
@@ -228,7 +232,7 @@
                  */
                 self.$el.request(self.options.optionsHandler, {
                     data: { scopeName: dependantScope },
-                    success: function(data) {
+                    success: function (data) {
                         self.fillOptions(dependantScope, data.options)
                         self.updateScopeSetting($scope, data.options.active.length)
                         $scope.loadIndicator('hide')
@@ -237,25 +241,26 @@
             })
         }, this.dependantUpdateInterval)
 
-        $.each(toRefresh.scopes, function(index, scope) {
+        $.each(toRefresh.scopes, function (index, scope) {
             scopeElements.filter('[data-scope-name="'+scope+'"]')
                 .addClass('loading-indicator-container')
                 .loadIndicator()
         })
     }
 
-    FilterWidget.prototype.focusSearch = function() {
-        if (Modernizr.touchevents)
+    FilterWidget.prototype.focusSearch = function () {
+        if (Modernizr.touchevents) {
             return
 
-        var $input = $('#controlFilterPopover input.filter-search-input'),
+            var $input = $('#controlFilterPopover input.filter-search-input'),
             length = $input.val().length
 
-        $input.focus()
-        $input.get(0).setSelectionRange(length, length)
+            $input.focus()
+            $input.get(0).setSelectionRange(length, length)
+        }
     }
 
-    FilterWidget.prototype.updateScopeSetting = function($scope, amount) {
+    FilterWidget.prototype.updateScopeSetting = function ($scope, amount) {
         var $setting = $scope.find('.filter-setting')
 
         if (amount) {
@@ -268,7 +273,7 @@
         }
     }
 
-    FilterWidget.prototype.selectItem = function($item, isDeselect) {
+    FilterWidget.prototype.selectItem = function ($item, isDeselect) {
         var $otherContainer = isDeselect
             ? $item.closest('.control-filter-popover').find('.filter-items:first > ul')
             : $item.closest('.control-filter-popover').find('.filter-active-items:first > ul')
@@ -276,37 +281,42 @@
         $item
             .addClass('animate-enter')
             .prependTo($otherContainer)
-            .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                 $(this).removeClass('animate-enter')
             })
 
-        if (!this.scopeValues[this.activeScopeName])
+        if (!this.scopeValues[this.activeScopeName]) {
             return
 
-        var
+            var
             itemId = $item.data('item-id'),
             items = this.scopeValues[this.activeScopeName],
             fromItems = isDeselect ? items.active : items.available,
             toItems = isDeselect ? items.available : items.active,
-            testFunc = function(item){ return item.id == itemId },
+            testFunc = function (item) {
+                return item.id == itemId }
+        },
             item = $.grep(fromItems, testFunc).pop(),
             filtered = $.grep(fromItems, testFunc, true)
 
-        if (isDeselect)
+        if (isDeselect) {
             this.scopeValues[this.activeScopeName].active = filtered
-        else
-            this.scopeValues[this.activeScopeName].available = filtered
+            else {
+                this.scopeValues[this.activeScopeName].available = filtered
 
-        if (item)
-            toItems.push(item)
+                if (item) {
+                    toItems.push(item)
 
-        this.toggleFilterButtons(items)
-        this.updateScopeSetting(this.$activeScope, items.active.length)
-        this.isActiveScopeDirty = true
-        this.focusSearch()
+                    this.toggleFilterButtons(items)
+                    this.updateScopeSetting(this.$activeScope, items.active.length)
+                    this.isActiveScopeDirty = true
+                    this.focusSearch()
+                }
+            }
+        }
     }
 
-    FilterWidget.prototype.displayPopover = function($scope) {
+    FilterWidget.prototype.displayPopover = function ($scope) {
         var self = this,
             scopeName = $scope.data('scope-name'),
             data = this.scopeValues[scopeName],
@@ -357,7 +367,7 @@
      * Returns false if loading options is instant,
      * otherwise returns a deferred promise object.
      */
-    FilterWidget.prototype.loadOptions = function(scopeName) {
+    FilterWidget.prototype.loadOptions = function (scopeName) {
         var self = this,
             data = { scopeName: scopeName }
 
@@ -375,74 +385,82 @@
          */
         return this.$el.request(this.options.optionsHandler, {
             data: data,
-            success: function(data) {
+            success: function (data) {
                 self.fillOptions(scopeName, data.options)
                 self.toggleFilterButtons()
             }
         })
     }
 
-    FilterWidget.prototype.fillOptions = function(scopeName, data) {
-        if (this.scopeValues[scopeName])
+    FilterWidget.prototype.fillOptions = function (scopeName, data) {
+        if (this.scopeValues[scopeName]) {
             return
 
-        if (!data.active) data.active = []
-        if (!data.available) data.available = []
+            if (!data.active) {
+                data.active = []
+                if (!data.available) {
+                    data.available = []
 
-        this.scopeValues[scopeName] = data
+                    this.scopeValues[scopeName] = data
 
-        // Do not render if scope has changed
-        if (scopeName != this.activeScopeName)
-            return
+                // Do not render if scope has changed
+                    if (scopeName != this.activeScopeName) {
+                        return
 
-        /*
-         * Inject available
-         */
-        var container = $('#controlFilterPopover .filter-items > ul').empty()
-        this.addItemsToListElement(container, data.available)
+                    /*
+                     * Inject available
+                     */
+                        var container = $('#controlFilterPopover .filter-items > ul').empty()
+                        this.addItemsToListElement(container, data.available)
 
-        /*
-         * Inject active
-         */
-        var container = $('#controlFilterPopover .filter-active-items > ul')
-        this.addItemsToListElement(container, data.active)
+                    /*
+                     * Inject active
+                     */
+                        var container = $('#controlFilterPopover .filter-active-items > ul')
+                        this.addItemsToListElement(container, data.active)
+                    }
+                }
+            }
+        }
     }
 
-    FilterWidget.prototype.filterAvailable = function(scopeName, available) {
-        if (this.activeScopeName != scopeName)
+    FilterWidget.prototype.filterAvailable = function (scopeName, available) {
+        if (this.activeScopeName != scopeName) {
             return
 
-        if (!this.scopeValues[this.activeScopeName])
-            return
+            if (!this.scopeValues[this.activeScopeName]) {
+                return
 
-        var
-            self = this,
-            filtered = [],
-            items = this.scopeValues[scopeName]
+                var
+                self = this,
+                filtered = [],
+                items = this.scopeValues[scopeName]
 
-        /*
-         * Ensure any active items do not appear in the search results
-         */
-        if (items.active.length) {
-            var activeIds = []
-            $.each(items.active, function (key, obj) {
-                activeIds.push(obj.id)
-            })
+            /*
+             * Ensure any active items do not appear in the search results
+             */
+                if (items.active.length) {
+                    var activeIds = []
+                    $.each(items.active, function (key, obj) {
+                        activeIds.push(obj.id)
+                    })
 
-            filtered = $.grep(available, function(item) {
-                return $.inArray(item.id, activeIds) === -1
-            })
-        }
-        else {
-            filtered = available
+                    filtered = $.grep(available, function (item) {
+                        return $.inArray(item.id, activeIds) === -1
+                    })
+                }
+                else {
+                    filtered = available
+                }
+            }
         }
 
         var container = $('#controlFilterPopover .filter-items > ul').empty()
         self.addItemsToListElement(container, filtered)
     }
 
-    FilterWidget.prototype.addItemsToListElement = function($ul, items) {
-        $.each(items, function(key, obj){
+    FilterWidget.prototype.addItemsToListElement = function ($ul, items) {
+        $.each(items, function (key, obj) {
             var item = $('<li />').data({ 'item-id': obj.id })
                 .append($('<a />').prop({ 'href': 'javascript:;',}).text(obj.name))
 
@@ -450,8 +468,7 @@
         })
     }
 
-    FilterWidget.prototype.toggleFilterButtons = function(data)
-    {
+    FilterWidget.prototype.toggleFilterButtons = function (data) {
         var items = $('#controlFilterPopover .filter-active-items > ul'),
             buttonContainer = $('#controlFilterPopover .filter-buttons')
 
@@ -465,29 +482,30 @@
     /*
      * Saves the options to the update handler
      */
-    FilterWidget.prototype.pushOptions = function(scopeName) {
-        if (!this.isActiveScopeDirty || !this.options.updateHandler)
+    FilterWidget.prototype.pushOptions = function (scopeName) {
+        if (!this.isActiveScopeDirty || !this.options.updateHandler) {
             return
 
-        var self = this,
+            var self = this,
             data = {
                 scopeName: scopeName,
                 options: this.scopeValues[scopeName]
             }
 
-        $.oc.stripeLoadIndicator.show()
+            $.oc.stripeLoadIndicator.show()
 
-        this.$el.request(this.options.updateHandler, {
-            data: data
-        }).always(function () {
-            $.oc.stripeLoadIndicator.hide()
-        }).done(function () {
-            // Trigger dependsOn updates on successful requests
-            self.$el.find('[data-scope-name="'+scopeName+'"]').trigger('change.oc.filterScope')
-        })
+            this.$el.request(this.options.updateHandler, {
+                data: data
+            }).always(function () {
+                $.oc.stripeLoadIndicator.hide()
+            }).done(function () {
+                // Trigger dependsOn updates on successful requests
+                self.$el.find('[data-scope-name="'+scopeName+'"]').trigger('change.oc.filterScope')
+            })
+        }
     }
 
-    FilterWidget.prototype.checkboxToggle = function($el) {
+    FilterWidget.prototype.checkboxToggle = function ($el) {
         var isChecked = $el.is(':checked'),
             $scope = $el.closest('.filter-scope'),
             scopeName = $scope.data('scope-name')
@@ -496,14 +514,14 @@
 
         if (this.options.updateHandler) {
             var data = {
-                    scopeName: scopeName,
-                    value: isChecked
-                }
+                scopeName: scopeName,
+                value: isChecked
+            }
 
             $.oc.stripeLoadIndicator.show()
             this.$el.request(this.options.updateHandler, {
                 data: data
-            }).always(function(){
+            }).always(function () {
                 $.oc.stripeLoadIndicator.hide()
             })
         }
@@ -511,7 +529,7 @@
         $scope.toggleClass('active', isChecked)
     }
 
-    FilterWidget.prototype.switchToggle = function($el) {
+    FilterWidget.prototype.switchToggle = function ($el) {
         var switchValue = $el.data('checked'),
             $scope = $el.closest('.filter-scope'),
             scopeName = $scope.data('scope-name')
@@ -520,14 +538,14 @@
 
         if (this.options.updateHandler) {
             var data = {
-                    scopeName: scopeName,
-                    value: switchValue
-                }
+                scopeName: scopeName,
+                value: switchValue
+            }
 
             $.oc.stripeLoadIndicator.show()
             this.$el.request(this.options.updateHandler, {
                 data: data
-            }).always(function(){
+            }).always(function () {
                 $.oc.stripeLoadIndicator.hide()
             })
         }
@@ -548,7 +566,7 @@
         this.$activeScope.data('oc.popover').hide()
     }
 
-    FilterWidget.prototype.getLang = function(name, defaultValue) {
+    FilterWidget.prototype.getLang = function (name, defaultValue) {
         if ($.oc === undefined || $.oc.lang === undefined) {
             return defaultValue
         }
@@ -569,9 +587,15 @@
             var $this   = $(this)
             var data    = $this.data('oc.filterwidget')
             var options = $.extend({}, FilterWidget.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.filterwidget', (data = new FilterWidget(this, options)))
-            if (typeof option == 'string') result = data[option].call($this)
-            if (typeof result != 'undefined') return false
+            if (!data) {
+                $this.data('oc.filterwidget', (data = new FilterWidget(this, options)))
+                if (typeof option == 'string') {
+                    result = data[option].call($this)
+                    if (typeof result != 'undefined') {
+                        return false
+                    }
+                }
+            }
         })
 
         return result ? result : this
@@ -590,7 +614,7 @@
     // FILTER WIDGET DATA-API
     // ==============
 
-    $(document).render(function(){
+    $(document).render(function () {
         $('[data-control="filterwidget"]').filterWidget();
     })
 

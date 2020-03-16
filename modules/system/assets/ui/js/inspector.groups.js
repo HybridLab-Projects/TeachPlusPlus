@@ -2,18 +2,19 @@
  * Inspector grouping support.
  *
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // GROUP MANAGER CLASS
     // ============================
 
-    var GroupManager = function(controlId) {
+    var GroupManager = function (controlId) {
         this.controlId = controlId
         this.rootGroup = null
         this.cachedGroupStatuses = null
     }
 
-    GroupManager.prototype.createGroup = function(groupId, parentGroup) {
+    GroupManager.prototype.createGroup = function (groupId, parentGroup) {
         var group = new Group(groupId)
 
         if (parentGroup) {
@@ -27,11 +28,11 @@
         return group
     }
 
-    GroupManager.prototype.getGroupIndex = function(group) {
+    GroupManager.prototype.getGroupIndex = function (group) {
         return group.getGroupIndex()
     }
 
-    GroupManager.prototype.isParentGroupExpanded = function(group) {
+    GroupManager.prototype.isParentGroupExpanded = function (group) {
         if (!group.parentGroup) {
             // The root group is always expanded
             return true
@@ -40,7 +41,7 @@
         return this.isGroupExpanded(group.parentGroup)
     }
 
-    GroupManager.prototype.isGroupExpanded = function(group) {
+    GroupManager.prototype.isGroupExpanded = function (group) {
         if (!group.parentGroup) {
             // The root group is always expanded
             return true
@@ -56,7 +57,7 @@
         return false
     }
 
-    GroupManager.prototype.setGroupStatus = function(groupIndex, expanded) {
+    GroupManager.prototype.setGroupStatus = function (groupIndex, expanded) {
         var statuses = this.readGroupStatuses()
 
         statuses[groupIndex] = expanded
@@ -64,7 +65,7 @@
         this.writeGroupStatuses(statuses)
     }
 
-    GroupManager.prototype.readGroupStatuses = function() {
+    GroupManager.prototype.readGroupStatuses = function () {
         if (this.cachedGroupStatuses !== null) {
             return this.cachedGroupStatuses
         }
@@ -81,7 +82,7 @@
         return this.cachedGroupStatuses
     }
 
-    GroupManager.prototype.writeGroupStatuses = function(updatedStatuses) {
+    GroupManager.prototype.writeGroupStatuses = function (updatedStatuses) {
         var statuses = getInspectorGroupStatuses()
 
         statuses[this.controlId] = updatedStatuses
@@ -90,11 +91,11 @@
         this.cachedGroupStatuses = updatedStatuses
     }
 
-    GroupManager.prototype.findGroupByIndex = function(index) {
+    GroupManager.prototype.findGroupByIndex = function (index) {
         return this.rootGroup.findGroupByIndex(index)
     }
 
-    GroupManager.prototype.findGroupRows = function(table, index, ignoreCollapsedSubgroups) {
+    GroupManager.prototype.findGroupRows = function (table, index, ignoreCollapsedSubgroups) {
         var group = this.findGroupByIndex(index)
 
         if (!group) {
@@ -104,7 +105,7 @@
         return group.findGroupRows(table, ignoreCollapsedSubgroups, this)
     }
 
-    GroupManager.prototype.markGroupRowInvalid = function(group, table) {
+    GroupManager.prototype.markGroupRowInvalid = function (group, table) {
         var currentGroup = group
 
         while (currentGroup) {
@@ -117,7 +118,7 @@
         }
     }
 
-    GroupManager.prototype.unmarkInvalidGroups = function(table) {
+    GroupManager.prototype.unmarkInvalidGroups = function (table) {
         var rows = table.querySelectorAll('tr.invalid')
 
         for (var i = rows.length-1; i >= 0; i--) {
@@ -125,7 +126,7 @@
         }
     }
 
-    GroupManager.prototype.isRowVisible = function(table, rowGroupIndex) {
+    GroupManager.prototype.isRowVisible = function (table, rowGroupIndex) {
         var group = this.findGroupByIndex(index)
 
         if (!group) {
@@ -149,7 +150,8 @@
     // Internal functions
     //
 
-    function getInspectorGroupStatuses() {
+    function getInspectorGroupStatuses()
+    {
         var statuses = document.body.getAttribute('data-inspector-group-statuses')
 
         if (statuses !== null) {
@@ -159,14 +161,15 @@
         return {}
     }
 
-    function setInspectorGroupStatuses(statuses) {
+    function setInspectorGroupStatuses(statuses)
+    {
         document.body.setAttribute('data-inspector-group-statuses', JSON.stringify(statuses))
     }
 
     // GROUP CLASS
     // ============================
 
-    var Group = function(groupId) {
+    var Group = function (groupId) {
         this.groupId = groupId
         this.parentGroup = null
         this.groupIndex = null
@@ -174,7 +177,7 @@
         this.groups = []
     }
 
-    Group.prototype.getGroupIndex = function() {
+    Group.prototype.getGroupIndex = function () {
         if (this.groupIndex !== null) {
             return this.groupIndex
         }
@@ -198,7 +201,7 @@
         return result
     }
 
-    Group.prototype.findGroupByIndex = function(index) {
+    Group.prototype.findGroupByIndex = function (index) {
         if (this.getGroupIndex() == index) {
             return this
         }
@@ -213,7 +216,7 @@
         return null
     }
 
-    Group.prototype.getLevel = function() {
+    Group.prototype.getLevel = function () {
         var current = this,
             level = -1
 
@@ -226,7 +229,7 @@
         return level
     }
 
-    Group.prototype.getGroupAndAllParents = function() {
+    Group.prototype.getGroupAndAllParents = function () {
         var current = this,
             result = []
 
@@ -239,7 +242,7 @@
         return result
     }
 
-    Group.prototype.findGroupRows = function(table, ignoreCollapsedSubgroups, groupManager) {
+    Group.prototype.findGroupRows = function (table, ignoreCollapsedSubgroups, groupManager) {
         var groupIndex = this.getGroupIndex(),
             rows = table.querySelectorAll('tr[data-parent-group-index="'+groupIndex+'"]'),
             result = Array.prototype.slice.call(rows) // Convert node list to array
@@ -260,7 +263,7 @@
         return result
     }
 
-    Group.prototype.findGroupRow = function(table) {
+    Group.prototype.findGroupRow = function (table) {
         return table.querySelector('tr[data-group-index="'+this.groupIndex+'"]')
     }
 

@@ -1,6 +1,6 @@
 /*
  * DragComponents plugin
- * 
+ *
  * Data attributes:
  * - data-control="dragcomponents" - enables the plugin on an element
  * - data-option="value" - an option with a value
@@ -8,16 +8,17 @@
  * JavaScript API:
  * $('a#someElement').dragComponents({ option: 'value' })
  *
- * Dependences: 
+ * Dependences:
  * - Some other plugin (filename.js)
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // DRAGCOMPONENTS CLASS DEFINITION
     // ============================
 
-    var DragComponents = function(element, options) {
+    var DragComponents = function (element, options) {
         var self       = this
         this.options   = options
         this.$el       = $(element)
@@ -33,44 +34,52 @@
             startPos,
             editorPos
 
-        $el.mousedown(function(event){
-            if ($el.data('component-attached')) return
+        $el.mousedown(function (event) {
+            if ($el.data('component-attached')) {
+                return
 
-            startDrag(event)
-            return false
+                startDrag(event)
+                return false
+            }
         })
 
-        $el.on('touchstart', function(event){
-            if ($el.data('component-attached')) return
+        $el.on('touchstart', function (event) {
+            if ($el.data('component-attached')) {
+                return
 
-            var touchEvent = event.originalEvent;
+                var touchEvent = event.originalEvent;
+            }
             if (touchEvent.touches.length == 1) {
                 startDrag(touchEvent.touches[0])
                 event.stopPropagation()
             }
         })
 
-        function initDrag(event) {
+        function initDrag(event)
+        {
             $componentList = $('#cms-master-tabs > div.tab-content > .tab-pane.active .control-componentlist')
             $el.addClass(self.options.placeholderClass)
             $clone.show()
             $editorArea = $('#cms-master-tabs > div.tab-content > .tab-pane.active [data-control="codeeditor"]')
-            if (!$editorArea.length) return
+            if (!$editorArea.length) {
+                return
 
-            $editor = $editorArea.codeEditor('getEditorObject')
-            $editor.focus()
+                $editor = $editorArea.codeEditor('getEditorObject')
+                $editor.focus()
 
-            $editor.on('mousemove', function (event) {
-               editorPos = event.getDocumentPosition()
-               $editor.clearSelection()
-               $editor.moveCursorToPosition(editorPos)
-            });
+                $editor.on('mousemove', function (event) {
+                    editorPos = event.getDocumentPosition()
+                    $editor.clearSelection()
+                    $editor.moveCursorToPosition(editorPos)
+                });
+            }
         }
 
         /*
          * Internal event, drag has started
          */
-        function startDrag(event) {
+        function startDrag(event)
+        {
 
             startPos = $el.offset()
             $clone = $el.clone().appendTo($(document.body))
@@ -92,24 +101,24 @@
             $clone.data('dragComponents', { x: objX, y: objY })
 
             if (Modernizr.touchevents) {
-                $(window).on('touchmove.oc.dragcomponents', function(event){
+                $(window).on('touchmove.oc.dragcomponents', function (event) {
                     var touchEvent = event.originalEvent
                     moveDrag(touchEvent.touches[0])
                     event.preventDefault()
                 })
 
-                $(window).on('touchend.oc.dragcomponents', function(event) {
+                $(window).on('touchend.oc.dragcomponents', function (event) {
                     stopDrag()
                 })
             }
             else {
-                $(window).on('mousemove.oc.dragcomponents', function(event){
+                $(window).on('mousemove.oc.dragcomponents', function (event) {
                     moveDrag(event)
                     $(document.body).addClass(self.options.dragClass)
                     return false
                 })
 
-                $(window).on('mouseup.oc.dragcomponents', function(mouseUpEvent){
+                $(window).on('mouseup.oc.dragcomponents', function (mouseUpEvent) {
                     var isClick = event.pageX == mouseUpEvent.pageX && event.pageY == mouseUpEvent.pageY
                     stopDrag(isClick)
                     return false
@@ -120,7 +129,8 @@
         /*
          * Internal event, drag is active
          */
-        function moveDrag(event) {
+        function moveDrag(event)
+        {
             if (!dragging) {
                 dragging = true
                 initDrag(event)
@@ -134,39 +144,45 @@
                 top: (event.pageY - adjY - offset.y)
             })
 
-            if (collision($clone, $componentList))
+            if (collision($clone, $componentList)) {
                 $componentList.addClass('droppable')
-            else
-                $componentList.removeClass('droppable')
+                else {
+                    $componentList.removeClass('droppable')
+                }
+            }
         }
 
         /*
          * Internal event, drag has ended
          */
-        function stopDrag(click) {
+        function stopDrag(click)
+        {
             dragging = false
 
-            if (click)
+            if (click) {
                 $(document.body).removeClass(self.options.dragClass)
 
-            $el.removeClass(self.options.placeholderClass)
-            $(window)
+                $el.removeClass(self.options.placeholderClass)
+                $(window)
                 .off('mousemove.oc.dragcomponents mouseup.oc.dragcomponents')
                 .removeData('dragComponents')
 
-            if (!click)
-                finishDrag()
-
-            $clone.remove()
-
-            window.setTimeout(function(){
                 if (!click) {
-                    $(document.body).removeClass(self.options.dragClass)
+                    finishDrag()
+
+                    $clone.remove()
+
+                    window.setTimeout(function () {
+                        if (!click) {
+                            $(document.body).removeClass(self.options.dragClass)
+                        }
+                    }, 100)
                 }
-            }, 100)
+            }
         }
 
-        function finishDrag() {
+        function finishDrag()
+        {
             // Dragged to the code editor
             if (collision($clone, $editorArea)) {
                 // Add the component to the page
@@ -195,11 +211,12 @@
             }
         }
 
-        function collision($div1, $div2) {
-            if (!$div1 || !$div2 || !$div1.length || !$div2.length)
+        function collision($div1, $div2)
+        {
+            if (!$div1 || !$div2 || !$div1.length || !$div2.length) {
                 return false
 
-            var x1 = $div1.offset().left,
+                var x1 = $div1.offset().left,
                 y1 = $div1.offset().top,
                 h1 = $div1.outerHeight(true),
                 w1 = $div1.outerWidth(true),
@@ -212,7 +229,8 @@
                 b2 = y2 + h2,
                 r2 = x2 + w2
 
-            return !(b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2)
+                return !(b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2)
+            }
         }
 
     }
@@ -234,7 +252,9 @@
             var data    = $this.data('oc.dragcomponents')
             var options = $.extend({}, DragComponents.DEFAULTS, $this.data(), typeof option == 'object' && option)
             if (!data) $this.data('oc.dragcomponents', (data = new DragComponents(this, options)))
-            else if (typeof option == 'string') data[option].apply(data, args)
+            else if (typeof option == 'string') {
+                data[option].apply(data, args)
+            }
         })
     }
 
@@ -251,7 +271,7 @@
     // DRAGCOMPONENTS DATA-API
     // ===============
 
-    $(document).on('mouseenter.oc.dragcomponents', '[data-control="dragcomponent"]', function() {
+    $(document).on('mouseenter.oc.dragcomponents', '[data-control="dragcomponent"]', function () {
         $(this).dragComponents()
     });
 

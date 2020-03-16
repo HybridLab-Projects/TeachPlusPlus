@@ -8,16 +8,17 @@
  * JavaScript API:
  * $('#tree').sidenavTree()
  *
- * Dependences: 
+ * Dependences:
  * - Null
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // SIDENAVTREE CLASS DEFINITION
     // ============================
 
-    var SidenavTree = function(element, options) {
+    var SidenavTree = function (element, options) {
         this.options   = options
         this.$el       = $(element)
 
@@ -28,7 +29,7 @@
         treeName: 'sidenav_tree'
     }
 
-    SidenavTree.prototype.init = function (){
+    SidenavTree.prototype.init = function () {
         var self = this
 
         $(document.body).addClass('has-sidenav-tree')
@@ -37,12 +38,12 @@
         this.searchCookieName = this.options.treeName + 'search'
         this.$searchInput = $(this.options.searchInput)
 
-        this.$el.on('click', 'li > div.group', function() {
+        this.$el.on('click', 'li > div.group', function () {
             self.toggleGroup($(this).closest('li'))
             return false
         })
 
-        this.$searchInput.on('input', function(){
+        this.$searchInput.on('input', function () {
             self.handleSearchChange()
         })
 
@@ -60,7 +61,7 @@
         }
     }
 
-    SidenavTree.prototype.toggleGroup = function(group) {
+    SidenavTree.prototype.toggleGroup = function (group) {
         var $group = $(group),
             status = $group.attr('data-status')
 
@@ -69,7 +70,7 @@
             : this.expandGroup($group)
     }
 
-    SidenavTree.prototype.collapseGroup = function(group) {
+    SidenavTree.prototype.collapseGroup = function (group) {
         var
             $list = $('> ul', group),
             self = this
@@ -78,7 +79,7 @@
         $list.animate({ 'height': 0 }, {
             duration: 100,
             queue: false,
-            complete: function() {
+            complete: function () {
                 $list.css({
                     'overflow': 'visible',
                     'display': 'none'
@@ -91,7 +92,7 @@
         })
     }
 
-    SidenavTree.prototype.expandGroup = function(group, duration) {
+    SidenavTree.prototype.expandGroup = function (group, duration) {
         var
             $list = $('> ul', group),
             self = this
@@ -102,7 +103,7 @@
             'overflow': 'hidden',
             'height': 0
         })
-        $list.animate({'height': $list[0].scrollHeight}, { duration: duration, queue: false, complete: function() {
+        $list.animate({'height': $list[0].scrollHeight}, { duration: duration, queue: false, complete: function () {
             $list.css({
                 'overflow': 'visible',
                 'height': 'auto',
@@ -114,7 +115,7 @@
         } })
     }
 
-    SidenavTree.prototype.saveGroupStatus = function(groupCode, collapsed) {
+    SidenavTree.prototype.saveGroupStatus = function (groupCode, collapsed) {
         var collapsedGroups = $.cookie(this.statusCookieName),
             updatedGroups = []
 
@@ -123,9 +124,10 @@
         }
 
         collapsedGroups = collapsedGroups.split('|')
-        $.each(collapsedGroups, function() {
-            if (groupCode != this)
+        $.each(collapsedGroups, function () {
+            if (groupCode != this) {
                 updatedGroups.push(this)
+            }
         })
 
         if (collapsed) {
@@ -135,7 +137,7 @@
         $.cookie(this.statusCookieName, updatedGroups.join('|'), { expires: 30, path: '/' })
     }
 
-    SidenavTree.prototype.handleSearchChange = function() {
+    SidenavTree.prototype.handleSearchChange = function () {
         var lastValue = this.$searchInput.data('oc.lastvalue');
 
         if (lastValue !== undefined && lastValue == this.$searchInput.val()) {
@@ -149,14 +151,14 @@
         }
 
         var self = this
-        this.dataTrackInputTimer = window.setTimeout(function(){
+        this.dataTrackInputTimer = window.setTimeout(function () {
             self.applySearch()
         }, 300);
 
         $.cookie(this.searchCookieName, $.trim(this.$searchInput.val()), { expires: 30, path: '/' })
     }
 
-    SidenavTree.prototype.applySearch = function() {
+    SidenavTree.prototype.applySearch = function () {
         var query = $.trim(this.$searchInput.val()),
             words = query.toLowerCase().split(' '),
             visibleGroups = [],
@@ -172,18 +174,18 @@
         /*
          * Find visible groups and items
          */
-        $('ul.top-level > li', this.$el).each(function() {
+        $('ul.top-level > li', this.$el).each(function () {
             var $li = $(this)
 
             if (self.textContainsWords($('div.group h3', $li).text(), words)) {
                 visibleGroups.push($li.get(0))
 
-                $('ul li', $li).each(function(){
+                $('ul li', $li).each(function () {
                     visibleItems.push(this)
                 })
             }
             else {
-                $('ul li', $li).each(function(){
+                $('ul li', $li).each(function () {
                     if (self.textContainsWords($(this).text(), words) || self.textContainsWords($(this).data('keywords'), words)) {
                         visibleGroups.push($li.get(0))
                         visibleItems.push(this)
@@ -195,30 +197,32 @@
         /*
          * Hide invisible groups and items
          */
-        $('ul.top-level > li', this.$el).each(function() {
+        $('ul.top-level > li', this.$el).each(function () {
             var $li = $(this),
                 groupIsVisible = $.inArray(this, visibleGroups) !== -1
 
             $li.toggleClass('hidden', !groupIsVisible)
-            if (groupIsVisible)
+            if (groupIsVisible) {
                 self.expandGroup($li, 0)
 
-            $('ul li', $li).each(function(){
-                var $itemLi = $(this)
+                $('ul li', $li).each(function () {
+                    var $itemLi = $(this)
 
-                $itemLi.toggleClass('hidden', $.inArray(this, visibleItems) == -1)
-            })
+                    $itemLi.toggleClass('hidden', $.inArray(this, visibleItems) == -1)
+                })
+            }
         })
 
         return false
     }
 
-    SidenavTree.prototype.textContainsWords = function(text, words) {
+    SidenavTree.prototype.textContainsWords = function (text, words) {
         text = text.toLowerCase()
 
         for (var i = 0; i < words.length; i++) {
-            if (text.indexOf(words[i]) === -1)
+            if (text.indexOf(words[i]) === -1) {
                 return false
+            }
         }
 
         return true
@@ -237,13 +241,16 @@
             var data    = $this.data('oc.sidenavTree')
             var options = $.extend({}, SidenavTree.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) $this.data('oc.sidenavTree', (data = new SidenavTree(this, options)))
-            if (typeof option == 'string') { 
-                var methodArgs = [];
-                for (var i=1; i<args.length; i++)
-                    methodArgs.push(args[i])
+            if (!data) {
+                $this.data('oc.sidenavTree', (data = new SidenavTree(this, options)))
+                if (typeof option == 'string') {
+                    var methodArgs = [];
+                    for (var i=1; i<args.length; i++) {
+                        methodArgs.push(args[i])
 
-                data[option].apply(data, methodArgs)
+                        data[option].apply(data, methodArgs)
+                    }
+                }
             }
         })
     }

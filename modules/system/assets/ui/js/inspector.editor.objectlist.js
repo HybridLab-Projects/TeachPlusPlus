@@ -1,12 +1,13 @@
 /*
  * Inspector object list editor class.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.propertyEditors.base,
         BaseProto = Base.prototype
 
-    var ObjectListEditor = function(inspector, propertyDefinition, containerCell, group) {
+    var ObjectListEditor = function (inspector, propertyDefinition, containerCell, group) {
         this.currentRowInspector = null
         this.popup = null
 
@@ -24,12 +25,12 @@
     ObjectListEditor.prototype = Object.create(BaseProto)
     ObjectListEditor.prototype.constructor = Base
 
-    ObjectListEditor.prototype.init = function() {
+    ObjectListEditor.prototype.init = function () {
         if (this.isKeyValueMode()) {
             var keyProperty = this.getKeyProperty()
 
             if (!keyProperty) {
-                throw new Error('Object list key property ' + this.propertyDefinition.keyProperty 
+                throw new Error('Object list key property ' + this.propertyDefinition.keyProperty
                     + ' is not defined in itemProperties. Property: ' + this.propertyDefinition.property)
             }
         }
@@ -37,7 +38,7 @@
         BaseProto.init.call(this)
     }
 
-    ObjectListEditor.prototype.dispose = function() {
+    ObjectListEditor.prototype.dispose = function () {
         this.unregisterHandlers()
         this.removeControls()
 
@@ -47,7 +48,7 @@
         BaseProto.dispose.call(this)
     }
 
-    ObjectListEditor.prototype.supportsExternalParameterEditor = function() {
+    ObjectListEditor.prototype.supportsExternalParameterEditor = function () {
         return false
     }
 
@@ -55,7 +56,7 @@
     // Building
     //
 
-    ObjectListEditor.prototype.build = function() {
+    ObjectListEditor.prototype.build = function () {
         var link = document.createElement('a')
 
         $.oc.foundation.element.addClass(link, 'trigger')
@@ -67,8 +68,8 @@
         this.containerCell.appendChild(link)
     }
 
-    ObjectListEditor.prototype.setLinkText = function(link, value) {
-        var value = value !== undefined && value !== null ? value 
+    ObjectListEditor.prototype.setLinkText = function (link, value) {
+        var value = value !== undefined && value !== null ? value
                 : this.inspector.getPropertyValue(this.propertyDefinition.property)
 
         if (value === null) {
@@ -95,7 +96,7 @@
                 }
 
                 itemCount = value.length
-            } 
+            }
             else {
                 if (typeof value !== 'object') {
                     throw new Error('Object list value should be an object. Property: ' + this.propertyDefinition.property)
@@ -109,7 +110,7 @@
         }
     }
 
-    ObjectListEditor.prototype.getPopupContent = function() {
+    ObjectListEditor.prototype.getPopupContent = function () {
         return '<form>                                                                                  \
                 <div class="modal-header">                                                              \
                     <button type="button" class="close" data-dismiss="popup">&times;</button>           \
@@ -177,11 +178,11 @@
                 </form>'
     }
 
-    ObjectListEditor.prototype.buildPopupContents = function(popup) {
+    ObjectListEditor.prototype.buildPopupContents = function (popup) {
         this.buildItemsTable(popup)
     }
 
-    ObjectListEditor.prototype.buildItemsTable = function(popup) {
+    ObjectListEditor.prototype.buildItemsTable = function (popup) {
         var table = popup.querySelector('table'),
             tbody = document.createElement('tbody'),
             items = this.inspector.getPropertyValue(this.propertyDefinition.property),
@@ -219,11 +220,11 @@
         this.updateScrollpads()
     }
 
-    ObjectListEditor.prototype.buildEmptyRow = function() {
+    ObjectListEditor.prototype.buildEmptyRow = function () {
         return this.buildTableRow('No items found', 'no-data', 'nolink')
     }
 
-    ObjectListEditor.prototype.removeEmptyRow = function() {
+    ObjectListEditor.prototype.removeEmptyRow = function () {
         var tbody = this.getTableBody(),
             row = tbody.querySelector('tr.no-data')
 
@@ -232,7 +233,7 @@
         }
     }
 
-    ObjectListEditor.prototype.buildTableRow = function(text, rowClass, cellClass) {
+    ObjectListEditor.prototype.buildTableRow = function (text, rowClass, cellClass) {
         var row = document.createElement('tr'),
             cell = document.createElement('td')
 
@@ -250,7 +251,7 @@
         return row
     }
 
-    ObjectListEditor.prototype.updateScrollpads = function() {
+    ObjectListEditor.prototype.updateScrollpads = function () {
         $('.control-scrollpad', this.popup).scrollpad('update')
     }
 
@@ -258,7 +259,7 @@
     // Built-in Inspector management
     //
 
-    ObjectListEditor.prototype.selectRow = function(row, forceSelect) {
+    ObjectListEditor.prototype.selectRow = function (row, forceSelect) {
         var tbody = row.parentNode,
             inspectorContainer = this.getInspectorContainer(),
             selectedRow = this.getSelectedRow()
@@ -289,7 +290,7 @@
         this.createInspectorForRow(row, inspectorContainer)
     }
 
-    ObjectListEditor.prototype.createInspectorForRow = function(row, inspectorContainer) {
+    ObjectListEditor.prototype.createInspectorForRow = function (row, inspectorContainer) {
         var dataStr = row.getAttribute('data-inspector-values')
 
         if (dataStr === undefined || typeof dataStr !== 'string') {
@@ -302,18 +303,23 @@
                 enableExternalParameterEditor: false,
                 onChange: this.proxy(this.onInspectorDataChange),
                 inspectorClass: this.inspector.options.inspectorClass
-            }
+        }
 
-        this.currentRowInspector = new $.oc.inspector.surface(inspectorContainer, properties, values, 
-            $.oc.inspector.helpers.generateElementUniqueId(inspectorContainer), options)
+        this.currentRowInspector = new $.oc.inspector.surface(
+            inspectorContainer,
+            properties,
+            values,
+            $.oc.inspector.helpers.generateElementUniqueId(inspectorContainer),
+            options
+        )
     }
 
-    ObjectListEditor.prototype.disposeInspector = function() {
+    ObjectListEditor.prototype.disposeInspector = function () {
         $.oc.foundation.controlUtils.disposeControls(this.popup.querySelector('[data-inspector-container]'))
         this.currentRowInspector = null
     }
 
-    ObjectListEditor.prototype.applyDataToRow = function(row) {
+    ObjectListEditor.prototype.applyDataToRow = function (row) {
         if (this.currentRowInspector === null) {
             return
         }
@@ -322,7 +328,7 @@
         row.setAttribute('data-inspector-values', JSON.stringify(data))
     }
 
-    ObjectListEditor.prototype.updateRowText = function(property, value) {
+    ObjectListEditor.prototype.updateRowText = function (property, value) {
         var selectedRow = this.getSelectedRow()
         
         if (!selectedRow) {
@@ -346,7 +352,7 @@
         selectedRow.firstChild.textContent = value
     }
 
-    ObjectListEditor.prototype.getSelectedRow = function() {
+    ObjectListEditor.prototype.getSelectedRow = function () {
         if (!this.popup) {
             throw new Error('Trying to get selected row without a popup reference.')
         }
@@ -362,7 +368,7 @@
         return null
     }
 
-    ObjectListEditor.prototype.createItem = function() {
+    ObjectListEditor.prototype.createItem = function () {
         var selectedRow = this.getSelectedRow()
 
         if (selectedRow) {
@@ -398,7 +404,7 @@
         this.updateScrollpads()
     }
 
-    ObjectListEditor.prototype.deleteItem = function() {
+    ObjectListEditor.prototype.deleteItem = function () {
         var selectedRow = this.getSelectedRow()
 
         if (!selectedRow) {
@@ -424,7 +430,7 @@
         this.updateScrollpads()
     }
 
-    ObjectListEditor.prototype.applyDataToParentInspector = function() {
+    ObjectListEditor.prototype.applyDataToParentInspector = function () {
         var selectedRow = this.getSelectedRow(),
             tbody = this.getTableBody(),
             dataRows = tbody.querySelectorAll('tr[data-inspector-values]'),
@@ -466,7 +472,7 @@
         return false
     }
 
-    ObjectListEditor.prototype.validateKeyValue = function() {
+    ObjectListEditor.prototype.validateKeyValue = function () {
         if (!this.isKeyValueMode()) {
             return true
         }
@@ -519,11 +525,11 @@
     // Helpers
     //
 
-    ObjectListEditor.prototype.getLink = function() {
+    ObjectListEditor.prototype.getLink = function () {
         return this.containerCell.querySelector('a.trigger')
     }
 
-    ObjectListEditor.prototype.getPopupFormElement = function() {
+    ObjectListEditor.prototype.getPopupFormElement = function () {
         var form = this.popup.querySelector('form')
 
         if (!form) {
@@ -533,19 +539,19 @@
         return form
     }
 
-    ObjectListEditor.prototype.getInspectorContainer = function() {
+    ObjectListEditor.prototype.getInspectorContainer = function () {
         return this.popup.querySelector('div[data-inspector-container]')
     }
 
-    ObjectListEditor.prototype.getTableBody = function() {
+    ObjectListEditor.prototype.getTableBody = function () {
         return this.popup.querySelector('table.inspector-table-list tbody')
     }
 
-    ObjectListEditor.prototype.isKeyValueMode = function() {
+    ObjectListEditor.prototype.isKeyValueMode = function () {
         return this.propertyDefinition.keyProperty !== undefined
     }
 
-    ObjectListEditor.prototype.getKeyProperty = function() {
+    ObjectListEditor.prototype.getKeyProperty = function () {
         for (var i = 0, len = this.propertyDefinition.itemProperties.length; i < len; i++) {
             var property = this.propertyDefinition.itemProperties[i]
 
@@ -555,7 +561,7 @@
         }
     }
 
-    ObjectListEditor.prototype.getValueKeys = function(value) {
+    ObjectListEditor.prototype.getValueKeys = function (value) {
         var result = []
 
         for (var key in value) {
@@ -565,7 +571,7 @@
         return result
     }
 
-    ObjectListEditor.prototype.addKeyProperty = function(key, value) {
+    ObjectListEditor.prototype.addKeyProperty = function (key, value) {
         if (!this.isKeyValueMode()) {
             return value
         }
@@ -575,7 +581,7 @@
         return value
     }
 
-    ObjectListEditor.prototype.removeKeyProperty = function(value) {
+    ObjectListEditor.prototype.removeKeyProperty = function (value) {
         if (!this.isKeyValueMode()) {
             return value
         }
@@ -589,7 +595,7 @@
         return result
     }
 
-    ObjectListEditor.prototype.getEmptyValue = function() {
+    ObjectListEditor.prototype.getEmptyValue = function () {
         if (this.isKeyValueMode()) {
             return {}
         }
@@ -602,7 +608,7 @@
     // Event handlers
     //
 
-    ObjectListEditor.prototype.registerHandlers = function() {
+    ObjectListEditor.prototype.registerHandlers = function () {
         var link = this.getLink(),
             $link = $(link)
 
@@ -611,7 +617,7 @@
         $link.on('hidden.oc.popup', this.proxy(this.onPopupHidden))
     }
 
-    ObjectListEditor.prototype.unregisterHandlers = function() {
+    ObjectListEditor.prototype.unregisterHandlers = function () {
         var link = this.getLink(),
             $link = $(link)
 
@@ -620,7 +626,7 @@
         $link.off('hidden.oc.popup', this.proxy(this.onPopupHidden))
     }
 
-    ObjectListEditor.prototype.onTriggerClick = function(ev) {
+    ObjectListEditor.prototype.onTriggerClick = function (ev) {
         $.oc.foundation.event.stop(ev)
 
         var content = this.getPopupContent()
@@ -634,7 +640,7 @@
         return false
     }
 
-    ObjectListEditor.prototype.onPopupShown = function(ev, link, popup) {
+    ObjectListEditor.prototype.onPopupShown = function (ev, link, popup) {
         $(popup).on('submit.inspector', 'form', this.proxy(this.onSubmit))
         $(popup).on('click', 'tr.rowlink', this.proxy(this.onRowClick))
         $(popup).on('click.inspector', '[data-cmd]', this.proxy(this.onCommand))
@@ -645,7 +651,7 @@
         this.getRootSurface().popupDisplayed()
     }
 
-    ObjectListEditor.prototype.onPopupHidden = function(ev, link, popup) {
+    ObjectListEditor.prototype.onPopupHidden = function (ev, link, popup) {
         $(popup).off('.inspector', this.proxy(this.onSubmit))
         $(popup).off('click', 'tr.rowlink', this.proxy(this.onRowClick))
         $(popup).off('click.inspector', '[data-cmd]', this.proxy(this.onCommand))
@@ -657,29 +663,29 @@
         this.getRootSurface().popupHidden()
     }
 
-    ObjectListEditor.prototype.onSubmit = function(ev) {
+    ObjectListEditor.prototype.onSubmit = function (ev) {
         this.applyDataToParentInspector()
 
         ev.preventDefault()
         return false
     }
 
-    ObjectListEditor.prototype.onRowClick = function(ev) {
+    ObjectListEditor.prototype.onRowClick = function (ev) {
         this.selectRow(ev.currentTarget)
     }
 
-    ObjectListEditor.prototype.onInspectorDataChange = function(property, value) {
+    ObjectListEditor.prototype.onInspectorDataChange = function (property, value) {
         this.updateRowText(property, value)
     }
 
-    ObjectListEditor.prototype.onCommand = function(ev) {
+    ObjectListEditor.prototype.onCommand = function (ev) {
         var command = ev.currentTarget.getAttribute('data-cmd')
 
         switch (command) {
-            case 'create-item' : 
+            case 'create-item' :
                 this.createItem()
             break;
-            case 'delete-item' : 
+            case 'delete-item' :
                 this.deleteItem()
             break;
         }
@@ -689,7 +695,7 @@
     // Disposing
     //
 
-    ObjectListEditor.prototype.removeControls = function() {
+    ObjectListEditor.prototype.removeControls = function () {
         if (this.popup) {
             this.disposeInspector(this.popup)
         }

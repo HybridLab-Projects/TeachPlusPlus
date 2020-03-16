@@ -1,7 +1,7 @@
 /*
  * The loading indicator.
  *
- * The load indicator DIV is injected inside its container. The container should have 
+ * The load indicator DIV is injected inside its container. The container should have
  * the relative position (use the loading-indicator-container class for it).
  *
  * Used with framework.js
@@ -17,7 +17,8 @@
  * $('#buttons').loadIndicator({ text: 'Saving...' }) - display the indicator in a transparent state
  * $('#buttons').loadIndicator('hide') - display the indicator
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var LoadIndicator = function (element, options) {
 
@@ -28,7 +29,7 @@
         this.show()
     }
 
-    LoadIndicator.prototype.hide = function() {
+    LoadIndicator.prototype.hide = function () {
         this.tally--
 
         if (this.tally <= 0) {
@@ -37,17 +38,18 @@
         }
     }
 
-    LoadIndicator.prototype.show = function(options) {
-        if (options)
+    LoadIndicator.prototype.show = function (options) {
+        if (options) {
             this.options = options
 
-        this.hide()
+            this.hide()
 
-        var indicator = $('<div class="loading-indicator"></div>')
-        indicator.append($('<div></div>').text(this.options.text))
-        indicator.append($('<span></span>'))
-        if (this.options.opaque !== undefined) {
-            indicator.addClass('is-opaque')
+            var indicator = $('<div class="loading-indicator"></div>')
+            indicator.append($('<div></div>').text(this.options.text))
+            indicator.append($('<span></span>'))
+            if (this.options.opaque !== undefined) {
+                indicator.addClass('is-opaque')
+            }
         }
         if (this.options.centered !== undefined) {
             indicator.addClass('indicator-center')
@@ -62,7 +64,7 @@
         this.tally++
     }
 
-    LoadIndicator.prototype.destroy = function() {
+    LoadIndicator.prototype.destroy = function () {
         this.$el.removeData('oc.loadIndicator')
         this.$el = null
     }
@@ -85,19 +87,21 @@
             var options = $.extend({}, LoadIndicator.DEFAULTS, typeof option == 'object' && option)
 
             if (!data) {
-                if (typeof option == 'string')
+                if (typeof option == 'string') {
                     return;
+                }
 
                 $this.data('oc.loadIndicator', (data = new LoadIndicator(this, options)))
             } else {
-                if (typeof option !== 'string')
+                if (typeof option !== 'string') {
                     data.show(options);
-                else {
+                } else {
                     var methodArgs = [];
-                    for (var i=1; i<args.length; i++)
+                    for (var i=1; i<args.length; i++) {
                         methodArgs.push(args[i])
 
-                    data[option].apply(data, methodArgs)
+                        data[option].apply(data, methodArgs)
+                    }
                 }
             }
         })
@@ -117,7 +121,7 @@
     // ==============
 
     $(document)
-        .on('ajaxPromise', '[data-load-indicator]', function() {
+        .on('ajaxPromise', '[data-load-indicator]', function () {
             var
                 indicatorContainer = $(this).closest('.loading-indicator-container'),
                 loadingText = $(this).data('load-indicator'),
@@ -125,14 +129,15 @@
                     opaque: $(this).data('load-indicator-opaque'),
                     centered: $(this).data('load-indicator-centered'),
                     size: $(this).data('load-indicator-size')
-                }
+            }
 
-                if (loadingText)
-                    options.text = loadingText
+            if (loadingText) {
+                options.text = loadingText
 
-            indicatorContainer.loadIndicator(options)
+                indicatorContainer.loadIndicator(options)
+            }
         })
-        .on('ajaxFail ajaxDone', '[data-load-indicator]', function() {
+        .on('ajaxFail ajaxDone', '[data-load-indicator]', function () {
             $(this).closest('.loading-indicator-container').loadIndicator('hide')
         })
 
