@@ -1,44 +1,12 @@
-title = "test" url = "/:all?*" == function onStart() { $this['vuetober'] = [
-'env' => app()->env, 'token' => Session::token(), ]; } ==
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="vuetober" content="{{ vuetober | json_encode }}" />
-
-    <title>Vuetober</title>
-    <link
-      href="http://localhost:8080/about.f7a45d11b63cf05e5694.hot-update.js"
-      rel="prefetch"
-    />
-    <link href="http://localhost:8080/js/about.js" rel="prefetch" />
-    <link href="http://localhost:8080/js/app.js" rel="preload" as="script" />
-    <link
-      href="http://localhost:8080/js/chunk-vendors.js"
-      rel="preload"
-      as="script"
-    />
-  </head>
-
-  <body>
-    <noscript>
-      <strong
-        >We're sorry but Vuetober doesn't work properly without JavaScript
-        enabled. Please enable it to continue.</strong
-      >
-    </noscript>
-    <div id="app"></div>
-
-    <script
-      type="text/javascript"
-      src="http://localhost:8080/js/chunk-vendors.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://localhost:8080/js/app.js"
-    ></script>
-  </body>
-</html>
+title = "test"
+url = "/:all?*"
+==
+function onStart()
+{
+    $this['vuetober'] = [
+        'env' => app()->env,
+        'token' => Session::token(),
+    ];
+}
+==
+<!DOCTYPE html><html><head><meta charset=utf-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta name=viewport content="width=device-width,initial-scale=1"><meta name=vuetober content="{{ vuetober | json_encode }}"><title>Vuetober</title><link href=/themes/vuetober/assets/css/about.97a66c47.css rel=prefetch><link href=/themes/vuetober/assets/js/about.2bc1b2e1.js rel=prefetch><link href=/themes/vuetober/assets/css/app.44ffc95e.css rel=preload as=style><link href=/themes/vuetober/assets/js/app.03f3ee9e.js rel=preload as=script><link href=/themes/vuetober/assets/js/chunk-vendors.0e40b22e.js rel=preload as=script><link href=/themes/vuetober/assets/css/app.44ffc95e.css rel=stylesheet></head><body><noscript><strong>We're sorry but Vuetober doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=/themes/vuetober/assets/js/chunk-vendors.0e40b22e.js></script><script src=/themes/vuetober/assets/js/app.03f3ee9e.js></script></body></html>
