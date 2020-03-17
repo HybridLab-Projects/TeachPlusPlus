@@ -1,5 +1,5 @@
 <template>
-  <div class="startingpage_style">
+  <div>
     <StartingPage />
   </div>
 </template>
@@ -17,9 +17,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .startingpage_style {
-    overflow: hidden;
-    background-color: #5351FB;
-    height: 100vh;
-  }
+
 </style>
