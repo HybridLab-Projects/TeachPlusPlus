@@ -7,6 +7,7 @@
       toggleable="lg"
       type="danger"
       variant="light"
+      fixed="top"
     >
       <b-navbar-brand
         to="/"
@@ -28,7 +29,7 @@
           class="ml-auto"
         >
           <p
-            class="my-auto"
+            class="my-auto text-muted mr-3"
           >
             Ešte nemáš účet?
           </p>
@@ -37,7 +38,7 @@
             v-if="!isLoggedIn"
           >
             <b-button
-              variant="outline-danger"
+              variant="outline-primary font-weight-bold px-3"
               class="registracia_btn"
             >
               Registruj sa
