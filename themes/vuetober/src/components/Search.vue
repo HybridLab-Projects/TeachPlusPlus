@@ -42,9 +42,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      teachers: 'getTeachers',
-    }),
+    ...mapGetters([
+      'getTeachers',
+    ]),
+    teachers() {
+      return this.getTeachers(this.searchTeacher);
+    },
   },
 };
 </script>

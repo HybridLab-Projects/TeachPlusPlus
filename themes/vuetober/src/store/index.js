@@ -113,6 +113,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
-    getTeachers: (state) => state.teachers,
+    getTeachers: (state) => (search) => state.teachers
+      .filter((teacher) => teacher.name.toLowerCase().includes(search)),
   },
 });
