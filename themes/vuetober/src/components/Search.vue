@@ -18,10 +18,10 @@
         </h5>
         <h6
           class="my-auto ml-2"
-          v-for="subject in teacher.subjects"
+          v-for="subject in teacher.subject"
           :key="subject.id"
         >
-          {{ subject.short }}
+          {{ subject.subject }}
         </h6>
         <h6 class="my-auto ml-2">
           >
@@ -32,44 +32,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Search',
   data() {
     return {
       searchTeacher: '',
-      teachers: [
-        {
-          name: 'Emilia Jancuskova',
-          id: 1,
-          subjects: [{
-            id: 1,
-            name: 'math',
-            short: 'MAT',
-          },
-          {
-            id: 2,
-            name: 'german',
-            short: 'NEJ',
-          },
-          ],
-        },
-        {
-          name: 'Milos',
-          id: 2,
-          subjects: [{
-            id: 1,
-            name: 'programming',
-            short: 'PRO',
-          },
-          {
-            id: 2,
-            name: 'engish',
-            short: 'ANJ',
-          },
-          ],
-        },
-      ],
     };
+  },
+  computed: {
+    ...mapGetters({
+      teachers: 'getTeachers',
+    }),
   },
 };
 </script>

@@ -18,6 +18,9 @@ import Search from '@/components/Search.vue';
 export default {
   name: 'Teachers',
   components: { Search },
+  created() {
+    this.$store.dispatch('fetchTeachers');
+  },
 };
 </script>
 

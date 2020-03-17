@@ -41,15 +41,8 @@
 
 <script>
 
-import Axios from 'axios';
-
 export default {
   name: 'StartingPage',
-  created() {
-    Axios.get('/api/teachers').then(({ data }) => {
-      console.log(data);
-    });
-  },
 };
 </script>
 
