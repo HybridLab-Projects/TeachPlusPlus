@@ -1,11 +1,11 @@
 columns:
     subject_name:
-        label: Subject
+        label: Predmet
         type: text
         searchable: true
         sortable: true
     short:
-        label: Short
+        label: Skratka
         type: text
         searchable: true
         sortable: true

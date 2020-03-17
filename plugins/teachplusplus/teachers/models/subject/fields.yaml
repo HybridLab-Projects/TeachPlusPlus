@@ -1,9 +1,9 @@
 fields:
     subject_name:
-        label: 'Subject name'
+        label: Predmet
         span: auto
         type: text
     short:
-        label: Short
+        label: Skratka predmetu
         span: right
         type: text

@@ -1,11 +1,11 @@
 columns:
     name:
-        label: Name
+        label: Meno
         type: text
         searchable: true
         sortable: true
     surname:
-        label: Surname
+        label: Priezvisko
         type: text
         searchable: true
         sortable: true
