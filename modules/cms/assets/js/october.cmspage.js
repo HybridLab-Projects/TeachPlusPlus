@@ -1,12 +1,13 @@
 /*
  * Scripts for the CMS page.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
-    var CmsPage = function() {
+    var CmsPage = function () {
 
         Base.call(this)
 
@@ -20,22 +21,22 @@
     CmsPage.prototype = Object.create(BaseProto)
     CmsPage.prototype.constructor = CmsPage
 
-    CmsPage.prototype.init = function() {
+    CmsPage.prototype.init = function () {
         $(document).ready(this.proxy(this.registerHandlers))
     }
 
-    CmsPage.prototype.updateTemplateList = function(type) {
+    CmsPage.prototype.updateTemplateList = function (type) {
         var $form = $('#cms-side-panel form[data-template-type='+type+']'),
             templateList = type + 'List'
 
         $form.request(templateList + '::onUpdate', {
-            complete: function() {
+            complete: function () {
                 $('button[data-control=delete-template]', $form).trigger('oc.triggerOn.update')
             }
         })
     }
 
-    CmsPage.prototype.registerHandlers = function() {
+    CmsPage.prototype.registerHandlers = function () {
         var $document = $(document),
             $masterTabs = $('#cms-master-tabs')
 
@@ -63,7 +64,7 @@
     // EVENT HANDLERS
     // ============================
 
-    CmsPage.prototype.onOpenDocument = function(event) {
+    CmsPage.prototype.onOpenDocument = function (event) {
         /*
          * Open a document when it's clicked in the sidebar
          */
@@ -74,136 +75,148 @@
                 type: $form.data('template-type'),
                 theme: $item.data('item-theme'),
                 path: $item.data('item-path')
-            },
+        },
             tabId = data.type + '-' + data.theme + '-' + data.path
 
-        if (data.type == 'asset' && $item.data('editable') === undefined)
+        if (data.type == 'asset' && $item.data('editable') === undefined) {
             return true
 
-        if ($form.length == 0)
-            return false
+            if ($form.length == 0) {
+                return false
 
-        /*
-         * Find if the tab is already opened
-         */
-         if ($('#cms-master-tabs').data('oc.tab').goTo(tabId))
-            return false
+            /*
+             * Find if the tab is already opened
+             */
+                if ($('#cms-master-tabs').data('oc.tab').goTo(tabId)) {
+                    return false
 
-        /*
-         * Open a new tab
-         */
-        $.oc.stripeLoadIndicator.show()
+                /*
+                 * Open a new tab
+                 */
+                    $.oc.stripeLoadIndicator.show()
 
-        $form.request('onOpenTemplate', {
-            data: data
-        }).done(function(data) {
-            $.oc.stripeLoadIndicator.hide()
-            $('#cms-master-tabs').ocTab('addTab', data.tabTitle, data.tab, tabId, $form.data('type-icon'))
-        }).always(function() {
-            $.oc.stripeLoadIndicator.hide()
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            $.oc.stripeLoadIndicator.hide()
-        })
+                    $form.request('onOpenTemplate', {
+                        data: data
+                    }).done(function (data) {
+                        $.oc.stripeLoadIndicator.hide()
+                        $('#cms-master-tabs').ocTab('addTab', data.tabTitle, data.tab, tabId, $form.data('type-icon'))
+                    }).always(function () {
+                        $.oc.stripeLoadIndicator.hide()
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        $.oc.stripeLoadIndicator.hide()
+                    })
 
-        return false
+                    return false
+                }
+            }
+        }
     }
 
-    CmsPage.prototype.ajaxInvalidField = function(ev, element, name, messages, isFirst) {
+    CmsPage.prototype.ajaxInvalidField = function (ev, element, name, messages, isFirst) {
         /*
          * Detect invalid fields, uncollapse the panel
          */
-        if (!isFirst)
+        if (!isFirst) {
             return
 
-        ev.preventDefault()
+            ev.preventDefault()
 
-        var $el = $(element),
+            var $el = $(element),
             $panel = $el.closest('.form-tabless-fields.collapsed'),
             $primaryPanel = $el.closest('.control-tabs.primary-tabs.collapsed')
 
-        if ($panel.length > 0)
-            $panel.removeClass('collapsed')
+            if ($panel.length > 0) {
+                $panel.removeClass('collapsed')
 
-        if ($primaryPanel.length > 0) {
-            $primaryPanel.removeClass('collapsed')
+                if ($primaryPanel.length > 0) {
+                    $primaryPanel.removeClass('collapsed')
 
-            var pane = $primaryPanel.closest('.tab-pane'),
-                $secondaryPanel = $('.control-tabs.secondary-tabs', pane)
+                    var pane = $primaryPanel.closest('.tab-pane'),
+                    $secondaryPanel = $('.control-tabs.secondary-tabs', pane)
 
-            $secondaryPanel.removeClass('primary-collapsed')
+                    $secondaryPanel.removeClass('primary-collapsed')
+                }
+            }
         }
 
         $el.focus()
     }
 
-    CmsPage.prototype.onTabClosed = function(ev) {
+    CmsPage.prototype.onTabClosed = function (ev) {
         this.updateModifiedCounter()
 
-        if ($('> div.tab-content > div.tab-pane', '#cms-master-tabs').length == 0)
+        if ($('> div.tab-content > div.tab-pane', '#cms-master-tabs').length == 0) {
             this.setPageTitle('')
-    }
-
-    CmsPage.prototype.onBeforeTabClose = function(ev) {
-        if ($.fn.table !== undefined)
-            $('[data-control=table]', ev.relatedTarget).table('dispose')
-
-        $.oc.foundation.controlUtils.disposeControls(ev.relatedTarget.get(0))
-    }
-
-    CmsPage.prototype.onBeforeRequest = function(ev) {
-        var $form = $(ev.target)
-
-        if ($('.components .layout-cell.error-component', $form).length > 0) {
-            if (!confirm('The form contains unknown components. Their properties will be lost on save. Do you want to save the form?'))
-                ev.preventDefault()
         }
     }
 
-    CmsPage.prototype.onTabShown = function(ev) {
+    CmsPage.prototype.onBeforeTabClose = function (ev) {
+        if ($.fn.table !== undefined) {
+            $('[data-control=table]', ev.relatedTarget).table('dispose')
+
+            $.oc.foundation.controlUtils.disposeControls(ev.relatedTarget.get(0))
+        }
+    }
+
+    CmsPage.prototype.onBeforeRequest = function (ev) {
+        var $form = $(ev.target)
+
+        if ($('.components .layout-cell.error-component', $form).length > 0) {
+            if (!confirm('The form contains unknown components. Their properties will be lost on save. Do you want to save the form?')) {
+                ev.preventDefault()
+            }
+        }
+    }
+
+    CmsPage.prototype.onTabShown = function (ev) {
         /*
          * Listen for the tabs "shown" event to track the current template in the list
          */
 
         var $target = $(ev.target)
 
-        if ($target.closest('[data-control=tab]').attr('id') != 'cms-master-tabs')
+        if ($target.closest('[data-control=tab]').attr('id') != 'cms-master-tabs') {
             return
 
-        var dataId = $target.closest('li').attr('data-tab-id'),
+            var dataId = $target.closest('li').attr('data-tab-id'),
             title = $target.attr('title'),
             $sidePanel = $('#cms-side-panel')
 
-        if (title)
-            this.setPageTitle(title)
+            if (title) {
+                this.setPageTitle(title)
 
-        $sidePanel.find('[data-control=filelist]').fileList('markActive', dataId)
-        $sidePanel.find('form').trigger('oc.list.setActiveItem', [dataId])
+                $sidePanel.find('[data-control=filelist]').fileList('markActive', dataId)
+                $sidePanel.find('form').trigger('oc.list.setActiveItem', [dataId])
+            }
+        }
     }
 
-    CmsPage.prototype.onInitTab = function(ev, data) {
+    CmsPage.prototype.onInitTab = function (ev, data) {
         /*
          * Listen for the tabs "initTab" event to inject extra controls to the tab
          */
 
-        if ($(ev.target).attr('id') != 'cms-master-tabs')
+        if ($(ev.target).attr('id') != 'cms-master-tabs') {
             return
 
-        var $collapseIcon = $('<a href="javascript:;" class="tab-collapse-icon tabless"><i class="icon-chevron-up"></i></a>'),
+            var $collapseIcon = $('<a href="javascript:;" class="tab-collapse-icon tabless"><i class="icon-chevron-up"></i></a>'),
             $panel = $('.form-tabless-fields', data.pane)
 
-        $panel.append($collapseIcon);
+            $panel.append($collapseIcon);
+        }
 
-        $collapseIcon.click(function(){
+        $collapseIcon.click(function () {
             $panel.toggleClass('collapsed')
 
-            if (typeof(localStorage) !== 'undefined')
+            if (typeof(localStorage) !== 'undefined') {
                 localStorage.ocCmsTablessCollapsed = $panel.hasClass('collapsed') ? 1 : 0
 
-            window.setTimeout(function(){
-                $(window).trigger('oc.updateUi')
-            }, 500)
+                window.setTimeout(function () {
+                    $(window).trigger('oc.updateUi')
+                }, 500)
 
-            return false
+                return false
+            }
         })
 
         var $primaryCollapseIcon = $('<a href="javascript:;" class="tab-collapse-icon primary"><i class="icon-chevron-down"></i></a>'),
@@ -213,63 +226,67 @@
         if ($primaryPanel.length > 0) {
             $secondaryPanel.append($primaryCollapseIcon);
 
-            $primaryCollapseIcon.click(function(){
+            $primaryCollapseIcon.click(function () {
                 $primaryPanel.toggleClass('collapsed')
                 $secondaryPanel.toggleClass('primary-collapsed')
                 $(window).trigger('oc.updateUi')
-                if (typeof(localStorage) !== 'undefined')
+                if (typeof(localStorage) !== 'undefined') {
                     localStorage.ocCmsPrimaryCollapsed = $primaryPanel.hasClass('collapsed') ? 1 : 0
-                return false
+                    return false
+                }
             })
         }
 
         if (typeof(localStorage) !== 'undefined') {
-            if (!$('a', data.tab).hasClass('new-template') && localStorage.ocCmsTablessCollapsed == 1)
+            if (!$('a', data.tab).hasClass('new-template') && localStorage.ocCmsTablessCollapsed == 1) {
                 $panel.addClass('collapsed')
 
-            if (localStorage.ocCmsPrimaryCollapsed == 1) {
-                $primaryPanel.addClass('collapsed')
-                $secondaryPanel.addClass('primary-collapsed')
+                if (localStorage.ocCmsPrimaryCollapsed == 1) {
+                    $primaryPanel.addClass('collapsed')
+                    $secondaryPanel.addClass('primary-collapsed')
+                }
             }
         }
 
         var $componentListFormGroup = $('.control-componentlist', data.pane).closest('.form-group')
-        if ($primaryPanel.length > 0)
+        if ($primaryPanel.length > 0) {
             $primaryPanel.before($componentListFormGroup)
-        else
-            $secondaryPanel.parent().before($componentListFormGroup)
+            else {
+                $secondaryPanel.parent().before($componentListFormGroup)
 
-        $componentListFormGroup.removeClass()
-        $componentListFormGroup.addClass('layout-row min-size')
-        this.updateComponentListClass(data.pane)
-        this.updateFormEditorMode(data.pane, true)
+                $componentListFormGroup.removeClass()
+                $componentListFormGroup.addClass('layout-row min-size')
+                this.updateComponentListClass(data.pane)
+                this.updateFormEditorMode(data.pane, true)
 
-        var $form = $('form', data.pane),
-            self = this
+                var $form = $('form', data.pane),
+                self = this
 
-        $form.on('changed.oc.changeMonitor', function() {
-            $panel.trigger('modified.oc.tab')
-            $panel.find('[data-control=commit-button]').addClass('hide');
-            $panel.find('[data-control=reset-button]').addClass('hide');
-            self.updateModifiedCounter()
-        })
+                $form.on('changed.oc.changeMonitor', function () {
+                    $panel.trigger('modified.oc.tab')
+                    $panel.find('[data-control=commit-button]').addClass('hide');
+                    $panel.find('[data-control=reset-button]').addClass('hide');
+                    self.updateModifiedCounter()
+                })
 
-        $form.on('unchanged.oc.changeMonitor', function() {
-            $panel.trigger('unmodified.oc.tab')
-            self.updateModifiedCounter()
-        })
+                $form.on('unchanged.oc.changeMonitor', function () {
+                    $panel.trigger('unmodified.oc.tab')
+                    self.updateModifiedCounter()
+                })
 
-        this.addTokenExpanderToEditor(data.pane, $form)
+                this.addTokenExpanderToEditor(data.pane, $form)
+            }
+        }
     }
 
-    CmsPage.prototype.onAfterAllTabsClosed = function(ev) {
+    CmsPage.prototype.onAfterAllTabsClosed = function (ev) {
         var $sidePanel = $('#cms-side-panel')
 
         $sidePanel.find('[data-control=filelist]').fileList('markActive', null)
         $sidePanel.find('form').trigger('oc.list.setActiveItem', [null])
     }
 
-    CmsPage.prototype.onAjaxUpdate = function(ev) {
+    CmsPage.prototype.onAjaxUpdate = function (ev) {
         var dataId = $('#cms-master-tabs .nav-tabs li.active').attr('data-tab-id'),
             $sidePanel = $('#cms-side-panel')
 
@@ -277,7 +294,7 @@
         $sidePanel.find('form').trigger('oc.list.setActiveItem', [dataId])
     }
 
-    CmsPage.prototype.onAjaxSuccess = function(ev, context, data) {
+    CmsPage.prototype.onAjaxSuccess = function (ev, context, data) {
         var element = ev.target
 
         // Update the visibilities of the commit & reset buttons
@@ -290,8 +307,9 @@
             $('[data-control=delete-button]', element).removeClass('hide')
             $('[data-control=preview-button]', element).removeClass('hide')
 
-            if (data.pageUrl !== undefined)
+            if (data.pageUrl !== undefined) {
                 $('[data-control=preview-button]', element).attr('href', data.pageUrl)
+            }
         }
 
         if (data.tabTitle !== undefined) {
@@ -309,8 +327,9 @@
         if (templateType.length > 0) {
             $.oc.cmsPage.updateTemplateList(templateType)
 
-            if (templateType == 'layout')
+            if (templateType == 'layout') {
                 this.updateLayouts(element)
+            }
         }
 
         this.updateFormEditorMode($(element).closest('.tab-pane'), false)
@@ -325,7 +344,7 @@
         }
     }
 
-    CmsPage.prototype.onAjaxError = function(ev, context, message, data, jqXHR) {
+    CmsPage.prototype.onAjaxError = function (ev, context, message, data, jqXHR) {
         if (context.handler == 'onSave') {
             if (jqXHR.responseText == 'mtime-mismatch') {
                 ev.preventDefault()
@@ -334,8 +353,8 @@
         }
     }
 
-    CmsPage.prototype.onCreateTemplateClick = function(ev) {
-       var  $form = $(ev.target).closest('[data-template-type]'),
+    CmsPage.prototype.onCreateTemplateClick = function (ev) {
+        var  $form = $(ev.target).closest('[data-template-type]'),
             type = $form.data('template-type'),
             tabId = type + Math.random(),
             self = this
@@ -343,48 +362,50 @@
         $.oc.stripeLoadIndicator.show()
 
         $form.request('onCreateTemplate', {
-           data: {type: type}
-        }).done(function(data) {
+            data: {type: type}
+        }).done(function (data) {
             $('#cms-master-tabs').ocTab('addTab', data.tabTitle, data.tab, tabId, $form.data('type-icon') + ' new-template')
             $('#layout-side-panel').trigger('close.oc.sidePanel')
             self.setPageTitle(data.tabTitle)
-        }).always(function(){
+        }).always(function () {
             $.oc.stripeLoadIndicator.hide()
         })
     }
 
-    CmsPage.prototype.onDeleteTemplateClick = function(ev) {
+    CmsPage.prototype.onDeleteTemplateClick = function (ev) {
         var $el = $(ev.currentTarget),
             $form = $el.closest('form'),
             templateType = $form.data('template-type'),
             self = this
 
-        if (!confirm($el.data('confirmation')))
+        if (!confirm($el.data('confirmation'))) {
             return
 
-        $.oc.stripeLoadIndicator.show()
+            $.oc.stripeLoadIndicator.show()
 
-        $form.request('onDeleteTemplates', {
-            data: {type: templateType}
-        }).done(function(data) {
-            var tabs = $('#cms-master-tabs').data('oc.tab');
-            $.each(data.deleted, function(index, path){
-                var
+            $form.request('onDeleteTemplates', {
+                data: {type: templateType}
+            }).done(function (data) {
+                var tabs = $('#cms-master-tabs').data('oc.tab');
+                $.each(data.deleted, function (index, path) {
+                    var
                     tabId = templateType + '-' + data.theme + '-' + path,
                     tab = tabs.findByIdentifier(tabId)
 
-                $('#cms-master-tabs').ocTab('closeTab', tab, true)
-            })
+                    $('#cms-master-tabs').ocTab('closeTab', tab, true)
+                })
 
-            if (data.error !== undefined && $.type(data.error) === 'string' && data.error.length)
-                $.oc.flashMsg({text: data.error, 'class': 'error'})
-        }).always(function(){
-            self.updateTemplateList(templateType)
-            $.oc.stripeLoadIndicator.hide()
-        })
+                if (data.error !== undefined && $.type(data.error) === 'string' && data.error.length) {
+                    $.oc.flashMsg({text: data.error, 'class': 'error'})
+                }
+            }).always(function () {
+                self.updateTemplateList(templateType)
+                $.oc.stripeLoadIndicator.hide()
+            })
+        }
     }
 
-    CmsPage.prototype.onInspectorShowing = function(ev, data) {
+    CmsPage.prototype.onInspectorShowing = function (ev, data) {
         var $dragScroll = $(ev.currentTarget).closest('[data-control="toolbar"]').data('oc.dragScroll')
         if ($dragScroll) {
             $dragScroll.goToElement(ev.currentTarget, data.callback)
@@ -395,7 +416,7 @@
         ev.stopPropagation()
     }
 
-    CmsPage.prototype.onInspectorHidden = function(ev) {
+    CmsPage.prototype.onInspectorHidden = function (ev) {
         var element = ev.target,
             values = JSON.parse($('[data-inspector-values]', element).val())
 
@@ -403,28 +424,29 @@
         $('span.alias', element).text(values['oc.alias'])
     }
 
-    CmsPage.prototype.onInspectorHiding = function(ev, values) {
+    CmsPage.prototype.onInspectorHiding = function (ev, values) {
         var element = ev.target,
             values = JSON.parse($('[data-inspector-values]', element).val()),
             alias = values['oc.alias'],
             $componentList = $('#cms-master-tabs > div.tab-content > .tab-pane.active .control-componentlist .layout'),
             $cell = $(ev.target).parent()
 
-        $('div.layout-cell', $componentList).each(function(){
-            if ($cell.get(0) == this)
+        $('div.layout-cell', $componentList).each(function () {
+            if ($cell.get(0) == this) {
                 return true
 
-            var $input = $('input[name="component_aliases[]"]', this)
+                var $input = $('input[name="component_aliases[]"]', this)
 
-            if ($input.val() == alias) {
-                ev.preventDefault()
-                alert('The component alias "'+alias+'" is already used.')
-                return false
-           }
+                if ($input.val() == alias) {
+                    ev.preventDefault()
+                    alert('The component alias "'+alias+'" is already used.')
+                    return false
+                }
+            }
         })
     }
 
-    CmsPage.prototype.onComponentRemove = function(ev) {
+    CmsPage.prototype.onComponentRemove = function (ev) {
         var element = ev.currentTarget
 
         $(element).trigger('change')
@@ -451,7 +473,7 @@
         return false
     }
 
-    CmsPage.prototype.onComponentClick = function(ev) {
+    CmsPage.prototype.onComponentClick = function (ev) {
         /*
          * Determine if a page or layout is open in the master tabs
          */
@@ -475,11 +497,11 @@
             counter = 2,
             existingAliases = []
 
-        $('div.layout-cell input[name="component_aliases[]"]', $componentList).each(function(){
+        $('div.layout-cell input[name="component_aliases[]"]', $componentList).each(function () {
             existingAliases.push($(this).val())
         })
 
-        while($.inArray(alias, existingAliases) !== -1) {
+        while ($.inArray(alias, existingAliases) !== -1) {
             alias = originalAlias + counter
             counter++
         }
@@ -521,7 +543,7 @@
     // INTERNAL METHODS
     // ============================
 
-    CmsPage.prototype.updateComponentListClass = function(pane) {
+    CmsPage.prototype.updateComponentListClass = function (pane) {
         var $componentList = $('.control-componentlist', pane),
             $primaryPanel = $('.control-tabs.primary-tabs', pane),
             $primaryTabContainer = $('.nav-tabs', $primaryPanel),
@@ -531,40 +553,46 @@
         $componentList.toggleClass('has-components', hasComponents)
     }
 
-    CmsPage.prototype.updateFormEditorMode = function(pane, initialization) {
+    CmsPage.prototype.updateFormEditorMode = function (pane, initialization) {
         var $contentTypeElement = $('[data-toolbar-type]', pane)
-        if ($contentTypeElement.length == 0)
+        if ($contentTypeElement.length == 0) {
             return
 
-        if ($contentTypeElement.data('toolbar-type') != 'content')
-            return
+            if ($contentTypeElement.data('toolbar-type') != 'content') {
+                return
 
-        var fileName = $('input[name=fileName]', pane).val(),
-            parts = fileName.split('.'),
-            extension = 'txt',
-            mode = 'plain_text',
-            modes = $.oc.codeEditorExtensionModes,
-            editor = $('[data-control=codeeditor]', pane)
+                var fileName = $('input[name=fileName]', pane).val(),
+                parts = fileName.split('.'),
+                extension = 'txt',
+                mode = 'plain_text',
+                modes = $.oc.codeEditorExtensionModes,
+                editor = $('[data-control=codeeditor]', pane)
 
-        if (parts.length >= 2)
-            extension = parts.pop().toLowerCase()
+                if (parts.length >= 2) {
+                    extension = parts.pop().toLowerCase()
 
-        if (modes[extension] !== undefined)
-            mode = modes[extension];
+                    if (modes[extension] !== undefined) {
+                        mode = modes[extension];
+                    }
+                }
+            }
+        }
 
-        var setEditorMode = function() {
-            window.setTimeout(function(){
+        var setEditorMode = function () {
+            window.setTimeout(function () {
                 editor.data('oc.codeEditor').editor.getSession().setMode({path: 'ace/mode/'+mode})
             }, 200)
         }
 
-        if (initialization)
+        if (initialization) {
             editor.on('oc.codeEditorReady', setEditorMode)
-        else
-            setEditorMode()
+            else {
+                setEditorMode()
+            }
+        }
     }
 
-    CmsPage.prototype.updateModifiedCounter = function() {
+    CmsPage.prototype.updateModifiedCounter = function () {
         var counters = {
             page: { menu: 'pages', count: 0 },
             partial: { menu: 'partials', count: 0 },
@@ -573,79 +601,80 @@
             asset: { menu: 'assets', count:  0}
         }
 
-        $('> div.tab-content > div.tab-pane[data-modified]', '#cms-master-tabs').each(function(){
+        $('> div.tab-content > div.tab-pane[data-modified]', '#cms-master-tabs').each(function () {
             var inputType = $('> form > input[name=templateType]', this).val()
             counters[inputType].count++
         })
 
-        $.each(counters, function(type, data){
+        $.each(counters, function (type, data) {
             $.oc.sideNav.setCounter('cms/' + data.menu, data.count);
         })
     }
 
-    CmsPage.prototype.addTokenExpanderToEditor = function(pane, $form) {
+    CmsPage.prototype.addTokenExpanderToEditor = function (pane, $form) {
         var group = $('[data-field-name=markup]', pane),
             editor = $('[data-control=codeeditor]', group),
             canExpand = false,
             self = this
 
-        if (!editor.length || editor.data('oc.tokenexpander'))
+        if (!editor.length || editor.data('oc.tokenexpander')) {
             return
 
-        var toolbar = editor.codeEditor('getToolbar')
+            var toolbar = editor.codeEditor('getToolbar')
 
-        editor.tokenExpander()
+            editor.tokenExpander()
 
-        var breakButton = $('<li />').prop({ 'class': 'tokenexpander-button' }).append(
-            $('<a />').prop({ 'href': 'javascript:; '}).append(
-                $('<i />').prop({ 'class': 'icon-code-fork' })
+            var breakButton = $('<li />').prop({ 'class': 'tokenexpander-button' }).append(
+                $('<a />').prop({ 'href': 'javascript:; '}).append(
+                    $('<i />').prop({ 'class': 'icon-code-fork' })
+                )
             )
-        )
 
-        breakButton.hide().on('click', function(){
-            self.handleExpandToken(editor, $form)
-            return false
-        })
+            breakButton.hide().on('click', function () {
+                self.handleExpandToken(editor, $form)
+                return false
+            })
 
-        $('ul:first', toolbar).prepend(breakButton)
+            $('ul:first', toolbar).prepend(breakButton)
 
-        editor
-            .on('show.oc.tokenexpander', function(){
+            editor
+            .on('show.oc.tokenexpander', function () {
                 canExpand = true
                 breakButton.show()
             })
-            .on('hide.oc.tokenexpander', function(){
+            .on('hide.oc.tokenexpander', function () {
                 canExpand = false
                 breakButton.hide()
             })
-            .on('dblclick', function(ev){
+            .on('dblclick', function (ev) {
                 if ((ev.metaKey || ev.ctrlKey) && canExpand) {
                     self.handleExpandToken(editor, $form)
                 }
             })
+        }
     }
 
-    CmsPage.prototype.handleExpandToken = function(editor, $form) {
-        editor.tokenExpander('expandToken', function(token, value){
+    CmsPage.prototype.handleExpandToken = function (editor, $form) {
+        editor.tokenExpander('expandToken', function (token, value) {
             return $form.request('onExpandMarkupToken', {
                 data: { tokenType: token, tokenName: value }
             })
         })
     }
 
-    CmsPage.prototype.handleMtimeMismatch = function(form) {
+    CmsPage.prototype.handleMtimeMismatch = function (form) {
         var $form = $(form)
         $form.popup({ handler: 'onOpenConcurrencyResolveForm' })
 
         var popup = $form.data('oc.popup'),
             self = this
 
-        $(popup.$content).on('click', 'button[data-action=reload]', function(){
+        $(popup.$content).on('click', 'button[data-action=reload]', function () {
             popup.hide()
             self.reloadForm(form)
         })
 
-        $(popup.$content).on('click', 'button[data-action=save]', function(){
+        $(popup.$content).on('click', 'button[data-action=save]', function () {
             popup.hide()
 
             $('input[name=templateForceSave]', $form).val(1)
@@ -654,14 +683,14 @@
         })
     }
 
-    CmsPage.prototype.reloadForm = function(form) {
+    CmsPage.prototype.reloadForm = function (form) {
         var
             $form = $(form),
             data = {
                 type: $('[name=templateType]', $form).val(),
                 theme: $('[name=theme]', $form).val(),
                 path: $('[name=templatePath]', $form).val(),
-            },
+        },
             tabId = data.type + '-' + data.theme + '-' + data.path,
             tabs = $('#cms-master-tabs').data('oc.tab'),
             tab = tabs.findByIdentifier(tabId),
@@ -675,34 +704,36 @@
 
         $form.request('onOpenTemplate', {
             data: data
-        }).done(function(data) {
+        }).done(function (data) {
             $('#cms-master-tabs').ocTab('updateTab', tab, data.tabTitle, data.tab)
             $('#cms-master-tabs').ocTab('unmodifyTab', tab)
             self.updateModifiedCounter()
-        }).always(function() {
+        }).always(function () {
             $.oc.stripeLoadIndicator.hide()
-        }).fail(function(jqXHR, textStatus, errorThrown) {
+        }).fail(function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText.length ? jqXHR.responseText : jqXHR.statusText)
         })
     }
 
-    CmsPage.prototype.setPageTitle = function(title) {
-        if (title.length)
+    CmsPage.prototype.setPageTitle = function (title) {
+        if (title.length) {
             $.oc.layout.setPageTitle(title + ' | ')
-        else
-            $.oc.layout.setPageTitle(title)
+            else {
+                $.oc.layout.setPageTitle(title)
+            }
+        }
     }
 
-    CmsPage.prototype.updateLayouts = function(form) {
+    CmsPage.prototype.updateLayouts = function (form) {
         $(form).request('onGetTemplateList', {
-            success: function(data) {
-                $('#cms-master-tabs > .tab-content select[name="settings[layout]"]').each(function(){
+            success: function (data) {
+                $('#cms-master-tabs > .tab-content select[name="settings[layout]"]').each(function () {
                     var
                         $select = $(this),
                         value = $select.val()
 
                     $select.find('option').remove()
-                    $.each(data.layouts, function(layoutFile, layoutName){
+                    $.each(data.layouts, function (layoutFile, layoutName) {
                         $select.append($('<option>').attr('value', layoutFile).text(layoutName))
                     })
                     $select.trigger('pause.oc.changeMonitor')

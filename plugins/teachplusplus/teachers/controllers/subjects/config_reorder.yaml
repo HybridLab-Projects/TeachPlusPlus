@@ -1,0 +1,4 @@
+title: Subjects
+modelClass: Teachplusplus\Teachers\Models\Subject
+toolbar:
+    buttons: reorder_toolbar

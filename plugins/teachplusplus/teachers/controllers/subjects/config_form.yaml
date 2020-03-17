@@ -1,0 +1,10 @@
+name: Subjects
+form: $/teachplusplus/teachers/models/subject/fields.yaml
+modelClass: Teachplusplus\Teachers\Models\Subject
+defaultRedirect: teachplusplus/teachers/subjects
+create:
+    redirect: 'teachplusplus/teachers/subjects/update/:id'
+    redirectClose: teachplusplus/teachers/subjects
+update:
+    redirect: teachplusplus/teachers/subjects
+    redirectClose: teachplusplus/teachers/subjects

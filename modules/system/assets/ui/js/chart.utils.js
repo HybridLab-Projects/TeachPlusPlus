@@ -2,13 +2,14 @@
  * October charting utilities.
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
-    var ChartUtils = function() {}
+    var ChartUtils = function () {}
 
     ChartUtils.prototype.defaultValueColor = '#b8b8b8';
 
-    ChartUtils.prototype.getColor = function(index) {
+    ChartUtils.prototype.getColor = function (index) {
         var
             colors = [
                 '#95b753', '#cc3300', '#e5a91a', '#3366ff', '#ff0f00', '#ff6600',
@@ -21,14 +22,14 @@
         return colors[colorIndex];
     }
 
-    ChartUtils.prototype.loadListValues = function($list) {
+    ChartUtils.prototype.loadListValues = function ($list) {
         var result = {
             values: [],
             total: 0,
             max: 0
         }
 
-        $('> li', $list).each(function(){
+        $('> li', $list).each(function () {
             var value = $(this).data('value')
                 ? parseFloat($(this).data('value'))
                 : parseFloat($('span', this).text());
@@ -40,14 +41,14 @@
         return result;
     }
 
-    ChartUtils.prototype.getLegendLabel = function($legend, index) {
+    ChartUtils.prototype.getLegendLabel = function ($legend, index) {
         return $('tr:eq('+index+') td:eq(1)', $legend).html();
     }
 
-    ChartUtils.prototype.initLegendColorIndicators = function($legend) {
+    ChartUtils.prototype.initLegendColorIndicators = function ($legend) {
         var indicators = [];
 
-        $('tr > td:first-child', $legend).each(function(){
+        $('tr > td:first-child', $legend).each(function () {
             var indicator = $('<i></i>')
             $(this).prepend(indicator)
             indicators.push(indicator)
@@ -56,14 +57,14 @@
         return indicators;
     }
 
-    ChartUtils.prototype.createLegend = function($list) {
+    ChartUtils.prototype.createLegend = function ($list) {
         var
             $legend = $('<div>').addClass('chart-legend'),
             $table = $('<table>')
 
         $legend.append($table)
 
-        $('> li', $list).each(function(){
+        $('> li', $list).each(function () {
             var label = $(this).clone().children().remove().end().html();
 
             $table.append(
@@ -80,33 +81,36 @@
         return $legend;
     }
 
-    ChartUtils.prototype.showTooltip = function(x, y, text) {
+    ChartUtils.prototype.showTooltip = function (x, y, text) {
         var $tooltip = $('#chart-tooltip')
 
-        if ($tooltip.length)
+        if ($tooltip.length) {
             $tooltip.remove()
 
-        $tooltip = $('<div id="chart-tooltip">')
+            $tooltip = $('<div id="chart-tooltip">')
             .html(text)
             .css('visibility', 'hidden')
 
-        x += 10
-        y += 10
+            x += 10
+            y += 10
 
-        $(document.body).append($tooltip)
-        var tooltipWidth = $tooltip.outerWidth()
-        if ((x + tooltipWidth) > $(window).width())
-            x = $(window).width() - tooltipWidth - 10;
+            $(document.body).append($tooltip)
+            var tooltipWidth = $tooltip.outerWidth()
+            if ((x + tooltipWidth) > $(window).width()) {
+                x = $(window).width() - tooltipWidth - 10;
+            }
+        }
 
         $tooltip.css({top: y, left: x, visibility: 'visible'});
     }
 
-    ChartUtils.prototype.hideTooltip = function() {
-       $('#chart-tooltip').remove()
+    ChartUtils.prototype.hideTooltip = function () {
+        $('#chart-tooltip').remove()
     }
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    $.oc.chartUtils = new ChartUtils();
+        $.oc.chartUtils = new ChartUtils();
+    }
 }(window.jQuery);

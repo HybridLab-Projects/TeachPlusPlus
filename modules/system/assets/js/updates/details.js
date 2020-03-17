@@ -2,24 +2,26 @@
  * Details page
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var UpdateDetails = function () {
         this.init()
     }
 
-    UpdateDetails.prototype.init = function() {
+    UpdateDetails.prototype.init = function () {
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.plugin-details-content pre').addClass('prettyprint')
             prettyPrint()
         })
 
     }
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    $.oc.updateDetails = new UpdateDetails;
+        $.oc.updateDetails = new UpdateDetails;
+    }
 
 }(window.jQuery);

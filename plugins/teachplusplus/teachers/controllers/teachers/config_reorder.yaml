@@ -1,0 +1,4 @@
+title: Teachers
+modelClass: Teachplusplus\Teachers\Models\Teacher
+toolbar:
+    buttons: reorder_toolbar

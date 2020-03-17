@@ -11,7 +11,8 @@
  * - Moment Timezone library (moment.timezone.js)
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -28,7 +29,7 @@
     DatePicker.prototype = Object.create(BaseProto)
     DatePicker.prototype.constructor = DatePicker
 
-    DatePicker.prototype.init = function() {
+    DatePicker.prototype.init = function () {
         var self = this,
             $form = this.$el.closest('form'),
             changeMonitor = $form.data('oc.changeMonitor')
@@ -62,7 +63,7 @@
             changeMonitor.resume()
         }
 
-        this.$timePicker.on('change.oc.datepicker', function() {
+        this.$timePicker.on('change.oc.datepicker', function () {
             if (!$.trim($(this).val())) {
                 self.emptyValues()
             }
@@ -71,7 +72,7 @@
             }
         })
 
-        this.$datePicker.on('change.oc.datepicker', function() {
+        this.$datePicker.on('change.oc.datepicker', function () {
             if (!$.trim($(this).val())) {
                 self.emptyValues()
             }
@@ -80,7 +81,7 @@
         this.$el.one('dispose-control', this.proxy(this.dispose))
     }
 
-    DatePicker.prototype.dispose = function() {
+    DatePicker.prototype.dispose = function () {
         this.$timePicker.off('change.oc.datepicker')
         this.$datePicker.off('change.oc.datepicker')
         this.$el.off('dispose-control', this.proxy(this.dispose))
@@ -96,7 +97,7 @@
     // Datepicker
     //
 
-    DatePicker.prototype.initDatePicker = function() {
+    DatePicker.prototype.initDatePicker = function () {
         var self = this,
             dateFormat = this.getDateFormat(),
             now = moment().tz(this.timezone).format(dateFormat)
@@ -107,7 +108,7 @@
             showWeekNumber: this.options.showWeekNumber,
             format: dateFormat,
             setDefaultDate: now,
-            onOpen: function() {
+            onOpen: function () {
                 var $field = $(this._o.trigger)
 
                 $(this.el).css({
@@ -115,9 +116,9 @@
                     right: $(window).width() - $field.offset().left - $field.outerWidth()
                 })
             },
-            onSelect: function() {
-                self.onSelectDatePicker.call(self, this.getMoment())
-            }
+                onSelect: function () {
+                    self.onSelectDatePicker.call(self, this.getMoment())
+                }
         }
 
         var lang = this.getLang('datepicker', false)
@@ -138,7 +139,7 @@
         this.$datePicker.pikaday(pikadayOptions)
     }
 
-    DatePicker.prototype.onSelectDatePicker = function(pickerMoment) {
+    DatePicker.prototype.onSelectDatePicker = function (pickerMoment) {
         var pickerValue = pickerMoment.format(this.dbDateFormat)
 
         var timeValue = this.options.mode === 'date' ? '00:00:00' : this.getTimePickerValue()
@@ -153,7 +154,7 @@
     }
 
     // Returns in user preference timezone
-    DatePicker.prototype.getDatePickerValue = function() {
+    DatePicker.prototype.getDatePickerValue = function () {
         var value = this.$datePicker.val()
 
         if (!this.hasDate || !value) {
@@ -165,7 +166,7 @@
         return moment(value, this.getDateFormat()).format(this.dbDateFormat)
     }
 
-    DatePicker.prototype.getDateFormat = function() {
+    DatePicker.prototype.getDateFormat = function () {
         var format = 'YYYY-MM-DD'
 
         if (this.options.format) {
@@ -185,7 +186,7 @@
     // Timepicker
     //
 
-    DatePicker.prototype.initTimePicker = function() {
+    DatePicker.prototype.initTimePicker = function () {
         this.$timePicker.clockpicker({
             autoclose: 'true',
             placement: 'auto',
@@ -197,7 +198,7 @@
         this.$timePicker.val(this.getDataLockerValue(this.getTimeFormat()))
     }
 
-    DatePicker.prototype.onSelectTimePicker = function() {
+    DatePicker.prototype.onSelectTimePicker = function () {
         var pickerValue = this.$timePicker.val()
 
         var timeValue = moment(pickerValue, this.getTimeFormat()).format(this.dbTimeFormat)
@@ -213,13 +214,13 @@
         this.$dataLocker.val(lockerValue)
     }
 
-    DatePicker.prototype.onChangeTimePicker = function() {
+    DatePicker.prototype.onChangeTimePicker = function () {
         // Trigger a change event when the time is changed, to allow dependent fields to refresh
         this.$timePicker.trigger('change')
     }
 
     // Returns in user preference timezone
-    DatePicker.prototype.getTimePickerValue = function() {
+    DatePicker.prototype.getTimePickerValue = function () {
         var value = this.$timePicker.val()
 
         if (!this.hasTime || !value) {
@@ -231,13 +232,13 @@
         return moment(value, this.getTimeFormat()).format(this.dbTimeFormat)
     }
 
-    DatePicker.prototype.getTimeFormat = function() {
+    DatePicker.prototype.getTimeFormat = function () {
         return this.isTimeTwelveHour()
             ? 'hh:mm A'
             : 'HH:mm'
     }
 
-    DatePicker.prototype.isTimeTwelveHour = function() {
+    DatePicker.prototype.isTimeTwelveHour = function () {
         return false
 
         // Disabled for now: The analog clock design is pretty good
@@ -261,13 +262,13 @@
     // Utilities
     //
 
-    DatePicker.prototype.emptyValues = function() {
+    DatePicker.prototype.emptyValues = function () {
         this.$dataLocker.val('')
         this.$datePicker.val('')
         this.$timePicker.val('')
     }
 
-    DatePicker.prototype.getDataLockerValue = function(format) {
+    DatePicker.prototype.getDataLockerValue = function (format) {
         var value = this.$dataLocker.val()
 
         return value
@@ -275,7 +276,7 @@
             : null
     }
 
-    DatePicker.prototype.getMomentLoadValue = function(value, format) {
+    DatePicker.prototype.getMomentLoadValue = function (value, format) {
         var momentObj = moment.tz(value, this.appTimezone)
 
         if (this.locale) {
@@ -287,7 +288,7 @@
         return momentObj.format(format)
     }
 
-    DatePicker.prototype.initRegion = function() {
+    DatePicker.prototype.initRegion = function () {
         this.locale = $('meta[name="backend-locale"]').attr('content')
         this.timezone = $('meta[name="backend-timezone"]').attr('content')
         this.appTimezone = $('meta[name="app-timezone"]').attr('content')
@@ -307,7 +308,7 @@
         }
     }
 
-    DatePicker.prototype.getLang = function(name, defaultValue) {
+    DatePicker.prototype.getLang = function (name, defaultValue) {
         if ($.oc === undefined || $.oc.lang === undefined) {
             return defaultValue
         }
@@ -337,9 +338,15 @@
             var $this   = $(this)
             var data    = $this.data('oc.datePicker')
             var options = $.extend({}, DatePicker.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.datePicker', (data = new DatePicker(this, options)))
-            if (typeof option == 'string') result = data[option].apply(data, args)
-            if (typeof result != 'undefined') return false
+            if (!data) {
+                $this.data('oc.datePicker', (data = new DatePicker(this, options)))
+                if (typeof option == 'string') {
+                    result = data[option].apply(data, args)
+                    if (typeof result != 'undefined') {
+                        return false
+                    }
+                }
+            }
         })
 
         return result ? result : items
@@ -352,7 +359,7 @@
         return this
     }
 
-    $(document).on('render', function() {
+    $(document).on('render', function () {
         $('[data-control="datepicker"]').datePicker()
     });
 

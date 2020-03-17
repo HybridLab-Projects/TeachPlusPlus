@@ -1,12 +1,13 @@
 /*
  * Inspector checkbox dropdown class.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.propertyEditors.base,
         BaseProto = Base.prototype
 
-    var DropdownEditor = function(inspector, propertyDefinition, containerCell, group) {
+    var DropdownEditor = function (inspector, propertyDefinition, containerCell, group) {
         this.indicatorContainer = null
 
         Base.call(this, inspector, propertyDefinition, containerCell, group)
@@ -15,14 +16,14 @@
     DropdownEditor.prototype = Object.create(BaseProto)
     DropdownEditor.prototype.constructor = Base
 
-    DropdownEditor.prototype.init = function() {
+    DropdownEditor.prototype.init = function () {
         this.dynamicOptions = this.propertyDefinition.options ? false : true
         this.initialization = false
 
         BaseProto.init.call(this)
     }
 
-    DropdownEditor.prototype.dispose = function() {
+    DropdownEditor.prototype.dispose = function () {
         this.unregisterHandlers()
         this.destroyCustomSelect()
 
@@ -35,7 +36,7 @@
     // Building
     //
 
-    DropdownEditor.prototype.build = function() {
+    DropdownEditor.prototype.build = function () {
         var select = document.createElement('select')
 
         $.oc.foundation.element.addClass(this.containerCell, 'dropdown')
@@ -50,13 +51,14 @@
         this.initCustomSelect()
 
         if (this.dynamicOptions) {
-           this.loadDynamicOptions(true)
+            this.loadDynamicOptions(true)
         }
     }
 
-    DropdownEditor.prototype.formatSelectOption = function(state) {
-        if (!state.id)
+    DropdownEditor.prototype.formatSelectOption = function (state) {
+        if (!state.id) {
             return state.text; // optgroup
+        }
 
         var option = state.element,
             iconClass = option.getAttribute('data-icon'),
@@ -73,7 +75,7 @@
         return state.text
     }
 
-    DropdownEditor.prototype.createOption = function(select, title, value) {
+    DropdownEditor.prototype.createOption = function (select, title, value) {
         var option = document.createElement('option')
 
         if (title !== null) {
@@ -99,13 +101,13 @@
         select.appendChild(option)
     }
 
-    DropdownEditor.prototype.createOptions = function(select, options) {
+    DropdownEditor.prototype.createOptions = function (select, options) {
         for (var value in options) {
             this.createOption(select, options[value], value)
         }
     }
 
-    DropdownEditor.prototype.initCustomSelect = function() {
+    DropdownEditor.prototype.initCustomSelect = function () {
         var select = this.getSelect()
 
         var options = {
@@ -118,7 +120,7 @@
 
         options.templateResult = this.formatSelectOption
         options.templateSelection = this.formatSelectOption
-        options.escapeMarkup = function(m) {
+        options.escapeMarkup = function (m) {
             return m
         }
 
@@ -130,7 +132,7 @@
         }
     }
 
-    DropdownEditor.prototype.createPlaceholder = function(select) {
+    DropdownEditor.prototype.createPlaceholder = function (select) {
         var placeholder = this.propertyDefinition.placeholder
 
         if (placeholder !== undefined && !Modernizr.touchevents) {
@@ -146,17 +148,17 @@
     // Helpers
     //
 
-    DropdownEditor.prototype.getSelect = function() {
+    DropdownEditor.prototype.getSelect = function () {
         return this.containerCell.querySelector('select')
     }
 
-    DropdownEditor.prototype.clearOptions = function(select) {
+    DropdownEditor.prototype.clearOptions = function (select) {
         while (select.firstChild) {
             select.removeChild(select.firstChild)
         }
     }
 
-    DropdownEditor.prototype.hasOptionValue = function(select, value) {
+    DropdownEditor.prototype.hasOptionValue = function (select, value) {
         var options = select.children
 
         for (var i = 0, len = options.length; i < len; i++) {
@@ -168,7 +170,7 @@
         return false
     }
 
-    DropdownEditor.prototype.normalizeValue = function(value) {
+    DropdownEditor.prototype.normalizeValue = function (value) {
         if (!this.propertyDefinition.booleanValues) {
             return value
         }
@@ -190,19 +192,19 @@
     // Event handlers
     //
 
-    DropdownEditor.prototype.registerHandlers = function() {
+    DropdownEditor.prototype.registerHandlers = function () {
         var select = this.getSelect()
 
         $(select).on('change', this.proxy(this.onSelectionChange))
     }
 
-    DropdownEditor.prototype.onSelectionChange = function() {
+    DropdownEditor.prototype.onSelectionChange = function () {
         var select = this.getSelect()
 
         this.inspector.setPropertyValue(this.propertyDefinition.property, this.normalizeValue(select.value), this.initialization)
     }
 
-    DropdownEditor.prototype.onInspectorPropertyChanged = function(property, value) {
+    DropdownEditor.prototype.onInspectorPropertyChanged = function (property, value) {
         if (!this.propertyDefinition.depends || this.propertyDefinition.depends.indexOf(property) === -1) {
             return
         }
@@ -214,7 +216,7 @@
         }
     }
 
-    DropdownEditor.prototype.onExternalPropertyEditorHidden = function() {
+    DropdownEditor.prototype.onExternalPropertyEditorHidden = function () {
         if (this.dynamicOptions) {
             this.loadDynamicOptions(false)
         }
@@ -224,13 +226,13 @@
     // Editor API methods
     //
 
-    DropdownEditor.prototype.updateDisplayedValue = function(value) {
+    DropdownEditor.prototype.updateDisplayedValue = function (value) {
         var select = this.getSelect()
 
         select.value = value
     }
 
-    DropdownEditor.prototype.getUndefinedValue = function() {
+    DropdownEditor.prototype.getUndefinedValue = function () {
         // Return default value if the default value is defined
         if (this.propertyDefinition.default !== undefined) {
             return this.propertyDefinition.default
@@ -251,7 +253,7 @@
         return undefined
     }
 
-    DropdownEditor.prototype.isEmptyValue = function(value) {
+    DropdownEditor.prototype.isEmptyValue = function (value) {
         if (this.propertyDefinition.booleanValues) {
             if (value === '') {
                 return true
@@ -260,14 +262,14 @@
             return false
         }
 
-        return BaseProto.isEmptyValue.call(this, value) 
+        return BaseProto.isEmptyValue.call(this, value)
     }
 
     //
     // Disposing
     //
 
-    DropdownEditor.prototype.destroyCustomSelect = function() {
+    DropdownEditor.prototype.destroyCustomSelect = function () {
         var $select = $(this.getSelect())
 
         if ($select.data('select2') != null) {
@@ -275,7 +277,7 @@
         }
     }
 
-    DropdownEditor.prototype.unregisterHandlers = function() {
+    DropdownEditor.prototype.unregisterHandlers = function () {
         var select = this.getSelect()
 
         $(select).off('change', this.proxy(this.onSelectionChange))
@@ -285,7 +287,7 @@
     // Static options
     //
 
-    DropdownEditor.prototype.loadStaticOptions = function(select) {
+    DropdownEditor.prototype.loadStaticOptions = function (select) {
         var value = this.inspector.getPropertyValue(this.propertyDefinition.property)
 
         this.createPlaceholder(select)
@@ -303,7 +305,7 @@
     // Dynamic options
     //
 
-    DropdownEditor.prototype.loadDynamicOptions = function(initialization) {
+    DropdownEditor.prototype.loadDynamicOptions = function (initialization) {
         var currentValue = this.inspector.getPropertyValue(this.propertyDefinition.property),
             data = this.getRootSurface().getValues(),
             self = this,
@@ -313,7 +315,8 @@
             currentValue = this.propertyDefinition.default
         }
 
-        var callback = function dropdownOptionsRequestDoneClosure(data) {
+        var callback = function dropdownOptionsRequestDoneClosure(data)
+        {
             self.hideLoadingIndicator()
             self.optionsRequestDone(data, currentValue, true)
         }
@@ -338,7 +341,7 @@
         )
     }
 
-    DropdownEditor.prototype.triggerGetOptions = function(values, callback) {
+    DropdownEditor.prototype.triggerGetOptions = function (values, callback) {
         var $inspectable = this.getInspectableElement()
         if (!$inspectable) {
             return true
@@ -347,7 +350,7 @@
         var optionsEvent = $.Event('dropdownoptions.oc.inspector')
 
         $inspectable.trigger(optionsEvent, [{
-            values: values, 
+            values: values,
             callback: callback,
             property: this.inspector.getPropertyPath(this.propertyDefinition.property),
             propertyDefinition: this.propertyDefinition
@@ -360,11 +363,11 @@
         return true
     }
 
-    DropdownEditor.prototype.saveDependencyValues = function() {
+    DropdownEditor.prototype.saveDependencyValues = function () {
         this.prevDependencyValues = this.getDependencyValues()
     }
 
-    DropdownEditor.prototype.getDependencyValues = function() {
+    DropdownEditor.prototype.getDependencyValues = function () {
         var result = ''
 
         for (var i = 0, len = this.propertyDefinition.depends.length; i < len; i++) {
@@ -381,13 +384,13 @@
         return result
     }
 
-    DropdownEditor.prototype.showLoadingIndicator = function() {
+    DropdownEditor.prototype.showLoadingIndicator = function () {
         if (!Modernizr.touchevents) {
             this.indicatorContainer.loadIndicator()
         }
     }
 
-    DropdownEditor.prototype.hideLoadingIndicator = function() {
+    DropdownEditor.prototype.hideLoadingIndicator = function () {
         if (this.isDisposed()) {
             return
         }
@@ -398,7 +401,7 @@
         }
     }
 
-    DropdownEditor.prototype.optionsRequestDone = function(data, currentValue, initialization) {
+    DropdownEditor.prototype.optionsRequestDone = function (data, currentValue, initialization) {
         if (this.isDisposed()) {
             // Handle the case when the asynchronous request finishes after
             // the editor is disposed
@@ -417,7 +420,7 @@
 
         if (data.options) {
             for (var i = 0, len = data.options.length; i < len; i++) {
-               this.createOption(select, data.options[i].title, data.options[i].value)
+                this.createOption(select, data.options[i].title, data.options[i].value)
             }
         }
 

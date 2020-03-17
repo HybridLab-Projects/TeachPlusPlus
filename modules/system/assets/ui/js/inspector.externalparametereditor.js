@@ -1,43 +1,46 @@
 /*
  * External parameter editor for Inspector.
  *
- * The external parameter editor allows to use URL and 
+ * The external parameter editor allows to use URL and
  * other external parameters as values for the inspectable
  * properties.
  *
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // NAMESPACES
     // ============================
 
-    if ($.oc === undefined)
+    if ($.oc === undefined) {
         $.oc = {}
 
-    if ($.oc.inspector === undefined)
-        $.oc.inspector = {}
+        if ($.oc.inspector === undefined) {
+            $.oc.inspector = {}
 
-    // CLASS DEFINITION
-    // ============================
+        // CLASS DEFINITION
+        // ============================
 
-    var Base = $.oc.foundation.base,
-        BaseProto = Base.prototype
+            var Base = $.oc.foundation.base,
+            BaseProto = Base.prototype
 
-    var ExternalParameterEditor = function(inspector, propertyDefinition, containerCell, initialValue) {
-        this.inspector = inspector
-        this.propertyDefinition = propertyDefinition
-        this.containerCell = containerCell
-        this.initialValue = initialValue
+            var ExternalParameterEditor = function (inspector, propertyDefinition, containerCell, initialValue) {
+                this.inspector = inspector
+                this.propertyDefinition = propertyDefinition
+                this.containerCell = containerCell
+                this.initialValue = initialValue
 
-        Base.call(this)
+                Base.call(this)
 
-        this.init()
+                this.init()
+            }
+        }
     }
 
     ExternalParameterEditor.prototype = Object.create(BaseProto)
     ExternalParameterEditor.prototype.constructor = Base
 
-    ExternalParameterEditor.prototype.dispose = function() {
+    ExternalParameterEditor.prototype.dispose = function () {
         this.disposeControls()
         this.unregisterHandlers()
 
@@ -49,7 +52,7 @@
         BaseProto.dispose.call(this)
     }
 
-    ExternalParameterEditor.prototype.init = function() {
+    ExternalParameterEditor.prototype.init = function () {
         this.tooltipText = 'Click to enter the external parameter name to load the property value from'
 
         this.build()
@@ -62,17 +65,17 @@
      *
      * <div class="external-param-editor-container">
      *     <input> <-- original property editing input/markup
-     *     <div class="external-editor">               
-     *         <div class="controls">                  
-     *             <input type="text" tabindex="-1"/>  
-     *             <a href="#" tabindex="-1">          
+     *     <div class="external-editor">
+     *         <div class="controls">
+     *             <input type="text" tabindex="-1"/>
+     *             <a href="#" tabindex="-1">
      *                 <i class="oc-icon-terminal"></i>
-     *             </a>                                
-     *         </div>                                  
+     *             </a>
+     *         </div>
      *     </div>
      * </div>
      */
-    ExternalParameterEditor.prototype.build = function() {
+    ExternalParameterEditor.prototype.build = function () {
         var container = document.createElement('div'),
             editor = document.createElement('div'),
             controls = document.createElement('div'),
@@ -109,7 +112,7 @@
         this.containerCell.appendChild(container)
     }
 
-    ExternalParameterEditor.prototype.setInitialValue = function() {
+    ExternalParameterEditor.prototype.setInitialValue = function () {
         if (!this.initialValue) {
             return
         }
@@ -130,7 +133,7 @@
         }
     }
 
-    ExternalParameterEditor.prototype.showEditor = function(building) {
+    ExternalParameterEditor.prototype.showEditor = function (building) {
         var editor = this.getEditor(),
             input = this.getInput(),
             container = this.getContainer(),
@@ -159,12 +162,12 @@
         }
     }
 
-    ExternalParameterEditor.prototype.repositionEditor = function() {
+    ExternalParameterEditor.prototype.repositionEditor = function () {
         this.getEditor().style.left = 0
         this.containerCell.scrollTop = 0
     }
 
-    ExternalParameterEditor.prototype.hideEditor = function() {
+    ExternalParameterEditor.prototype.hideEditor = function () {
         var editor = this.getEditor(),
             container = this.getContainer()
 
@@ -181,7 +184,7 @@
         }
     }
 
-    ExternalParameterEditor.prototype.toggleEditor = function(ev) {
+    ExternalParameterEditor.prototype.toggleEditor = function (ev) {
         $.oc.foundation.event.stop(ev)
 
         var link = this.getLink(),
@@ -206,7 +209,7 @@
         setTimeout(this.proxy(this.hideEditor), 200)
     }
 
-    ExternalParameterEditor.prototype.toggleEditorVisibility = function(show) {
+    ExternalParameterEditor.prototype.toggleEditorVisibility = function (show) {
         var container = this.getContainer(),
             children = container.children,
             height = 0
@@ -243,11 +246,11 @@
         }
     }
 
-    ExternalParameterEditor.prototype.focus = function() {
+    ExternalParameterEditor.prototype.focus = function () {
         this.getInput().focus()
     }
 
-    ExternalParameterEditor.prototype.validate = function(silentMode) {
+    ExternalParameterEditor.prototype.validate = function (silentMode) {
         var value = $.trim(this.getValue())
 
         if (value.length === 0) {
@@ -266,7 +269,7 @@
     // Event handlers
     //
 
-    ExternalParameterEditor.prototype.registerHandlers = function() {
+    ExternalParameterEditor.prototype.registerHandlers = function () {
         var input = this.getInput()
 
         this.getLink().addEventListener('click', this.proxy(this.toggleEditor))
@@ -274,11 +277,11 @@
         input.addEventListener('change', this.proxy(this.onInputChange))
     }
 
-    ExternalParameterEditor.prototype.onInputFocus = function() {
+    ExternalParameterEditor.prototype.onInputFocus = function () {
         this.inspector.makeCellActive(this.containerCell)
     }
 
-    ExternalParameterEditor.prototype.onInputChange = function() {
+    ExternalParameterEditor.prototype.onInputChange = function () {
         this.inspector.markPropertyChanged(this.propertyDefinition.property, true)
     }
 
@@ -286,7 +289,7 @@
     // Disposing
     //
 
-    ExternalParameterEditor.prototype.unregisterHandlers = function() {
+    ExternalParameterEditor.prototype.unregisterHandlers = function () {
         var input = this.getInput()
 
         this.getLink().removeEventListener('click', this.proxy(this.toggleEditor))
@@ -294,7 +297,7 @@
         input.removeEventListener('change', this.proxy(this.onInputChange))
     }
 
-    ExternalParameterEditor.prototype.disposeControls = function() {
+    ExternalParameterEditor.prototype.disposeControls = function () {
         $(this.getLink()).tooltip('destroy')
     }
 
@@ -302,31 +305,31 @@
     // Helpers
     //
 
-    ExternalParameterEditor.prototype.getInput = function() {
+    ExternalParameterEditor.prototype.getInput = function () {
         return this.containerCell.querySelector('div.external-editor input')
     }
 
-    ExternalParameterEditor.prototype.getValue = function() {
+    ExternalParameterEditor.prototype.getValue = function () {
         return this.getInput().value
     }
 
-    ExternalParameterEditor.prototype.getLink = function() {
+    ExternalParameterEditor.prototype.getLink = function () {
         return this.containerCell.querySelector('a.external-editor-link')
     }
 
-    ExternalParameterEditor.prototype.getContainer = function() {
+    ExternalParameterEditor.prototype.getContainer = function () {
         return this.containerCell.querySelector('div.external-param-editor-container')
     }
 
-    ExternalParameterEditor.prototype.getEditor = function() {
+    ExternalParameterEditor.prototype.getEditor = function () {
         return this.containerCell.querySelector('div.external-editor')
     }
 
-    ExternalParameterEditor.prototype.getPropertyName = function() {
+    ExternalParameterEditor.prototype.getPropertyName = function () {
         return this.propertyDefinition.property
     }
 
-    ExternalParameterEditor.prototype.isEditorVisible = function() {
+    ExternalParameterEditor.prototype.isEditorVisible = function () {
         return $.oc.foundation.element.hasClass(this.getContainer(), 'editor-visible')
     }
 
