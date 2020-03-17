@@ -48,7 +48,6 @@ new Vue({
         token
       }`;
     }
-    console.log('token');
 
     Axios.interceptors.response.use(
       (response) => response,

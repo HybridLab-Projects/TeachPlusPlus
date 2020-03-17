@@ -14,14 +14,14 @@
         class="d-flex align-items-center"
       >
         <h5 class="mr-auto my-auto">
-          {{ teacher.name }}
+          {{ teacher.name }} {{ teacher.surname }}
         </h5>
         <h6
           class="my-auto ml-2"
           v-for="subject in teacher.subject"
           :key="subject.id"
         >
-          {{ subject.subject }}
+          {{ subject.short }}
         </h6>
         <h6 class="my-auto ml-2">
           >

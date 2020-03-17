@@ -19,7 +19,7 @@ export default new Vuex.Store({
     auth_success(state, { token, user }) {
       state.status = 'success';
       state.token = token;
-      state.user = { ...user };
+      state.user = user;
     },
     auth_error(state) {
       state.status = 'error';
@@ -31,6 +31,7 @@ export default new Vuex.Store({
       state.status = '';
       state.token = '';
       state.user = {};
+      state.teachers = [];
     },
     addTeachers(state, teachers) {
       state.teachers = teachers;
@@ -87,13 +88,14 @@ export default new Vuex.Store({
       });
     },
     logout({ commit, state }) {
-      commit('logout');
       return new Promise((resolve, reject) => {
         Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
           .then((res) => {
+            commit('logout');
             resolve();
           })
           .catch((err) => {
+            commit('logout');
             reject(err);
           });
       });
@@ -114,6 +116,6 @@ export default new Vuex.Store({
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
     getTeachers: (state) => (search) => state.teachers
-      .filter((teacher) => teacher.name.toLowerCase().includes(search)),
+      .filter((teacher) => teacher.surname.toLowerCase().includes(search)),
   },
 });
