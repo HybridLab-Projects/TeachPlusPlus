@@ -19,5 +19,7 @@ export default {
 <style lang="scss" scoped>
   .startingpage_style {
     overflow: hidden;
+    background-color: #5351FB;
+    height: 100vh;
   }
 </style>

@@ -1,6 +1,15 @@
 <template>
-  <b-container fluid>
-    <div class="container ml-5">
+  <b-container
+    fluid
+  >
+    <div class="w-100">
+      <img
+        class="img_cont"
+        :src="require(`@/assets/img/Group.svg`)"
+        alt=""
+      >
+    </div>
+    <div class="cont ml-5">
       <h1
         class="display-4 mb-4"
       >
@@ -29,9 +38,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .container {
-    margin-top: 10rem;
+  .cont {
+    position: absolute;
+    top: 200px;
     min-width: 420px;
     max-width: 500px;
+  }
+
+  .img_cont {
+    margin-left: 50%;
+    transform: translateX(-20%);
+    height: 80vh;
   }
 </style>

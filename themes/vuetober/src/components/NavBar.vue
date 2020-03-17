@@ -1,7 +1,7 @@
 <template>
   <b-container
     fluid
-    class="px-0"
+    class=""
   >
     <b-navbar
       toggleable="lg"
@@ -13,10 +13,9 @@
         class="brand"
       >
         <img
-          src="https://placekitten.com/g/30/30"
-          class="d-inline-block align-top"
-          alt="Kitten"
-        > <strong>Teach++</strong>
+          :src="require(`@/assets/img/Logo.svg`)"
+          alt=""
+        >
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse" />
