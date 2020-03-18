@@ -38,8 +38,8 @@
             v-if="!isLoggedIn"
           >
             <b-button
-              variant="outline-primary font-weight-bold px-3"
-              class="registracia_btn"
+              variant="outline-primary"
+              class="font-weight-bold px-3"
             >
               Registruj sa
             </b-button>
