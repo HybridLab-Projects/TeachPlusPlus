@@ -19,7 +19,7 @@
         lacus, at consectetur ex.
       </p>
       <b-button
-        class="login_button"
+        class="login_button py-10 px-5 mt-5"
         variant="danger"
       >
         Prihlás sa!

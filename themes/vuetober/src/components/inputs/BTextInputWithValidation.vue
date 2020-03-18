@@ -1,21 +1,23 @@
 <template>
-  <ValidationProvider
-    :vid="vid"
-    :name="$attrs.name"
-    :rules="rules"
-    v-slot="{ valid, errors }"
-  >
-    <b-form-group v-bind="$attrs">
-      <b-form-input
-        v-model="innerValue"
-        v-bind="$attrs"
-        :state="errors[0] ? false : (valid ? true : null)"
-      />
-      <b-form-invalid-feedback id="inputLiveFeedback">
-        {{ errors[0] }}
-      </b-form-invalid-feedback>
-    </b-form-group>
-  </ValidationProvider>
+  <div class="input_form">
+    <ValidationProvider
+      :vid="vid"
+      :name="$attrs.name"
+      :rules="rules"
+      v-slot="{ valid, errors }"
+    >
+      <b-form-group v-bind="$attrs">
+        <b-form-input
+          v-model="innerValue"
+          v-bind="$attrs"
+          :state="errors[0] ? false : (valid ? true : null)"
+        />
+        <b-form-invalid-feedback id="inputLiveFeedback">
+          {{ errors[0] }}
+        </b-form-invalid-feedback>
+      </b-form-group>
+    </ValidationProvider>
+  </div>
 </template>
 
 <script>
@@ -63,5 +65,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .input_form {
+    min-width: 30%;
+    max-width: 40%;
+  }
 </style>
