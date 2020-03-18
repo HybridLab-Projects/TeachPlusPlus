@@ -30,7 +30,7 @@
           <p
             class="my-auto"
           >
-            Ešte nemáš účet?
+            <strong class="text-secondary">Ešte nemáš účet?</strong>
           </p>
           <b-nav-item
             to="register"

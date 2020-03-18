@@ -64,7 +64,6 @@
           Suhlas
         </BCheckboxWithValidation>
 
-
         <b-button
           type="submit"
           variant="primary"
@@ -114,14 +113,19 @@ export default {
     onRegister() {
       this.error = '';
       const { user } = this;
-      this.$store.dispatch('register', user)
+      this.$store
+        .dispatch('register', user)
         .then(() => this.$router.push('teachers'))
-        .catch((err) => { this.error = err.response.data.error; });
+        .catch((err) => {
+          this.error = err.response.data.error;
+        });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
+.cont_forms {
+  width: 40%;
+}
 </style>
