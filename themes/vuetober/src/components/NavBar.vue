@@ -1,7 +1,7 @@
 <template>
   <b-container
     fluid
-    class=""
+    class="px-0"
   >
     <b-navbar
       toggleable="lg"
@@ -40,7 +40,7 @@
               variant="outline-danger"
               class="registracia_btn"
             >
-              Registrácia
+              Registruj sa
             </b-button>
           </b-nav-item>
           <b-nav-item
