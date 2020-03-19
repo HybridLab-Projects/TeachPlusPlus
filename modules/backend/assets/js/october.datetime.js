@@ -26,8 +26,7 @@
  * dateTimeLongMin  -> Sat, Apr 23, 2016 6:29 AM
  *
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
@@ -43,7 +42,7 @@
     DateTimeConverter.prototype = Object.create(BaseProto)
     DateTimeConverter.prototype.constructor = DateTimeConverter
 
-    DateTimeConverter.prototype.init = function () {
+    DateTimeConverter.prototype.init = function() {
         this.initDefaults()
 
         this.$el.text(this.getDateTimeValue())
@@ -51,7 +50,7 @@
         this.$el.one('dispose-control', this.proxy(this.dispose))
     }
 
-    DateTimeConverter.prototype.initDefaults = function () {
+    DateTimeConverter.prototype.initDefaults = function() {
         if (!this.options.timezone) {
             this.options.timezone = $('meta[name="backend-timezone"]').attr('content')
         }
@@ -74,7 +73,7 @@
         }
     }
 
-    DateTimeConverter.prototype.getDateTimeValue = function () {
+    DateTimeConverter.prototype.getDateTimeValue = function() {
         this.datetime = this.$el.attr('datetime')
 
         if (this.$el.get(0).hasAttribute('data-ignore-timezone')) {
@@ -106,7 +105,7 @@
         return result
     }
 
-    DateTimeConverter.prototype.getFormatFromAlias = function (alias) {
+    DateTimeConverter.prototype.getFormatFromAlias = function(alias) {
         var map = {
             time: 'LT',
             timeLong: 'LTS',
@@ -123,7 +122,7 @@
         return map[alias] ? map[alias] : 'llll'
     }
 
-    DateTimeConverter.prototype.dispose = function () {
+    DateTimeConverter.prototype.dispose = function() {
         this.$el.off('dispose-control', this.proxy(this.dispose))
         this.$el.removeData('oc.dateTimeConverter')
 
@@ -154,15 +153,9 @@
             var $this   = $(this)
             var data    = $this.data('oc.dateTimeConverter')
             var options = $.extend({}, DateTimeConverter.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.dateTimeConverter', (data = new DateTimeConverter(this, options)))
-                if (typeof option == 'string') {
-                    result = data[option].apply(data, args)
-                    if (typeof result != 'undefined') {
-                        return false
-                    }
-                }
-            }
+            if (!data) $this.data('oc.dateTimeConverter', (data = new DateTimeConverter(this, options)))
+            if (typeof option == 'string') result = data[option].apply(data, args)
+            if (typeof result != 'undefined') return false
         })
 
         return result ? result : items
@@ -175,7 +168,7 @@
         return this
     }
 
-    $(document).render(function () {
+    $(document).render(function (){
         $('time[data-datetime-control]').dateTimeConverter()
     })
 

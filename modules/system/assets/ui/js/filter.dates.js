@@ -79,24 +79,20 @@
                 scopeName = $scope.data('scope-name')
 
             // Ignore if already opened
-            if ($scope.hasClass('filter-scope-open')) {
-                return
+            if ($scope.hasClass('filter-scope-open')) return
 
             // Ignore if another popover is opened
-                if (null !== self.activeScopeName) {
-                    return
+            if (null !== self.activeScopeName) return
 
-                    self.$activeScope = $scope
-                    self.activeScopeName = scopeName
-                    self.isActiveScopeDirty = false
+            self.$activeScope = $scope
+            self.activeScopeName = scopeName
+            self.isActiveScopeDirty = false
 
-                    if ($scope.hasClass('range')) {
-                        self.displayPopoverRange($scope)
-                    }
-                    else {
-                        self.displayPopoverDate($scope)
-                    }
-                }
+            if ($scope.hasClass('range')) {
+                self.displayPopoverRange($scope)
+            }
+            else {
+                self.displayPopoverDate($scope)
             }
 
             $scope.addClass('filter-scope-open')
@@ -262,7 +258,7 @@
                     setDefaultDate: '' !== defaultValue ? defaultValue.toDate() : '',
                     format: self.getDateFormat(),
                     i18n: self.getLang('datepicker')
-            }
+                }
 
             if (0 <= index && index < data.dates.length) {
                 defaultValue = data.dates[index] ? moment.tz(data.dates[index], self.appTimezone).tz(self.timezone) : ''
@@ -302,7 +298,7 @@
             if (dates.length > 1) {
                 dates[1] = dates[1] && dates[1].match(dateRegex) ? dates[1] : null
 
-                if (dates[0] || dates[1]) {
+                if(dates[0] || dates[1]) {
                     var after = dates[0] ? moment.tz(dates[0], this.appTimezone).tz(this.timezone).format(dateFormat) : '∞',
                         before = dates[1] ? moment.tz(dates[1], this.appTimezone).tz(this.timezone).format(dateFormat) : '∞'
 
@@ -311,7 +307,7 @@
                     reset = true
                 }
             }
-            else if (dates[0]) {
+            else if(dates[0]) {
                 $setting.text(moment.tz(dates[0], this.appTimezone).tz(this.timezone).format(dateFormat))
             } else {
                 reset = true
@@ -321,7 +317,7 @@
             reset = true
         }
 
-        if (reset) {
+        if(reset) {
             $setting.text(this.getLang('filter.dates.all', 'all'));
             $scope.removeClass('active')
         } else {
@@ -339,7 +335,7 @@
             datepickers.each(function (index, datepicker) {
                 var date = $(datepicker).data('pikaday').toString('YYYY-MM-DD')
 
-                if (date.match(/\d{4}-\d{2}-\d{2}/)) {
+                if(date.match(/\d{4}-\d{2}-\d{2}/)) {
                     if (index === 0) {
                         date += ' 00:00:00'
                     } else if (index === 1) {
@@ -388,7 +384,7 @@
             $target.parents('.pika-title').length
     }
 
-    FilterWidget.prototype.initRegion = function () {
+    FilterWidget.prototype.initRegion = function() {
         this.locale = $('meta[name="backend-locale"]').attr('content')
         this.timezone = $('meta[name="backend-timezone"]').attr('content')
         this.appTimezone = $('meta[name="app-timezone"]').attr('content')

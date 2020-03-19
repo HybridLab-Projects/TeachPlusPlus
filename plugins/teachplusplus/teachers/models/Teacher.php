@@ -23,19 +23,23 @@ class Teacher extends Model
      */
     public $table = 'teachplusplus_teachers_';
 
-    public $belongsToMany =[
+    /* Relations */
 
+    public $belongsToMany =[
         'subject' =>[
-            'Teachplusplus\teachers\models\Subject',
+            'Teachplusplus\teachers\Models\Subject',
             'table' => 'teachplusplus_teachers_teachers_subjects',
             'order' => 'subject_name'
-
+        ],
+        'feedback' =>[
+            'Teachplusplus\teachers\Models\Feedback',
+            'table' => 'teachplusplus_teachers_feedbacks_teachers',
+            'order' => 'name' 
         ]
+
         ];
 
-       
-
-
+    
     /**
      * @var array Validation rules
      */

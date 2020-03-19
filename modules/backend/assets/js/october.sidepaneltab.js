@@ -2,16 +2,15 @@
  * Side Panel Tabs
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
-    var SidePanelTab = function (element, options) {
+    var SidePanelTab = function(element, options) {
         this.options = options
         this.$el = $(element)
         this.init()
     }
 
-    SidePanelTab.prototype.init = function () {
+    SidePanelTab.prototype.init = function() {
         var self = this
         this.tabOpenDelay = 200
         this.tabOpenTimeout = undefined
@@ -25,13 +24,13 @@
         this.visibleItemId = false
         this.$fixButton = $('<a href="#" class="fix-button"><i class="icon-thumb-tack"></i></a>')
 
-        this.$fixButton.click(function () {
+        this.$fixButton.click(function() {
             self.fixPanel()
             return false
         })
         $('.fix-button-container', this.$el).append(this.$fixButton)
 
-        this.$sideNavItems.click(function () {
+        this.$sideNavItems.click(function() {
             if ($(this).data('no-side-panel')) {
                 return
             }
@@ -63,15 +62,15 @@
             //     }
             // })
 
-            self.$sideNav.mouseleave(function () {
+            self.$sideNav.mouseleave(function() {
                 clearTimeout(self.panelOpenTimeout)
             })
 
-            self.$el.mouseleave(function () {
+            self.$el.mouseleave(function() {
                 self.hideSidePanel()
             })
 
-            self.$sideNavItems.mouseenter(function () {
+            self.$sideNavItems.mouseenter(function() {
                 if ($(window).width() < self.options.breakpoint || !self.panelFixed()) {
                     if ($(this).data('no-side-panel')) {
                         self.hideSidePanel()
@@ -79,31 +78,31 @@
                     }
 
                     var _this = this
-                    self.tabOpenTimeout = setTimeout(function () {
+                    self.tabOpenTimeout = setTimeout(function() {
                         self.displaySidePanel()
                         self.displayTab(_this)
                     }, self.tabOpenDelay)
                 }
             })
 
-            self.$sideNavItems.mouseleave(function () {
+            self.$sideNavItems.mouseleave(function() {
                 clearTimeout(self.tabOpenTimeout)
             })
 
-            $(window).resize(function () {
+            $(window).resize(function() {
                 self.updatePanelPosition()
                 self.updateActiveTab()
             })
         }
         else {
-            $('#layout-body').click(function () {
+            $('#layout-body').click(function() {
                 if (self.panelVisible) {
                     self.hideSidePanel()
                     return false
                 }
             })
 
-            self.$el.on('close.oc.sidePanel', function () {
+            self.$el.on('close.oc.sidePanel', function() {
                 self.hideSidePanel()
             })
         }
@@ -111,14 +110,14 @@
         this.updateActiveTab()
     }
 
-    SidePanelTab.prototype.displayTab = function (menuItem) {
+    SidePanelTab.prototype.displayTab = function(menuItem) {
         var menuItemId = $(menuItem).data('menu-item')
 
         this.visibleItemId = menuItemId
 
         $.oc.sideNav.setActiveItem(menuItemId)
 
-        this.$sidePanelItems.each(function () {
+        this.$sidePanelItems.each(function() {
             var  $el = $(this)
             $el.toggleClass('hide', $el.data('content-id') != menuItemId)
         })
@@ -126,7 +125,7 @@
         $(window).trigger('resize')
     }
 
-    SidePanelTab.prototype.displaySidePanel = function () {
+    SidePanelTab.prototype.displaySidePanel = function() {
         $(document.body).addClass('display-side-panel')
 
         this.$el.appendTo('#layout-canvas')
@@ -140,7 +139,7 @@
         $(window).trigger('resize')
     }
 
-    SidePanelTab.prototype.hideSidePanel = function () {
+    SidePanelTab.prototype.hideSidePanel = function() {
         $(document.body).removeClass('display-side-panel')
         if (this.$el.next('#layout-body').length == 0) {
             $('#layout-body').before(this.$el)
@@ -151,7 +150,7 @@
         this.updateActiveTab()
     }
 
-    SidePanelTab.prototype.updatePanelPosition = function () {
+    SidePanelTab.prototype.updatePanelPosition = function() {
         if (!this.panelFixed() || Modernizr.touchevents) {
             this.$el.height($(document).height() - this.mainNavHeight)
         }
@@ -164,7 +163,7 @@
         }
     }
 
-    SidePanelTab.prototype.updateActiveTab = function () {
+    SidePanelTab.prototype.updateActiveTab = function() {
         if (!this.panelVisible && ($(window).width() < this.options.breakpoint || !this.panelFixed())) {
             $.oc.sideNav.unsetActiveItem()
         }
@@ -173,17 +172,17 @@
         }
     }
 
-    SidePanelTab.prototype.panelFixed = function () {
+    SidePanelTab.prototype.panelFixed = function() {
         return !($(window).width() < this.options.breakpoint) &&
             !$(document.body).hasClass('side-panel-not-fixed')
     }
 
-    SidePanelTab.prototype.fixPanel = function () {
+    SidePanelTab.prototype.fixPanel = function() {
         $(document.body).toggleClass('side-panel-not-fixed')
 
         var self = this
 
-        window.setTimeout(function () {
+        window.setTimeout(function() {
             var fixed = self.panelFixed()
 
             if (fixed) {
@@ -194,9 +193,8 @@
                 self.hideSidePanel()
             }
 
-            if (typeof(localStorage) !== 'undefined') {
+            if (typeof(localStorage) !== 'undefined')
                 localStorage.ocSidePanelFixed = fixed ? 1 : 0
-            }
         }, 0)
     }
 
@@ -210,16 +208,12 @@
     var old = $.fn.sidePanelTab
 
     $.fn.sidePanelTab = function (option) {
-        return this.each(function () {
+        return this.each(function() {
             var $this = $(this)
             var data = $this.data('oc.sidePanelTab')
             var options = $.extend({}, SidePanelTab.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.sidePanelTab', (data = new SidePanelTab(this, options)))
-                if (typeof option == 'string') {
-                    data[option].call(data)
-                }
-            }
+            if (!data) $this.data('oc.sidePanelTab', (data = new SidePanelTab(this, options)))
+            if (typeof option == 'string') data[option].call(data)
         })
     }
 
@@ -228,7 +222,7 @@
     // NO CONFLICT
     // =================
 
-    $.fn.sidePanelTab.noConflict = function () {
+    $.fn.sidePanelTab.noConflict = function() {
         $.fn.sidePanelTab = old
         return this
     }
@@ -236,14 +230,14 @@
     // DATA-API
     // ============
 
-    $(document).ready(function () {
+    $(document).ready(function(){
         $('[data-control=layout-sidepanel]').sidePanelTab()
     })
 
     // STORED PREFERENCES
     // ====================
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         if (Modernizr.touchevents || (typeof(localStorage) !== 'undefined')) {
             if (localStorage.ocSidePanelFixed == 0) {
                 $(document.body).addClass('side-panel-not-fixed')

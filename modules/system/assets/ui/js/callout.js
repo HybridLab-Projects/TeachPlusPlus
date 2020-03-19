@@ -25,25 +25,20 @@
 
         var $parent = $(selector)
 
-        if (e) {
-            e.preventDefault()
+        if (e) e.preventDefault()
 
-            if (!$parent.length) {
-                $parent = $this.hasClass('callout') ? $this : $this.parent()
-            }
+        if (!$parent.length) {
+            $parent = $this.hasClass('callout') ? $this : $this.parent()
         }
 
         $parent.trigger(e = $.Event('close.oc.callout'))
 
-        if (e.isDefaultPrevented()) {
-            return
+        if (e.isDefaultPrevented()) return
 
-            $parent.removeClass('in')
+        $parent.removeClass('in')
 
-            function removeElement()
-            {
-                $parent.trigger('closed.oc.callout').remove()
-            }
+        function removeElement() {
+            $parent.trigger('closed.oc.callout').remove()
         }
 
         $.support.transition && $parent.hasClass('fade')
@@ -63,12 +58,8 @@
             var $this = $(this)
             var data  = $this.data('oc.callout')
 
-            if (!data) {
-                $this.data('oc.callout', (data = new Callout(this)))
-                if (typeof option == 'string') {
-                    data[option].call($this)
-                }
-            }
+            if (!data) $this.data('oc.callout', (data = new Callout(this)))
+            if (typeof option == 'string') data[option].call($this)
         })
     }
 

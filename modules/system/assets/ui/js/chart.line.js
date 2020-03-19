@@ -22,13 +22,12 @@
  * - Flot Time (jquery.flot.time.js)
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // LINE CHART CLASS DEFINITION
     // ============================
 
-    var ChartLine = function (element, options) {
+    var ChartLine = function(element, options) {
         var self = this
 
         /*
@@ -116,30 +115,28 @@
          * Markings Helper
          */
 
-        if (this.chartOptions.xaxis.mode == "time" && this.options.timeMode == "weeks") {
+        if (this.chartOptions.xaxis.mode == "time" && this.options.timeMode == "weeks")
             this.chartOptions.markings = weekendAreas
 
-            function weekendAreas(axes)
-            {
-                var markings = [],
+        function weekendAreas(axes) {
+            var markings = [],
                 d = new Date(axes.xaxis.min);
 
-                // Go to the first Saturday
-                d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
-                d.setUTCSeconds(0)
-                d.setUTCMinutes(0)
-                d.setUTCHours(0)
-                var i = d.getTime()
+            // Go to the first Saturday
+            d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
+            d.setUTCSeconds(0)
+            d.setUTCMinutes(0)
+            d.setUTCHours(0)
+            var i = d.getTime()
 
-                do {
-                    // When we don't set yaxis, the rectangle automatically
-                    // extends to infinity upwards and downwards
-                    markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } })
-                    i += 7 * 24 * 60 * 60 * 1000
-                } while (i < axes.xaxis.max) {
-                    return markings
-                }
-            }
+            do {
+                // When we don't set yaxis, the rectangle automatically
+                // extends to infinity upwards and downwards
+                markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } })
+                i += 7 * 24 * 60 * 60 * 1000
+            } while (i < axes.xaxis.max)
+
+            return markings
         }
 
         /*
@@ -148,7 +145,7 @@
 
         this.initializing = true
 
-        this.$el.find('>[data-chart="dataset"]').each(function () {
+        this.$el.find('>[data-chart="dataset"]').each(function(){
             var data = $(this).data(),
                 processedData = {};
 
@@ -157,9 +154,8 @@
                     value = data[key];
 
                 normalizedKey = normalizedKey.charAt(0).toLowerCase() + normalizedKey.slice(1);
-                if (normalizedKey == 'data') {
+                if (normalizedKey == 'data')
                     value = JSON.parse('['+value+']');
-                }
 
                 processedData[normalizedKey] = value;
             }
@@ -189,18 +185,17 @@
     ChartLine.prototype.addDataSet = function (dataSet) {
         this.fullDataSet.push(dataSet)
 
-        if (!this.initializing) {
+        if (!this.initializing)
             this.rebuildChart()
-        }
     }
 
-    ChartLine.prototype.rebuildChart = function () {
+    ChartLine.prototype.rebuildChart = function() {
         this.$el.trigger('oc.beforeChartLineRender', [this])
 
         $.plot(this.$el, this.fullDataSet, this.chartOptions)
     }
 
-    ChartLine.prototype.clearZoom = function () {
+    ChartLine.prototype.clearZoom = function() {
         this.rebuildChart()
         this.resetZoomLink.hide()
     }
@@ -215,12 +210,8 @@
             var $this   = $(this)
             var data    = $this.data('october.chartLine')
             var options = $.extend({}, ChartLine.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('october.chartLine', (data = new ChartLine(this, options)))
-                if (typeof option == 'string') {
-                    data[option].call($this)
-                }
-            }
+            if (!data) $this.data('october.chartLine', (data = new ChartLine(this, options)))
+            if (typeof option == 'string') data[option].call($this)
         })
     }
 

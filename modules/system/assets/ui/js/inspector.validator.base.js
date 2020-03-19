@@ -1,39 +1,37 @@
 /*
  * Inspector validator base class.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // NAMESPACES
     // ============================
 
-    if ($.oc.inspector.validators === undefined) {
+    if ($.oc.inspector.validators === undefined)
         $.oc.inspector.validators = {}
 
     // CLASS DEFINITION
     // ============================
 
-        var Base = $.oc.foundation.base,
+    var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
-        var BaseValidator = function (options) {
-            this.options = options
-            this.defaultMessage = 'Invalid property value.'
+    var BaseValidator = function(options) {
+        this.options = options
+        this.defaultMessage = 'Invalid property value.'
 
-            Base.call(this)
-        }
+        Base.call(this)
     }
 
     BaseValidator.prototype = Object.create(BaseProto)
     BaseValidator.prototype.constructor = Base
 
-    BaseValidator.prototype.dispose = function () {
+    BaseValidator.prototype.dispose = function() {
         this.defaultMessage = null
 
         BaseProto.dispose.call(this)
     }
 
-    BaseValidator.prototype.getMessage = function (defaultMessage) {
+    BaseValidator.prototype.getMessage = function(defaultMessage) {
         if (this.options.message !== undefined) {
             return this.options.message
         }
@@ -45,7 +43,7 @@
         return this.defaultMessage
     }
 
-    BaseValidator.prototype.isScalar = function (value) {
+    BaseValidator.prototype.isScalar = function(value) {
         if (value === undefined || value === null) {
             return true
         }
@@ -53,7 +51,7 @@
         return !!(typeof value === 'string' || typeof value == 'number' || typeof value == 'boolean');
     }
 
-    BaseValidator.prototype.isValid = function (value) {
+    BaseValidator.prototype.isValid = function(value) {
         return null
     }
 

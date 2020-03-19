@@ -2,12 +2,11 @@
 
     $.FroalaEditor.PLUGINS.mediaManager = function (editor) {
 
-        function onInsertFile()
-        {
+        function onInsertFile() {
             new $.oc.mediaManager.popup({
                 alias: 'ocmediamanager',
                 cropAndInsertButton: false,
-                onInsert: function (items) {
+                onInsert: function(items) {
                     if (!items.length) {
                         $.oc.alert($.oc.lang.get('mediamanager.invalid_file_empty_insert'))
                         return
@@ -45,8 +44,7 @@
             })
         }
 
-        function onInsertImage()
-        {
+        function onInsertImage() {
             var $currentImage = editor.image.get(),
                 selection = editor.selection.get(),
                 range = editor.selection.ranges(0);
@@ -54,7 +52,7 @@
             new $.oc.mediaManager.popup({
                 alias: 'ocmediamanager',
                 cropAndInsertButton: true,
-                onInsert: function (items) {
+                onInsert: function(items) {
                     editor.selection.clear();
                     selection.addRange(range);
                     
@@ -87,12 +85,11 @@
             })
         }
 
-        function onInsertVideo()
-        {
+        function onInsertVideo() {
             new $.oc.mediaManager.popup({
                 alias: 'ocmediamanager',
                 cropAndInsertButton: false,
-                onInsert: function (items) {
+                onInsert: function(items) {
                     if (!items.length) {
                         $.oc.alert($.oc.lang.get('mediamanager.invalid_video_empty_insert'))
                         return
@@ -119,12 +116,11 @@
             })
         }
 
-        function onInsertAudio()
-        {
+        function onInsertAudio() {
             new $.oc.mediaManager.popup({
                 alias: 'ocmediamanager',
                 cropAndInsertButton: false,
-                onInsert: function (items) {
+                onInsert: function(items) {
                     if (!items.length) {
                         $.oc.alert($.oc.lang.get('mediamanager.invalid_audio_empty_insert'))
                         return
@@ -151,8 +147,7 @@
             })
         }
 
-        function _insertVideoFallback(link)
-        {
+        function _insertVideoFallback(link) {
             var $richEditorNode = editor.$el.closest('[data-control="richeditor"]')
 
             var title = link.substring(link.lastIndexOf('/') + 1)
@@ -162,8 +157,7 @@
             editor.popups.hide('video.insert')
         }
 
-        function _insertAudioFallback(link)
-        {
+        function _insertAudioFallback(link) {
             var $richEditorNode = editor.$el.closest('[data-control="richeditor"]')
 
             var title = link.substring(link.lastIndexOf('/') + 1)
@@ -176,8 +170,7 @@
         /**
          * Init.
          */
-        function _init()
-        {
+        function _init () {
             editor.events.on('destroy', _destroy, true)
 
             editor.events.on('video.linkError', _insertVideoFallback)
@@ -188,8 +181,7 @@
         /**
          * Destroy.
          */
-        function _destroy()
-        {
+        function _destroy () {
         }
 
         // Expose public methods. If _init is not public then the plugin won't be initialized.

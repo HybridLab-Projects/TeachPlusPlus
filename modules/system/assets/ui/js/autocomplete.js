@@ -13,7 +13,7 @@
  * - Source can also be { something: 'Something', else: 'Else' }
  */
 
-!function ($) {
+!function($){
 
     "use strict"; // jshint ;_;
 
@@ -53,8 +53,8 @@
         show: function () {
             var offset = this.options.bodyContainer ? this.$element.offset() : this.$element.position(),
                 pos = $.extend({}, offset, {
-                    height: this.$element[0].offsetHeight
-                }),
+                height: this.$element[0].offsetHeight
+            }),
             cssOptions = {
                 top: pos.top + pos.height
                 , left: pos.left
@@ -100,24 +100,22 @@
         },
 
         itemValue: function (item) {
-            if (typeof item === 'object') {
+            if (typeof item === 'object')
                 return item.value;
-            }
 
             return item;
         },
 
         itemLabel: function (item) {
-            if (typeof item === 'object') {
+            if (typeof item === 'object')
                 return item.label;
-            }
 
             return item;
         },
 
         itemsToArray: function (items) {
             var newArray = []
-            $.each(items, function (value, label) {
+            $.each(items, function(value, label){
                 newArray.push({ label: label, value: value })
             })
             return newArray
@@ -126,18 +124,17 @@
         process: function (items) {
             var that = this
 
-            if (typeof items == 'object') {
+            if (typeof items == 'object')
                 items = this.itemsToArray(items)
 
-                items = $.grep(items, function (item) {
-                    return that.matcher(item)
-                })
+            items = $.grep(items, function (item) {
+                return that.matcher(item)
+            })
 
-                items = this.sorter(items)
+            items = this.sorter(items)
 
-                if (!items.length) {
-                    return this.shown ? this.hide() : this
-                }
+            if (!items.length) {
+                return this.shown ? this.hide() : this
             }
 
             return this.render(items.slice(0, this.options.items)).show()
@@ -157,12 +154,8 @@
             while (item = items.shift()) {
                 itemValue = this.itemValue(item)
                 if (!itemValue.toLowerCase().indexOf(this.query.toLowerCase())) beginswith.push(item)
-                else if (~itemValue.indexOf(this.query)) {
-                    caseSensitive.push(item)
-                    else {
-                        caseInsensitive.push(item)
-                    }
-                }
+                else if (~itemValue.indexOf(this.query)) caseSensitive.push(item)
+                else caseInsensitive.push(item)
             }
 
             return beginswith.concat(caseSensitive, caseInsensitive)
@@ -228,7 +221,7 @@
                 .on('mouseleave.autocomplete', 'li', $.proxy(this.mouseleave, this))
         },
 
-        eventSupported: function (eventName) {
+        eventSupported: function(eventName) {
             var isSupported = eventName in this.$element
             if (!isSupported) {
                 this.$element.setAttribute(eventName, 'return;')
@@ -238,26 +231,24 @@
         },
 
         move: function (e) {
-            if (!this.shown) {
-                return
+            if (!this.shown) return
 
-                switch (e.key) {
-                    case 'Tab':
-                    case 'Enter':
-                    case 'Escape':
-                        e.preventDefault()
-                        break
+            switch(e.key) {
+                case 'Tab':
+                case 'Enter':
+                case 'Escape':
+                    e.preventDefault()
+                    break
 
-                    case 'ArrowUp':
-                        e.preventDefault()
-                        this.prev()
-                        break
+                case 'ArrowUp':
+                    e.preventDefault()
+                    this.prev()
+                    break
 
-                    case 'ArrowDown':
-                        e.preventDefault()
-                        this.next()
-                        break
-                }
+                case 'ArrowDown':
+                    e.preventDefault()
+                    this.next()
+                    break
             }
 
             e.stopPropagation()
@@ -269,14 +260,12 @@
         },
 
         keypress: function (e) {
-            if (this.suppressKeyPressRepeat) {
-                return
-                this.move(e)
-            }
+            if (this.suppressKeyPressRepeat) return
+            this.move(e)
         },
 
         keyup: function (e) {
-            switch (e.keyCode) {
+            switch(e.keyCode) {
                 case 40: // down arrow
                 case 38: // up arrow
                 case 16: // shift
@@ -286,14 +275,12 @@
 
                 case 9: // tab
                 case 13: // enter
-                    if (!this.shown) {
-                    }
+                    if (!this.shown) return
                     this.select()
                     break
 
                 case 27: // escape
-                    if (!this.shown) {
-                    }
+                    if (!this.shown) return
                     this.hide()
                     break
 
@@ -311,9 +298,7 @@
 
         blur: function (e) {
             this.focused = false
-            if (!this.mousedover && this.shown) {
-                this.hide()
-            }
+            if (!this.mousedover && this.shown) this.hide()
         },
 
         click: function (e) {
@@ -331,12 +316,10 @@
 
         mouseleave: function (e) {
             this.mousedover = false
-            if (!this.focused && this.shown) {
-                this.hide()
-            }
+            if (!this.focused && this.shown) this.hide()
         },
 
-        destroy: function () {
+        destroy: function() {
             this.hide()
 
             this.$element.removeData('autocomplete')
@@ -361,12 +344,8 @@
             var $this = $(this)
                 , data = $this.data('autocomplete')
                 , options = typeof option == 'object' && option
-            if (!data) {
-                $this.data('autocomplete', (data = new Autocomplete(this, options)))
-                if (typeof option == 'string') {
-                    data[option]()
-                }
-            }
+            if (!data) $this.data('autocomplete', (data = new Autocomplete(this, options)))
+            if (typeof option == 'string') data[option]()
         })
     }
 
@@ -394,33 +373,26 @@
     /* AUTOCOMPLETE DATA-API
      * ================== */
 
-    function paramToObj(name, value)
-    {
-        if (value === undefined) {
-            value = ''
-            if (typeof value == 'object') {
-                return value
+    function paramToObj(name, value) {
+        if (value === undefined) value = ''
+        if (typeof value == 'object') return value
 
-                try {
-                    return ocJSON("{" + value + "}")
-                }
-                catch (e) {
-                    throw new Error('Error parsing the '+name+' attribute value. '+e)
-                }
-            }
+        try {
+            return ocJSON("{" + value + "}")
+        }
+        catch (e) {
+            throw new Error('Error parsing the '+name+' attribute value. '+e)
         }
     }
 
     $(document).on('focus.autocomplete.data-api', '[data-control="autocomplete"]', function (e) {
         var $this = $(this)
-        if ($this.data('autocomplete')) {
-            return
+        if ($this.data('autocomplete')) return
 
-            var opts = $this.data()
+        var opts = $this.data()
 
-            if (opts.source) {
-                opts.source = paramToObj('data-source', opts.source)
-            }
+        if (opts.source) {
+            opts.source = paramToObj('data-source', opts.source)
         }
 
         $this.autocomplete(opts)

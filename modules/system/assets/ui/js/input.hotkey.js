@@ -8,8 +8,7 @@
  *
  * $('html').hotKey({ hotkey: 'ctrl+s, cmd+s', hotkeyVisible: false, callback: doSomething });
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -35,7 +34,7 @@
     HotKey.prototype = Object.create(BaseProto)
     HotKey.prototype.constructor = HotKey
 
-    HotKey.prototype.dispose = function () {
+    HotKey.prototype.dispose = function() {
         if (this.$el === null) {
             return
         }
@@ -52,7 +51,7 @@
         BaseProto.dispose.call(this)
     }
 
-    HotKey.prototype.init = function () {
+    HotKey.prototype.init = function() {
         this.initKeyMap()
 
         var keys = this.options.hotkey.toLowerCase().split(',')
@@ -66,12 +65,12 @@
         this.$el.one('dispose-control', this.proxy(this.dispose))
     }
 
-    HotKey.prototype.unregisterHandlers = function () {
+    HotKey.prototype.unregisterHandlers = function() {
         this.$target.off('keydown', this.proxy(this.onKeyDown))
         this.$el.off('dispose-control', this.proxy(this.dispose))
     }
 
-    HotKey.prototype.makeCondition = function (keyBind) {
+    HotKey.prototype.makeCondition = function(keyBind) {
         var condition = { shift: false, ctrl: false, cmd: false, alt: false, specific: -1 },
             keys = keyBind.split('+')
 
@@ -104,7 +103,7 @@
         return condition
     }
 
-    HotKey.prototype.initKeyMap = function () {
+    HotKey.prototype.initKeyMap = function() {
         this.keyMap = {
             'esc':       27,
             'tab':       9,
@@ -143,13 +142,13 @@
         }
     }
 
-    HotKey.prototype.trim = function (str) {
+    HotKey.prototype.trim = function(str) {
         return str
             .replace(/^\s+/, "")
             .replace(/\s+$/, "")
     }
 
-    HotKey.prototype.testConditions = function (ev) {
+    HotKey.prototype.testConditions = function(ev) {
         for (var i = 0, len = this.keyConditions.length; i < len; i++) {
             var condition = this.keyConditions[i]
 
@@ -165,7 +164,7 @@
         return false
     }
 
-    HotKey.prototype.onKeyDown = function (ev) {
+    HotKey.prototype.onKeyDown = function(ev) {
         if (this.testConditions(ev)) {
             if (this.options.hotkeyVisible && !this.$el.is(':visible')) {
                 return
@@ -181,7 +180,7 @@
         hotkey: null,
         hotkeyTarget: 'html',
         hotkeyVisible: true,
-        callback: function (element) {
+        callback: function(element) {
             element.trigger('click')
             return false
         }
@@ -199,12 +198,8 @@
             var $this   = $(this)
             var data    = $this.data('oc.hotkey')
             var options = $.extend({}, HotKey.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.hotkey', (data = new HotKey(this, options)))
-                if (typeof option == 'string') {
-                    data[option].apply(data, args)
-                }
-            }
+            if (!data) $this.data('oc.hotkey', (data = new HotKey(this, options)))
+            if (typeof option == 'string') data[option].apply(data, args)
         })
     }
 
@@ -221,7 +216,7 @@
     // HOTKEY DATA-API
     // ==============
 
-    $(document).render(function () {
+    $(document).render(function() {
         $('[data-hotkey]').hotKey()
     })
 

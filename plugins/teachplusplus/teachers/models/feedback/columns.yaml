@@ -1,0 +1,5 @@
+columns:
+    content:
+        label: Feedbacks
+        type: text
+        sortable: true

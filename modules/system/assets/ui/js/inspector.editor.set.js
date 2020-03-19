@@ -3,13 +3,12 @@
  *
  * This class uses $.oc.inspector.propertyEditors.checkbox editor.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.inspector.propertyEditors.base,
         BaseProto = Base.prototype
 
-    var SetEditor = function (inspector, propertyDefinition, containerCell, group) {
+    var SetEditor = function(inspector, propertyDefinition, containerCell, group) {
         this.editors = []
         this.loadedItems = null
 
@@ -19,13 +18,13 @@
     SetEditor.prototype = Object.create(BaseProto)
     SetEditor.prototype.constructor = Base
 
-    SetEditor.prototype.init = function () {
+    SetEditor.prototype.init = function() {
         this.initControlGroup()
 
         BaseProto.init.call(this)
     }
 
-    SetEditor.prototype.dispose = function () {
+    SetEditor.prototype.dispose = function() {
         this.disposeEditors()
         this.disposeControls()
 
@@ -38,7 +37,7 @@
     // Building
     //
 
-    SetEditor.prototype.build = function () {
+    SetEditor.prototype.build = function() {
         var link = document.createElement('a')
 
         $.oc.foundation.element.addClass(link, 'trigger')
@@ -57,7 +56,7 @@
         }
     }
 
-    SetEditor.prototype.loadStaticItems = function () {
+    SetEditor.prototype.loadStaticItems = function() {
         var itemArray = []
 
         for (var itemValue in this.propertyDefinition.items) {
@@ -72,8 +71,8 @@
         }
     }
 
-    SetEditor.prototype.setLinkText = function (link, value) {
-        var value = (value !== undefined && value !== null) ? value
+    SetEditor.prototype.setLinkText = function(link, value) {
+        var value = (value !== undefined && value !== null) ? value 
                 : this.getNormalizedValue(),
             text = '[ ]'
 
@@ -102,12 +101,12 @@
         link.textContent = text
     }
 
-    SetEditor.prototype.buildItemEditor = function (value, text) {
+    SetEditor.prototype.buildItemEditor = function(value, text) {
         var property = {
-            title: text,
-            itemType: 'property',
-            groupIndex: this.group.getGroupIndex()
-        },
+                title: text,
+                itemType: 'property',
+                groupIndex: this.group.getGroupIndex()
+            },
             newRow = this.createGroupedRow(property),
             currentRow = this.containerCell.parentNode,
             tbody = this.containerCell.parentNode.parentNode, // row / tbody
@@ -119,18 +118,18 @@
         tbody.insertBefore(newRow, currentRow.nextSibling)
     }
 
-    SetEditor.prototype.buildCheckbox = function (cell, value, title) {
+    SetEditor.prototype.buildCheckbox = function(cell, value, title) {
         var property = {
-            property: value,
-            title: title,
-            default: this.isCheckedByDefault(value)
-        },
+                property: value,
+                title: title,
+                default: this.isCheckedByDefault(value)
+            },
             editor = new $.oc.inspector.propertyEditors.checkbox(this, property, cell, this.group)
 
         this.editors.push[editor]
     }
 
-    SetEditor.prototype.isCheckedByDefault = function (value) {
+    SetEditor.prototype.isCheckedByDefault = function(value) {
         if (!this.propertyDefinition.default) {
             return false
         }
@@ -142,11 +141,11 @@
     // Dynamic items
     //
 
-    SetEditor.prototype.showLoadingIndicator = function () {
+    SetEditor.prototype.showLoadingIndicator = function() {
         $(this.getLink()).loadIndicator()
     }
 
-    SetEditor.prototype.hideLoadingIndicator = function () {
+    SetEditor.prototype.hideLoadingIndicator = function() {
         if (this.isDisposed()) {
             return
         }
@@ -157,7 +156,7 @@
         $link.loadIndicator('destroy')
     }
 
-    SetEditor.prototype.loadDynamicItems = function () {
+    SetEditor.prototype.loadDynamicItems = function() {
         var link = this.getLink(),
             data = this.inspector.getValues(),
             $form = $(link).closest('form')
@@ -175,7 +174,7 @@
         .always(this.proxy(this.hideLoadingIndicator))
     }
 
-    SetEditor.prototype.itemsRequestDone = function (data, currentValue, initialization) {
+    SetEditor.prototype.itemsRequestDone = function(data, currentValue, initialization) {
         if (this.isDisposed()) {
             // Handle the case when the asynchronous request finishes after
             // the editor is disposed
@@ -199,11 +198,11 @@
     // Helpers
     //
 
-    SetEditor.prototype.getLink = function () {
+    SetEditor.prototype.getLink = function() {
         return this.containerCell.querySelector('a.trigger')
     }
 
-    SetEditor.prototype.getItemsSource = function () {
+    SetEditor.prototype.getItemsSource = function() {
         if (this.propertyDefinition.items !== undefined) {
             return this.propertyDefinition.items
         }
@@ -211,7 +210,7 @@
         return this.loadedItems
     }
 
-    SetEditor.prototype.valueToText = function (value) {
+    SetEditor.prototype.valueToText = function(value) {
         var source = this.getItemsSource()
 
         if (!source) {
@@ -227,11 +226,11 @@
         return value
     }
 
-    /*
+    /* 
      * Removes items that don't exist in the defined items from
      * the value.
      */
-    SetEditor.prototype.cleanUpValue = function (value) {
+    SetEditor.prototype.cleanUpValue = function(value) {
         if (!value) {
             return value
         }
@@ -250,7 +249,7 @@
         return result
     }
 
-    SetEditor.prototype.getNormalizedValue = function () {
+    SetEditor.prototype.getNormalizedValue = function() {
         var value = this.inspector.getPropertyValue(this.propertyDefinition.property)
 
         if (value === null) {
@@ -272,11 +271,11 @@
     // Editor API methods
     //
 
-    SetEditor.prototype.supportsExternalParameterEditor = function () {
+    SetEditor.prototype.supportsExternalParameterEditor = function() {
         return false
     }
 
-    SetEditor.prototype.isGroupedEditor = function () {
+    SetEditor.prototype.isGroupedEditor = function() {
         return true
     }
 
@@ -288,11 +287,11 @@
     // of the Inspector.
     //
 
-    SetEditor.prototype.getPropertyValue = function (checkboxValue) {
+    SetEditor.prototype.getPropertyValue = function(checkboxValue) {
         // When a checkbox requests the property value, we return
         // TRUE if the checkbox value is listed in the current values of
         // the set.
-        // For example, the available set items are [create, update], the
+        // For example, the available set items are [create, update], the 
         // current set value is [create] and checkboxValue is "create".
         // The result of the method will be TRUE.
 
@@ -309,7 +308,7 @@
         return value.indexOf(checkboxValue) > -1
     }
 
-    SetEditor.prototype.setPropertyValue = function (checkboxValue, isChecked) {
+    SetEditor.prototype.setPropertyValue = function(checkboxValue, isChecked) {
         // In this method the Set Editor mimics the Surface.
         // It acts as a parent surface for the children checkboxes,
         // watching changes in them and updating the link text.
@@ -332,7 +331,7 @@
                 if (currentValue.indexOf(itemValue) !== -1) {
                     resultValue.push(itemValue)
                 }
-            }
+            } 
             else {
                 if (isChecked) {
                     resultValue.push(itemValue)
@@ -344,7 +343,7 @@
         this.setLinkText(this.getLink())
     }
 
-    SetEditor.prototype.generateSequencedId = function () {
+    SetEditor.prototype.generateSequencedId = function() {
         return this.inspector.generateSequencedId()
     }
 
@@ -352,7 +351,7 @@
     // Disposing
     //
 
-    SetEditor.prototype.disposeEditors = function () {
+    SetEditor.prototype.disposeEditors = function() {
         for (var i = 0, len = this.editors.length; i < len; i++) {
             var editor = this.editors[i]
 
@@ -360,7 +359,7 @@
         }
     }
 
-    SetEditor.prototype.disposeControls = function () {
+    SetEditor.prototype.disposeControls = function() {
         var link = this.getLink()
 
         if (this.propertyDefinition.items === undefined) {

@@ -1,20 +1,19 @@
 /*
  * Inspector float validator.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.inspector.validators.baseNumber,
         BaseProto = Base.prototype
 
-    var FloatValidator = function (options) {
+    var FloatValidator = function(options) {
         Base.call(this, options)
     }
 
     FloatValidator.prototype = Object.create(BaseProto)
     FloatValidator.prototype.constructor = Base
 
-    FloatValidator.prototype.isValid = function (value) {
+    FloatValidator.prototype.isValid = function(value) {
         if (!this.isScalar(value) || typeof value == 'boolean') {
             this.throwError('The Float Inspector validator can only be used with string values.')
         }
@@ -29,8 +28,8 @@
             return null
         }
 
-        var testResult = this.options.allowNegative ?
-            /^[-]?([0-9]+\.[0-9]+|[0-9]+)$/.test(string) :
+        var testResult = this.options.allowNegative ? 
+            /^[-]?([0-9]+\.[0-9]+|[0-9]+)$/.test(string) : 
             /^([0-9]+\.[0-9]+|[0-9]+)$/.test(string)
 
         if (!testResult) {

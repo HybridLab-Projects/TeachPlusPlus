@@ -1,0 +1,12 @@
+fields:
+    content:
+        label: Content
+        span: auto
+        size: ''
+        type: richeditor
+    teachers:
+        label: 'teachplusplus.teachers::lang.plugin.name'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation

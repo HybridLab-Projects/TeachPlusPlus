@@ -57,7 +57,8 @@
         <button type="button" class="btn btn-primary" data-action="submit" data-dismiss="modal">' + open + '</button>  \
         <button type="button" class="btn btn-default" data-dismiss="popup">' + cancel + '</button>                     \
     </div>                                                                                                             \
-</div>'),
+</div>'
+                ),
                 select = $('select', popup)
 
             for (var key in ExceptionBeautifier.EDITORS) {

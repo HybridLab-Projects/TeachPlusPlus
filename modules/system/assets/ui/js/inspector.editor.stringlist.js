@@ -1,21 +1,20 @@
 /*
  * Inspector string list editor class.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.inspector.propertyEditors.text,
         BaseProto = Base.prototype
 
-    var StringListEditor = function (inspector, propertyDefinition, containerCell, group) {
+    var StringListEditor = function(inspector, propertyDefinition, containerCell, group) {
         Base.call(this, inspector, propertyDefinition, containerCell, group)
     }
 
     StringListEditor.prototype = Object.create(BaseProto)
     StringListEditor.prototype.constructor = Base
 
-    StringListEditor.prototype.setLinkText = function (link, value) {
-        var value = value !== undefined ? value
+    StringListEditor.prototype.setLinkText = function(link, value) {
+        var value = value !== undefined ? value 
                 : this.inspector.getPropertyValue(this.propertyDefinition.property)
 
         if (value === undefined) {
@@ -33,7 +32,7 @@
             }
 
             link.textContent = value
-        }
+        } 
         else {
             $.oc.foundation.element.removeClass(link, 'placeholder')
     
@@ -41,13 +40,13 @@
         }
     }
 
-    StringListEditor.prototype.checkValueType = function (value) {
+    StringListEditor.prototype.checkValueType = function(value) {
         if (value && Object.prototype.toString.call(value) !== '[object Array]') {
             this.throwError('The string list value should be an array.')
         }
     }
 
-    StringListEditor.prototype.configurePopup = function (popup) {
+    StringListEditor.prototype.configurePopup = function(popup) {
         var $textarea = $(popup).find('textarea'),
             value = this.inspector.getPropertyValue(this.propertyDefinition.property)
 
@@ -70,7 +69,7 @@
         this.configureComment(popup)
     }
 
-    StringListEditor.prototype.handleSubmit = function ($form) {
+    StringListEditor.prototype.handleSubmit = function($form) {
         var $textarea = $form.find('textarea'),
             link = this.getLink(),
             value = $.trim($textarea.val()),

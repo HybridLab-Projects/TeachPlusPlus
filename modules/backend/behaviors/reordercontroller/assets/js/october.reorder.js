@@ -5,10 +5,9 @@
  * - Simple sorting: Post back the original sort orders and the new ordered identifiers.
  * - Nested sorting: Post back source and target nodes IDs and the move positioning.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
-    var ReorderBehavior = function () {
+    var ReorderBehavior = function() {
 
         this.sortMode = null
 
@@ -25,7 +24,7 @@
         }
 
 
-        this.processReorder = function (ev, sortData) {
+        this.processReorder = function(ev, sortData){
             var postData
 
             if (this.sortMode == 'simple') {
@@ -48,7 +47,7 @@
                     targetNode: 0,
                     sourceNode: $item.data('recordId'),
                     position: 'root'
-            }
+                }
 
             if (($el = $item.next()) && $el.length) {
                 moveData.position = 'before'
@@ -70,7 +69,7 @@
         this.initSortingSimple = function () {
             var sortOrders = []
 
-            $('#reorderTreeList li').each(function () {
+            $('#reorderTreeList li').each(function(){
                 sortOrders.push($(this).data('recordSortOrder'))
             })
 

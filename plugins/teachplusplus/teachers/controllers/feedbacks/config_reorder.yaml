@@ -1,0 +1,4 @@
+title: Feedbacks
+modelClass: Teachplusplus\Teachers\Models\Feedback
+toolbar:
+    buttons: reorder_toolbar

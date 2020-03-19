@@ -8,7 +8,7 @@
  * $.oc.cursorLoadIndicator.hide()
  *
  * By default if the show() method has been called several times, the hide() method should be
- * called the same number of times in order to hide the cursor. Use hide(true) to hide the
+ * called the same number of times in order to hide the cursor. Use hide(true) to hide the 
  * indicator forcibly.
  *
  * The event parameter in the show() method is optional. If it is passed, the initial cursor position
@@ -17,34 +17,29 @@
  * Require:
  *  - modernizr/modernizr
  */
-+function ($) {
-    "use strict";
-    if ($.oc === undefined) {
++function ($) { "use strict";
+    if ($.oc === undefined)
         $.oc = {}
 
-        var CursorLoadIndicator = function () {
-            if (Modernizr.touchevents) {
-                return
-
-                this.counter = 0
-                this.indicator = $('<div/>').addClass('cursor-loading-indicator').addClass('hide')
-                $(document.body).append(this.indicator)
-            }
-        }
-    }
-
-    CursorLoadIndicator.prototype.show = function (event) {
-        if (Modernizr.touchevents) {
+    var CursorLoadIndicator = function () {
+        if (Modernizr.touchevents)
             return
 
-            this.counter++
+        this.counter = 0
+        this.indicator = $('<div/>').addClass('cursor-loading-indicator').addClass('hide')
+        $(document.body).append(this.indicator)
+    }
 
-            if (this.counter > 1) {
-                return
+    CursorLoadIndicator.prototype.show = function(event) {
+        if (Modernizr.touchevents)
+            return
 
-                var self = this;
-            }
-        }
+        this.counter++
+
+        if (this.counter > 1)
+            return
+
+        var self = this;
 
         if (event !== undefined && event.clientY !== undefined) {
             self.indicator.css({
@@ -54,7 +49,7 @@
         }
 
         this.indicator.removeClass('hide')
-        $(window).on('mousemove.cursorLoadIndicator', function (e) {
+        $(window).on('mousemove.cursorLoadIndicator', function(e){
             self.indicator.css({
                 left: e.clientX + 15,
                 top: e.clientY + 15,
@@ -62,23 +57,21 @@
         })
     }
 
-    CursorLoadIndicator.prototype.hide = function (force) {
-        if (Modernizr.touchevents) {
+    CursorLoadIndicator.prototype.hide = function(force) {
+        if (Modernizr.touchevents)
             return
 
-            this.counter--
-            if (force !== undefined && force) {
-                this.counter = 0
+        this.counter--
+        if (force !== undefined && force)
+            this.counter = 0
 
-                if (this.counter <= 0) {
-                    this.indicator.addClass('hide')
-                    $(window).off('.cursorLoadIndicator');
-                }
-            }
+        if (this.counter <= 0) {
+            this.indicator.addClass('hide')
+            $(window).off('.cursorLoadIndicator');
         }
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         $.oc.cursorLoadIndicator = new CursorLoadIndicator();
     })
 
@@ -86,9 +79,9 @@
     // ==============
     
     $(document)
-        .on('ajaxPromise', '[data-cursor-load-indicator]', function () {
+        .on('ajaxPromise', '[data-cursor-load-indicator]', function() {
             $.oc.cursorLoadIndicator.show()
-        }).on('ajaxFail ajaxDone', '[data-cursor-load-indicator]', function () {
+        }).on('ajaxFail ajaxDone', '[data-cursor-load-indicator]', function() {
             $.oc.cursorLoadIndicator.hide()
         })
 

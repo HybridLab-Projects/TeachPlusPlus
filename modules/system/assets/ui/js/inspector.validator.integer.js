@@ -1,20 +1,19 @@
 /*
  * Inspector integer validator.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.inspector.validators.baseNumber,
         BaseProto = Base.prototype
 
-    var IntegerValidator = function (options) {
+    var IntegerValidator = function(options) {
         Base.call(this, options)
     }
 
     IntegerValidator.prototype = Object.create(BaseProto)
     IntegerValidator.prototype.constructor = Base
 
-    IntegerValidator.prototype.isValid = function (value) {
+    IntegerValidator.prototype.isValid = function(value) {
         if (!this.isScalar(value) || typeof value == 'boolean') {
             this.throwError('The Integer Inspector validator can only be used with string values.')
         }
@@ -29,8 +28,8 @@
             return null
         }
 
-        var testResult = this.options.allowNegative ?
-            /^\-?[0-9]*$/.test(string) :
+        var testResult = this.options.allowNegative ? 
+            /^\-?[0-9]*$/.test(string) : 
             /^[0-9]*$/.test(string)
 
         if (!testResult) {

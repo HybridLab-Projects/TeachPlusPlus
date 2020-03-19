@@ -12,3 +12,12 @@
 1.0.5:
     - 'Created table teachplusplus_teachers_teachers_subjects'
     - builder_table_create_teachplusplus_teachers_teachers_subjects.php
+1.0.6:
+    - 'Created table teachplusplus_teachers_feedback'
+    - builder_table_create_teachplusplus_teachers_feedback.php
+1.0.7:
+    - 'Updated table teachplusplus_teachers_feedback'
+    - builder_table_update_teachplusplus_teachers_feedbacks.php
+1.0.8:
+    - 'Created table teachplusplus_teachers_feedbacks_teachers'
+    - builder_table_create_teachplusplus_teachers_feedbacks_teachers.php

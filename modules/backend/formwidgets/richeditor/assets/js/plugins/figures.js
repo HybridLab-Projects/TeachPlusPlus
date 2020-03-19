@@ -9,8 +9,7 @@
         /**
          * Insert UI Blocks
          */
-        function insertElement($el)
-        {
+        function insertElement($el) {
             var html = $('<div />').append($el.clone()).remove().html()
 
             // Make sure we have focus.
@@ -21,7 +20,7 @@
             editor.html.cleanEmptyTags()
 
             // Clean up wrapping paragraphs or empty paragraphs
-            $('figure', editor.$el).each(function () {
+            $('figure', editor.$el).each(function() {
                 var $this = $(this),
                     $parent = $this.parent('p'),
                     $next = $this.next('p')
@@ -31,7 +30,7 @@
                     $this.insertAfter($parent)
                 }
 
-                // Inserting a figure tag will put an empty paragraph tag
+                // Inserting a figure tag will put an empty paragraph tag 
                 // directly after it, strip these instances out
                 if (!!$next.length && $.trim($next.text()).length == 0) {
                     $next.remove()
@@ -41,8 +40,7 @@
             editor.undo.saveStep()
         }
 
-        function _makeUiBlockElement()
-        {
+        function _makeUiBlockElement() {
             var $node = $('<figure contenteditable="false" tabindex="0" data-ui-block="true">&nbsp;</figure>')
 
             $node.get(0).contentEditable = false
@@ -50,8 +48,7 @@
             return $node
         }
 
-        function insertVideo(url, text)
-        {
+        function insertVideo(url, text) {
             var $node = _makeUiBlockElement()
 
             $node.attr('data-video', url)
@@ -60,8 +57,7 @@
             insertElement($node)
         }
 
-        function insertAudio(url, text)
-        {
+        function insertAudio(url, text) {
             var $node = _makeUiBlockElement()
 
             $node.attr('data-audio', url)
@@ -73,9 +69,8 @@
         /**
          * Init UI Blocks
          */
-        function _initUiBlocks()
-        {
-            $('[data-video], [data-audio]', editor.$el).each(function () {
+        function _initUiBlocks () {
+            $('[data-video], [data-audio]', editor.$el).each(function() {
                 $(this)
                     .addClass('fr-draggable')
                     .attr({
@@ -89,8 +84,7 @@
             })
         }
 
-        function _handleUiBlocksKeydown(ev)
-        {
+        function _handleUiBlocksKeydown(ev) {
             if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp' || ev.key === 'Backspace' || ev.key === 'Delete') {
                 var $block = $(editor.selection.element())
                 if ($block.is('br')) {
@@ -116,8 +110,7 @@
             }
         }
 
-        function _handleUiBlockCaretClearEmpty($block, $p)
-        {
+        function _handleUiBlockCaretClearEmpty($block, $p) {
             if ($block.attr('data-ui-block') !== undefined && $.trim($p.text()).length == 0) {
                 $p.remove()
                 _handleUiBlockCaretIn($block)
@@ -125,8 +118,7 @@
             }
         }
 
-        function _handleUiBlockCaretIn($block)
-        {
+        function _handleUiBlockCaretIn($block) {
             if ($block.attr('data-ui-block') !== undefined) {
                 $block.focus()
                 editor.selection.clear()
@@ -136,8 +128,7 @@
             return false
         }
 
-        function _uiBlockKeyDown(ev, block)
-        {
+        function _uiBlockKeyDown(ev, block) {
             if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp' || ev.key === 'Enter' || ev.key === 'Backspace' || ev.key === 'Delete') {
                 switch (ev.key) {
                     case 'ArrowDown':
@@ -174,8 +165,7 @@
             }
         }
 
-        function _focusUiBlockOrText($block, gotoStart)
-        {
+        function _focusUiBlockOrText($block, gotoStart) {
             if (!!$block.length) {
                 if (!_handleUiBlockCaretIn($block)) {
                     if (gotoStart) {
@@ -193,8 +183,7 @@
         /**
          * Keydown
          */
-        function _onKeydown(ev)
-        {
+        function _onKeydown (ev) {
             _handleUiBlocksKeydown(ev)
 
             if (ev.isDefaultPrevented()) {
@@ -202,8 +191,7 @@
             }
         }
 
-        function _onFigureKeydown(ev)
-        {
+        function _onFigureKeydown(ev) {
             if (ev.target && $(ev.target).attr('data-ui-block') !== undefined) {
                 _uiBlockKeyDown(ev, ev.target)
             }
@@ -216,11 +204,10 @@
         /**
          * Sync
          */
-        function _onSync(html)
-        {
+        function _onSync(html) {
             var $domTree = $('<div>' + html + '</div>')
 
-            $domTree.find('[data-video], [data-audio]').each(function () {
+            $domTree.find('[data-video], [data-audio]').each(function(){
                 $(this)
                     .removeAttr('contenteditable data-ui-block tabindex draggable')
                     .removeClass('fr-draggable fr-dragging')
@@ -232,8 +219,7 @@
         /**
          * Init.
          */
-        function _init()
-        {
+        function _init () {
             editor.events.on('initialized', _initUiBlocks)
 
             editor.events.on('html.set', _initUiBlocks)
@@ -250,8 +236,7 @@
         /**
          * Destroy.
          */
-        function _destroy()
-        {
+        function _destroy () {
             editor.$el.off('keydown', 'figure', _onFigureKeydown)
         }
 

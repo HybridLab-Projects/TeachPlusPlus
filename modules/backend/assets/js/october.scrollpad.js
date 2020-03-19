@@ -1,13 +1,13 @@
 /*
  * ScrollPad plugin.
  *
- * This plugin creates a scrollable area with features similar (but more limited)
- * to october.scrollbar.js, with virtual scroll bars. This plugin is more lightweight
+ * This plugin creates a scrollable area with features similar (but more limited) 
+ * to october.scrollbar.js, with virtual scroll bars. This plugin is more lightweight 
  * in terms of calculations and more responsive. It doesn't use scripting for scrolling,
- * instead it uses the native scrolling and listens for the onscroll event to update
+ * instead it uses the native scrolling and listens for the onscroll event to update 
  * the virtual scroll bars.
  *
- * The plugin is partially based on Trackpad Scroll Emulator
+ * The plugin is partially based on Trackpad Scroll Emulator 
  * https://github.com/jnicol/trackpad-scroll-emulator, cleaned up for the better CPU and
  * memory (DOM references) management.
  *
@@ -15,12 +15,12 @@
  * <div class="control-scrollpad" data-control="scrollpad" data-direction="vertical">
  *     <div>
  *         <div>
- *             The content goes here. The two wrapping
+ *             The content goes here. The two wrapping 
  *             DIV elements are required.
  *         </div>
  *     </div>
  * </div>
- *
+ * 
  * Data attributes:
  * - data-control="scrollpad" - enables the plugin.
  * - data-direction="vertical|horizontal" - sets the scrolling direction.
@@ -36,8 +36,7 @@
  * instead of negative margins.
  *
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -45,7 +44,7 @@
     // SCROLLPAD CLASS DEFINITION
     // ============================
 
-    var Scrollpad = function (element, options) {
+    var Scrollpad = function(element, options) {
         this.$el = $(element)
         this.scrollbarElement = null
         this.dragHandleElement = null
@@ -70,7 +69,7 @@
     Scrollpad.prototype = Object.create(BaseProto)
     Scrollpad.prototype.constructor = Scrollpad
 
-    Scrollpad.prototype.dispose = function () {
+    Scrollpad.prototype.dispose = function() {
         this.unregisterHandlers()
 
         this.$el.get(0).removeChild(this.scrollbarElement)
@@ -85,25 +84,25 @@
         BaseProto.dispose.call(this)
     }
 
-    Scrollpad.prototype.scrollToStart = function () {
+    Scrollpad.prototype.scrollToStart = function() {
         var scrollAttr = this.options.direction == 'vertical' ? 'scrollTop' : 'scrollLeft'
         this.scrollContentElement[scrollAttr] = 0
     }
 
-    Scrollpad.prototype.update = function () {
+    Scrollpad.prototype.update = function() {
         this.updateScrollbarSize()
     }
 
     // SCROLLPAD INTERNAL METHODS
     // ============================
 
-    Scrollpad.prototype.init = function () {
+    Scrollpad.prototype.init = function() {
         this.build()
         this.setScrollContentSize()
         this.registerHandlers()
     }
 
-    Scrollpad.prototype.build = function () {
+    Scrollpad.prototype.build = function() {
         var el = this.$el.get(0)
 
         this.scrollContentElement = el.children[0]
@@ -113,7 +112,7 @@
         this.dragHandleElement = el.querySelector('.scrollpad-scrollbar > .drag-handle')
     }
 
-    Scrollpad.prototype.registerHandlers = function () {
+    Scrollpad.prototype.registerHandlers = function() {
         this.$el.on('mouseenter', this.proxy(this.onMouseEnter))
         this.$el.on('mouseleave', this.proxy(this.onMouseLeave))
 
@@ -123,7 +122,7 @@
         this.dragHandleElement.addEventListener('mousedown', this.proxy(this.onStartDrag))
     }
 
-    Scrollpad.prototype.unregisterHandlers = function () {
+    Scrollpad.prototype.unregisterHandlers = function() {
         this.$el.off('mouseenter', this.proxy(this.onMouseEnter))
         this.$el.off('mouseleave', this.proxy(this.onMouseLeave))
         this.$el.off('dispose-control', this.proxy(this.dispose))
@@ -134,43 +133,39 @@
         document.removeEventListener('mouseup', this.proxy(this.onEndDrag))
     }
 
-    Scrollpad.prototype.setScrollContentSize = function () {
+    Scrollpad.prototype.setScrollContentSize = function() {
         var scrollbarSize = this.getScrollbarSize()
 
-        if (this.options.direction == 'vertical') {
+        if (this.options.direction == 'vertical')
             this.scrollContentElement.setAttribute('style', 'margin-right: -' + scrollbarSize + 'px')
-            else {
-                this.scrollContentElement.setAttribute('style', 'margin-bottom: -' + scrollbarSize + 'px')
-            }
-        }
+        else
+            this.scrollContentElement.setAttribute('style', 'margin-bottom: -' + scrollbarSize + 'px')
     }
 
-    Scrollpad.prototype.getScrollbarSize = function () {
-        if (this.scrollbarSize !== null) {
+    Scrollpad.prototype.getScrollbarSize = function() {
+        if (this.scrollbarSize !== null)
             return this.scrollbarSize
 
-            var testerElement = document.createElement('div')
-            testerElement.setAttribute('class', 'scrollpad-scrollbar-size-tester')
-            testerElement.appendChild(document.createElement('div'))
+        var testerElement = document.createElement('div')
+        testerElement.setAttribute('class', 'scrollpad-scrollbar-size-tester')
+        testerElement.appendChild(document.createElement('div'))
 
-            document.body.appendChild(testerElement)
+        document.body.appendChild(testerElement)
 
-            var width = testerElement.offsetWidth,
+        var width = testerElement.offsetWidth,
             innerWidth = testerElement.querySelector('div').offsetWidth
 
-            document.body.removeChild(testerElement)
+        document.body.removeChild(testerElement)
 
-        // Some magic for FireFox, see
+        // Some magic for FireFox, see 
         // https://github.com/jnicol/trackpad-scroll-emulator/blob/master/jquery.trackpad-scroll-emulator.js
-            if (width === innerWidth && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-                return this.scrollbarSize = 17
+        if (width === innerWidth && navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
+            return this.scrollbarSize = 17
 
-                return this.scrollbarSize = width - innerWidth
-            }
-        }
+        return this.scrollbarSize = width - innerWidth
     }
 
-    Scrollpad.prototype.updateScrollbarSize = function () {
+    Scrollpad.prototype.updateScrollbarSize = function() {
         this.scrollbarElement.removeAttribute('data-hidden')
 
         var contentSize = this.options.direction == 'vertical' ? this.contentElement.scrollHeight : this.contentElement.scrollWidth,
@@ -181,59 +176,55 @@
             handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
         if (scrollbarSize < contentSize) {
-            if (this.options.direction == 'vertical') {
+            if (this.options.direction == 'vertical')
                 this.dragHandleElement.setAttribute('style', 'top: ' + handleOffset + 'px; height: ' + handleSize + 'px')
-                else {
-                    this.dragHandleElement.setAttribute('style', 'left: ' + handleOffset + 'px; width: ' + handleSize + 'px')
+            else
+                this.dragHandleElement.setAttribute('style', 'left: ' + handleOffset + 'px; width: ' + handleSize + 'px')
 
-                    this.scrollbarElement.removeAttribute('data-hidden')
-                }
-            }
-        } else {
-            this.scrollbarElement.setAttribute('data-hidden', true)
+            this.scrollbarElement.removeAttribute('data-hidden')
         }
+        else
+            this.scrollbarElement.setAttribute('data-hidden', true)
     }
 
-    Scrollpad.prototype.displayScrollbar = function () {
+    Scrollpad.prototype.displayScrollbar = function() {
         this.clearUpdateScrollbarTimer()
 
         this.updateScrollbarSize()
         this.scrollbarElement.setAttribute('data-visible', 'true')
     }
 
-    Scrollpad.prototype.hideScrollbar = function () {
+    Scrollpad.prototype.hideScrollbar = function() {
         this.scrollbarElement.removeAttribute('data-visible')
     }
 
-    Scrollpad.prototype.clearUpdateScrollbarTimer = function () {
-        if (this.updateScrollbarTimer === null) {
+    Scrollpad.prototype.clearUpdateScrollbarTimer = function() {
+        if (this.updateScrollbarTimer === null)
             return
 
-            clearTimeout(this.updateScrollbarTimer)
-            this.updateScrollbarTimer = null
-        }
+        clearTimeout(this.updateScrollbarTimer)
+        this.updateScrollbarTimer = null
     }
 
     // EVENT HANDLERS
     // ============================
 
-    Scrollpad.prototype.onMouseEnter = function () {
+    Scrollpad.prototype.onMouseEnter = function() {
         this.displayScrollbar()
     }
 
-    Scrollpad.prototype.onMouseLeave = function () {
+    Scrollpad.prototype.onMouseLeave = function() {
         this.hideScrollbar()
     }
 
-    Scrollpad.prototype.onScroll = function () {
-        if (this.updateScrollbarTimer !== null) {
+    Scrollpad.prototype.onScroll = function() {
+        if (this.updateScrollbarTimer !== null)
             return
 
-            this.updateScrollbarTimer = setTimeout(this.proxy(this.displayScrollbar), 10)
-        }
+        this.updateScrollbarTimer = setTimeout(this.proxy(this.displayScrollbar), 10) 
     }
 
-    Scrollpad.prototype.onStartDrag = function (ev) {
+    Scrollpad.prototype.onStartDrag = function(ev) {
         $.oc.foundation.event.stop(ev)
         
         var pageCoords = $.oc.foundation.event.pageCoordinates(ev),
@@ -247,7 +238,7 @@
         document.addEventListener('mouseup', this.proxy(this.onEndDrag))
     }
 
-    Scrollpad.prototype.onMouseMove = function (ev) {
+    Scrollpad.prototype.onMouseMove = function(ev) {
         $.oc.foundation.event.stop(ev)
 
         var eventCoordsAttr = this.options.direction == 'vertical' ? 'y' : 'x',
@@ -262,16 +253,15 @@
             contentSize = this.contentElement[offsetAttr],
             dragPerc = dragPos / scrollbarSize
 
-        if (dragPerc > 1) {
+        if (dragPerc > 1)
             dragPerc = 1
 
-            var scrollPos = dragPerc * contentSize;
-        }
+        var scrollPos = dragPerc * contentSize;
 
         this.scrollContentElement[scrollAttr] = scrollPos
     }
     
-    Scrollpad.prototype.onEndDrag = function (ev) {
+    Scrollpad.prototype.onEndDrag = function(ev) {
         document.removeEventListener('mousemove', this.proxy(this.onMouseMove))
         document.removeEventListener('mouseup', this.proxy(this.onEndDrag))
     }
@@ -286,22 +276,16 @@
     var old = $.fn.scrollpad
 
     $.fn.scrollpad = function (option) {
-        var args = Array.prototype.slice.call(arguments, 1),
+        var args = Array.prototype.slice.call(arguments, 1), 
             result = undefined
 
         this.each(function () {
             var $this   = $(this)
             var data    = $this.data('oc.scrollpad')
             var options = $.extend({}, Scrollpad.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.scrollpad', (data = new Scrollpad(this, options)))
-                if (typeof option == 'string') {
-                    result = data[option].apply(data, args)
-                    if (typeof result != 'undefined') {
-                        return false
-                    }
-                }
-            }
+            if (!data) $this.data('oc.scrollpad', (data = new Scrollpad(this, options)))
+            if (typeof option == 'string') result = data[option].apply(data, args)
+            if (typeof result != 'undefined') return false
         })
         
         return result ? result : this
@@ -320,7 +304,7 @@
     // SCROLLPAD DATA-API
     // ===============
 
-    $(document).on('render', function () {
+    $(document).on('render', function(){
         $('div[data-control=scrollpad]').scrollpad()
     })
 }(window.jQuery);

@@ -12,13 +12,12 @@
  * Dependences:
  * - Raphaël (raphael-min.js)
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var BarChart = function (element, options) {
         this.options = options || {}
 
-        var
+        var 
             $el = this.$el = $(element),
             size = this.size = $el.height(),
             self = this,
@@ -34,7 +33,7 @@
         $el.prepend($canvas)
         $el.toggleClass('full-width', isFullWidth)
 
-        Raphael($canvas.get(0), isFullWidth ? '100%' : chartWidth, chartHeight, function () {
+        Raphael($canvas.get(0), isFullWidth ? '100%' : chartWidth, chartHeight, function(){
             self.paper = this
             self.bars = this.set()
 
@@ -51,29 +50,26 @@
             }
 
             // Add bars
-                var start = 0
-                $.each(values.values, function (index, valueInfo) {
-                    var color = valueInfo.color !== undefined ? valueInfo.color : $.oc.chartUtils.getColor(index),
+            var start = 0
+            $.each(values.values, function(index, valueInfo) {
+                var color = valueInfo.color !== undefined ? valueInfo.color : $.oc.chartUtils.getColor(index),
                     path = self.paper.path().attr({"stroke-width": 0}).attr({bar: [start, 0]}).attr({fill: color})
 
-                    self.bars.push(path)
-                    indicators[index].css('background-color', color)
-                    start += barWidth + self.options.gap
+                self.bars.push(path)
+                indicators[index].css('background-color', color)
+                start += barWidth + self.options.gap
 
-                    path.hover(function (ev) {
-                        $.oc.chartUtils.showTooltip(
-                            ev.pageX,
-                            ev.pageY,
-                            $.trim($.oc.chartUtils.getLegendLabel($legend, index)) + ': <strong>'+valueInfo.value+'</stong>'
-                        )
-                    }, function () {
-                        $.oc.chartUtils.hideTooltip()
-                    })
+                path.hover(function(ev){
+                    $.oc.chartUtils.showTooltip(ev.pageX, ev.pageY, 
+                        $.trim($.oc.chartUtils.getLegendLabel($legend, index)) + ': <strong>'+valueInfo.value+'</stong>')
+                }, function() {
+                    $.oc.chartUtils.hideTooltip()
                 })
+            })
 
             // Animate bars
             start = 0
-            $.each(values.values, function (index, valueInfo) {
+            $.each(values.values, function(index, valueInfo) {
                 var height = (values.max && valueInfo.value) ? chartHeight/values.max * valueInfo.value : 0
 
                 self.bars[index].animate({bar: [start, height]}, 1000, "bounce")
@@ -82,12 +78,12 @@
 
             // Update the full-width chart when the window is redized
             if (isFullWidth) {
-                $(window).on('resize', function () {
+                $(window).on('resize', function(){
                     chartWidth = self.$el.width()
                     barWidth = (chartWidth - (values.values.length-1)*self.options.gap)/values.values.length
 
                     var start = 0
-                    $.each(values.values, function (index, valueInfo) {
+                    $.each(values.values, function(index, valueInfo) {
                         var height = (values.max && valueInfo.value) ? chartHeight/values.max * valueInfo.value : 0
 
                         self.bars[index].animate({bar: [start, height]}, 10, "bounce")
@@ -98,7 +94,7 @@
         })
     }
 
-    BarChart.prototype.isFullWidth = function () {
+    BarChart.prototype.isFullWidth = function() {
         return this.options.fullWidth !== undefined && this.options.fullWidth
     }
 
@@ -117,9 +113,8 @@
             var data  = $this.data('oc.barChart')
             var options = $.extend({}, BarChart.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) {
+            if (!data)
                 $this.data('oc.barChart', new BarChart(this, options))
-            }
         })
     }
 

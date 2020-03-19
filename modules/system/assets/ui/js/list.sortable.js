@@ -1,6 +1,6 @@
 /*
  * Sortable plugin.
- *
+ * 
  * Status: experimental. The behavior is not perfect, but it's OK in terms of memory
  * usage and disposing.
  *
@@ -8,7 +8,7 @@
  * functionality. The plugin uses only HTML5 Drag&Drop feature and completely
  * disposable.
  *
- * During the dragging the plugin creates a placeholder element, which should be
+ * During the dragging the plugin creates a placeholder element, which should be 
  * styled separately.
  *
  * Draggable elements should be marked with "draggable" HTML5 attribute.
@@ -18,7 +18,7 @@
  * [x] Sorting a single list.
  * [ ] Dragging items between multiple lists.
  * [ ] Sorting nested lists.
-
+ 
  * JAVASCRIPT API
  *
  * $('#list').listSortable({})
@@ -29,7 +29,7 @@
  * <ul data-control="list-sortable">
  *     <li draggable="true">...</li>
  *
- * Multiple lists will not support this option and the plugin should be created
+ * Multiple lists will not support this option and the plugin should be created 
  * and updated by a caller code.
  *
  * Options:
@@ -40,8 +40,7 @@
  * - dragged.list.sortable - triggered on a list element after it was moved
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype,
@@ -71,7 +70,7 @@
         this.listSortableId = 'listsortable/id/' + listSortableIdCounter
     }
 
-    ListSortable.prototype.addList = function (list) {
+    ListSortable.prototype.addList = function(list) {
         this.lists.push(list)
         this.registerListHandlers(list)
 
@@ -84,7 +83,7 @@
     // Event management
     //
 
-    ListSortable.prototype.registerListHandlers = function (list) {
+    ListSortable.prototype.registerListHandlers = function(list) {
         var $list = $(list)
 
         $list.on('dragstart', '> li', this.proxy(this.onDragStart))
@@ -95,7 +94,7 @@
         $list.on('dragend', '> li', this.proxy(this.onDragEnd))
     }
 
-    ListSortable.prototype.unregisterListHandlers = function (list) {
+    ListSortable.prototype.unregisterListHandlers = function(list) {
         var $list = $(list)
 
         $list.off('dragstart', '> li', this.proxy(this.onDragStart))
@@ -106,7 +105,7 @@
         $list.off('dragend', '> li', this.proxy(this.onDragEnd))
     }
 
-    ListSortable.prototype.unregisterHandlers = function () {
+    ListSortable.prototype.unregisterHandlers = function() {
         $(document).off('dragover', this.proxy(this.onDocumentDragOver))
         $(document).off('mousemove', this.proxy(this.onDocumentMouseMove))
         $(this.lists[0]).off('dispose-control', this.proxy(this.dispose))
@@ -116,7 +115,7 @@
     // Disposing
     //
 
-    ListSortable.prototype.unbindLists = function () {
+    ListSortable.prototype.unbindLists = function() {
         for (var i=this.lists.length-1; i>0; i--) {
             var list = this.lists[i]
 
@@ -125,7 +124,7 @@
         }
     }
 
-    ListSortable.prototype.dispose = function () {
+    ListSortable.prototype.dispose = function() {
         this.unbindLists()
         this.unregisterHandlers()
 
@@ -139,7 +138,7 @@
     // Internal helpers
     //
 
-    ListSortable.prototype.elementBelongsToManagedList = function (element) {
+    ListSortable.prototype.elementBelongsToManagedList = function(element) {
         for (var i=this.lists.length-1; i >= 0; i--) {
             var list = this.lists[i],
                 children = [].slice.call(list.children); // Converts HTMLCollection to array
@@ -152,18 +151,18 @@
         return false
     }
 
-    ListSortable.prototype.isDragStartAllowed = function (element) {
-        // TODO: if handle selector is specified - test if
+    ListSortable.prototype.isDragStartAllowed = function(element) {
+        // TODO: if handle selector is specified - test if 
         // the element is a handle.
 
         return true
     }
 
-    ListSortable.prototype.elementIsPlaceholder = function (element) {
+    ListSortable.prototype.elementIsPlaceholder = function(element) {
         return element.getAttribute('class') === 'list-sortable-placeholder'
     }
 
-    ListSortable.prototype.getElementSortableId = function (element) {
+    ListSortable.prototype.getElementSortableId = function(element) {
         if (element.hasAttribute('data-list-sortable-element-id')) {
             return element.getAttribute('data-list-sortable-element-id')
         }
@@ -176,21 +175,21 @@
         return elementsIdCounter
     }
 
-    ListSortable.prototype.dataTransferContains = function (ev, element) {
-        if (ev.dataTransfer.types.indexOf !== undefined) {
+    ListSortable.prototype.dataTransferContains = function(ev, element) {
+        if (ev.dataTransfer.types.indexOf !== undefined){
             return ev.dataTransfer.types.indexOf(element) >= 0
         }
 
         return ev.dataTransfer.types.contains(element)
     }
 
-    ListSortable.prototype.isSourceManagedList = function (ev) {
+    ListSortable.prototype.isSourceManagedList = function(ev) {
         return this.dataTransferContains(ev, this.listSortableId)
     }
 
-    ListSortable.prototype.removePlaceholders = function () {
+    ListSortable.prototype.removePlaceholders = function() {
         for (var i=this.lists.length-1; i >= 0; i--) {
-            var list = this.lists[i],
+            var list = this.lists[i], 
                 placeholders = list.querySelectorAll('.list-sortable-placeholder')
 
             for (var j=placeholders.length-1; j >= 0; j--) {
@@ -199,7 +198,7 @@
         }
     }
 
-    ListSortable.prototype.createPlaceholder = function (element, ev) {
+    ListSortable.prototype.createPlaceholder = function(element, ev) {
         var placeholder = document.createElement('li'),
             placement = this.getPlaceholderPlacement(element, ev)
 
@@ -216,7 +215,7 @@
         }
     }
 
-    ListSortable.prototype.moveElement = function (target, ev) {
+    ListSortable.prototype.moveElement = function(target, ev) {
         var list = target.parentNode,
             placeholder = list.querySelector('.list-sortable-placeholder')
 
@@ -238,7 +237,7 @@
         $(item).trigger('dragged.list.sortable')
     }
 
-    ListSortable.prototype.findDraggedItem = function (elementId) {
+    ListSortable.prototype.findDraggedItem = function(elementId) {
         for (var i=this.lists.length-1; i >= 0; i--) {
             var list = this.lists[i],
                 item = list.querySelector('[data-list-sortable-element-id="'+elementId+'"]')
@@ -251,7 +250,7 @@
         return null
     }
 
-    ListSortable.prototype.getPlaceholderPlacement = function (hoverElement, ev) {
+    ListSortable.prototype.getPlaceholderPlacement = function(hoverElement, ev) {
         var mousePosition = $.oc.foundation.event.pageCoordinates(ev),
             elementPosition = $.oc.foundation.element.absolutePosition(hoverElement)
 
@@ -267,7 +266,7 @@
         }
     }
 
-    ListSortable.prototype.lastMousePositionChanged = function (ev) {
+    ListSortable.prototype.lastMousePositionChanged = function(ev) {
         var mousePosition = $.oc.foundation.event.pageCoordinates(ev.originalEvent)
 
         if (this.lastMousePosition === null || this.lastMousePosition.x != mousePosition.x || this.lastMousePosition.y != mousePosition.y) {
@@ -278,7 +277,7 @@
         return false
     }
 
-    ListSortable.prototype.mouseOutsideLists = function (ev) {
+    ListSortable.prototype.mouseOutsideLists = function(ev) {
         var mousePosition = $.oc.foundation.event.pageCoordinates(ev)
 
         for (var i=this.lists.length-1; i >= 0; i--) {
@@ -290,7 +289,7 @@
         return true
     }
 
-    ListSortable.prototype.getClosestDraggableParent = function (element) {
+    ListSortable.prototype.getClosestDraggableParent = function(element) {
         var current = element
 
         while (current) {
@@ -307,7 +306,7 @@
     // EVENT HANDLERS
     // ============================
 
-    ListSortable.prototype.onDragStart = function (ev) {
+    ListSortable.prototype.onDragStart = function(ev) {
         if (!this.isDragStartAllowed(ev.target)) {
             return
         }
@@ -321,9 +320,9 @@
         // the dragend for removing the placeholders because dragend
         // is triggered before drop, but we need placeholder to exists
         // in the drop handler.
-        //
+        // 
         // Mouse events are suppressed during the drag and drop operations,
-        // so we only need to handle it once (but we still must the handler
+        // so we only need to handle it once (but we still must the handler 
         // explicitly).
         $(document).on('mousemove', this.proxy(this.onDocumentMouseMove))
 
@@ -332,7 +331,7 @@
         $(document).on('dragover', this.proxy(this.onDocumentDragOver))
     }
 
-    ListSortable.prototype.onDragOver = function (ev) {
+    ListSortable.prototype.onDragOver = function(ev) {
         if (!this.isSourceManagedList(ev.originalEvent)) {
             return
         }
@@ -351,7 +350,7 @@
         ev.originalEvent.dataTransfer.dropEffect = 'move'
     }
 
-    ListSortable.prototype.onDragEnter = function (ev) {
+    ListSortable.prototype.onDragEnter = function(ev) {
         if (!this.isSourceManagedList(ev.originalEvent)) {
             return
         }
@@ -370,7 +369,7 @@
         ev.preventDefault()
     }
 
-    ListSortable.prototype.onDragLeave = function (ev) {
+    ListSortable.prototype.onDragLeave = function(ev) {
         if (!this.isSourceManagedList(ev.originalEvent)) {
             return
         }
@@ -379,7 +378,7 @@
         ev.preventDefault()
     }
 
-    ListSortable.prototype.onDragDrop = function (ev) {
+    ListSortable.prototype.onDragDrop = function(ev) {
         if (!this.isSourceManagedList(ev.originalEvent)) {
             return
         }
@@ -394,11 +393,11 @@
         this.removePlaceholders()
     }
 
-    ListSortable.prototype.onDragEnd = function (ev) {
+    ListSortable.prototype.onDragEnd = function(ev) {
         $(document).off('dragover', this.proxy(this.onDocumentDragOver))
     }
 
-    ListSortable.prototype.onDocumentDragOver = function (ev) {
+    ListSortable.prototype.onDocumentDragOver = function(ev) {
         if (!this.isSourceManagedList(ev.originalEvent)) {
             return
         }
@@ -409,7 +408,7 @@
         }
     }
 
-    ListSortable.prototype.onDocumentMouseMove = function (ev) {
+    ListSortable.prototype.onDocumentMouseMove = function(ev) {
         $(document).off('mousemove', this.proxy(this.onDocumentMouseMove))
         this.removePlaceholders()
     }
@@ -437,7 +436,7 @@
                 $this.data('oc.listSortable', (data = new ListSortable(this, options)))
             }
 
-            if (typeof option == 'string' && data) {
+            if (typeof option == 'string' && data) { 
                 if (data[option]) {
                     var methodArguments = Array.prototype.slice.call(args) // Clone the arguments array
                     methodArguments.shift()
@@ -458,7 +457,7 @@
         return this
     }
 
-    $(document).render(function () {
+    $(document).render(function(){
         $('[data-control=list-sortable]').listSortable()
     })
 

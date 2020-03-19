@@ -1,21 +1,20 @@
 /*
  * Base class for Inspector numeric validators.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.inspector.validators.base,
         BaseProto = Base.prototype
 
-    var BaseNumber = function (options) {
+    var BaseNumber = function(options) {
         Base.call(this, options)
     }
 
     BaseNumber.prototype = Object.create(BaseProto)
     BaseNumber.prototype.constructor = Base
 
-    BaseNumber.prototype.doCommonChecks = function (value) {
-        if (this.options.min !== undefined || this.options.max !== undefined) {
+    BaseNumber.prototype.doCommonChecks = function(value) {
+       if (this.options.min !== undefined || this.options.max !== undefined) {
             if (this.options.min !== undefined) {
                 if (this.options.min.value === undefined) {
                     throw new Error('The min.value parameter is not defined in the Inspector validator configuration')

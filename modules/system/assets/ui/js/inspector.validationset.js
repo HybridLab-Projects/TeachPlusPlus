@@ -1,58 +1,56 @@
 /*
  * Inspector validation set class.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // NAMESPACES
     // ============================
 
-    if ($.oc.inspector.validators === undefined) {
+      if ($.oc.inspector.validators === undefined)
         $.oc.inspector.validators = {}
 
     // CLASS DEFINITION
     // ============================
 
-        var Base = $.oc.foundation.base,
+    var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
-        var ValidationSet = function (options, propertyName) {
-            this.validators = []
+    var ValidationSet = function(options, propertyName) {
+        this.validators = []
 
-            this.options = options
-            this.propertyName = propertyName
-            Base.call(this)
+        this.options = options
+        this.propertyName = propertyName
+        Base.call(this)
 
-            this.createValidators()
-        }
+        this.createValidators()
     }
 
     ValidationSet.prototype = Object.create(BaseProto)
     ValidationSet.prototype.constructor = Base
 
-    ValidationSet.prototype.dispose = function () {
+    ValidationSet.prototype.dispose = function() {
         this.disposeValidators()
         this.validators = null
 
         BaseProto.dispose.call(this)
     }
 
-    ValidationSet.prototype.disposeValidators = function () {
+    ValidationSet.prototype.disposeValidators = function() {
         for (var i = 0, len = this.validators.length; i < len; i++) {
             this.validators[i].dispose()
         }
     }
 
-    ValidationSet.prototype.throwError = function (errorMessage) {
+    ValidationSet.prototype.throwError = function(errorMessage) {
         throw new Error(errorMessage + ' Property: ' + this.propertyName)
     }
 
-    ValidationSet.prototype.createValidators = function () {
+    ValidationSet.prototype.createValidators = function() {
         // Handle legacy validation syntax properties:
         //
         // - required
         // - validationPattern
-        // - validationMessage
+        // - validationMessage 
 
         if ((this.options.required !== undefined ||
             this.options.validationPattern !== undefined ||
@@ -99,7 +97,7 @@
         }
     }
 
-    ValidationSet.prototype.validate = function (value) {
+    ValidationSet.prototype.validate = function(value) {
         try {
             for (var i = 0, len = this.validators.length; i < len; i++) {
                 var validator = this.validators[i],

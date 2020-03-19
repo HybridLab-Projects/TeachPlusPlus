@@ -1,15 +1,15 @@
 fields:
     name:
-        label: Meno učiteľa
+        label: 'Meno učiteľa'
         span: full
         type: text
     surname:
-        label: Priezvisko učiteľa
+        label: 'Priezvisko učiteľa'
         span: full
         type: text
     subject:
         label: Predmety
-        span: auto
         nameFrom: subject_name
         descriptionFrom: description
+        span: left
         type: relation

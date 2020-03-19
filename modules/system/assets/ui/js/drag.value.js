@@ -14,13 +14,12 @@
  *
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // DRAG VALUE CLASS DEFINITION
     // ============================
 
-    var DragValue = function (element, options) {
+    var DragValue = function(element, options) {
         this.options   = options
         this.$el       = $(element)
 
@@ -32,7 +31,7 @@
         dragClick: false
     }
 
-    DragValue.prototype.init = function () {
+    DragValue.prototype.init = function() {
         this.$el.prop('draggable', true)
         this.textValue = this.$el.data('textValue')
 
@@ -50,7 +49,7 @@
     // Drag events
     //
 
-    DragValue.prototype.handleDragStart = function (event) {
+    DragValue.prototype.handleDragStart = function(event) {
         var e = event.originalEvent
         e.dataTransfer.effectAllowed = 'all'
         e.dataTransfer.setData('text/plain', this.textValue)
@@ -60,12 +59,12 @@
             .addClass('dragvalue-dragging')
     }
 
-    DragValue.prototype.handleDrop = function (event) {
+    DragValue.prototype.handleDrop = function(event) {
         event.stopPropagation()
         return false
     }
 
-    DragValue.prototype.handleDragEnd = function (event) {
+    DragValue.prototype.handleDragEnd = function(event) {
         this.$el
             .css({ opacity: 1 })
             .removeClass('dragvalue-dragging')
@@ -75,56 +74,48 @@
     // Click events
     //
 
-    DragValue.prototype.handleMouseOver = function (event) {
+    DragValue.prototype.handleMouseOver = function(event) {
         var el = document.activeElement
-        if (!el) {
-            return
+        if (!el) return
 
-            if (el.isContentEditable || (
+        if (el.isContentEditable || (
             el.tagName.toLowerCase() == 'input' &&
             el.type == 'text' ||
             el.tagName.toLowerCase() == 'textarea'
-            )) {
-                this.lastElement = el
-            }
+        )) {
+            this.lastElement = el
         }
     }
 
-    DragValue.prototype.handleClick = function (event) {
-        if (!this.lastElement) {
-            return
+    DragValue.prototype.handleClick = function(event) {
+        if (!this.lastElement) return
 
-            var $el = $(this.lastElement)
+        var $el = $(this.lastElement)
 
-            if ($el.hasClass('ace_text-input')) {
-                return this.handleClickCodeEditor(event, $el)
+        if ($el.hasClass('ace_text-input'))
+            return this.handleClickCodeEditor(event, $el)
 
-                if (this.lastElement.isContentEditable) {
-                    return this.handleClickContentEditable()
+        if (this.lastElement.isContentEditable)
+            return this.handleClickContentEditable()
 
-                    this.insertAtCaret(this.lastElement, this.textValue)
-                }
-            }
-        }
+        this.insertAtCaret(this.lastElement, this.textValue)
     }
 
-    DragValue.prototype.handleClickCodeEditor = function (event, $el) {
+    DragValue.prototype.handleClickCodeEditor = function(event, $el) {
         var $editorArea = $el.closest('[data-control=codeeditor]')
-        if (!$editorArea.length) {
-            return
+        if (!$editorArea.length) return
 
-            $editorArea.codeEditor('getEditorObject').insert(this.textValue)
-        }
+        $editorArea.codeEditor('getEditorObject').insert(this.textValue)
     }
 
-    DragValue.prototype.handleClickContentEditable = function () {
+    DragValue.prototype.handleClickContentEditable = function() {
         var sel, range, html;
         if (window.getSelection) {
             sel = window.getSelection();
             if (sel.getRangeAt && sel.rangeCount) {
                 range = sel.getRangeAt(0);
                 range.deleteContents();
-                range.insertNode(document.createTextNode(this.textValue));
+                range.insertNode( document.createTextNode(this.textValue) );
             }
         }
         else if (document.selection && document.selection.createRange) {
@@ -136,7 +127,7 @@
     // Helpers
     //
 
-    DragValue.prototype.insertAtCaret = function (el, insertValue) {
+    DragValue.prototype.insertAtCaret = function(el, insertValue) {
         // IE
         if (document.selection) {
             el.focus()
@@ -170,15 +161,9 @@
             var $this   = $(this)
             var data    = $this.data('oc.dragvalue')
             var options = $.extend({}, DragValue.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.dragvalue', (data = new DragValue(this, options)))
-                if (typeof option == 'string') {
-                    result = data[option].apply(data, args)
-                    if (typeof result != 'undefined') {
-                        return false
-                    }
-                }
-            }
+            if (!data) $this.data('oc.dragvalue', (data = new DragValue(this, options)))
+            if (typeof option == 'string') result = data[option].apply(data, args)
+            if (typeof result != 'undefined') return false
         })
 
         return result ? result : this
@@ -197,7 +182,7 @@
     // DRAG VALUE DATA-API
     // ===============
 
-    $(document).render(function () {
+    $(document).render(function() {
         $('[data-control="dragvalue"]').dragValue()
     });
 
