@@ -66,7 +66,6 @@ export default {
 
 <style lang="scss" scoped>
   .input_form {
-    min-width: 30%;
-    max-width: 40%;
+    width: 30vw;
   }
 </style>

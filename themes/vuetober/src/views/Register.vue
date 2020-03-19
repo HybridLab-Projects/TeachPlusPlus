@@ -1,13 +1,10 @@
 <template>
-  <div class="cont_all">
-    <img
-      class="cont_img"
-      :src="require(`@/assets/img/Group.svg`)"
-      alt
-    >
-    <div class="cont_forms text-white">
-      <b-container class="text-left">
-        <h1 class="mb-5">REGISTER</h1>
+  <div class="row test">
+    <div class="d-flex justify-content-center col-md-6 text-dark cont_forms p-0 m-0">
+      <div class="test">
+        <h1 class="d-flex justify-content-center mt-3 mb-3 test2">
+          Registrácia
+        </h1>
         <ValidationObserver
           v-slot="{ passes }"
         >
@@ -15,7 +12,7 @@
             <BTextInputWithValidation
               rules="required|alpha"
               type="text"
-              label="Meno"
+              label=""
               name="Meno"
               v-model="user.name"
               placeholder="Zadaj meno"
@@ -24,7 +21,7 @@
             <BTextInputWithValidation
               rules="required|alpha"
               type="text"
-              label="Priezvisko"
+              label=""
               name="Priezvisko"
               v-model="user.surname"
               placeholder="Zadaj priezvisko"
@@ -33,7 +30,7 @@
             <BTextInputWithValidation
               rules="required"
               type="text"
-              label="Používateľské meno"
+              label=""
               name="Používateľské meno"
               v-model="user.username"
               placeholder="Zadaj používateľské meno"
@@ -42,7 +39,7 @@
             <BTextInputWithValidation
               rules="required|email"
               type="text"
-              label="Email"
+              label=""
               name="Email"
               v-model="user.email"
               placeholder="Zadaj email"
@@ -51,7 +48,7 @@
             <BTextInputWithValidation
               rules="required|min:8|upperCase|containsNumber"
               type="password"
-              label="Heslo"
+              label=""
               name="Heslo"
               vid="user.password"
               v-model="user.password"
@@ -61,7 +58,7 @@
             <BTextInputWithValidation
               rules="required|min:8|confirmed:user.password"
               type="password"
-              label="Potvrdenie hesla "
+              label=""
               name="Potvrdenie hesla"
               v-model="user.password_confirmation"
               placeholder="Potvrď heslo"
@@ -76,7 +73,7 @@
             <b-button
               type="submit"
               variant="danger"
-              class="py-10 px-5 mt-5"
+              class="py-10 px-5"
             >
               Submit
             </b-button>
@@ -90,7 +87,14 @@
             </b-alert>
           </b-form>
         </ValidationObserver>
-      </b-container>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center col-md-6 p-0 mb-5 cont_img">
+      <img
+        class="cont_img_pic"
+        :src="require(`@/assets/img/Group.svg`)"
+        alt
+      >
     </div>
   </div>
 </template>
@@ -137,17 +141,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cont_all {
-  background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
-  height: 130vh;
-}
 
-.cont_img {
-  transform: translateX(80%) translateY(10rem);
-  height: 80vh;
-}
+  .cont_img {
+    background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
+    border-radius: 150px 0px 150px 150px;
+  }
 
-.cont_forms {
-  transform: translateX(0%) translateY(-30rem);
-}
+  .cont_img_pic {
+    width: 45vw;
+    transform: translateX(-40%) translateY(20%);
+  }
+
+  .test2 {
+    color: #5352f6;
+  }
 </style>
