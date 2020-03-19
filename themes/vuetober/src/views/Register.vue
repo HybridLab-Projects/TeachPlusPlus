@@ -52,7 +52,7 @@
         <BTextInputWithValidation
           rules="required|min:8|confirmed:user.password"
           type="password"
-          label="Potvrdenie hesla "
+          label="Potvrdenie hesla"
           name="Potvrdenie hesla"
           v-model="user.password_confirmation"
           placeholder="Potvrď heslo"
