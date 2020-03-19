@@ -1,0 +1,9 @@
+fields:
+    subject_name:
+        label: Predmet
+        span: auto
+        type: text
+    short:
+        label: Skratka predmetu
+        span: right
+        type: text

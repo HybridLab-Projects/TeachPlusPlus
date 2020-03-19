@@ -329,7 +329,7 @@
             '</div></div>')
 
         if (source.indexOf('Message-ID:') > 0) {
-            markup = source.trim().replace(/(?:^|<\/html>)[^]*?(?:<html|$)/g, function(m) {
+            markup = source.trim().replace(/(?:^|<\/html>)[^]*?(?:<html|$)/g, function (m) {
                 return m.replace(/\r\n|\r|\n/g, '<br>').replace(/ {2}/g, '&nbsp;&nbsp;')
             })
             iframe = $('<iframe id="#beautifier-tab-formatted-iframe" style="width: 100%; height: 500px; padding: 0" frameborder="0"></iframe>')
@@ -341,7 +341,7 @@
         if (iframe) {
             tabs.find('#beautifier-tab-formatted').append(iframe)
             iframe.wrap('<div class="beautifier-formatted-content" />')
-            iframe.on('load', function() {
+            iframe.on('load', function () {
                 var $html = iframe.contents().find('html')
                 $html.html(markup)
                 $html.css({
@@ -376,9 +376,15 @@
             var $this = $(this)
             var data = $this.data('oc.exceptionBeautifier')
             var options = $.extend({}, ExceptionBeautifier.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.exceptionBeautifier', (data = new ExceptionBeautifier(this, options)))
-            if (typeof option == 'string') result = data[option].call($this)
-            if (typeof result != 'undefined') return false
+            if (!data) {
+                $this.data('oc.exceptionBeautifier', (data = new ExceptionBeautifier(this, options)))
+                if (typeof option == 'string') {
+                    result = data[option].call($this)
+                    if (typeof result != 'undefined') {
+                        return false
+                    }
+                }
+            }
         })
 
         return result ? result : this

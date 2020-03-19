@@ -2,16 +2,19 @@
  * Autocomplete cell processor for the table control.
  */
 
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     // NAMESPACE CHECK
     // ============================
 
-    if ($.oc.table === undefined)
+    if ($.oc.table === undefined) {
         throw new Error("The $.oc.table namespace is not defined. Make sure that the table.js script is loaded.");
+    }
 
-    if ($.oc.table.processor === undefined)
+    if ($.oc.table.processor === undefined) {
         throw new Error("The $.oc.table.processor namespace is not defined. Make sure that the table.processor.base.js script is loaded.");
+    }
 
     // CLASS DEFINITION
     // ============================
@@ -19,7 +22,7 @@
     var Base = $.oc.table.processor.string,
         BaseProto = Base.prototype
 
-    var AutocompleteProcessor = function(tableObj, columnName, columnConfiguration) {
+    var AutocompleteProcessor = function (tableObj, columnName, columnConfiguration) {
         //
         // State properties
         //
@@ -36,7 +39,7 @@
     AutocompleteProcessor.prototype = Object.create(BaseProto)
     AutocompleteProcessor.prototype.constructor = AutocompleteProcessor
 
-    AutocompleteProcessor.prototype.dispose = function() {
+    AutocompleteProcessor.prototype.dispose = function () {
         this.cachedOptionPromises = null
 
         BaseProto.dispose.call(this)
@@ -47,37 +50,39 @@
      * away from the cell. Processors can update the sell value in this method.
      * Processors must clear the reference to the active cell in this method.
      */
-    AutocompleteProcessor.prototype.onUnfocus = function() {
-        if (!this.activeCell)
+    AutocompleteProcessor.prototype.onUnfocus = function () {
+        if (!this.activeCell) {
             return
 
-        this.removeAutocomplete()
+            this.removeAutocomplete()
 
-        BaseProto.onUnfocus.call(this)
+            BaseProto.onUnfocus.call(this)
+        }
     }
 
     /*
      * Renders the cell in the normal (no edit) mode
      */
-    AutocompleteProcessor.prototype.renderCell = function(value, cellContentContainer) {
+    AutocompleteProcessor.prototype.renderCell = function (value, cellContentContainer) {
         BaseProto.renderCell.call(this, value, cellContentContainer)
 
         // this.fetchOptions(cellContentContainer.parentNode)
     }
 
-    AutocompleteProcessor.prototype.buildEditor = function(cellElement, cellContentContainer, isClick) {
+    AutocompleteProcessor.prototype.buildEditor = function (cellElement, cellContentContainer, isClick) {
         BaseProto.buildEditor.call(this, cellElement, cellContentContainer, isClick)
 
         var self = this
 
-        this.fetchOptions(cellElement, function autocompleteFetchOptions(options) {
+        this.fetchOptions(cellElement, function autocompleteFetchOptions(options)
+        {
             self.buildAutoComplete(options)
 
             self = null
         })
     }
 
-    AutocompleteProcessor.prototype.fetchOptions = function(cellElement, onSuccess) {
+    AutocompleteProcessor.prototype.fetchOptions = function (cellElement, onSuccess) {
         if (this.columnConfiguration.options) {
             if (onSuccess !== undefined) {
                 onSuccess(this.columnConfiguration.options)
@@ -104,40 +109,43 @@
 
             if (!this.cachedOptionPromises[cachingKey]) {
                 var requestData = {
-                        column: this.columnName,
-                        rowData: this.tableObj.getRowData(row)
-                    },
+                    column: this.columnName,
+                    rowData: this.tableObj.getRowData(row)
+                },
                     handlerName = this.tableObj.getAlias()+'::onGetAutocompleteOptions'
 
                 this.cachedOptionPromises[cachingKey] = this.tableObj.$el.request(handlerName, {data: requestData})
             }
 
-            this.cachedOptionPromises[cachingKey].done(function onAutocompleteLoadOptionsSuccess(data){
+            this.cachedOptionPromises[cachingKey].done(function onAutocompleteLoadOptionsSuccess(data)
+            {
                 if (onSuccess !== undefined) {
                     onSuccess(data.options)
                 }
-            }).always(function onAutocompleteLoadOptionsAlways(){
+            }).always(function onAutocompleteLoadOptionsAlways()
+            {
                 $.oc.foundation.element.removeClass(viewContainer, 'loading')
             })
         }
     }
 
-    AutocompleteProcessor.prototype.createOptionsCachingKey = function(row) {
+    AutocompleteProcessor.prototype.createOptionsCachingKey = function (row) {
         var cachingKey = 'non-dependent',
             dependsOn = this.columnConfiguration.dependsOn
 
         if (dependsOn) {
             if (typeof dependsOn == 'object') {
-                for (var i = 0, len = dependsOn.length; i < len; i++ )
+                for (var i = 0, len = dependsOn.length; i < len; i++ ) {
                     cachingKey += dependsOn[i] + this.tableObj.getRowCellValueByColumnName(row, dependsOn[i])
-            } else
+                } } else {
                 cachingKey = dependsOn + this.tableObj.getRowCellValueByColumnName(row, dependsOn)
+                }
         }
 
         return cachingKey
     }
 
-    AutocompleteProcessor.prototype.triggerGetOptions = function(callback) {
+    AutocompleteProcessor.prototype.triggerGetOptions = function (callback) {
         var tableElement = this.tableObj.getElement()
         if (!tableElement) {
             return
@@ -147,7 +155,7 @@
             values = {} // TODO - implement loading values from the current row.
 
         $(tableElement).trigger(optionsEvent, [{
-            values: values, 
+            values: values,
             callback: callback,
             column: this.columnName,
             columnConfiguration: this.columnConfiguration
@@ -160,7 +168,7 @@
         return true
     }
 
-    AutocompleteProcessor.prototype.getInput = function() {
+    AutocompleteProcessor.prototype.getInput = function () {
         if (!this.activeCell) {
             return null
         }
@@ -168,7 +176,7 @@
         return this.activeCell.querySelector('.string-input')
     }
 
-    AutocompleteProcessor.prototype.buildAutoComplete = function(items) {
+    AutocompleteProcessor.prototype.buildAutoComplete = function (items) {
         if (!this.activeCell) {
             return
         }
@@ -190,7 +198,7 @@
         })
     }
 
-    AutocompleteProcessor.prototype.prepareItems = function(items) {
+    AutocompleteProcessor.prototype.prepareItems = function (items) {
         var result = {}
 
         if ($.isArray(items)) {
@@ -205,7 +213,7 @@
         return result
     }
 
-    AutocompleteProcessor.prototype.removeAutocomplete = function() {
+    AutocompleteProcessor.prototype.removeAutocomplete = function () {
         var input = this.getInput()
 
         $(input).autocomplete('destroy')

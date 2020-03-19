@@ -33,11 +33,6 @@ extend('containsNumber', {
 });
 Vue.component('ValidationProvider', ValidationProvider);
 
-Vue.prototype.$http = Axios;
-const token = localStorage.getItem('token');
-if (token) {
-  Vue.prototype.$http.defaults.headers.common.Authorization = token;
-}
 
 Vue.config.productionTip = false;
 
@@ -45,4 +40,23 @@ new Vue({
   router,
   store,
   render: (h) => h(App),
+  created() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // eslint-disable-next-line dot-notation
+      Axios.defaults.headers.common['Authorization'] = `Bearer ${
+        token
+      }`;
+    }
+
+    Axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response.status === 401 || error.response.status === 400) {
+          this.$store.dispatch('logout');
+        }
+        return Promise.reject(error);
+      },
+    );
+  },
 }).$mount('#app');

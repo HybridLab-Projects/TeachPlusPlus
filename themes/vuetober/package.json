@@ -10,12 +10,12 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
-    "bootstrap-vue": "^2.5.0",
+    "bootstrap-vue": "^2.7.0",
     "core-js": "^3.6.4",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
@@ -28,11 +28,11 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.25.0",
+    "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
-    "stylelint": "^13.2.0",
+    "stylelint": "^13.2.1",
     "stylelint-config-recommended-scss": "^4.2.0",
-    "stylelint-scss": "^3.14.2",
+    "stylelint-scss": "^3.15.0",
     "stylelint-webpack-plugin": "^1.2.3",
     "vue-cli-plugin-vuetober": "^3.0.0",
     "vue-template-compiler": "^2.6.11"

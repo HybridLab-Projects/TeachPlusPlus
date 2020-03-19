@@ -1,19 +1,20 @@
 /*
  * Inspector regex validator.
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.validators.base,
         BaseProto = Base.prototype
 
-    var RegexValidator = function(options) {
+    var RegexValidator = function (options) {
         Base.call(this, options)
     }
 
     RegexValidator.prototype = Object.create(BaseProto)
     RegexValidator.prototype.constructor = Base
 
-    RegexValidator.prototype.isValid = function(value) {
+    RegexValidator.prototype.isValid = function (value) {
         if (this.options.pattern === undefined) {
             this.throwError('The pattern parameter is not defined in the Regex Inspector validator configuration.')
         }

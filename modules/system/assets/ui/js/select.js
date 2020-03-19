@@ -6,13 +6,13 @@
  *  - select2/select2.full
  */
 
-(function($){
+(function ($) {
 
     /*
      * Custom drop downs
      */
-    $(document).render(function(){
-        var formatSelectOption = function(state) {
+    $(document).render(function () {
+        var formatSelectOption = function (state) {
             var text = $('<span>').text(state.text).html()
 
             if (!state.id) {
@@ -37,19 +37,20 @@
         var selectOptions = {
             templateResult: formatSelectOption,
             templateSelection: formatSelectOption,
-            escapeMarkup: function(m) { return m },
+            escapeMarkup: function (m) {
+                return m },
             width: 'style'
         }
 
         /*
          * Bind custom select
          */
-        $('select.custom-select').each(function(){
+        $('select.custom-select').each(function () {
             var $element = $(this),
                 extraOptions = {
                     dropdownCssClass: '',
                     containerCssClass: ''
-                }
+            }
 
             // Prevent duplicate loading
             if ($element.data('select2') != null) {
@@ -57,7 +58,7 @@
             }
 
             $element.attr('data-disposable', 'data-disposable')
-            $element.one('dispose-control', function(){
+            $element.one('dispose-control', function () {
                 if ($element.data('select2')) {
                     $element.select2('destroy')
                 }
@@ -81,7 +82,7 @@
             var source = $element.data('handler');
             if (source) {
                 extraOptions.ajax = {
-                    transport: function(params, success, failure) {
+                    transport: function (params, success, failure) {
                         var $request = $element.request(source, {
                             data: params.data
                         })
@@ -130,7 +131,7 @@
                     extraOptions.closeOnSelect = false
                     extraOptions.minimumInputLength = 1
 
-                    $element.on('select2:closing', function() {
+                    $element.on('select2:closing', function () {
                         if ($('.select2-dropdown.select-no-dropdown:first .select2-results__option--highlighted').length > 0) {
                             $('.select2-dropdown.select-no-dropdown:first .select2-results__option--highlighted').removeClass('select2-results__option--highlighted')
                             $('.select2-dropdown.select-no-dropdown:first .select2-results__option:first').addClass('select2-results__option--highlighted')
@@ -149,7 +150,7 @@
         })
     })
 
-    $(document).on('disable', 'select.custom-select', function(event, status) {
+    $(document).on('disable', 'select.custom-select', function (event, status) {
         if ($(this).data('select2') != null) {
             $(this).select2('enable', !status)
         }

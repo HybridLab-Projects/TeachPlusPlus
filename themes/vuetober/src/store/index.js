@@ -10,6 +10,7 @@ export default new Vuex.Store({
     status: '',
     token: localStorage.getItem('token') || '',
     user: JSON.parse(localStorage.getItem('user')) || {},
+    teachers: [],
   },
   mutations: {
     auth_request(state) {
@@ -18,15 +19,22 @@ export default new Vuex.Store({
     auth_success(state, { token, user }) {
       state.status = 'success';
       state.token = token;
-      state.user = { ...user };
+      state.user = user;
     },
     auth_error(state) {
       state.status = 'error';
     },
     logout(state) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      delete Axios.defaults.headers.common.Authorization;
       state.status = '';
       state.token = '';
       state.user = {};
+      state.teachers = [];
+    },
+    addTeachers(state, teachers) {
+      state.teachers = teachers;
     },
   },
   actions: {
@@ -39,7 +47,9 @@ export default new Vuex.Store({
             const { user } = res.data;
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('token', token);
-            Axios.defaults.headers.common.Authorization = token;
+            Axios.defaults.headers.common.Authorization = `Bearer ${
+              token
+            }`;
             commit('auth_success', { token, user });
             resolve(res);
           })
@@ -62,7 +72,10 @@ export default new Vuex.Store({
             console.log('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('token', token);
-            Axios.defaults.headers.common.Authorization = token;
+            // eslint-disable-next-line dot-notation
+            Axios.defaults.headers.common['Authorization'] = `Bearer ${
+              token
+            }`;
             commit('auth_success', { token, user });
             resolve(res);
           })
@@ -76,15 +89,25 @@ export default new Vuex.Store({
     },
     logout({ commit, state }) {
       return new Promise((resolve, reject) => {
-        commit('logout');
-        localStorage.removeItem('token');
-        delete Axios.defaults.headers.common.Authorization;
         Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
           .then((res) => {
+            commit('logout');
             resolve();
           })
           .catch((err) => {
+            commit('logout');
             reject(err);
+          });
+      });
+    },
+    fetchTeachers({ commit }) {
+      return new Promise((resolve, reject) => {
+        Axios
+          .get('/api/teacher').then(({ data }) => {
+            commit('addTeachers', data);
+            resolve();
+          }).catch((res) => {
+            reject(res);
           });
       });
     },
@@ -92,5 +115,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
+    getTeachers: (state) => (search) => state.teachers
+      .filter((teacher) => teacher.surname.toLowerCase().includes(search)),
   },
 });

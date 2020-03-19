@@ -10,7 +10,8 @@
  * Dependences:
  * - Sortable (jquery-sortable.js)
  */
-+function ($) { "use strict";
++function ($) {
+    "use strict";
 
     var SimpleList = function (element, options) {
 
@@ -19,21 +20,20 @@
         this.options = options || {}
 
         if ($el.hasClass('is-sortable')) {
-
             /*
              * Make each list inside sortable
              */
             var sortableOptions = {
                 distance: 10
             }
-            if (this.options.sortableHandle)
+            if (this.options.sortableHandle) {
                 sortableOptions[handle] = this.options.sortableHandle
 
-            $el.find('> ul, > ol').sortable(sortableOptions)
+                $el.find('> ul, > ol').sortable(sortableOptions)
+            }
         }
 
         if ($el.hasClass('is-scrollable')) {
-
             /*
              * Inject a scrollbar container
              */
@@ -57,9 +57,11 @@
             var $this = $(this)
             var data  = $this.data('oc.simplelist')
             var options = $.extend({}, SimpleList.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.simplelist', (data = new SimpleList(this, options)))
+            if (!data) {
+                $this.data('oc.simplelist', (data = new SimpleList(this, options)))
+            }
         })
-      }
+    }
 
     $.fn.simplelist.Constructor = SimpleList
 
@@ -74,7 +76,7 @@
     // SIMPLE LIST DATA-API
     // ===============
 
-    $(document).render(function(){
+    $(document).render(function () {
         $('[data-control="simplelist"]').simplelist()
     })
 
