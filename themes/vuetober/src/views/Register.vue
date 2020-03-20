@@ -1,8 +1,8 @@
 <template>
-  <div class="row test">
+  <div class="row mt-5 test">
     <div class="d-flex justify-content-center col-md-6 text-dark cont_forms p-0 m-0">
       <div class="test">
-        <h1 class="d-flex justify-content-center mt-3 mb-3 test2">
+        <h1 class="d-flex justify-content-center mt-5 mb-3 test2">
           Registrácia
         </h1>
         <ValidationObserver
@@ -141,7 +141,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
   .cont_img {
     background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
     border-radius: 150px 0px 150px 150px;

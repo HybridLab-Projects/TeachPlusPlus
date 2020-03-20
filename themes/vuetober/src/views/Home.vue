@@ -6,7 +6,7 @@
     <div class="cont-color pl-5">
       <div class="content-container pl-5">
         <h1 class="display-4 mb-4 text-white">
-          Čo je to <strong>Teach++</strong>
+          Čo je to, <strong>Teach++</strong>
         </h1>
         <p class="text-white">
           Loorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non lectus erat.
