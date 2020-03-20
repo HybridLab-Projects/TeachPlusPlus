@@ -17,6 +17,7 @@
           class="shadow font-weight-bold px-5 py-3 mt-3"
           size="lg"
           variant="danger"
+          to="/login"
         >
           Prihlásiť sa
         </b-button>
