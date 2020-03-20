@@ -1,12 +1,18 @@
 fields:
     content:
         label: Content
-        span: auto
         size: ''
+        span: auto
         type: richeditor
     teachers:
-        label: 'teachplusplus.teachers::lang.plugin.name'
-        nameFrom: name
+        label: Učitel
+        nameFrom: surname
         descriptionFrom: description
         span: auto
+        type: relation
+    subject:
+        label: Predmet
+        nameFrom: subject_name
+        descriptionFrom: description
+        span: right
         type: relation

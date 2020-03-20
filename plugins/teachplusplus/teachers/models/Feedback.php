@@ -23,6 +23,12 @@ class Feedback extends Model
         ]
         ];
 
+    public $hasOne =[ 
+
+        'subject' => 'Teachplusplus\teachers\Models\Subject',
+        'key' => 'name'
+        ];
+
 
     /**
      * @var array Validation rules

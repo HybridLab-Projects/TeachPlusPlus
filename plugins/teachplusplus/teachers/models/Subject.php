@@ -26,7 +26,6 @@ public $belongsToMany =[
         'Teachplusplus\teachers\models\Teacher',
         'table' => 'teachplusplus_teachers_teachers_teachers',
         'order' => 'name'
-
     ]
     ];
 
