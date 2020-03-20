@@ -4,6 +4,7 @@
     :name="$attrs.name"
     :rules="rules"
     v-slot="{ valid, errors }"
+    mode="eager"
   >
     <b-form-group v-bind="$attrs">
       <b-form-input
