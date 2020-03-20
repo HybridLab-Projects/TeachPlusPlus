@@ -54,6 +54,7 @@ new Vue({
       (error) => {
         if (error.response.status === 401 || error.response.status === 400) {
           this.$store.dispatch('logout');
+          this.$router.push('/');
         }
         return Promise.reject(error);
       },

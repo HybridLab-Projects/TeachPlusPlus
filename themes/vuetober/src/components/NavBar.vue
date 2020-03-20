@@ -71,7 +71,10 @@ export default {
     logout() {
       this.$store.dispatch('logout')
         .then(() => this.$router.push('/'))
-        .catch((err) => console.log(err.response.data.error));
+        .catch((err) => {
+          console.log(err.response.data.error);
+          this.$router.push('/');
+        });
     },
   },
 };
