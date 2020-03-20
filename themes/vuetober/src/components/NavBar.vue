@@ -31,7 +31,7 @@
           <p
             class="my-auto text-muted mr-3"
           >
-            Ešte nemáš účet?
+            <strong class="text-secondary">Ešte nemáš účet?</strong>
           </p>
           <b-nav-item
             to="register"
