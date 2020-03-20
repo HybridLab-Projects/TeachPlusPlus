@@ -39,77 +39,68 @@ export default new Vuex.Store({
   },
   actions: {
     register({ commit }, authUser) {
-      return new Promise((resolve, reject) => {
-        commit('auth_request');
-        Axios({ url: '/api/signup', data: authUser, method: 'POST' })
-          .then((res) => {
-            const { token } = res.data;
-            const { user } = res.data;
-            localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('token', token);
-            Axios.defaults.headers.common.Authorization = `Bearer ${
-              token
-            }`;
-            commit('auth_success', { token, user });
-            resolve(res);
-          })
-          .catch((err) => {
-            commit('auth_error');
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
-            reject(err);
-          });
-      });
+      commit('auth_request');
+      return Axios({ url: '/api/signup', data: authUser, method: 'POST' })
+        .then(({ data }) => {
+          const { token } = data;
+          const { user } = data;
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('token', token);
+          Axios.defaults.headers.common.Authorization = `Bearer ${
+            token
+          }`;
+          commit('auth_success', { token, user });
+        })
+        .catch((err) => {
+          commit('auth_error');
+          localStorage.removeItem('user');
+          localStorage.removeItem('token');
+          throw err;
+        });
     },
     login({ commit }, authUser) {
-      return new Promise((resolve, reject) => {
-        commit('auth_request');
-        Axios({ url: '/api/login', data: authUser, method: 'POST' })
-          .then((res) => {
-            const { token } = res.data;
-            const { user } = res.data;
-            console.log('user', user);
-            console.log('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('token', token);
-            // eslint-disable-next-line dot-notation
-            Axios.defaults.headers.common['Authorization'] = `Bearer ${
-              token
-            }`;
-            commit('auth_success', { token, user });
-            resolve(res);
-          })
-          .catch((err) => {
-            commit('auth_error');
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
-            reject(err);
-          });
-      });
+      commit('auth_request');
+      return Axios({ url: '/api/login', data: authUser, method: 'POST' })
+        .then(({ data }) => {
+          const { token } = data;
+          const { user } = data;
+          console.log('user', user);
+          console.log('token', token);
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('token', token);
+          // eslint-disable-next-line dot-notation
+          Axios.defaults.headers.common['Authorization'] = `Bearer ${
+            token
+          }`;
+          commit('auth_success', { token, user });
+        })
+        .catch((err) => {
+          commit('auth_error');
+          localStorage.removeItem('user');
+          localStorage.removeItem('token');
+          throw err;
+        });
     },
+
     logout({ commit, state }) {
-      return new Promise((resolve, reject) => {
-        Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
-          .then((res) => {
-            commit('logout');
-            resolve();
-          })
-          .catch((err) => {
-            commit('logout');
-            reject(err);
-          });
-      });
+      return Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
+        .then(() => {
+          commit('logout');
+        })
+        .catch((err) => {
+          commit('logout');
+          console.log(err);
+          throw err;
+        });
     },
+
     fetchTeachers({ commit }) {
-      return new Promise((resolve, reject) => {
-        Axios
-          .get('/api/teacher').then(({ data }) => {
-            commit('addTeachers', data);
-            resolve();
-          }).catch((res) => {
-            reject(res);
-          });
-      });
+      return Axios
+        .get('/api/teacher').then(({ data }) => {
+          commit('addTeachers', data);
+        }).catch((err) => {
+          throw err;
+        });
     },
   },
   getters: {
