@@ -42,8 +42,7 @@ export default new Vuex.Store({
       commit('auth_request');
       return Axios({ url: '/api/signup', data: authUser, method: 'POST' })
         .then(({ data }) => {
-          const { token } = data;
-          const { user } = data;
+          const { token, user } = data;
           localStorage.setItem('user', JSON.stringify(user));
           localStorage.setItem('token', token);
           Axios.defaults.headers.common.Authorization = `Bearer ${
@@ -62,8 +61,7 @@ export default new Vuex.Store({
       commit('auth_request');
       return Axios({ url: '/api/login', data: authUser, method: 'POST' })
         .then(({ data }) => {
-          const { token } = data;
-          const { user } = data;
+          const { token, user } = data;
           console.log('user', user);
           console.log('token', token);
           localStorage.setItem('user', JSON.stringify(user));
@@ -98,8 +96,6 @@ export default new Vuex.Store({
       return Axios
         .get('/api/teacher').then(({ data }) => {
           commit('addTeachers', data);
-        }).catch((err) => {
-          throw err;
         });
     },
   },
