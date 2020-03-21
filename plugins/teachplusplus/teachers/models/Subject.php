@@ -21,12 +21,16 @@ class Subject extends Model
      */
     public $table = 'teachplusplus_teachers_subjects';
 
-public $belongsToMany =[
-    'teacher' =>[
-        'Teachplusplus\teachers\models\Teacher',
-        'table' => 'teachplusplus_teachers_teachers_teachers',
-        'order' => 'name'
-    ]
+    public $belongsToMany =[
+        'teacher' =>[
+            'Teachplusplus\Teachers\Models\Teacher',
+            'table' => 'teachplusplus_teachers_teachers_teachers',
+            'order' => 'name'
+        ]
+    ];
+
+    public $belongsTo = [
+        'feedback' => 'Teachplusplus\Teachers\Models\Feedback'
     ];
 
    

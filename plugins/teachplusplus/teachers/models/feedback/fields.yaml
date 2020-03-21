@@ -1,12 +1,18 @@
 fields:
     content:
         label: Content
-        size: ''
+        size: ""
         span: auto
         type: richeditor
     teacher:
         label: Učitel
         nameFrom: surname
+        descriptionFrom: description
+        span: auto
+        type: relation
+    subject:
+        label: Relation
+        nameFrom: subject_name
         descriptionFrom: description
         span: auto
         type: relation

@@ -16,11 +16,10 @@ class Feedback extends Model
     public $table = 'teachplusplus_teachers_feedbacks';
 
 
-    // public $hasOne =[ 
+    public $hasOne =[ 
 
-    //     'subject' => 'Teachplusplus\teachers\Models\Subject',
-    //     'key' => 'name'
-    //     ];
+        'subject' => 'Teachplusplus\teachers\Models\Subject'
+        ];
 
     public $belongsTo = [
         'teacher' => 'Teachplusplus\Teachers\Models\Teacher',

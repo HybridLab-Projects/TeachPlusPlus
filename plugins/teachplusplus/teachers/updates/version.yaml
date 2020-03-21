@@ -39,3 +39,12 @@
 1.0.14:
     - 'Updated table teachplusplus_teachers_'
     - builder_table_update_teachplusplus_teachers__2.php
+1.0.15:
+    - 'Updated table teachplusplus_teachers_subjects'
+    - builder_table_update_teachplusplus_teachers_subjects_2.php
+1.0.16:
+    - 'Updated table teachplusplus_teachers_subjects'
+    - builder_table_update_teachplusplus_teachers_subjects_3.php
+1.0.17:
+    - 'Updated table teachplusplus_teachers_subjects'
+    - builder_table_update_teachplusplus_teachers_subjects_4.php
