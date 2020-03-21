@@ -18,7 +18,7 @@
         </h5>
         <h6
           class="my-auto ml-2"
-          v-for="subject in teacher.subject"
+          v-for="subject in teacher.subjects"
           :key="subject.id"
         >
           {{ subject.short }}
