@@ -1,9 +1,10 @@
 fields:
     content:
-        label: Content
-        size: ""
-        span: auto
-        type: richeditor
+        label: Feedback
+        size: ''
+        mode: tab
+        span: full
+        type: markdown
     teacher:
         label: Učitel
         nameFrom: surname
@@ -11,7 +12,7 @@ fields:
         span: auto
         type: relation
     subject:
-        label: Relation
+        label: Predmet
         nameFrom: subject_name
         descriptionFrom: description
         span: auto
