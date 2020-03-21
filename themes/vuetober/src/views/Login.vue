@@ -44,7 +44,10 @@
         </ValidationObserver>
       </div>
     </div>
-    <div class="d-flex justify-content-center col-md-6 p-0 mb-5 cont_img">
+    <div class="col-md-2">
+      i
+    </div>
+    <div class="d-flex justify-content-center col-md-4 p-0 mb-5 cont_img">
       <img
         class="cont_img_pic"
         :src="require(`@/assets/img/Group.svg`)"
@@ -96,7 +99,7 @@ export default {
   }
 
   .cont_img_pic {
-    width: 45vw;
+    height: 80vh;
     transform: translateX(-40%) translateY(20%);
   }
 

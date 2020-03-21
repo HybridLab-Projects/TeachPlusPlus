@@ -1,6 +1,6 @@
 <template>
   <div class="row mt-5 test">
-    <div class="d-flex justify-content-center col-md-6 text-dark cont_forms p-0 m-0">
+    <div class="d-flex justify-content-center col-lg-6 text-dark cont_forms p-0 m-0">
       <div class="test">
         <h1 class="d-flex justify-content-center mt-5 mb-3 test2">
           Registrácia
@@ -73,7 +73,7 @@
             <b-button
               type="submit"
               variant="danger"
-              class="py-10 px-5"
+              class="py-10 px-5 mt-3"
             >
               Submit
             </b-button>
@@ -89,7 +89,7 @@
         </ValidationObserver>
       </div>
     </div>
-    <div class="d-flex justify-content-center col-md-6 p-0 mb-5 cont_img">
+    <div class="d-flex justify-content-center col-lg-6 p-0 mb-5 cont_img">
       <img
         class="cont_img_pic"
         :src="require(`@/assets/img/Group.svg`)"
@@ -147,8 +147,8 @@ export default {
   }
 
   .cont_img_pic {
-    width: 45vw;
-    transform: translateX(-40%) translateY(20%);
+    height: 75vh;
+    transform: translateX(-25%) translateY(15%);
   }
 
   .test2 {
