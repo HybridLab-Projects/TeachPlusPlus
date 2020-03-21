@@ -7,7 +7,7 @@ fields:
         label: 'Priezvisko učiteľa'
         span: full
         type: text
-    subject:
+    subjects:
         label: Predmety
         nameFrom: subject_name
         descriptionFrom: description
