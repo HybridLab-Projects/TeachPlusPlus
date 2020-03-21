@@ -15,19 +15,17 @@ class Feedback extends Model
      */
     public $table = 'teachplusplus_teachers_feedbacks';
 
-    public $belongsToMany =[
-        'teachers' =>[
-            'Teachplusplus\teachers\models\Teacher',
-            'table' => 'teachplusplus_teachers_feedbacks_teachers',
-            'order' => 'name'
-        ]
-        ];
 
-    public $hasOne =[ 
+    // public $hasOne =[ 
 
-        'subject' => 'Teachplusplus\teachers\Models\Subject',
-        'key' => 'name'
-        ];
+    //     'subject' => 'Teachplusplus\teachers\Models\Subject',
+    //     'key' => 'name'
+    //     ];
+
+    public $belongsTo = [
+        'teacher' => 'Teachplusplus\Teachers\Models\Teacher',
+
+    ];
 
 
     /**

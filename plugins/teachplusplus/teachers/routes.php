@@ -3,7 +3,7 @@ use Teachplusplus\Teachers\Models\Teacher;
 
 Route::get('api/teacher', function () {
 
-    $teachers = Teacher::with('subject','feedback')->get();
+    $teachers = Teacher::with('subjects', 'feedbacks')->get();
     
 
     return $teachers;
@@ -11,7 +11,7 @@ Route::get('api/teacher', function () {
 
 Route::get('api/teacher/{id}', function ($id) {
 
-    $teacher = Teacher::with('subject','feedback')->findOrFail($id);
+    $teacher = Teacher::with('subjects', 'feedbacks')->findOrFail($id);
     
    
 
