@@ -3,8 +3,7 @@
  *
  * - Documentation: ../docs/input-trigger.md
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var TriggerOn = function (element, options) {
 
@@ -12,24 +11,21 @@
 
         this.options = options || {};
 
-        if (this.options.triggerCondition === false) {
+        if (this.options.triggerCondition === false)
             throw new Error('Trigger condition is not specified.')
 
-            if (this.options.trigger === false) {
-                throw new Error('Trigger selector is not specified.')
+        if (this.options.trigger === false)
+            throw new Error('Trigger selector is not specified.')
 
-                if (this.options.triggerAction === false) {
-                    throw new Error('Trigger action is not specified.')
+        if (this.options.triggerAction === false)
+            throw new Error('Trigger action is not specified.')
 
-                    this.triggerCondition = this.options.triggerCondition
+        this.triggerCondition = this.options.triggerCondition
 
-                    if (this.options.triggerCondition.indexOf('value') == 0) {
-                        var match = this.options.triggerCondition.match(/[^[\]]+(?=])/g)
-                        this.triggerCondition = 'value'
-                        this.triggerConditionValue = (match) ? match : [""]
-                    }
-                }
-            }
+        if (this.options.triggerCondition.indexOf('value') == 0) {
+            var match = this.options.triggerCondition.match(/[^[\]]+(?=])/g)
+            this.triggerCondition = 'value'
+            this.triggerConditionValue = (match) ? match : [""]
         }
 
         this.triggerParent = undefined
@@ -53,7 +49,7 @@
         }
 
         var self = this
-        $el.on('oc.triggerOn.update', function (e) {
+        $el.on('oc.triggerOn.update', function(e){
             e.stopPropagation()
             self.onConditionChanged()
         })
@@ -61,7 +57,7 @@
         self.onConditionChanged()
     }
 
-    TriggerOn.prototype.onConditionChanged = function () {
+    TriggerOn.prototype.onConditionChanged = function() {
         if (this.triggerCondition == 'checked') {
             this.updateTarget(!!$(this.options.trigger + ':checked', this.triggerParent).length)
         }
@@ -80,10 +76,10 @@
             }
 
             var self = this
-            trigger.each(function () {
+            trigger.each(function() {
                 var triggerValue = $(this).val();
 
-                $.each($.isArray(triggerValue) ? triggerValue : [triggerValue], function (key, val) {
+                $.each($.isArray(triggerValue) ? triggerValue : [triggerValue], function(key, val) {
                     triggered = $.inArray(val, self.triggerConditionValue) != -1
                     return !triggered
                 })
@@ -95,11 +91,11 @@
         }
     }
 
-    TriggerOn.prototype.updateTarget = function (status) {
+    TriggerOn.prototype.updateTarget = function(status) {
         var self = this,
             actions = this.options.triggerAction.split('|')
 
-        $.each(actions, function (index, action) {
+        $.each(actions, function(index, action) {
             self.updateTargetAction(action, status)
         })
 
@@ -108,7 +104,7 @@
         this.$el.trigger('oc.triggerOn.afterUpdate', status)
     }
 
-    TriggerOn.prototype.updateTargetAction = function (action, status) {
+    TriggerOn.prototype.updateTargetAction = function(action, status) {
         if (action == 'show') {
             this.$el
                 .toggleClass('hide', !status)
@@ -150,12 +146,11 @@
         }
     }
 
-    TriggerOn.prototype.fixButtonClasses = function () {
+    TriggerOn.prototype.fixButtonClasses = function() {
         var group = this.$el.closest('.btn-group')
 
-        if (group.length > 0 && this.$el.is(':last-child')) {
+        if (group.length > 0 && this.$el.is(':last-child'))
             this.$el.prev().toggleClass('last', this.$el.hasClass('hide'))
-        }
     }
 
     TriggerOn.DEFAULTS = {
@@ -176,9 +171,7 @@
             var data  = $this.data('oc.triggerOn')
             var options = $.extend({}, TriggerOn.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) {
-                $this.data('oc.triggerOn', (data = new TriggerOn(this, options)))
-            }
+            if (!data) $this.data('oc.triggerOn', (data = new TriggerOn(this, options)))
         })
     }
 
@@ -195,7 +188,7 @@
     // TRIGGERON DATA-API
     // ===============
 
-    $(document).render(function () {
+    $(document).render(function(){
         $('[data-trigger]').triggerOn()
     })
 

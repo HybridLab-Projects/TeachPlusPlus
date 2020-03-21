@@ -1,11 +1,10 @@
 /*
- * Extends the fancy tabs layout with expand controls in the tab
- * form sections. See main Builder page for example.
+ * Extends the fancy tabs layout with expand controls in the tab 
+ * form sections. See main Builder page for example. 
  * TODO: A similar layout is used in the CMS, Pages and Builder areas,
  * but only Builder uses this class.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
@@ -21,7 +20,7 @@
     TabFormExpandControls.prototype = Object.create(BaseProto)
     TabFormExpandControls.prototype.constructor = TabFormExpandControls
 
-    TabFormExpandControls.prototype.init = function () {
+    TabFormExpandControls.prototype.init = function() {
         this.tabsControlId = this.$tabsControlElement.attr('id')
 
         if (!this.tabsControlId) {
@@ -31,7 +30,7 @@
         this.registerHandlers()
     }
 
-    TabFormExpandControls.prototype.dispose = function () {
+    TabFormExpandControls.prototype.dispose = function() {
         this.unregisterHandlers()
 
         this.$tabsControlElement = null
@@ -39,33 +38,32 @@
         BaseProto.dispose.call(this)
     }
 
-    TabFormExpandControls.prototype.registerHandlers = function () {
+    TabFormExpandControls.prototype.registerHandlers = function() {
         this.$tabsControlElement.on('initTab.oc.tab', this.proxy(this.initTab))
         this.$tabsControlElement.on('click', '[data-control="tabless-collapse-icon"]', this.proxy(this.tablessCollapseClicked))
         this.$tabsControlElement.on('click', '[data-control="primary-collapse-icon"]', this.proxy(this.primaryCollapseClicked))
     }
 
-    TabFormExpandControls.prototype.unregisterHandlers = function () {
+    TabFormExpandControls.prototype.unregisterHandlers = function() {
         this.$tabsControlElement.off('initTab.oc.tab', this.proxy(this.initTab))
         this.$tabsControlElement.off('click', '[data-control="tabless-collapse-icon"]', this.proxy(this.tablessCollapseClicked))
         this.$tabsControlElement.off('click', '[data-control="primary-collapse-icon"]', this.proxy(this.primaryCollapseClicked))
     }
 
-    TabFormExpandControls.prototype.initTab = function (ev, data) {
-        if ($(ev.target).attr('id') != this.tabsControlId) {
+    TabFormExpandControls.prototype.initTab = function(ev, data) {
+        if ($(ev.target).attr('id') != this.tabsControlId)
             return
 
-            var $primaryPanel = this.findPrimaryPanel(data.pane),
+        var $primaryPanel = this.findPrimaryPanel(data.pane),
             $panel = $('.form-tabless-fields', data.pane),
             $secondaryPanel = this.findSecondaryPanel(data.pane),
             hasSecondaryTabs = $secondaryPanel.length > 0
 
-            $secondaryPanel.addClass('secondary-content-tabs')
-            $panel.append(this.createTablessCollapseIcon())
+        $secondaryPanel.addClass('secondary-content-tabs')
+        $panel.append(this.createTablessCollapseIcon())
 
-            if (!hasSecondaryTabs) {
-                $('.tab-pane', $primaryPanel).addClass('pane-compact')
-            }
+        if (!hasSecondaryTabs) {
+            $('.tab-pane', $primaryPanel).addClass('pane-compact')
         }
 
         $('.nav-tabs', $primaryPanel).addClass('master-area')
@@ -90,7 +88,7 @@
         }
     }
 
-    TabFormExpandControls.prototype.tablessCollapseClicked = function (ev) {
+    TabFormExpandControls.prototype.tablessCollapseClicked = function(ev) {
         var $panel = $(ev.target).closest('.form-tabless-fields')
 
         $panel.toggleClass('collapsed')
@@ -101,7 +99,7 @@
         return false
     }
 
-    TabFormExpandControls.prototype.primaryCollapseClicked = function (ev) {
+    TabFormExpandControls.prototype.primaryCollapseClicked = function(ev) {
         var $pane = $(ev.target).closest('.tab-pane'),
             $primaryPanel = this.findPrimaryPanel($pane),
             $secondaryPanel = this.findSecondaryPanel($pane)
@@ -115,31 +113,31 @@
         return false
     }
 
-    TabFormExpandControls.prototype.updateUi = function () {
+    TabFormExpandControls.prototype.updateUi = function() {
         $(window).trigger('oc.updateUi')
     }
 
-    TabFormExpandControls.prototype.createTablessCollapseIcon = function () {
+    TabFormExpandControls.prototype.createTablessCollapseIcon = function() {
         return $('<a href="javascript:;" class="tab-collapse-icon tabless" data-control="tabless-collapse-icon"><i class="icon-chevron-up"></i></a>')
     }
 
-    TabFormExpandControls.prototype.createPrimaryCollapseIcon = function () {
+    TabFormExpandControls.prototype.createPrimaryCollapseIcon = function() {
         return $('<a href="javascript:;" class="tab-collapse-icon primary" data-control="primary-collapse-icon"><i class="icon-chevron-down"></i></a>')
     }
 
-    TabFormExpandControls.prototype.generateStorageKey = function (section) {
+    TabFormExpandControls.prototype.generateStorageKey = function(section) {
         return 'oc' + section + this.tabsControlId.replace('-', '') + 'collapsed'
     }
 
-    TabFormExpandControls.prototype.findPrimaryPanel = function (pane) {
+    TabFormExpandControls.prototype.findPrimaryPanel = function(pane) {
         return $(pane).find('.control-tabs.primary-tabs')
     }
 
-    TabFormExpandControls.prototype.findSecondaryPanel = function (pane) {
+    TabFormExpandControls.prototype.findSecondaryPanel = function(pane) {
         return $(pane).find('.control-tabs.secondary-tabs')
     }
 
-    TabFormExpandControls.prototype.getLocalStorageValue = function (section, defaultValue) {
+    TabFormExpandControls.prototype.getLocalStorageValue = function(section, defaultValue) {
         var key = this.generateStorageKey(section)
 
         if (typeof(localStorage) !== 'undefined') {
@@ -149,7 +147,7 @@
         return defaultValue
     }
 
-    TabFormExpandControls.prototype.setLocalStorageValue = function (section, value) {
+    TabFormExpandControls.prototype.setLocalStorageValue = function(section, value) {
         var key = this.generateStorageKey(section)
 
         if (typeof(localStorage) !== 'undefined') {

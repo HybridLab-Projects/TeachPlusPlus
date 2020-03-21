@@ -13,17 +13,16 @@
  * Events
  * - open.oc.list - this event is triggered on the list element when an item is clicked.
  *
- * Dependences:
+ * Dependences: 
  * - Null
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // FILELIST CLASS DEFINITION
     // ============================
 
-    var FileList = function (element, options) {
+    var FileList = function(element, options) {
         this.options   = options
         this.$el       = $(element)
 
@@ -34,17 +33,17 @@
         ignoreItemClick: false
     }
 
-    FileList.prototype.init = function () {
+    FileList.prototype.init = function (){
         var self = this
 
-        this.$el.on('click', 'li.group > h4 > a, li.group > div.group', function () {
+        this.$el.on('click', 'li.group > h4 > a, li.group > div.group', function() {
             self.toggleGroup($(this).closest('li'))
 
             return false;
         });
 
         if (!this.options.ignoreItemClick) {
-            this.$el.on('click', 'li.item > a', function (event) {
+            this.$el.on('click', 'li.item > a', function(event) {
                 var e = $.Event('open.oc.list', {relatedTarget: $(this).parent().get(0), clickEvent: event})
                 self.$el.trigger(e, this)
 
@@ -55,21 +54,21 @@
         this.$el.on('ajaxUpdate', $.proxy(this.update, this))
     }
 
-    FileList.prototype.toggleGroup = function (group) {
+    FileList.prototype.toggleGroup = function(group) {
         var $group = $(group);
 
         $group.attr('data-status') == 'expanded' ?
-            this.collapseGroup($group) :
+            this.collapseGroup($group) : 
             this.expandGroup($group)
     }
 
-    FileList.prototype.collapseGroup = function (group) {
-        var
+    FileList.prototype.collapseGroup = function(group) {
+        var 
             $list = $('> ul, > div.subitems', group),
             self = this;
 
         $list.css('overflow', 'hidden')
-        $list.animate({'height': 0}, { duration: 100, queue: false, complete: function () {
+        $list.animate({'height': 0}, { duration: 100, queue: false, complete: function() {
             $list.css({
                 'overflow': 'visible',
                 'display': 'none'
@@ -81,8 +80,8 @@
         this.sendGroupStatusRequest(group, 0);
     }
 
-    FileList.prototype.expandGroup = function (group) {
-        var
+    FileList.prototype.expandGroup = function(group) {
+        var 
             $list = $('> ul, > div.subitems', group),
             self = this;
 
@@ -91,7 +90,7 @@
             'display': 'block',
             'height': 0
         })
-        $list.animate({'height': $list[0].scrollHeight}, { duration: 100, queue: false, complete: function () {
+        $list.animate({'height': $list[0].scrollHeight}, { duration: 100, queue: false, complete: function() {
             $list.css({
                 'overflow': 'visible',
                 'height': 'auto'
@@ -103,30 +102,27 @@
         this.sendGroupStatusRequest(group, 1);
     }
 
-    FileList.prototype.sendGroupStatusRequest = function (group, status) {
+    FileList.prototype.sendGroupStatusRequest = function(group, status) {
         if (this.options.groupStatusHandler !== undefined) {
             var groupId = $(group).data('group-id')
-            if (groupId === undefined) {
+            if (groupId === undefined)
                 groupId = $('> h4 a', group).text();
-            }
 
             $(group).request(this.options.groupStatusHandler, {data: {group: groupId, status: status}})
         }
     }
 
-    FileList.prototype.markActive = function (dataId) {
+    FileList.prototype.markActive = function(dataId) {
         $('li.item', this.$el).removeClass('active')
-        if (dataId) {
+        if (dataId)
             $('li.item[data-id="'+dataId+'"]', this.$el).addClass('active')
 
-            this.dataId = dataId
-        }
+        this.dataId = dataId
     }
 
-    FileList.prototype.update = function () {
-        if (this.dataId !== undefined) {
+    FileList.prototype.update = function() {
+        if (this.dataId !== undefined)
             this.markActive(this.dataId)
-        }
     }
 
     // FILELIST PLUGIN DEFINITION
@@ -142,16 +138,13 @@
             var data    = $this.data('oc.fileList')
             var options = $.extend({}, FileList.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) {
-                $this.data('oc.fileList', (data = new FileList(this, options)))
-                if (typeof option == 'string') {
-                    var methodArgs = [];
-                    for (var i=1; i<args.length; i++) {
-                        methodArgs.push(args[i])
+            if (!data) $this.data('oc.fileList', (data = new FileList(this, options)))
+            if (typeof option == 'string') { 
+                var methodArgs = [];
+                for (var i=1; i<args.length; i++)
+                    methodArgs.push(args[i])
 
-                        data[option].apply(data, methodArgs)
-                    }
-                }
+                data[option].apply(data, methodArgs)
             }
         })
     }

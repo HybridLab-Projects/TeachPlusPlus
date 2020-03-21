@@ -4,8 +4,7 @@
  * Documentation: ../docs/popover.md
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Popover = function (element, options) {
 
@@ -17,56 +16,51 @@
         this.show()
     }
 
-    Popover.prototype.hide = function () {
+    Popover.prototype.hide = function() {
         var e = $.Event('hiding.oc.popover', {relatedTarget: this.$el})
         this.$el.trigger(e, this)
-        if (e.isDefaultPrevented()) {
+        if (e.isDefaultPrevented())
             return
 
-            this.$container.removeClass('in')
-            if (this.$overlay) {
-                this.$overlay.removeClass('in')
+        this.$container.removeClass('in')
+        if (this.$overlay) this.$overlay.removeClass('in')
 
-                this.disposeControls()
+        this.disposeControls()
 
-                $.support.transition && this.$container.hasClass('fade')
-                ? this.$container
-                 .one($.support.transition.end, $.proxy(this.hidePopover, this))
-                 .emulateTransitionEnd(300)
-                : this.hidePopover()
-            }
-        }
+        $.support.transition && this.$container.hasClass('fade')
+         ? this.$container
+             .one($.support.transition.end, $.proxy(this.hidePopover, this))
+             .emulateTransitionEnd(300)
+         : this.hidePopover()
     }
 
-    Popover.prototype.disposeControls = function () {
+    Popover.prototype.disposeControls = function() {
         if (this.$container) {
             $.oc.foundation.controlUtils.disposeControls(this.$container.get(0))
         }
     }
 
-    Popover.prototype.hidePopover = function () {
+    Popover.prototype.hidePopover = function() {
         this.$container.remove();
-        if (this.$overlay) {
-            this.$overlay.remove()
+        if (this.$overlay) this.$overlay.remove()
 
-            this.$el.removeClass('popover-highlight')
-            this.$el.trigger('hide.oc.popover')
+        this.$el.removeClass('popover-highlight')
+        this.$el.trigger('hide.oc.popover')
 
-            this.$overlay = false
-            this.$container = false
+        this.$overlay = false
+        this.$container = false
 
-            this.$el.data('oc.popover', null)
-            $(document.body).removeClass('popover-open')
+        this.$el.data('oc.popover', null)
+        $(document.body).removeClass('popover-open')
 
-            $(document).unbind('mousedown', this.docClickHandler);
-        }
+        $(document).unbind('mousedown', this.docClickHandler);
         $(document).off('.oc.popover')
 
         this.docClickHandler = null
         this.options.onCheckDocumentClickTarget = null
     }
 
-    Popover.prototype.show = function (options) {
+    Popover.prototype.show = function(options) {
         var self = this
 
         /*
@@ -74,17 +68,15 @@
          */
         var e = $.Event('showing.oc.popover', { relatedTarget: this.$el })
         this.$el.trigger(e, this)
-        if (e.isDefaultPrevented()) {
-            return
+        if (e.isDefaultPrevented()) return
 
         /*
          * Create the popover container and overlay
          */
-            this.$container = $('<div />').addClass('control-popover')
+        this.$container = $('<div />').addClass('control-popover')
 
-            if (this.options.containerClass) {
-                this.$container.addClass(this.options.containerClass)
-            }
+        if (this.options.containerClass) {
+            this.$container.addClass(this.options.containerClass)
         }
 
         if (this.options.useAnimation) {
@@ -123,7 +115,7 @@
          */
         this.reposition()
 
-        $(window).on('resize', function () {
+        $(window).on('resize', function() {
             if (self.$container) {
                 self.reposition()
             }
@@ -133,48 +125,45 @@
          * Display the popover
          */
         this.$container.addClass('in')
-        if (this.$overlay) {
-            this.$overlay.addClass('in')
+        if (this.$overlay) this.$overlay.addClass('in')
 
-            $(document.body).addClass('popover-open')
-            var showEvent = jQuery.Event('show.oc.popover', { relatedTarget: this.$container.get(0) })
-            this.$el.trigger(showEvent)
+        $(document.body).addClass('popover-open')
+        var showEvent = jQuery.Event('show.oc.popover', { relatedTarget: this.$container.get(0) })
+        this.$el.trigger(showEvent)
 
         /*
          * Bind events
          */
-            this.$container.on('close.oc.popover', function (e) {
-                self.hide()
-            })
+        this.$container.on('close.oc.popover', function(e){
+           self.hide()
+        })
 
-            this.$container.on('click', '[data-dismiss=popover]', function (e) {
-                self.hide()
-                return false
-            })
+        this.$container.on('click', '[data-dismiss=popover]', function(e){
+           self.hide()
+           return false
+        })
 
-            this.docClickHandler = $.proxy(this.onDocumentClick, this)
-            $(document).bind('mousedown', this.docClickHandler);
-        }
+        this.docClickHandler = $.proxy(this.onDocumentClick, this)
+        $(document).bind('mousedown', this.docClickHandler);
 
         if (this.options.closeOnEsc) {
-            $(document).on('keyup.oc.popover', function (e) {
-                if ($(e.target).hasClass('select2-offscreen')) {
-                    return false
+            $(document).on('keyup.oc.popover', function(e){
+               if ($(e.target).hasClass('select2-offscreen'))
+                   return false
 
-                    if (!self.options.closeOnEsc) { // The value of the option could be changed after the popover is displayed
-                        return false
-                    }
-                }
+               if (!self.options.closeOnEsc) { // The value of the option could be changed after the popover is displayed
+                   return false
+               }
 
-                if (e.key === 'Escape') {
-                    self.hide()
-                    return false
-                }
+               if (e.key === 'Escape') {
+                   self.hide()
+                   return false
+               }
             })
         }
     }
 
-    Popover.prototype.reposition = function () {
+    Popover.prototype.reposition = function() {
         var
             placement = this.calcPlacement(),
             position = this.calcPosition(placement)
@@ -199,7 +188,7 @@
         return this.options.content
     }
 
-    Popover.prototype.calcDimensions = function () {
+    Popover.prototype.calcDimensions = function() {
         var
             documentWidth = $(document).width(),
             documentHeight = $(document).height(),
@@ -223,60 +212,56 @@
         }
     }
 
-    Popover.prototype.fitsLeft = function (dimensions) {
+    Popover.prototype.fitsLeft = function(dimensions) {
         return dimensions.spaceLeft >= dimensions.containerWidth &&
                dimensions.spaceHorizontalBottom >= dimensions.containerHeight
     }
 
-    Popover.prototype.fitsRight = function (dimensions) {
+    Popover.prototype.fitsRight = function(dimensions) {
         return dimensions.spaceRight >= dimensions.containerWidth &&
                dimensions.spaceHorizontalBottom >= dimensions.containerHeight
     }
 
-    Popover.prototype.fitsBottom = function (dimensions) {
+    Popover.prototype.fitsBottom = function(dimensions) {
         return dimensions.spaceBottom >= dimensions.containerHeight &&
                dimensions.spaceVerticalRight >= dimensions.containerWidth
     }
 
-    Popover.prototype.fitsTop = function (dimensions) {
+    Popover.prototype.fitsTop = function(dimensions) {
         return dimensions.spaceTop >= dimensions.containerHeight &&
                dimensions.spaceVerticalRight >= dimensions.containerWidth
     }
 
-    Popover.prototype.calcPlacement = function () {
-        var
+    Popover.prototype.calcPlacement = function() {
+        var 
             placement = this.options.placement,
             dimensions = this.calcDimensions();
 
-        if (placement == 'center') {
+        if (placement == 'center')
             return placement
 
-            if (placement != 'bottom' && placement != 'top' && placement != 'left' && placement != 'right') {
-                placement = 'bottom'
+        if (placement != 'bottom' && placement != 'top' && placement != 'left' && placement != 'right')
+            placement = 'bottom'
 
-                var placementFunctions = {
-                    top: this.fitsTop,
-                    bottom: this.fitsBottom,
-                    left: this.fitsLeft,
-                    right: this.fitsRight
-                }
+        var placementFunctions = {
+            top: this.fitsTop,
+            bottom: this.fitsBottom,
+            left: this.fitsLeft,
+            right: this.fitsRight
+        }
 
-                if (placementFunctions[placement](dimensions)) {
-                    return placement
+        if (placementFunctions[placement](dimensions))
+            return placement
 
-                    for (var index in placementFunctions) {
-                        if (placementFunctions[index](dimensions)) {
-                            return index
-                        }
-                    }
-                }
-            }
+        for (var index in placementFunctions) {
+            if (placementFunctions[index](dimensions))
+                return index
         }
 
         return this.options.fallbackPlacement
     }
 
-    Popover.prototype.calcPosition = function (placement) {
+    Popover.prototype.calcPosition = function(placement) {
         var
             dimensions = this.calcDimensions(),
             result
@@ -302,40 +287,36 @@
                 var windowHeight = $(window).height()
                 result = {x: (dimensions.documentWidth/2 - dimensions.containerWidth/2), y: (windowHeight/2 - dimensions.containerHeight/2)}
 
-                if (result.y < 40) {
+                if (result.y < 40)
                     result.y = 40
-                    break;
-                }
+            break;
         }
 
-        if (!this.options.container) {
+        if (!this.options.container)
             return result
 
-            var
+        var
             $container = $(this.options.container),
             containerOffset = $container.offset()
 
-            result.x -= containerOffset.left
-            result.y -= containerOffset.top
+        result.x -= containerOffset.left
+        result.y -= containerOffset.top
 
-            return result
-        }
+        return result
     }
 
-    Popover.prototype.onDocumentClick = function (e) {
-        if (!this.options.closeOnPageClick) {
+    Popover.prototype.onDocumentClick = function(e) {
+        if (!this.options.closeOnPageClick)
             return
 
-            if (this.options.onCheckDocumentClickTarget && this.options.onCheckDocumentClickTarget(e.target)) {
-                return
-            }
+        if (this.options.onCheckDocumentClickTarget && this.options.onCheckDocumentClickTarget(e.target)) {
+            return
         }
 
-        if ($.contains(this.$container.get(0), e.target)) {
+        if ($.contains(this.$container.get(0), e.target))
             return
 
-            this.hide();
-        }
+        this.hide();
     }
 
     Popover.DEFAULTS = {
@@ -369,22 +350,19 @@
             var options = $.extend({}, Popover.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
             if (!data) {
-                if (typeof option == 'string') {
+                if (typeof option == 'string')
                     return;
-                }
 
                 $this.data('oc.popover', (data = new Popover(this, options)))
             } else {
-                if (typeof option != 'string') {
+                if (typeof option != 'string')
                     return;
-                }
 
                 var methodArgs = [];
-                for (var i=1; i<args.length; i++) {
+                for (var i=1; i<args.length; i++)
                     methodArgs.push(args[i])
 
-                    data[option].apply(data, methodArgs)
-                }
+                data[option].apply(data, methodArgs)
             }
         })
     }
@@ -402,7 +380,7 @@
     // POPOVER DATA-API
     // ===============
 
-    $(document).on('click', '[data-control=popover]', function (e) {
+    $(document).on('click', '[data-control=popover]', function(e){
         $(this).ocPopover()
 
         return false;

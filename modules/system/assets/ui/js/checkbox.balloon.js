@@ -1,12 +1,11 @@
 /*
- * Balloon selector control.
+ * Balloon selector control. 
  *
  * Data attributes:
  * - data-control="balloon-selector" - enables the plugin
  *
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var BalloonSelector = function (element, options) {
 
@@ -16,7 +15,7 @@
         this.options = options || {};
 
         var self = this;
-        $('li', this.$el).click(function () {
+        $('li', this.$el).click(function(){
             if (self.$el.hasClass('control-disabled')) {
                 return
             }
@@ -44,9 +43,7 @@
             var data  = $this.data('oc.balloon-selector')
             var options = $.extend({}, BalloonSelector.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) {
-                $this.data('oc.balloon-selector', (data = new BalloonSelector(this, options)))
-            }
+            if (!data) $this.data('oc.balloon-selector', (data = new BalloonSelector(this, options)))
         })
     }
 
@@ -63,7 +60,7 @@
     // BALLOON SELECTOR DATA-API
     // ===================================
 
-    $(document).on('render', function () {
+    $(document).on('render', function(){
         $('div[data-control=balloon-selector]').balloonSelector()
     })
 

@@ -1,50 +1,46 @@
 /*
  * Inspector editor base class.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // NAMESPACES
     // ============================
 
-    if ($.oc === undefined) {
+    if ($.oc === undefined)
         $.oc = {}
 
-        if ($.oc.inspector === undefined) {
-            $.oc.inspector = {}
+    if ($.oc.inspector === undefined)
+        $.oc.inspector = {}
 
-            if ($.oc.inspector.propertyEditors === undefined) {
-                $.oc.inspector.propertyEditors = {}
+    if ($.oc.inspector.propertyEditors === undefined)
+        $.oc.inspector.propertyEditors = {}
 
-            // CLASS DEFINITION
-            // ============================
+    // CLASS DEFINITION
+    // ============================
 
-                var Base = $.oc.foundation.base,
-                BaseProto = Base.prototype
+    var Base = $.oc.foundation.base,
+        BaseProto = Base.prototype
 
-                var BaseEditor = function (inspector, propertyDefinition, containerCell, group) {
-                    this.inspector = inspector
-                    this.propertyDefinition = propertyDefinition
-                    this.containerCell = containerCell
-                    this.containerRow = containerCell.parentNode
-                    this.parentGroup = group
-                    this.group = null // Group created by a grouped editor, for example by the set editor
-                    this.childInspector = null
-                    this.validationSet = null
-                    this.disposed = false
+    var BaseEditor = function(inspector, propertyDefinition, containerCell, group) {
+        this.inspector = inspector
+        this.propertyDefinition = propertyDefinition
+        this.containerCell = containerCell
+        this.containerRow = containerCell.parentNode
+        this.parentGroup = group
+        this.group = null // Group created by a grouped editor, for example by the set editor
+        this.childInspector = null
+        this.validationSet = null
+        this.disposed = false
 
-                    Base.call(this)
+        Base.call(this)
 
-                    this.init()
-                }
-            }
-        }
+        this.init()
     }
 
     BaseEditor.prototype = Object.create(BaseProto)
     BaseEditor.prototype.constructor = Base
 
-    BaseEditor.prototype.dispose = function () {
+    BaseEditor.prototype.dispose = function() {
         this.disposed = true // After this point editors can't rely on any DOM references
 
         this.disposeValidation()
@@ -65,27 +61,27 @@
         BaseProto.dispose.call(this)
     }
 
-    BaseEditor.prototype.init = function () {
+    BaseEditor.prototype.init = function() {
         this.build()
         this.registerHandlers()
         this.initValidation()
     }
 
-    BaseEditor.prototype.build = function () {
+    BaseEditor.prototype.build = function() {
         return null
     }
 
-    BaseEditor.prototype.isDisposed = function () {
+    BaseEditor.prototype.isDisposed = function() {
         return this.disposed
     }
 
-    BaseEditor.prototype.registerHandlers = function () {
+    BaseEditor.prototype.registerHandlers = function() {
     }
 
-    BaseEditor.prototype.onInspectorPropertyChanged = function (property, value) {
+    BaseEditor.prototype.onInspectorPropertyChanged = function(property, value) {
     }
 
-    BaseEditor.prototype.notifyChildSurfacesPropertyChanged = function (property, value) {
+    BaseEditor.prototype.notifyChildSurfacesPropertyChanged = function(property, value) {
         if (!this.hasChildSurface()) {
             return
         }
@@ -93,45 +89,45 @@
         this.childInspector.notifyEditorsPropertyChanged(property, value)
     }
 
-    BaseEditor.prototype.focus = function () {
+    BaseEditor.prototype.focus = function() {
     }
 
-    BaseEditor.prototype.hasChildSurface = function () {
+    BaseEditor.prototype.hasChildSurface = function() {
         return this.childInspector !== null
     }
 
-    BaseEditor.prototype.getRootSurface = function () {
+    BaseEditor.prototype.getRootSurface = function() {
         return this.inspector.getRootSurface()
     }
 
-    BaseEditor.prototype.getPropertyPath = function () {
+    BaseEditor.prototype.getPropertyPath = function() {
         return this.inspector.getPropertyPath(this.propertyDefinition.property)
     }
 
     /**
-     * Updates displayed value in the editor UI. The value is already set
+     * Updates displayed value in the editor UI. The value is already set 
      * in the Inspector and should be loaded from Inspector.
      */
-    BaseEditor.prototype.updateDisplayedValue = function (value) {
+    BaseEditor.prototype.updateDisplayedValue = function(value) {
     }
 
-    BaseEditor.prototype.getPropertyName = function () {
+    BaseEditor.prototype.getPropertyName = function() {
         return this.propertyDefinition.property
     }
 
-    BaseEditor.prototype.getUndefinedValue = function () {
+    BaseEditor.prototype.getUndefinedValue = function() {
         return this.propertyDefinition.default === undefined ? undefined : this.propertyDefinition.default
     }
 
-    BaseEditor.prototype.throwError = function (errorMessage) {
+    BaseEditor.prototype.throwError = function(errorMessage) {
         throw new Error(errorMessage + ' Property: ' + this.propertyDefinition.property)
     }
 
-    BaseEditor.prototype.getInspectableElement = function () {
+    BaseEditor.prototype.getInspectableElement = function() {
         return this.getRootSurface().getInspectableElement()
     }
 
-    BaseEditor.prototype.isEmptyValue = function (value) {
+    BaseEditor.prototype.isEmptyValue = function(value) {
         return value === undefined
             || value === null
             || (typeof value == 'object' && $.isEmptyObject(value) )
@@ -143,19 +139,19 @@
     // Validation
     //
 
-    BaseEditor.prototype.initValidation = function () {
+    BaseEditor.prototype.initValidation = function() {
         this.validationSet = new $.oc.inspector.validationSet(this.propertyDefinition, this.propertyDefinition.property)
     }
 
-    BaseEditor.prototype.disposeValidation = function () {
+    BaseEditor.prototype.disposeValidation = function() {
         this.validationSet.dispose()
     }
 
-    BaseEditor.prototype.getValueToValidate = function () {
+    BaseEditor.prototype.getValueToValidate = function() {
         return this.inspector.getPropertyValue(this.propertyDefinition.property)
     }
 
-    BaseEditor.prototype.validate = function (silentMode) {
+    BaseEditor.prototype.validate = function(silentMode) {
         var value = this.getValueToValidate()
 
         if (value === undefined) {
@@ -173,7 +169,7 @@
         return true
     }
 
-    BaseEditor.prototype.markInvalid = function () {
+    BaseEditor.prototype.markInvalid = function() {
         $.oc.foundation.element.addClass(this.containerRow, 'invalid')
         this.inspector.getGroupManager().markGroupRowInvalid(this.parentGroup, this.inspector.getRootTable())
 
@@ -185,26 +181,26 @@
     // External editor
     //
 
-    BaseEditor.prototype.supportsExternalParameterEditor = function () {
+    BaseEditor.prototype.supportsExternalParameterEditor = function() {
         return true
     }
 
-    BaseEditor.prototype.onExternalPropertyEditorHidden = function () {
+    BaseEditor.prototype.onExternalPropertyEditorHidden = function() {
     }
 
     //
     // Grouping
     //
 
-    BaseEditor.prototype.isGroupedEditor = function () {
+    BaseEditor.prototype.isGroupedEditor = function() {
         return false
     }
 
-    BaseEditor.prototype.initControlGroup = function () {
+    BaseEditor.prototype.initControlGroup = function() {
         this.group = this.inspector.getGroupManager().createGroup(this.propertyDefinition.property, this.parentGroup)
     }
 
-    BaseEditor.prototype.createGroupedRow = function (property) {
+    BaseEditor.prototype.createGroupedRow = function(property) {
         var row = this.inspector.buildRow(property, this.group),
             groupedClass = this.inspector.getGroupManager().isGroupExpanded(this.group) ? 'expanded' : 'collapsed'
 

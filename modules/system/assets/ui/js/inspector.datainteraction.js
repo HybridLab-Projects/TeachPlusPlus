@@ -1,11 +1,10 @@
 /*
  * Inspector data interaction class.
  *
- * Provides methods for loading and writing Inspector configuration
+ * Provides methods for loading and writing Inspector configuration 
  * and values form and to inspectable elements.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // CLASS DEFINITION
     // ============================
@@ -13,7 +12,7 @@
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
-    var DataInteraction = function (element) {
+    var DataInteraction = function(element) {
         this.element = element
 
         Base.call(this)
@@ -22,17 +21,17 @@
     DataInteraction.prototype = Object.create(BaseProto)
     DataInteraction.prototype.constructor = Base
 
-    DataInteraction.prototype.dispose = function () {
+    DataInteraction.prototype.dispose = function() {
         this.element = null
 
         BaseProto.dispose.call(this)
     }
 
-    DataInteraction.prototype.getElementValuesInput = function () {
+    DataInteraction.prototype.getElementValuesInput = function() {
         return this.element.querySelector('input[data-inspector-values]')
     }
 
-    DataInteraction.prototype.normalizePropertyCode = function (code, configuration) {
+    DataInteraction.prototype.normalizePropertyCode = function(code, configuration) {
         var lowerCaseCode = code.toLowerCase()
 
         for (var index in configuration) {
@@ -46,7 +45,7 @@
         return code
     }
 
-    DataInteraction.prototype.loadValues = function (configuration) {
+    DataInteraction.prototype.loadValues = function(configuration) {
         var valuesField = this.getElementValuesInput()
 
         if (valuesField) {
@@ -71,8 +70,8 @@
                 // Important - values contained in data-property-xxx attributes are
                 // considered strings and never parsed with JSON. The use of the
                 // data-property-xxx attributes is very limited - they're only
-                // used in Pages for creating snippets from partials, where properties
-                // are created with a table UI widget, which doesn't allow creating
+                // used in Pages for creating snippets from partials, where properties 
+                // are created with a table UI widget, which doesn't allow creating 
                 // properties of any complex types.
                 //
                 // There is no a technically reliable way to determine when a string
@@ -91,13 +90,13 @@
         return values
     }
 
-    DataInteraction.prototype.loadConfiguration = function (onComplete) {
+    DataInteraction.prototype.loadConfiguration = function(onComplete) {
         var configurationField = this.element.querySelector('input[data-inspector-config]'),
             result = {
                 configuration: {},
                 title: null,
                 description: null
-        },
+            },
             $element = $(this.element)
 
         result.title = $element.data('inspector-title')
@@ -117,10 +116,9 @@
         $.oc.stripeLoadIndicator.show()
         $form.request('onGetInspectorConfiguration', {
             data: data
-        }).done(function inspectorConfigurationRequestDoneClosure(data)
-        {
+        }).done(function inspectorConfigurationRequestDoneClosure(data) {
             self.configurartionRequestDone(data, onComplete, result)
-        }).always(function () {
+        }).always(function() {
             $.oc.stripeLoadIndicator.hide()
         })
     }
@@ -129,16 +127,16 @@
     // Internal methods
     //
 
-    DataInteraction.prototype.parseConfiguration = function (configuration) {
+    DataInteraction.prototype.parseConfiguration = function(configuration) {
         if (!$.isArray(configuration) && !$.isPlainObject(configuration)) {
             if ($.trim(configuration) === 0) {
                 return {}
             }
 
             try {
-                return JSON.parse(configuration)
+               return JSON.parse(configuration)
             }
-            catch (err) {
+            catch(err) {
                 throw new Error('Error parsing Inspector configuration. ' + err)
             }
         }
@@ -147,7 +145,7 @@
         }
     }
 
-    DataInteraction.prototype.configurartionRequestDone = function (data, onComplete, result) {
+    DataInteraction.prototype.configurartionRequestDone = function(data, onComplete, result) {
         result.configuration = this.parseConfiguration(data.configuration.properties)
 
         if (data.configuration.title !== undefined) {

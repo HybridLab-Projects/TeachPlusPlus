@@ -14,3 +14,7 @@ navigation:
                 label: Subjects
                 url: teachplusplus/teachers/subjects
                 icon: icon-list
+    feedback:
+        label: Feedbacks
+        url: teachplusplus/teachers/feedbacks
+        icon: icon-comment

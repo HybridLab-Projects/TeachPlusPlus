@@ -10,13 +10,12 @@
  * Dependancies:
  * - Isotope (isotope.js)
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // REPORTCONTAINER CLASS DEFINITION
     // ============================
 
-    var ReportContainer = function (element, options) {
+    var ReportContainer = function(element, options) {
         this.options = options
         this.$el= $(element)
         this.$form = this.$el.closest('form')
@@ -31,7 +30,7 @@
         columns: 12
     }
 
-    ReportContainer.prototype.init = function () {
+    ReportContainer.prototype.init = function() {
         var self = this
 
         this.$el.isotope({
@@ -46,7 +45,7 @@
             this.$el.sortable({
                 vertical: false,
                 handle: '.drag-handle',
-                onDrop: function ($item, container, _super) {
+                onDrop: function($item, container, _super) {
                     $item.removeClass('dragged')
                     $('body').removeClass('dragging')
 
@@ -57,7 +56,7 @@
             })
         }
 
-        this.$el.on('hidden.oc.inspector', '[data-inspectable]', function () {
+        this.$el.on('hidden.oc.inspector', '[data-inspectable]', function() {
             var values = $('[data-inspector-values]', this).val(),
                 parsedValues = JSON.parse(values),
                 li = $(this).closest('li').get(0)
@@ -67,8 +66,8 @@
                     'fields': values,
                     'alias': $('[data-widget-alias]', $(this).closest('div.content')).val()
                 },
-                success: function (data) {
-                    this.success(data).done(function () {
+                success: function(data) {
+                    this.success(data).done(function() {
                         li.className = li.className.replace(/width\-[0-9]+/g, '')
                         $(li).addClass('width-'+parsedValues['ocWidgetWidth'])
                         $(li).toggleClass('new-line', parsedValues['ocWidgetNewRow'] == 1)
@@ -80,9 +79,9 @@
             })
         })
 
-        this.$el.on('click', '.content > button.close', function () {
+        this.$el.on('click', '.content > button.close', function() {
             var $btn = $(this)
-            $.oc.confirm($.oc.lang.get('alert.widget_remove_confirm'), function () {
+            $.oc.confirm($.oc.lang.get('alert.widget_remove_confirm'), function() {
                 self.$form.request(self.alias + '::onRemoveWidget', {
                     data: {
                         'alias': $('[data-widget-alias]', $btn.closest('div.content')).val()
@@ -95,16 +94,16 @@
             })
         })
 
-        $(window).on('oc.reportWidgetAdded', function () {
+        $(window).on('oc.reportWidgetAdded', function() {
             self.redraw()
             self.setSortOrders()
         })
 
-        $(window).on('oc.reportWidgetRefresh', function () {
+        $(window).on('oc.reportWidgetRefresh', function() {
             self.redraw()
         })
 
-        window.setTimeout(function () {
+        window.setTimeout(function() {
             self.updateWidth()
             self.redraw()
         }, 200)
@@ -112,7 +111,7 @@
         this.setSortOrders()
     }
 
-    ReportContainer.prototype.updateWidth = function () {
+    ReportContainer.prototype.updateWidth = function() {
         var width = this.$el.width(),
             wrapped = width <= this.options.breakpoint,
             columnWidth = wrapped ? width : width / this.options.columns
@@ -124,7 +123,7 @@
         this.$el.toggleClass('wrapped', wrapped)
     }
 
-    ReportContainer.prototype.redraw = function () {
+    ReportContainer.prototype.redraw = function() {
         this.$el
             .isotope('reloadItems')
             .isotope({ sortBy: 'original-order' })
@@ -136,20 +135,20 @@
         $('> .dropdown', this.$toolbar).toggleClass('dropup', !!$items.length)
     }
 
-    ReportContainer.prototype.setSortOrders = function () {
+    ReportContainer.prototype.setSortOrders = function() {
         this.sortOrders = []
 
         var self = this
-        $('[data-widget-order]', this.$el).each(function () {
+        $('[data-widget-order]', this.$el).each(function() {
             self.sortOrders.push($(this).val())
         })
     }
 
-    ReportContainer.prototype.postSortOrders = function () {
+    ReportContainer.prototype.postSortOrders = function() {
         var aliases = [],
             self = this
 
-        $('[data-widget-alias]', this.$el).each(function () {
+        $('[data-widget-alias]', this.$el).each(function() {
             aliases.push($(this).val())
         })
 
@@ -161,9 +160,9 @@
         })
     }
 
-    ReportContainer.prototype.updateSeparators = function () {
+    ReportContainer.prototype.updateSeparators = function() {
         $('li.item.separator', this.$el).remove()
-        $('li.item.new-line', this.$el).each(function () {
+        $('li.item.new-line', this.$el).each(function() {
             $(this).before('<li class="item separator"></li>')
         })
     }
@@ -173,17 +172,13 @@
 
     var old = $.fn.reportContainer
 
-    $.fn.reportContainer = function (option) {
-        return this.each(function () {
+    $.fn.reportContainer = function(option) {
+        return this.each(function() {
             var $this   = $(this)
             var data    = $this.data('oc.reportContainer')
             var options = $.extend({}, ReportContainer.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.reportContainer', (data = new ReportContainer(this, options)))
-                if (typeof option == 'string') {
-                    data[option].call($this)
-                }
-            }
+            if (!data) $this.data('oc.reportContainer', (data = new ReportContainer(this, options)))
+            if (typeof option == 'string') data[option].call($this)
         })
     }
 
@@ -192,7 +187,7 @@
     // REPORTCONTAINER NO CONFLICT
     // =================
 
-    $.fn.reportContainer.noConflict = function () {
+    $.fn.reportContainer.noConflict = function() {
         $.fn.reportContainer = old
         return this
     }
@@ -200,7 +195,7 @@
     // REPORTCONTAINER DATA-API
     // ===============
 
-    $(document).render(function () {
+    $(document).render(function() {
         $('[data-control="report-container"]').reportContainer()
     })
 

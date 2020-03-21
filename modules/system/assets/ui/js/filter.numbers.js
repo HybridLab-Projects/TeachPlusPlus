@@ -73,23 +73,19 @@
                 scopeName = $scope.data('scope-name')
 
             // Ignore if already opened
-            if ($scope.hasClass('filter-scope-open')) {
-                return
+            if ($scope.hasClass('filter-scope-open')) return
 
             // Ignore if another popover is opened
-                if (null !== self.activeScopeName) {
-                    return
-                    self.$activeScope = $scope
-                    self.activeScopeName = scopeName
-                    self.isActiveScopeDirty = false
+            if (null !== self.activeScopeName) return
+            self.$activeScope = $scope
+            self.activeScopeName = scopeName
+            self.isActiveScopeDirty = false
 
-                    if ($scope.hasClass('range')) {
-                        self.displayPopoverNumberRange($scope)
-                    }
-                    else {
-                        self.displayPopoverNumber($scope)
-                    }
-                }
+            if ($scope.hasClass('range')) {
+                self.displayPopoverNumberRange($scope)
+            }
+            else {
+                self.displayPopoverNumber($scope)
             }
 
             $scope.addClass('filter-scope-open')
@@ -260,7 +256,7 @@
             if (numbers.length > 1) {
                 numbers[1] = numbers[1] && numbers[1].match(numberRegex) ? numbers[1] : null
 
-                if (numbers[0] || numbers[1]) {
+                if(numbers[0] || numbers[1]) {
                     var min = numbers[0] ? numbers[0] : '∞',
                         max = numbers[1] ? numbers[1] : '∞'
 
@@ -269,7 +265,7 @@
                     reset = true
                 }
             }
-            else if (numbers[0]) {
+            else if(numbers[0]) {
                 $setting.text(numbers[0])
             } else {
                 reset = true
@@ -279,7 +275,7 @@
             reset = true
         }
 
-        if (reset) {
+        if(reset) {
             $setting.text(this.getLang('filter.numbers.all', 'all'));
             $scope.removeClass('active')
         } else {

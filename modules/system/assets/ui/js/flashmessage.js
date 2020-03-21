@@ -6,8 +6,7 @@
  * Require:
  *  - bootstrap/transition
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var FlashMessage = function (options, el) {
         var
@@ -28,19 +27,17 @@
 
         $(document.body).append($element)
 
-        setTimeout(function () {
+        setTimeout(function() {
             $element.addClass('in')
         }, 100)
 
         var timer = window.setTimeout(remove, options.interval * 1000)
 
-        function removeElement()
-        {
+        function removeElement() {
             $element.remove()
         }
 
-        function remove()
-        {
+        function remove() {
             window.clearInterval(timer)
 
             $element.removeClass('in')
@@ -61,18 +58,18 @@
     // FLASH MESSAGE PLUGIN DEFINITION
     // ============================
 
-    if ($.oc === undefined) {
+    if ($.oc === undefined)
         $.oc = {}
 
-        $.oc.flashMsg = FlashMessage
+    $.oc.flashMsg = FlashMessage
 
     // FLASH MESSAGE DATA-API
     // ===============
 
-        $(document).render(function () {
-            $('[data-control=flash-message]').each(function () {
-                $.oc.flashMsg($(this).data(), this)
-            })
+    $(document).render(function(){
+        $('[data-control=flash-message]').each(function(){
+            $.oc.flashMsg($(this).data(), this)
         })
-    }
+    })
+
 }(window.jQuery);

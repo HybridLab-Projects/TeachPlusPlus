@@ -6,19 +6,16 @@
  * TODO: implement the search
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // NAMESPACE CHECK
     // ============================
 
-    if ($.oc.table === undefined) {
+    if ($.oc.table === undefined)
         throw new Error("The $.oc.table namespace is not defined. Make sure that the table.js script is loaded.");
-    }
 
-    if ($.oc.table.processor === undefined) {
+    if ($.oc.table.processor === undefined)
         throw new Error("The $.oc.table.processor namespace is not defined. Make sure that the table.processor.base.js script is loaded.");
-    }
 
     // CLASS DEFINITION
     // ============================
@@ -26,7 +23,7 @@
     var Base = $.oc.table.processor.base,
         BaseProto = Base.prototype
 
-    var DropdownProcessor = function (tableObj, columnName, columnConfiguration) {
+    var DropdownProcessor = function(tableObj, columnName, columnConfiguration) {
         //
         // State properties
         //
@@ -53,7 +50,7 @@
     DropdownProcessor.prototype = Object.create(BaseProto)
     DropdownProcessor.prototype.constructor = DropdownProcessor
 
-    DropdownProcessor.prototype.dispose = function () {
+    DropdownProcessor.prototype.dispose = function() {
         this.unregisterListHandlers()
         this.itemClickHandler = null
         this.itemKeyDownHandler = null
@@ -63,8 +60,9 @@
         BaseProto.dispose.call(this)
     }
 
-    DropdownProcessor.prototype.unregisterListHandlers = function () {
-        if (this.itemListElement) {
+    DropdownProcessor.prototype.unregisterListHandlers = function() {
+        if (this.itemListElement)
+        {
             // This processor binds custom click handler to the item list,
             // the standard registerHandlers/unregisterHandlers functionality
             // can't be used here because the element belongs to the document
@@ -78,16 +76,14 @@
     /*
      * Renders the cell in the normal (no edit) mode
      */
-    DropdownProcessor.prototype.renderCell = function (value, cellContentContainer) {
+    DropdownProcessor.prototype.renderCell = function(value, cellContentContainer) {
         var viewContainer = this.createViewContainer(cellContentContainer, '...')
 
-        this.fetchOptions(cellContentContainer.parentNode, function renderCellFetchOptions(options)
-        {
-            if (options[value] !== undefined) {
+        this.fetchOptions(cellContentContainer.parentNode, function renderCellFetchOptions(options) {
+            if (options[value] !== undefined)
                 viewContainer.textContent = options[value]
 
-                cellContentContainer.setAttribute('tabindex', 0)
-            }
+            cellContentContainer.setAttribute('tabindex', 0)
         })
     }
 
@@ -95,7 +91,7 @@
      * This method is called when the cell managed by the processor
      * is focused (clicked or navigated with the keyboard).
      */
-    DropdownProcessor.prototype.onFocus = function (cellElement, isClick) {
+    DropdownProcessor.prototype.onFocus = function(cellElement, isClick) {
         if (this.activeCell === cellElement) {
             this.showDropdown()
             return
@@ -105,9 +101,8 @@
         var cellContentContainer = this.getCellContentContainer(cellElement)
         this.buildEditor(cellElement, cellContentContainer, isClick)
 
-        if (!isClick) {
+        if (!isClick)
             cellContentContainer.focus()
-        }
     }
 
     /*
@@ -115,19 +110,18 @@
      * away from the cell. Processors can update the sell value in this method.
      * Processors must clear the reference to the active cell in this method.
      */
-    DropdownProcessor.prototype.onUnfocus = function () {
-        if (!this.activeCell) {
+    DropdownProcessor.prototype.onUnfocus = function() {
+        if (!this.activeCell)
             return
 
-            this.unregisterListHandlers()
+        this.unregisterListHandlers()
 
-            this.hideDropdown()
-            this.itemListElement = null
-            this.activeCell = null
-        }
+        this.hideDropdown()
+        this.itemListElement = null
+        this.activeCell = null
     }
 
-    DropdownProcessor.prototype.buildEditor = function (cellElement, cellContentContainer, isClick) {
+    DropdownProcessor.prototype.buildEditor = function(cellElement, cellContentContainer, isClick) {
         // Create the select control
         var currentValue = this.tableObj.getCellValue(cellElement),
             containerPosition = this.getAbsolutePosition(cellContentContainer)
@@ -144,8 +138,7 @@
         this.itemListElement.style.left = containerPosition.left + 'px'
         this.itemListElement.style.top = containerPosition.top - 2 + cellContentContainer.offsetHeight + 'px'
 
-        this.fetchOptions(cellElement, function renderCellFetchOptions(options)
-        {
+        this.fetchOptions(cellElement, function renderCellFetchOptions(options) {
             var listElement = document.createElement('ul')
 
             for (var value  in options) {
@@ -154,27 +147,25 @@
                 itemElement.textContent = options[value]
                 itemElement.setAttribute('tabindex', 0)
 
-                if (value == currentValue) {
+                if (value == currentValue)
                     itemElement.setAttribute('class', 'selected')
 
-                    listElement.appendChild(itemElement)
-                }
+                listElement.appendChild(itemElement)
             }
 
             self.itemListElement.appendChild(listElement)
 
-            if (isClick) {
+            if (isClick)
                 self.showDropdown()
 
-                self = null
-            }
+            self = null
         })
     }
 
     /*
      * Hide the drop-down, but don't delete it.
      */
-    DropdownProcessor.prototype.hideDropdown = function () {
+    DropdownProcessor.prototype.hideDropdown = function() {
         if (this.itemListElement && this.activeCell && this.itemListElement.parentNode) {
             var cellContentContainer = this.getCellContentContainer(this.activeCell)
             cellContentContainer.setAttribute('data-dropdown-open', 'false')
@@ -185,7 +176,7 @@
         }
     }
 
-    DropdownProcessor.prototype.showDropdown = function () {
+    DropdownProcessor.prototype.showDropdown = function() {
         if (this.itemListElement && this.itemListElement.parentNode !== document.body) {
             this.getCellContentContainer(this.activeCell).setAttribute('data-dropdown-open', 'true')
             document.body.appendChild(this.itemListElement)
@@ -195,20 +186,19 @@
             if (!activeItemElement) {
                 activeItemElement = this.itemListElement.querySelector('ul li:first-child')
 
-                if (activeItemElement) {
+                if (activeItemElement)
                     activeItemElement.setAttribute('class', 'selected')
-                }
             }
 
             if (activeItemElement) {
-                window.setTimeout(function () {
+                window.setTimeout(function(){
                     activeItemElement.focus()
                 }, 0)
             }
         }
     }
 
-    DropdownProcessor.prototype.fetchOptions = function (cellElement, onSuccess) {
+    DropdownProcessor.prototype.fetchOptions = function(cellElement, onSuccess) {
         if (this.columnConfiguration.options) {
             onSuccess(this.columnConfiguration.options)
         }
@@ -230,41 +220,38 @@
 
             if (!this.cachedOptionPromises[cachingKey]) {
                 var requestData = {
-                    column: this.columnName,
-                    rowData: this.tableObj.getRowData(row)
-                },
+                        column: this.columnName,
+                        rowData: this.tableObj.getRowData(row)
+                    },
                     handlerName = this.tableObj.getAlias()+'::onGetDropdownOptions'
 
                 this.cachedOptionPromises[cachingKey] = this.tableObj.$el.request(handlerName, {data: requestData})
             }
 
-            this.cachedOptionPromises[cachingKey].done(function onDropDownLoadOptionsSuccess(data)
-            {
+            this.cachedOptionPromises[cachingKey].done(function onDropDownLoadOptionsSuccess(data){
                 onSuccess(data.options)
-            }).always(function onDropDownLoadOptionsAlways()
-            {
+            }).always(function onDropDownLoadOptionsAlways(){
                 viewContainer.setAttribute('class', '')
             })
         }
     }
 
-    DropdownProcessor.prototype.createOptionsCachingKey = function (row) {
+    DropdownProcessor.prototype.createOptionsCachingKey = function(row) {
         var cachingKey = 'non-dependent',
             dependsOn = this.columnConfiguration.dependsOn
 
         if (dependsOn) {
             if (typeof dependsOn == 'object') {
-                for (var i = 0, len = dependsOn.length; i < len; i++ ) {
+                for (var i = 0, len = dependsOn.length; i < len; i++ )
                     cachingKey += dependsOn[i] + this.tableObj.getRowCellValueByColumnName(row, dependsOn[i])
-                } } else {
+            } else
                 cachingKey = dependsOn + this.tableObj.getRowCellValueByColumnName(row, dependsOn)
-                }
         }
 
         return cachingKey
     }
 
-    DropdownProcessor.prototype.getAbsolutePosition = function (element) {
+    DropdownProcessor.prototype.getAbsolutePosition = function(element) {
         // TODO: use the foundation library
 
         var top = document.body.scrollTop,
@@ -275,31 +262,31 @@
             top -= element.scrollTop || 0;
             left += element.offsetLeft || 0;
             element = element.offsetParent;
-        } while (element) {
-            return top: top,
+        } while(element)
+
+        return {
+            top: top,
             left: left
         }
     }
 
-    DropdownProcessor.prototype.updateCellFromFocusedItem = function (focusedItem) {
+    DropdownProcessor.prototype.updateCellFromFocusedItem = function(focusedItem) {
         if (!focusedItem) {
             focusedItem = this.findFocusedItem();
         }
         this.setSelectedItem(focusedItem);
     }
 
-    DropdownProcessor.prototype.findSelectedItem = function () {
-        if (this.itemListElement) {
+    DropdownProcessor.prototype.findSelectedItem = function() {
+        if (this.itemListElement)
             return this.itemListElement.querySelector('ul li.selected')
 
-            return null
-        }
+        return null
     }
 
-    DropdownProcessor.prototype.setSelectedItem = function (item) {
-        if (!this.itemListElement) {
+    DropdownProcessor.prototype.setSelectedItem = function(item) {
+        if (!this.itemListElement)
             return null;
-        }
 
         if (item.tagName == 'LI' && this.itemListElement.contains(item)) {
             this.itemListElement.querySelectorAll('ul li').forEach(function (option) {
@@ -312,15 +299,14 @@
         this.setViewContainerValue(this.activeCell, item.textContent)
     }
 
-    DropdownProcessor.prototype.findFocusedItem = function () {
-        if (this.itemListElement) {
+    DropdownProcessor.prototype.findFocusedItem = function() {
+        if (this.itemListElement)
             return this.itemListElement.querySelector('ul li:focus')
 
-            return null
-        }
+        return null
     }
 
-    DropdownProcessor.prototype.onItemClick = function (ev) {
+    DropdownProcessor.prototype.onItemClick = function(ev) {
         var target = this.tableObj.getEventTarget(ev)
 
         if (target.tagName == 'LI') {
@@ -330,25 +316,24 @@
         }
     }
 
-    DropdownProcessor.prototype.onItemKeyDown = function (ev) {
-        if (!this.itemListElement) {
+    DropdownProcessor.prototype.onItemKeyDown = function(ev) {
+        if (!this.itemListElement)
             return
 
-            if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
-                // Up or down keys - find previous/next list item and select it
-                var focused = this.findFocusedItem(),
+        if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp')
+        {
+            // Up or down keys - find previous/next list item and select it
+            var focused = this.findFocusedItem(),
                 newFocusedItem = focused.nextElementSibling
 
-                if (ev.key === 'ArrowUp') {
-                    newFocusedItem = focused.previousElementSibling
+            if (ev.key === 'ArrowUp')
+                newFocusedItem = focused.previousElementSibling
 
-                    if (newFocusedItem) {
-                        newFocusedItem.focus()
-                    }
-                }
-
-                return
+            if (newFocusedItem) {
+                newFocusedItem.focus()
             }
+
+            return
         }
 
         if (ev.key === 'Enter' || ev.key === '(Space character)' || ev.key === 'Spacebar' || ev.key === ' ') {
@@ -378,15 +363,14 @@
     /*
      * Event handler for mouse movements over options in the dropdown menu
      */
-    DropdownProcessor.prototype.onItemMouseMove = function (ev) {
-        if (!this.itemListElement) {
+    DropdownProcessor.prototype.onItemMouseMove = function(ev) {
+        if (!this.itemListElement)
             return
 
-            var target = this.tableObj.getEventTarget(ev)
+        var target = this.tableObj.getEventTarget(ev)
 
-            if (target.tagName == 'LI') {
-                target.focus();
-            }
+        if (target.tagName == 'LI') {
+            target.focus();
         }
     }
 
@@ -394,7 +378,7 @@
      * Event handler for the keydown event. The table class calls this method
      * for all processors.
      */
-    DropdownProcessor.prototype.onKeyDown = function (ev) {
+    DropdownProcessor.prototype.onKeyDown = function(ev) {
         if (!this.itemListElement)
             return
 
@@ -413,9 +397,8 @@
             } else {
                 newSelectedItem = selected.nextElementSibling
 
-                if (ev.key === 'ArrowUp') {
+                if (ev.key === 'ArrowUp')
                     newSelectedItem = selected.previousElementSibling
-                }
             }
 
             if (newSelectedItem) {
@@ -431,66 +414,62 @@
     /*
      * This method is called when a cell value in the row changes.
      */
-    DropdownProcessor.prototype.onRowValueChanged = function (columnName, cellElement) {
+    DropdownProcessor.prototype.onRowValueChanged = function(columnName, cellElement) {
         // Determine if this drop-down depends on the changed column
         // and update the option list if necessary
 
         // TODO: setting drop-down values with table.setRowValues() is not implemented currently
 
-        if (!this.columnConfiguration.dependsOn) {
+        if (!this.columnConfiguration.dependsOn)
             return
 
-            var dependsOnColumn = false,
+        var dependsOnColumn = false,
             dependsOn = this.columnConfiguration.dependsOn
 
-            if (typeof dependsOn == 'object') {
-                for (var i = 0, len = dependsOn.length; i < len; i++ ) {
-                    if (dependsOn[i] == columnName) {
-                        dependsOnColumn = true
-                        break
-                    }
+        if (typeof dependsOn == 'object') {
+            for (var i = 0, len = dependsOn.length; i < len; i++ ) {
+                if (dependsOn[i] == columnName) {
+                    dependsOnColumn = true
+                    break
                 }
             }
-            else {
-                dependsOnColumn = dependsOn == columnName
-            }
+        }
+        else {
+            dependsOnColumn = dependsOn == columnName
         }
 
-        if (!dependsOnColumn) {
+        if (!dependsOnColumn)
             return
 
-            var currentValue = this.tableObj.getCellValue(cellElement),
+        var currentValue = this.tableObj.getCellValue(cellElement),
             viewContainer = this.getViewContainer(cellElement)
 
-            this.fetchOptions(cellElement, function rowValueChangedFetchOptions(options)
-            {
-                var value = options[currentValue] !== undefined
+        this.fetchOptions(cellElement, function rowValueChangedFetchOptions(options) {
+            var value = options[currentValue] !== undefined
                 ? options[currentValue]
                 : '...'
 
-                viewContainer.textContent = value
-                viewContainer = null
-            })
-        }
+            viewContainer.textContent = value
+            viewContainer = null
+        })
     }
 
     /*
      * Determines whether the specified element is some element created by the
      * processor.
      */
-    DropdownProcessor.prototype.elementBelongsToProcessor = function (element) {
-        if (!this.itemListElement) {
+    DropdownProcessor.prototype.elementBelongsToProcessor = function(element) {
+        if (!this.itemListElement)
             return false
 
-            return this.tableObj.parentContainsElement(this.itemListElement, element)
-        }
+        return this.tableObj.parentContainsElement(this.itemListElement, element)
     }
 
     /*
      * Provides auto-complete like functionality for typing in a query and selecting
      * a matching list option
      */
-    DropdownProcessor.prototype.searchByTextInput = function (ev, focusOnly) {
+    DropdownProcessor.prototype.searchByTextInput = function(ev, focusOnly) {
         if (focusOnly === undefined) {
             focusOnly = false;
         }
@@ -508,7 +487,7 @@
             var validItem = null;
             var query = this.searchQuery;
 
-            this.itemListElement.querySelectorAll('ul li').forEach(function (item) {
+            this.itemListElement.querySelectorAll('ul li').forEach(function(item) {
                 if (validItem === null && item.dataset.value && item.dataset.value.toLowerCase().indexOf(query.toLowerCase()) === 0) {
                     validItem = item;
                 }
@@ -533,7 +512,7 @@
         }
     }
 
-    DropdownProcessor.prototype.cancelTextSearch = function () {
+    DropdownProcessor.prototype.cancelTextSearch = function() {
         this.searching = false;
         this.searchQuery = null;
         this.searchInterval = null;

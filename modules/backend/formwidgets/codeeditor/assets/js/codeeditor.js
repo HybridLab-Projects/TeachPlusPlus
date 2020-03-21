@@ -14,8 +14,7 @@
  * - Ace Editor (ace.js)
  */
 
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -23,7 +22,7 @@
     // CODEEDITOR CLASS DEFINITION
     // ============================
 
-    var CodeEditor = function (element, options) {
+    var CodeEditor = function(element, options) {
         Base.call(this)
 
         this.options   = options
@@ -77,7 +76,7 @@
         readOnly: false
     }
 
-    CodeEditor.prototype.init = function () {
+    CodeEditor.prototype.init = function (){
 
         var self = this;
 
@@ -132,7 +131,7 @@
                 // options.vendorPath + '/mode-' + options.language + '.js',
                 options.vendorPath + '/theme-' + options.theme + '.js'
             ]
-        }, function () {
+        }, function(){
             editor.setTheme('ace/theme/' + options.theme)
             var inline = options.language === 'php'
             editor.getSession().setMode({ path: 'ace/mode/'+options.language, inline: inline })
@@ -177,7 +176,7 @@
          */
 
         this.$toolbar.find('>ul>li>a')
-            .each(function () {
+            .each(function(){
                 var abbr = $(this).find('>abbr'),
                     label = abbr.text(),
                     help = abbr.attr('title'),
@@ -220,51 +219,48 @@
         })
     }
 
-    CodeEditor.prototype.dispose = function () {
-        if (this.$el === null) {
+    CodeEditor.prototype.dispose = function() {
+        if (this.$el === null)
             return
 
-            this.unregisterHandlers()
-            this.disposeAttachedControls()
+        this.unregisterHandlers()
+        this.disposeAttachedControls()
 
-            this.$el = null
-            this.$textarea = null
-            this.$toolbar = null
-            this.$code = null
-            this.$fullscreenEnable = null
-            this.$fullscreenDisable = null
-            this.$searchboxEnable = null
-            this.$searchboxDisable = null
-            this.$replaceboxEnable = null
-            this.$replaceboxDisable = null
-            this.$form = null
-            this.options = null
+        this.$el = null
+        this.$textarea = null
+        this.$toolbar = null
+        this.$code = null
+        this.$fullscreenEnable = null
+        this.$fullscreenDisable = null
+        this.$searchboxEnable = null
+        this.$searchboxDisable = null
+        this.$replaceboxEnable = null
+        this.$replaceboxDisable = null
+        this.$form = null
+        this.options = null
 
-            BaseProto.dispose.call(this)
-        }
+        BaseProto.dispose.call(this)
     }
 
-    CodeEditor.prototype.disposeAttachedControls = function () {
+    CodeEditor.prototype.disposeAttachedControls = function() {
         this.editor.destroy()
 
         var keys = Object.keys(this.editor.renderer)
-        for (var i=0, len=keys.length; i<len; i++) {
+        for (var i=0, len=keys.length; i<len; i++)
             this.editor.renderer[keys[i]] = null
 
-            keys = Object.keys(this.editor)
-            for (var i=0, len=keys.length; i<len; i++) {
-                this.editor[keys[i]] = null
+        keys = Object.keys(this.editor)
+        for (var i=0, len=keys.length; i<len; i++)
+            this.editor[keys[i]] = null
 
-                this.editor = null
+        this.editor = null
 
-                this.$toolbar.find('>ul>li>a').tooltip('destroy')
-                this.$el.removeData('oc.codeEditor')
-                this.$el.hotKey('dispose')
-            }
-        }
+        this.$toolbar.find('>ul>li>a').tooltip('destroy')
+        this.$el.removeData('oc.codeEditor')
+        this.$el.hotKey('dispose')
     }
 
-    CodeEditor.prototype.unregisterHandlers = function () {
+    CodeEditor.prototype.unregisterHandlers = function() {
         this.editor.off('change', this.proxy(this.onChange))
         this.editor.off('blur', this.proxy(this.onBlur))
         this.editor.off('focus', this.proxy(this.onFocus))
@@ -279,32 +275,32 @@
         $(window).off('oc.updateUi', this.proxy(this.onResize))
     }
 
-    CodeEditor.prototype.onBeforeRequest = function () {
+    CodeEditor.prototype.onBeforeRequest = function() {
         this.$textarea.val(this.editor.getSession().getValue())
     }
 
-    CodeEditor.prototype.onChange = function () {
+    CodeEditor.prototype.onChange = function() {
         this.$form.trigger('change')
         this.$textarea.trigger('oc.codeEditorChange')
     }
 
-    CodeEditor.prototype.onResize = function () {
+    CodeEditor.prototype.onResize = function() {
         this.editor.resize()
     }
 
-    CodeEditor.prototype.onBlur = function () {
+    CodeEditor.prototype.onBlur = function() {
         this.$el.removeClass('editor-focus')
     }
 
-    CodeEditor.prototype.onFocus = function () {
+    CodeEditor.prototype.onFocus = function() {
         this.$el.addClass('editor-focus')
     }
 
-    CodeEditor.prototype.onEscape = function () {
+    CodeEditor.prototype.onEscape = function() {
         this.isFullscreen && this.toggleFullscreen()
     }
 
-    CodeEditor.prototype.setWordWrap = function (mode) {
+    CodeEditor.prototype.setWordWrap = function(mode) {
         var session = this.editor.getSession(),
             renderer = this.editor.renderer
 
@@ -332,34 +328,34 @@
         }
     }
 
-    CodeEditor.prototype.setTheme = function (theme) {
+    CodeEditor.prototype.setTheme = function(theme) {
         var self = this
         assetManager.load({
             js:[
                 this.options.vendorPath + '/theme-' + theme + '.js'
             ]
-        }, function () {
+        }, function(){
             self.editor.setTheme('ace/theme/' + theme)
         })
     }
 
-    CodeEditor.prototype.getContent = function () {
+    CodeEditor.prototype.getContent = function() {
         return this.editor.getSession().getValue()
     }
 
-    CodeEditor.prototype.setContent = function (html) {
+    CodeEditor.prototype.setContent = function(html) {
         this.editor.getSession().setValue(html)
     }
 
-    CodeEditor.prototype.getEditorObject = function () {
+    CodeEditor.prototype.getEditorObject = function() {
         return this.editor
     }
 
-    CodeEditor.prototype.getToolbar = function () {
+    CodeEditor.prototype.getToolbar = function() {
         return this.$toolbar
     }
 
-    CodeEditor.prototype.toggleFullscreen = function () {
+    CodeEditor.prototype.toggleFullscreen = function() {
         this.$el.toggleClass('editor-fullscreen')
         this.$fullscreenEnable.toggle()
         this.$fullscreenDisable.toggle()
@@ -377,7 +373,7 @@
         this.editor.focus()
     }
 
-    CodeEditor.prototype.toggleSearchbox = function () {
+    CodeEditor.prototype.toggleSearchbox = function() {
         this.$searchboxEnable.toggle()
         this.$searchboxDisable.toggle()
 
@@ -387,7 +383,7 @@
         this.editor.focus()
     }
 
-    CodeEditor.prototype.toggleReplacebox = function () {
+    CodeEditor.prototype.toggleReplacebox = function() {
         this.$replaceboxEnable.toggle()
         this.$replaceboxDisable.toggle()
 
@@ -408,15 +404,9 @@
             var $this   = $(this)
             var data    = $this.data('oc.codeEditor')
             var options = $.extend({}, CodeEditor.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.codeEditor', (data = new CodeEditor(this, options)))
-                if (typeof option == 'string') {
-                    result = data[option].apply(data, args)
-                    if (typeof result != 'undefined') {
-                        return false
-                    }
-                }
-            }
+            if (!data) $this.data('oc.codeEditor', (data = new CodeEditor(this, options)))
+            if (typeof option == 'string') result = data[option].apply(data, args)
+            if (typeof result != 'undefined') return false
         })
 
         return result ? result : this
@@ -424,28 +414,27 @@
 
     $.fn.codeEditor.Constructor = CodeEditor
 
-    if ($.oc === undefined) {
+    if ($.oc === undefined)
         $.oc = {}
 
-        $.oc.codeEditorExtensionModes = {
-            'htm': 'html',
-            'html': 'html',
-            'md': 'markdown',
-            'txt': 'plain_text',
-            'js': 'javascript',
-            'less': 'less',
-            'scss': 'scss',
-            'sass': 'sass',
-            'css': 'css'
-        }
+    $.oc.codeEditorExtensionModes = {
+        'htm': 'html',
+        'html': 'html',
+        'md': 'markdown',
+        'txt': 'plain_text',
+        'js': 'javascript',
+        'less': 'less',
+        'scss': 'scss',
+        'sass': 'sass',
+        'css': 'css'
+    }
 
     // CODEEDITOR NO CONFLICT
     // =================
 
-        $.fn.codeEditor.noConflict = function () {
-            $.fn.codeEditor = old
-            return this
-        }
+    $.fn.codeEditor.noConflict = function () {
+        $.fn.codeEditor = old
+        return this
     }
 
     // CODEEDITOR DATA-API

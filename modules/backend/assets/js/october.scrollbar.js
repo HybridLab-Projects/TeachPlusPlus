@@ -1,20 +1,19 @@
 /*
- * Creates a scrollbar in a container.
- *
+ * Creates a scrollbar in a container. 
+ * 
  * Note the element must have a height set for vertical,
  * and a width set for horizontal.
- *
+ * 
  * Data attributes:
  * - data-control="scrollbar" - enables the scrollbar plugin
  *
  * JavaScript API:
  * $('#area').scrollbar()
  *
- * Dependences:
+ * Dependences: 
  * - Mouse Wheel plugin (mousewheel.js)
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
@@ -43,9 +42,9 @@
         /*
          * Native (mobile) environments use overflow auto in CSS
          */
-        if (isNative) {
+         if (isNative) {
             return
-        }
+         }
 
         /*
          * Create Scrollbar
@@ -62,25 +61,25 @@
         /*
          * Bind events
          */
-        if (isTouch) {
-            this.$el.on('touchstart', function (event) {
+         if (isTouch) {
+            this.$el.on('touchstart', function (event){
                 var touchEvent = event.originalEvent;
                 if (touchEvent.touches.length == 1) {
                     startDrag(touchEvent.touches[0])
                     event.stopPropagation()
                 }
             })
-        }
-        else {
-            this.$thumb.on('mousedown', function (event) {
+         }
+         else {
+            this.$thumb.on('mousedown', function (event){
                 startDrag(event)
             })
-            this.$track.on('mouseup', function (event) {
+            this.$track.on('mouseup', function (event){
                 moveDrag(event)
             })
-        }
+         }
 
-        $el.mousewheel(function (event) {
+        $el.mousewheel(function (event){
             var offset = self.options.vertical
                 ? ((event.deltaFactor * event.deltaY) * -1)
                 : (event.deltaFactor * event.deltaX)
@@ -88,7 +87,7 @@
             return !scrollWheel(offset * self.options.scrollSpeed)
         })
 
-        $el.on('oc.scrollbar.gotoStart', function (event) {
+        $el.on('oc.scrollbar.gotoStart', function(event){
             self.options.vertical
                 ? $el.scrollTop(0)
                 : $el.scrollLeft(0)
@@ -103,8 +102,7 @@
          /*
           * Internal event, drag has started
           */
-        function startDrag(event)
-        {
+        function startDrag(event) {
             $('body').addClass('drag-noselect')
             $el.trigger('oc.scrollStart')
 
@@ -112,22 +110,21 @@
             startOffset = self.options.vertical ? $el.scrollTop() : $el.scrollLeft()
 
             if (isTouch) {
-                $(window).on('touchmove.scrollbar', function (event) {
+                $(window).on('touchmove.scrollbar', function(event) {
                     var touchEvent = event.originalEvent
-                    if (moveDrag(touchEvent.touches[0])) {
+                    if (moveDrag(touchEvent.touches[0]))
                         event.preventDefault();
-                    }
                 });
 
                 $el.on('touchend.scrollbar', stopDrag)
             }
             else {
-                $(window).on('mousemove.scrollbar', function (event) {
+                $(window).on('mousemove.scrollbar', function(event){
                     moveDrag(event)
                     return false
                 })
 
-                $(window).on('mouseup.scrollbar', function () {
+                $(window).on('mouseup.scrollbar', function(){
                     stopDrag()
                     return false
                 })
@@ -137,8 +134,7 @@
         /*
          * Internal event, drag is active
          */
-        function moveDrag(event)
-        {
+        function moveDrag(event) {
             self.isLocked = true;
 
             var
@@ -171,8 +167,7 @@
         /*
          * Internal event, drag has ended
          */
-        function stopDrag()
-        {
+        function stopDrag() {
             $('body').removeClass('drag-noselect')
             $el.trigger('oc.scrollEnd')
 
@@ -185,8 +180,7 @@
 
         var isWebkit = $(document.documentElement).hasClass('webkit')
 
-        function scrollWheel(offset)
-        {
+        function scrollWheel(offset) {
             startOffset = self.options.vertical ? el.scrollTop : el.scrollLeft
             $el.trigger('oc.scrollStart')
 
@@ -205,7 +199,7 @@
                     self.endScrollTimeout = undefined
                 }
 
-                self.endScrollTimeout = setTimeout(function () {
+                self.endScrollTimeout = setTimeout(function() { 
                     $el.trigger('oc.scrollEnd')
                     self.endScrollTimeout = undefined
                 }, 50)
@@ -219,20 +213,19 @@
         /*
          * Give the DOM a second, then set the track and thumb size
          */
-        setTimeout(function () {
-            self.update() }, 1);
+        setTimeout(function() { self.update() }, 1);
     }
 
     Scrollbar.prototype = Object.create(BaseProto)
     Scrollbar.prototype.constructor = Scrollbar
 
-    Scrollbar.prototype.dispose = function () {
+    Scrollbar.prototype.dispose = function() {
         this.unregisterHandlers()
 
         BaseProto.dispose.call(this)
     }
 
-    Scrollbar.prototype.unregisterHandlers = function () {
+    Scrollbar.prototype.unregisterHandlers = function() {
 
     }
 
@@ -240,23 +233,22 @@
         vertical: true,
         scrollSpeed: 2,
         animation: true,
-        start: function () {},
-        drag: function () {},
-        stop: function () {}
+        start: function() {},
+        drag: function() {},
+        stop: function() {}
     }
 
-    Scrollbar.prototype.update = function () {
-        if (!this.$scrollbar) {
+    Scrollbar.prototype.update = function() {
+        if (!this.$scrollbar)
             return
 
-            this.$scrollbar.hide()
-            this.setThumbSize()
-            this.setThumbPosition()
-            this.$scrollbar.show()
-        }
+        this.$scrollbar.hide()
+        this.setThumbSize()
+        this.setThumbPosition()
+        this.$scrollbar.show()
     }
 
-    Scrollbar.prototype.setThumbSize = function () {
+    Scrollbar.prototype.setThumbSize = function() {
         var properties = this.calculateProperties()
 
         this.isScrollable = !(properties.thumbSizeRatio >= 1);
@@ -272,18 +264,16 @@
         }
     }
 
-    Scrollbar.prototype.setThumbPosition = function () {
+    Scrollbar.prototype.setThumbPosition = function() {
         var properties = this.calculateProperties()
 
-        if (this.options.vertical) {
+        if (this.options.vertical)
             this.$thumb.css({top: properties.thumbPosition})
-            else {
-                this.$thumb.css({left: properties.thumbPosition})
-            }
-        }
+        else
+            this.$thumb.css({left: properties.thumbPosition})
     }
 
-    Scrollbar.prototype.calculateProperties = function () {
+    Scrollbar.prototype.calculateProperties = function() {
 
         var $el = this.$el,
             properties = {};
@@ -298,43 +288,40 @@
         properties.thumbPositionRatio = properties.scrollAmount / (properties.canvasSize - properties.viewportSize)
         properties.thumbPosition = ((properties.viewportSize - properties.thumbSize) * properties.thumbPositionRatio) + properties.scrollAmount
 
-        if (isNaN(properties.thumbPosition)) {
+        if (isNaN(properties.thumbPosition))
             properties.thumbPosition = 0
 
-            return properties;
-        }
+        return properties;
     }
 
-    Scrollbar.prototype.getViewportSize = function () {
+    Scrollbar.prototype.getViewportSize = function() {
         return (this.options.vertical)
             ? this.$el.height()
             : this.$el.width();
     }
 
-    Scrollbar.prototype.getCanvasSize = function () {
+    Scrollbar.prototype.getCanvasSize = function() {
         return (this.options.vertical)
             ? this.$el.get(0).scrollHeight
             : this.$el.get(0).scrollWidth;
     }
 
-    Scrollbar.prototype.gotoElement = function (element, callback) {
+    Scrollbar.prototype.gotoElement = function(element, callback) {
         var $el = $(element)
-        if (!$el.length) {
+        if (!$el.length)
             return;
-        }
 
         var self = this,
             offset = 0,
             animated = false,
             params = {
-                duration: 300,
-                queue: false,
-                complete: function () {
-                    if (callback !== undefined) {
+                duration: 300, 
+                queue: false, 
+                complete: function(){
+                    if (callback !== undefined)
                         callback()
-                    }
                 }
-        }
+            }
 
         if (!this.options.vertical) {
             offset = $el.get(0).offsetLeft - this.$el.scrollLeft()
@@ -368,21 +355,19 @@
                     this.$el.scrollTop($el.get(0).offsetTop)
                 } else {
                     offset = $el.get(0).offsetTop - (this.$el.scrollTop() + this.$el.outerHeight())
-                    if (offset > 0) {
+                    if (offset > 0)
                         this.$el.scrollTop($el.get(0).offsetTop + $el.outerHeight() - this.$el.outerHeight())
-                    }
                 }
             }
         }
 
-        if (!animated && callback !== undefined) {
+        if (!animated && callback !== undefined)
             callback()
 
-            return this
-        }
+        return this
     }
 
-    Scrollbar.prototype.dispose = function () {
+    Scrollbar.prototype.dispose = function() {
         this.$el = null
         this.$scrollbar = null
         this.$track = null
@@ -400,14 +385,10 @@
             var data  = $this.data('oc.scrollbar')
             var options = $.extend({}, Scrollbar.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-            if (!data) {
-                $this.data('oc.scrollbar', (data = new Scrollbar(this, options)))
-                if (typeof option == 'string') {
-                    data[option].call($this)
-                }
-            }
+            if (!data) $this.data('oc.scrollbar', (data = new Scrollbar(this, options)))
+            if (typeof option == 'string') data[option].call($this)
         })
-    }
+      }
 
     $.fn.scrollbar.Constructor = Scrollbar
 
@@ -421,7 +402,7 @@
 
     // SCROLLBAR DATA-API
     // ===============
-    $(document).render(function () {
+    $(document).render(function(){
         $('[data-control=scrollbar]').scrollbar()
     })
 

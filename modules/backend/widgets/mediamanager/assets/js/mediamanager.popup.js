@@ -1,31 +1,29 @@
 /*
  * Media manager popup
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
-    if ($.oc.mediaManager === undefined) {
+    if ($.oc.mediaManager === undefined)
         $.oc.mediaManager = {}
 
-        var Base = $.oc.foundation.base,
+    var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
-        var MediaManagerPopup = function (options) {
-            this.$popupRootElement = null
+    var MediaManagerPopup = function(options) {
+        this.$popupRootElement = null
 
-            this.options = $.extend({}, MediaManagerPopup.DEFAULTS, options)
+        this.options = $.extend({}, MediaManagerPopup.DEFAULTS, options)
 
-            Base.call(this)
+        Base.call(this)
 
-            this.init()
-            this.show()
-        }
+        this.init()
+        this.show()
     }
 
     MediaManagerPopup.prototype = Object.create(BaseProto)
     MediaManagerPopup.prototype.constructor = MediaManagerPopup
 
-    MediaManagerPopup.prototype.dispose = function () {
+    MediaManagerPopup.prototype.dispose = function() {
         this.unregisterHandlers()
 
         this.$popupRootElement.remove()
@@ -35,26 +33,25 @@
         BaseProto.dispose.call(this)
     }
 
-    MediaManagerPopup.prototype.init = function () {
-        if (this.options.alias === undefined) {
+    MediaManagerPopup.prototype.init = function() {
+        if (this.options.alias === undefined)
             throw new Error('Media Manager popup option "alias" is not set.')
 
-            this.$popupRootElement = $('<div/>')
-            this.registerHandlers()
-        }
+        this.$popupRootElement = $('<div/>')
+        this.registerHandlers()
     }
 
-    MediaManagerPopup.prototype.registerHandlers = function () {
+    MediaManagerPopup.prototype.registerHandlers = function() {
         this.$popupRootElement.one('hide.oc.popup', this.proxy(this.onPopupHidden))
         this.$popupRootElement.one('shown.oc.popup', this.proxy(this.onPopupShown))
     }
 
-    MediaManagerPopup.prototype.unregisterHandlers = function () {
+    MediaManagerPopup.prototype.unregisterHandlers = function() {
         this.$popupElement.off('popupcommand', this.proxy(this.onPopupCommand))
         this.$popupRootElement.off('popupcommand', this.proxy(this.onPopupCommand))
     }
 
-    MediaManagerPopup.prototype.show = function () {
+    MediaManagerPopup.prototype.show = function() {
         var data = {
             bottomToolbar: this.options.bottomToolbar ? 1 : 0,
             cropAndInsertButton: this.options.cropAndInsertButton ? 1 : 0
@@ -68,52 +65,48 @@
         })
     }
 
-    MediaManagerPopup.prototype.hide = function () {
-        if (this.$popupElement) {
+    MediaManagerPopup.prototype.hide = function() {
+        if (this.$popupElement)
             this.$popupElement.trigger('close.oc.popup')
-        }
     }
 
-    MediaManagerPopup.prototype.getMediaManagerElement = function () {
+    MediaManagerPopup.prototype.getMediaManagerElement = function() {
         return this.$popupElement.find('[data-control="media-manager"]')
     }
 
-    MediaManagerPopup.prototype.insertMedia = function () {
+    MediaManagerPopup.prototype.insertMedia = function() {
         var items = this.getMediaManagerElement().mediaManager('getSelectedItems')
 
-        if (this.options.onInsert !== undefined) {
+        if (this.options.onInsert !== undefined)
             this.options.onInsert.call(this, items)
-        }
     }
 
-    MediaManagerPopup.prototype.insertCroppedImage = function (imageItem) {
-        if (this.options.onInsert !== undefined) {
+    MediaManagerPopup.prototype.insertCroppedImage = function(imageItem) {
+        if (this.options.onInsert !== undefined)
             this.options.onInsert.call(this, [imageItem])
-        }
     }
 
     // EVENT HANDLERS
     // ============================
 
-    MediaManagerPopup.prototype.onPopupHidden = function (event, element, popup) {
+    MediaManagerPopup.prototype.onPopupHidden = function(event, element, popup) {
         var mediaManager = this.getMediaManagerElement()
 
         mediaManager.mediaManager('dispose')
         mediaManager.remove()
 
         // Release clickedElement reference inside redactor.js
-        // If we don't do it, the Media Manager popup DOM elements
+        // If we don't do it, the Media Manager popup DOM elements 
         // won't be removed from the memory.
         $(document).trigger('mousedown')
 
         this.dispose()
 
-        if (this.options.onClose !== undefined) {
+        if (this.options.onClose !== undefined)
             this.options.onClose.call(this)
-        }
     }
 
-    MediaManagerPopup.prototype.onPopupShown = function (event, element, popup) {
+    MediaManagerPopup.prototype.onPopupShown = function(event, element, popup) {
         this.$popupElement = popup
         this.$popupElement.on('popupcommand', this.proxy(this.onPopupCommand))
 
@@ -122,12 +115,12 @@
         this.getMediaManagerElement().mediaManager('selectFirstItem')
     }
 
-    MediaManagerPopup.prototype.onPopupCommand = function (ev, command, param) {
+    MediaManagerPopup.prototype.onPopupCommand = function(ev, command, param) {
         switch (command) {
-            case 'insert' :
+            case 'insert' : 
                 this.insertMedia()
             break;
-            case 'insert-cropped' :
+            case 'insert-cropped' : 
                 this.insertCroppedImage(param)
             break;
         }

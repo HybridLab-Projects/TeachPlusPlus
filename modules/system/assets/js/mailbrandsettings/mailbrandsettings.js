@@ -1,25 +1,22 @@
 var previewIframe
 
-$(document).on('change', '.field-colorpicker', function () {
-    $('#brandSettingsForm').request('onUpdateSampleMessage').done(function (data) {
+$(document).on('change', '.field-colorpicker', function() {
+    $('#brandSettingsForm').request('onUpdateSampleMessage').done(function(data) {
         updatePreviewContent(data.previewHtml)
     })
 })
 
-function updatePreviewContent(content)
-{
+function updatePreviewContent(content) {
     'srcdoc' in previewIframe
         ? previewIframe.srcdoc = content
         : previewIframe.src = 'data:text/html;charset=UTF-8,' + content
 }
 
-function adjustPreviewHeight()
-{
+function adjustPreviewHeight() {
     previewIframe.style.height = (previewIframe.contentWindow.document.getElementsByTagName('body')[0].scrollHeight) +'px'
 }
 
-function createPreviewContainer(el, content)
-{
+function createPreviewContainer(el, content) {
     previewIframe = document.createElement('iframe')
 
     updatePreviewContent(content)

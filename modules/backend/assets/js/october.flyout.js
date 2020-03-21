@@ -1,8 +1,7 @@
 /*
  * Flyout plugin.
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
@@ -10,7 +9,7 @@
     // SCROLLPAD CLASS DEFINITION
     // ============================
 
-    var Flyout = function (element, options) {
+    var Flyout = function(element, options) {
         this.$el = $(element)
         this.$overlay = null
         this.options = options
@@ -23,7 +22,7 @@
     Flyout.prototype = Object.create(BaseProto)
     Flyout.prototype.constructor = Flyout
 
-    Flyout.prototype.dispose = function () {
+    Flyout.prototype.dispose = function() {
         this.removeOverlay()
         this.$el.removeData('oc.flyout')
         this.$el = null
@@ -35,7 +34,7 @@
         BaseProto.dispose.call(this)
     }
 
-    Flyout.prototype.show = function () {
+    Flyout.prototype.show = function() {
         var $cells = this.$el.find('> .layout-cell'),
             $flyout = this.$el.find('> .flyout')
 
@@ -58,7 +57,7 @@
         this.hideToggle()
     }
 
-    Flyout.prototype.hide = function () {
+    Flyout.prototype.hide = function() {
         var $cells = this.$el.find('> .layout-cell'),
             $flyout = this.$el.find('> .flyout')
 
@@ -77,17 +76,17 @@
     // FLYOUT INTERNAL METHODS
     // ============================
 
-    Flyout.prototype.init = function () {
+    Flyout.prototype.init = function() {
         this.build()
     }
 
-    Flyout.prototype.build = function () {
+    Flyout.prototype.build = function() {
         if (this.options.flyoutToggle) {
             this.buildToggle()
         }
     }
 
-    Flyout.prototype.buildToggle = function () {
+    Flyout.prototype.buildToggle = function() {
         var $toggleContainer = $(this.options.flyoutToggle),
             $toggle = $('<div class="flyout-toggle"><i class="icon-chevron-right"></i></div>')
 
@@ -95,14 +94,14 @@
         $toggleContainer.append($toggle)
     }
 
-    Flyout.prototype.removeToggle = function () {
+    Flyout.prototype.removeToggle = function() {
         var $toggle = this.getToggle()
 
         $toggle.off('click', this.proxy(this.show))
         $toggle.remove()
     }
 
-    Flyout.prototype.hideToggle = function () {
+    Flyout.prototype.hideToggle = function() {
         if (!this.options.flyoutToggle) {
             return
         }
@@ -110,7 +109,7 @@
         this.getToggle().hide()
     }
 
-    Flyout.prototype.showToggle = function () {
+    Flyout.prototype.showToggle = function() {
         if (!this.options.flyoutToggle) {
             return
         }
@@ -118,21 +117,21 @@
         this.getToggle().show()
     }
 
-    Flyout.prototype.getToggle = function () {
+    Flyout.prototype.getToggle = function() {
         var $toggleContainer = $(this.options.flyoutToggle)
 
         return $toggleContainer.find('.flyout-toggle')
     }
 
-    Flyout.prototype.setBodyClass = function () {
+    Flyout.prototype.setBodyClass = function() {
         $(document.body).addClass('flyout-visible')
     }
 
-    Flyout.prototype.removeBodyClass = function () {
+    Flyout.prototype.removeBodyClass = function() {
         $(document.body).removeClass('flyout-visible')
     }
 
-    Flyout.prototype.createOverlay = function () {
+    Flyout.prototype.createOverlay = function() {
         this.$overlay = $('<div class="flyout-overlay"/>')
 
         var position = this.$el.offset()
@@ -148,7 +147,7 @@
         $(document.body).append(this.$overlay)
     }
 
-    Flyout.prototype.removeOverlay = function () {
+    Flyout.prototype.removeOverlay = function() {
         if (!this.$overlay) {
             return
         }
@@ -160,7 +159,7 @@
         this.$overlay = null
     }
 
-    Flyout.prototype.removeOverlayAndShowToggle = function () {
+    Flyout.prototype.removeOverlayAndShowToggle = function() {
         this.removeOverlay()
         this.showToggle()
     }
@@ -168,11 +167,11 @@
     // EVENT HANDLERS
     // ============================
 
-    Flyout.prototype.onOverlayClick = function () {
+    Flyout.prototype.onOverlayClick = function() {
         this.hide()
     }
 
-    Flyout.prototype.onDocumentKeydown = function (ev) {
+    Flyout.prototype.onDocumentKeydown = function(ev) {
         if (ev.key === 'Escape') {
             this.hide();
         }
@@ -189,22 +188,16 @@
     var old = $.fn.flyout
 
     $.fn.flyout = function (option) {
-        var args = Array.prototype.slice.call(arguments, 1),
+        var args = Array.prototype.slice.call(arguments, 1), 
             result = undefined
 
         this.each(function () {
             var $this   = $(this)
             var data    = $this.data('oc.flyout')
             var options = $.extend({}, Flyout.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) {
-                $this.data('oc.flyout', (data = new Flyout(this, options)))
-                if (typeof option == 'string') {
-                    result = data[option].apply(data, args)
-                    if (typeof result != 'undefined') {
-                        return false
-                    }
-                }
-            }
+            if (!data) $this.data('oc.flyout', (data = new Flyout(this, options)))
+            if (typeof option == 'string') result = data[option].apply(data, args)
+            if (typeof result != 'undefined') return false
         })
         
         return result ? result : this
@@ -225,7 +218,7 @@
 
     // Currently flyouts don't use the document render event
     // and can't be created dynamically (performance considerations).
-    $(document).ready(function () {
+    $(document).ready(function(){
         $('div[data-control=flyout]').flyout()
     })
 }(window.jQuery);

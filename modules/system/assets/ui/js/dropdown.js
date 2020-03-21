@@ -6,10 +6,9 @@
  * Require:
  *  - bootstrap/dropdown
  */
-+function ($) {
-    "use strict";
++function ($) { "use strict";
 
-    $(document).on('shown.bs.dropdown', '.dropdown', function (event, relatedTarget) {
+    $(document).on('shown.bs.dropdown', '.dropdown', function(event, relatedTarget) {
         $(document.body).addClass('dropdown-open')
 
         var dropdown = $(relatedTarget.relatedTarget).siblings('.dropdown-menu'),
@@ -17,48 +16,47 @@
 
         // The dropdown menu should be a sibling of the triggering element (above)
         // otherwise, look for any dropdown menu within this context.
-        if (dropdown.length === 0) {
+        if (dropdown.length === 0){
             dropdown = $('.dropdown-menu', this)
         }
 
         if ($('.dropdown-container', dropdown).length == 0) {
+
             var title = $('[data-toggle=dropdown]', this).text(),
                 titleAttr = dropdown.data('dropdown-title'),
                 timer = null
 
-            if (titleAttr !== undefined) {
+            if (titleAttr !== undefined)
                 title = titleAttr
 
-                $('li:first-child', dropdown).addClass('first-item')
-                $('li:last-child', dropdown).addClass('last-item')
+            $('li:first-child', dropdown).addClass('first-item')
+            $('li:last-child', dropdown).addClass('last-item')
 
-                dropdown.prepend($('<li />').addClass('dropdown-title').text(title))
+            dropdown.prepend($('<li />').addClass('dropdown-title').text(title))
 
-                var container = $('<li />').addClass('dropdown-container'),
+            var container = $('<li />').addClass('dropdown-container'),
                 ul = $('<ul />')
 
-                container.prepend(ul)
-                ul.prepend(dropdown.children())
-                dropdown.prepend(container)
+            container.prepend(ul)
+            ul.prepend(dropdown.children())
+            dropdown.prepend(container)
 
-                dropdown.on('touchstart', function () {
-                    window.setTimeout(function () {
-                        dropdown.addClass('scroll')
-                    }, 200)
-                })
+            dropdown.on('touchstart', function(){
+                window.setTimeout(function(){
+                    dropdown.addClass('scroll')
+                }, 200)
+            })
 
-                dropdown.on('touchend', function () {
-                    window.setTimeout(function () {
-                        dropdown.removeClass('scroll')
-                    }, 200)
-                })
+            dropdown.on('touchend', function(){
+                window.setTimeout(function(){
+                    dropdown.removeClass('scroll')
+                }, 200)
+            })
 
-                dropdown.on('click', 'a', function () {
-                    if (dropdown.hasClass('scroll')) {
-                        return false
-                    }
-                })
-            }
+            dropdown.on('click', 'a', function(){
+                if (dropdown.hasClass('scroll'))
+                    return false
+            })
         }
 
         if (dropdownContainer !== undefined && dropdownContainer == 'body') {
@@ -78,7 +76,7 @@
                 position = {
                     x: targetOffset.left,
                     y: targetOffset.top + targetHeight
-            },
+                },
                 leftOffset = targetWidth < 30 ? -16 : 0,
                 documentHeight = $(document).height(),
                 dropdownHeight = dropdown.height()
@@ -103,7 +101,7 @@
         }
     })
 
-    $(document).on('hidden.bs.dropdown', '.dropdown', function () {
+    $(document).on('hidden.bs.dropdown', '.dropdown', function() {
         var dropdown = $(this).data('oc.dropdown')
         if (dropdown !== undefined) {
             dropdown.css('display', 'none')
@@ -120,8 +118,7 @@
 
     var $dropdown, $container, $target
 
-    function fixDropdownPosition()
-    {
+    function fixDropdownPosition() {
         var position = $container.offset()
 
         $dropdown.css({
@@ -131,7 +128,7 @@
         })
     }
 
-    $(document).on('shown.bs.dropdown', '.dropdown.dropdown-fixed', function (event, eventData) {
+    $(document).on('shown.bs.dropdown', '.dropdown.dropdown-fixed', function(event, eventData) {
         $container = $(this)
         $dropdown = $('.dropdown-menu', $container)
         $target = $(eventData.relatedTarget)
@@ -140,7 +137,7 @@
         $(window).on('scroll.oc.dropdown, resize.oc.dropdown', fixDropdownPosition)
     })
 
-    $(document).on('hidden.bs.dropdown', '.dropdown.dropdown-fixed', function () {
+    $(document).on('hidden.bs.dropdown', '.dropdown.dropdown-fixed', function() {
         $(window).off('scroll.oc.dropdown, resize.oc.dropdown', fixDropdownPosition)
     })
 
