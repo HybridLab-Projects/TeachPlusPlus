@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar />
+    <NavBar v-if="!['Teachers'].includes($route.name)" />
     <router-view />
   </div>
 </template>

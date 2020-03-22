@@ -1,12 +1,11 @@
 <template>
   <b-container fluid>
-    <h1>PROTECTED</h1>
     <b-row>
       <b-col cols="5">
         <Search />
       </b-col>
       <b-col>
-        <h1>Test</h1>
+        <Teacher />
       </b-col>
     </b-row>
   </b-container>
@@ -14,10 +13,14 @@
 
 <script>
 import Search from '@/components/Search.vue';
+import Teacher from '@/components/Teacher.vue';
 
 export default {
   name: 'Teachers',
-  components: { Search },
+  components: {
+    Search,
+    Teacher,
+  },
   created() {
     this.$store.dispatch('fetchTeachers');
   },
