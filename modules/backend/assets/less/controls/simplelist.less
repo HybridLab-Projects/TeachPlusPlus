@@ -69,10 +69,14 @@
     background: @color-form-checkboxlist-background;
     .border-radius(@border-radius-base);
 
-    ul { padding-left: 15px; }
+    ul {
+        padding-left: 15px;
+    }
 
     &.form-control {
-        ul { margin-bottom: 0; }
+        ul {
+            margin-bottom: 0;
+        }
         li {
             padding-top: 5px;
             padding-bottom: 5px;
@@ -110,7 +114,6 @@
     }
 
     &.is-sortable {
-
         li.placeholder {
             position: relative;
             &:before {
@@ -122,7 +125,7 @@
 
         li.dragged {
             position: absolute;
-            .opacity(.5);
+            .opacity(0.5);
             z-index: 2000;
             color: @color-sortable-active;
 
@@ -132,11 +135,21 @@
 
     &.is-scrollable {
         height: 200px;
-        &.size-tiny { min-height: @size-tiny + 200; }
-        &.size-small { min-height: @size-small + 200; }
-        &.size-large { min-height: @size-large + 200; }
-        &.size-huge { min-height: @size-huge + 200; }
-        &.size-giant { min-height: @size-giant + 200; }
+        &.size-tiny {
+            min-height: @size-tiny + 200;
+        }
+        &.size-small {
+            min-height: @size-small + 200;
+        }
+        &.size-large {
+            min-height: @size-large + 200;
+        }
+        &.size-huge {
+            min-height: @size-huge + 200;
+        }
+        &.size-giant {
+            min-height: @size-giant + 200;
+        }
     }
 
     &.is-divided,
@@ -150,7 +163,8 @@
                 font-weight: 500;
             }
 
-            .description {}
+            .description {
+            }
         }
     }
 
@@ -177,8 +191,13 @@
             &:hover {
                 background: @color-list-hover-bg;
                 cursor: pointer;
-                &, a { color: white; }
-                a { text-decoration: none; }
+                &,
+                a {
+                    color: white;
+                }
+                a {
+                    text-decoration: none;
+                }
             }
 
             &.active {
@@ -212,9 +231,9 @@
                     display: block;
                     width: 155px;
                     height: 155px;
-                    border: 3px solid rgba(0,0,0,.1);
+                    border: 3px solid rgba(0, 0, 0, 0.1);
                     position: relative;
-                    .transition(border .3s ease);
+                    .transition(border 0.3s ease);
                 }
 
                 .image {
@@ -229,7 +248,7 @@
 
                     > i {
                         font-size: 56px;
-                        color: rgba(0,0,0,.25);
+                        color: rgba(0, 0, 0, 0.25);
                     }
                 }
 
@@ -244,11 +263,11 @@
 
                 &:hover {
                     .box {
-                        border-color: rgba(0,0,0,.2);
+                        border-color: rgba(0, 0, 0, 0.2);
                     }
 
                     .image > i {
-                        color: rgba(0,0,0,.45);
+                        color: rgba(0, 0, 0, 0.45);
                     }
                 }
             }

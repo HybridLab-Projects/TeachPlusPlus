@@ -1,12 +1,12 @@
 title: Feedbacks
 modelClass: Teachplusplus\Teachers\Models\Feedback
 list: $/teachplusplus/teachers/models/feedback/columns.yaml
-recordUrl: 'teachplusplus/teachers/feedbacks/update/:id'
-noRecordsMessage: 'backend::lang.list.no_records'
+recordUrl: "teachplusplus/teachers/feedbacks/update/:id"
+noRecordsMessage: "backend::lang.list.no_records"
 recordsPerPage: 20
 showSetup: true
 showCheckboxes: true
 toolbar:
     buttons: list_toolbar
     search:
-        prompt: 'backend::lang.list.search_prompt'
+        prompt: "backend::lang.list.search_prompt"

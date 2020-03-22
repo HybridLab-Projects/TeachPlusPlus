@@ -31,7 +31,8 @@
 }
 
 .control-filelist ul li.with-icon {
-    span.title, span.description {
+    span.title,
+    span.description {
         padding-left: 22px;
     }
 
@@ -60,7 +61,7 @@ html.gecko .control-filelist ul li.group {
     border-left: 1px solid #d9d9d9;
 
     &:empty {
-        display: none!important;
+        display: none !important;
     }
 }
 
@@ -84,13 +85,13 @@ form.hide-secondary-tabs {
 
 // Full height database columns table
 
-form[data-entity=database] {
+form[data-entity="database"] {
     div.field-datatable {
         position: absolute;
         width: 100%;
         height: 100%;
 
-        div[data-control=table] {
+        div[data-control="table"] {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -104,8 +105,8 @@ form[data-entity=database] {
                     top: 70px;
                     bottom: 0;
                     position: absolute;
-                    max-height: none!important;
-                    height: auto!important;
+                    max-height: none !important;
+                    height: auto !important;
                 }
             }
         }
@@ -132,7 +133,7 @@ div.control-table .toolbar a.builder-custom-table-button {
         background: white;
 
         .border-top(@color) {
-            content: ' ';
+            content: " ";
             display: block;
             position: absolute;
             width: 100%;
@@ -142,12 +143,13 @@ div.control-table .toolbar a.builder-custom-table-button {
             left: 0;
         }
 
-        > ul.nav-tabs, > div > ul.nav-tabs {
+        > ul.nav-tabs,
+        > div > ul.nav-tabs {
             padding-left: 20px;
             padding-bottom: 2px;
             background: white;
             position: relative;
-            
+
             &:before {
                 .border-top(#95a5a6);
             }
@@ -158,9 +160,9 @@ div.control-table .toolbar a.builder-custom-table-button {
                 > a {
                     background: white;
                     color: #bdc3c7;
-                    border-left: 1px solid #ecf0f1!important;
-                    border-right: 1px solid #ecf0f1!important;
-                    border-bottom: 1px solid #ecf0f1!important;
+                    border-left: 1px solid #ecf0f1 !important;
+                    border-right: 1px solid #ecf0f1 !important;
+                    border-bottom: 1px solid #ecf0f1 !important;
                     padding: 4px 10px;
                     line-height: 100%;
                     .border-radius(0 0 4px 4px);
@@ -172,7 +174,7 @@ div.control-table .toolbar a.builder-custom-table-button {
                     }
                 }
 
-                &.active{
+                &.active {
                     top: 0;
 
                     &:before {
@@ -182,9 +184,9 @@ div.control-table .toolbar a.builder-custom-table-button {
 
                     a {
                         padding-top: 5px;
-                        border-left: 1px solid #95a5a6!important;
-                        border-right: 1px solid #95a5a6!important;
-                        border-bottom: 1px solid #95a5a6!important;
+                        border-left: 1px solid #95a5a6 !important;
+                        border-right: 1px solid #95a5a6 !important;
+                        border-bottom: 1px solid #95a5a6 !important;
                         color: #95a5a6;
                     }
                 }

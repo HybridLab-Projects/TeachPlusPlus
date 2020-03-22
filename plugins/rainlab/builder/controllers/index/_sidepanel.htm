@@ -1,13 +1,16 @@
 <div class="layout control-scrollpanel" id="builder-side-panel">
     <div class="layout-cell">
-        <div class="layout-relative fix-button-container fix-button-content-header">
+        <div
+            class="layout-relative fix-button-container fix-button-content-header"
+        >
             <!-- Tables -->
             <form
                 class="layout"
                 data-content-id="database"
                 data-template-type="database"
                 data-type-icon="oc-icon-table"
-                onsubmit="return false">
+                onsubmit="return false"
+            >
                 <?= $this->widget->databaseTabelList->render() ?>
             </form>
 
@@ -17,7 +20,8 @@
                 data-content-id="models"
                 data-template-type="model"
                 data-type-icon="oc-icon-random"
-                onsubmit="return false">
+                onsubmit="return false"
+            >
                 <?= $this->widget->modelList->render() ?>
             </form>
 
@@ -27,7 +31,8 @@
                 data-content-id="controllers"
                 data-template-type="controller"
                 data-type-icon="oc-icon-asterisk"
-                onsubmit="return false">
+                onsubmit="return false"
+            >
                 <?= $this->widget->controllerList->render() ?>
             </form>
 
@@ -37,7 +42,8 @@
                 data-content-id="version"
                 data-template-type="version"
                 data-type-icon="oc-icon-code-fork"
-                onsubmit="return false">
+                onsubmit="return false"
+            >
                 <?= $this->widget->versionList->render() ?>
             </form>
 
@@ -47,7 +53,8 @@
                 data-content-id="localization"
                 data-template-type="localization"
                 data-type-icon="oc-icon-glove"
-                onsubmit="return false">
+                onsubmit="return false"
+            >
                 <?= $this->widget->languageList->render() ?>
             </form>
         </div>

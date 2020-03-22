@@ -3,7 +3,6 @@
 # ===================================
 
 columns:
-
     code:
         label: system::lang.mail_templates.code
         searchable: true

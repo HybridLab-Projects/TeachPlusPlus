@@ -2,6 +2,6 @@
 #  Configures the layout list widget
 # ===================================
 
-noRecordsMessage: 'cms::lang.content.no_list_records'
-deleteConfirmation: 'cms::lang.content.delete_confirm_multiple'
+noRecordsMessage: "cms::lang.content.no_list_records"
+deleteConfirmation: "cms::lang.content.delete_confirm_multiple"
 itemType: content

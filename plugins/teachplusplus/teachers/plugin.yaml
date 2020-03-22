@@ -1,9 +1,9 @@
 plugin:
-    name: 'teachplusplus.teachers::lang.plugin.name'
-    description: 'teachplusplus.teachers::lang.plugin.description'
+    name: "teachplusplus.teachers::lang.plugin.name"
+    description: "teachplusplus.teachers::lang.plugin.description"
     author: TeachPlusPlus
     icon: oc-icon-book
-    homepage: ''
+    homepage: ""
 navigation:
     main-menu-item:
         label: Teachers

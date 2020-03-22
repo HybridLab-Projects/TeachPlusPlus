@@ -7,7 +7,7 @@ fields:
         label: rainlab.builder::lang.localization.language
         attributes:
             default-focus: 1
-            spellcheck: 'false'
+            spellcheck: "false"
 
     toolbar:
         type: partial

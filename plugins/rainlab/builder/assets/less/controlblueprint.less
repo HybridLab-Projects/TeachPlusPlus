@@ -14,8 +14,9 @@
         }
     }
 
-    li.control:hover, li.inspector-open {
-         > .control-wrapper {
+    li.control:hover,
+    li.inspector-open {
+        > .control-wrapper {
             .builder-blueprint-control-text,
             .builder-blueprint-control-textarea,
             .builder-blueprint-control-dropdown {
@@ -25,15 +26,25 @@
             .builder-blueprint-control-dropdown:before {
                 background-color: @builder-hover-color;
             }
-         }
+        }
     }
 
     .builder-blueprint-control-textarea {
-        &.size-tiny { min-height: @size-tiny; }
-        &.size-small { min-height: @size-small; }
-        &.size-large { min-height: @size-large; }
-        &.size-huge { min-height: @size-huge; }
-        &.size-giant { min-height: @size-giant; }
+        &.size-tiny {
+            min-height: @size-tiny;
+        }
+        &.size-small {
+            min-height: @size-small;
+        }
+        &.size-large {
+            min-height: @size-large;
+        }
+        &.size-huge {
+            min-height: @size-huge;
+        }
+        &.size-giant {
+            min-height: @size-giant;
+        }
     }
 
     .builder-blueprint-control-section {
@@ -59,9 +70,10 @@
     .builder-blueprint-control-dropdown {
         position: relative;
 
-        &:before, &:after {
+        &:before,
+        &:after {
             position: absolute;
-            content: '';
+            content: "";
         }
 
         &:before {
@@ -85,7 +97,7 @@
     .builder-blueprint-control-checkbox {
         &:before {
             float: left;
-            content: ' ';
+            content: " ";
             border: 2px solid @builder-control-border-color;
             .border-radius(4px);
             width: 17px;
@@ -104,8 +116,9 @@
         }
     }
 
-    li.control:hover, li.inspector-open {
-         > .control-wrapper {
+    li.control:hover,
+    li.inspector-open {
+        > .control-wrapper {
             .builder-blueprint-control-checkbox:before {
                 border-color: @builder-hover-color;
             }
@@ -115,9 +128,10 @@
     .builder-blueprint-control-switch {
         position: relative;
 
-        &:before, &:after {
+        &:before,
+        &:after {
             position: absolute;
-            content: ' ';
+            content: " ";
             .border-radius(30px);
         }
 
@@ -150,8 +164,9 @@
         }
     }
 
-    li.control:hover, li.inspector-open {
-         > .control-wrapper {
+    li.control:hover,
+    li.inspector-open {
+        > .control-wrapper {
             .builder-blueprint-control-switch:before {
                 background-color: @builder-hover-color;
             }
@@ -175,9 +190,9 @@
             .builder-blueprint-control-repeater-body {
                 > .repeater-button {
                     background: @builder-hover-color;
-                    color: white!important;
+                    color: white !important;
                     span {
-                        color: white!important;
+                        color: white !important;
                     }
                 }
             }
@@ -188,7 +203,7 @@
         position: relative;
 
         &:before {
-            content: '';
+            content: "";
             position: absolute;
             width: 2px;
             top: 0;
@@ -198,7 +213,7 @@
         }
 
         &:after {
-            content: '';
+            content: "";
             position: absolute;
             width: 6px;
             height: 6px;
@@ -215,9 +230,11 @@
         }
     }
 
-    li.control:hover, li.inspector-open {
+    li.control:hover,
+    li.inspector-open {
         > .builder-blueprint-control-repeater {
-            &:before, &:after {
+            &:before,
+            &:after {
                 background-color: @builder-hover-color;
             }
         }
@@ -236,7 +253,7 @@
                 &:last-child {
                     margin-bottom: 0;
                 }
- 
+
                 i {
                     margin-right: 5px;
                 }
@@ -256,5 +273,4 @@
             }
         }
     }
-
 }

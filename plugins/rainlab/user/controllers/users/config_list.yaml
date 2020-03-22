@@ -31,7 +31,6 @@ filter: config_filter.yaml
 
 # Toolbar widget configuration
 toolbar:
-
     # Partial for toolbar buttons
     buttons: list_toolbar
 

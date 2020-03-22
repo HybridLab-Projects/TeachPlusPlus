@@ -3,7 +3,7 @@ form: $/teachplusplus/teachers/models/teacher/fields.yaml
 modelClass: Teachplusplus\Teachers\Models\Teacher
 defaultRedirect: teachplusplus/teachers/teachers
 create:
-    redirect: 'teachplusplus/teachers/teachers/update/:id'
+    redirect: "teachplusplus/teachers/teachers/update/:id"
     redirectClose: teachplusplus/teachers/teachers
 update:
     redirect: teachplusplus/teachers/teachers

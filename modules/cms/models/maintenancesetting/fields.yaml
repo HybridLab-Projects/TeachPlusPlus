@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     hint:
         type: hint
         path: ~/modules/cms/models/maintenancesetting/_hint.htm

@@ -3,7 +3,6 @@
 # ===================================
 
 columns:
-
     first_name:
         label: backend::lang.user.first_name
         searchable: true

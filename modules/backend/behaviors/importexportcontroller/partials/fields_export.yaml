@@ -18,7 +18,7 @@ fields:
 
     format_delimiter:
         label: backend::lang.import_export.delimiter_char
-        default: ','
+        default: ","
         span: left
         trigger:
             action: show

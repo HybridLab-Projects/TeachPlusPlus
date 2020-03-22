@@ -5,7 +5,6 @@
 tabs:
     defaultTab: cms::lang.theme.default_tab
     fields:
-
         name:
             label: cms::lang.theme.name_label
             placeholder: cms::lang.theme.name_create_placeholder

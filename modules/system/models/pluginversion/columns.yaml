@@ -3,7 +3,6 @@
 # ===================================
 
 columns:
-
     name:
         label: system::lang.updates.plugin_name
         sortable: false

@@ -5,7 +5,6 @@
 tabs:
     defaultTab: system::lang.log.default_tab
     fields:
-
         log_requests:
             label: system::lang.log.log_requests
             span: auto

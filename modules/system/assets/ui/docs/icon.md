@@ -1089,7 +1089,6 @@ Feel free to use them alongside your buttons.
 }
 </style>
 
-
 <!-- PHP code for outputting icons -->
 <!--
     <?php

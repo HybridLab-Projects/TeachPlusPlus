@@ -1,9 +1,3 @@
-{% set record = __SELF__.record %}
-{% set displayColumn = __SELF__.displayColumn %}
-{% set notFoundMessage = __SELF__.notFoundMessage %}
-
-{% if record %}
-    {{ attribute(record, displayColumn) }}
-{% else %}
-    {{ notFoundMessage }}
-{% endif %}
+{% set record = __SELF__.record %} {% set displayColumn = __SELF__.displayColumn
+%} {% set notFoundMessage = __SELF__.notFoundMessage %} {% if record %} {{
+attribute(record, displayColumn) }} {% else %} {{ notFoundMessage }} {% endif %}

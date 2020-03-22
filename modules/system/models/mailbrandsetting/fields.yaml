@@ -3,14 +3,12 @@
 # ===================================
 
 fields:
-
     _mail_preview:
         type: partial
         path: field_mail_preview
 
 secondaryTabs:
     fields:
-
         _section_background:
             label: system::lang.mail_brand.fields._section_background
             type: section

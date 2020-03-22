@@ -4,7 +4,6 @@
 
 tabs:
     fields:
-
         sender_name:
             label: system::lang.mail.sender_name
             span: auto

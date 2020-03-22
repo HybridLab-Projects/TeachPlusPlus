@@ -1,5 +1,4 @@
-Symfony Translation Contracts
-=============================
+# Symfony Translation Contracts
 
 A set of abstractions extracted out of the Symfony components.
 

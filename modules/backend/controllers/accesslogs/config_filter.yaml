@@ -3,7 +3,6 @@
 # ===================================
 
 scopes:
-
     created_at:
         label: backend::lang.access_log.created_at
         type: daterange

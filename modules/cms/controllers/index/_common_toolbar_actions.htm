@@ -8,7 +8,7 @@
     data-request="onDelete"
     data-request-confirm="<?= e(trans('cms::lang.' . $toolbarSource . '.delete_confirm_single')) ?>"
     data-request-success="$.oc.cmsPage.updateTemplateList('<?= $toolbarSource ?>'); $(this).trigger('close.oc.tab', [{force: true}])"
-    data-control="delete-button">
-</button>
+    data-control="delete-button"
+></button>
 
 <?= $this->makePartial('button_lastmodified'); ?>

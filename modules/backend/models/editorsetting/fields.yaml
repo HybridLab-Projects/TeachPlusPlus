@@ -4,7 +4,6 @@
 
 tabs:
     fields:
-
         html_custom_styles:
             label: backend::lang.editor.custom_styles
             commentAbove: backend::lang.editor.custom styles_comment

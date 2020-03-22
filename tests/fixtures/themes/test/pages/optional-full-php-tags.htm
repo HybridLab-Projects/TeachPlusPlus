@@ -1,6 +1,4 @@
-url = "/cycle-test"
-layout = "cycle-test"
-==
+url = "/cycle-test" layout = "cycle-test" ==
 <?php
 function onStart() {
     $this['pageStartVar'] = 3;
@@ -10,5 +8,5 @@ function onEnd() {
     $this['pageEndVar'] = 4;
 }
 ?>
-==
-{{ layoutStartVar }}{{ layoutBeforePageStartVar }}{{ pageStartVar }}{{ pageEndVar }}{{ layoutEndVar }}
+== {{ layoutStartVar }}{{ layoutBeforePageStartVar }}{{ pageStartVar }}{{
+pageEndVar }}{{ layoutEndVar }}

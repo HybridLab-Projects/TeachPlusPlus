@@ -5,7 +5,6 @@
     data-thumbnail-width="<?= $imageWidth ?: '0' ?>"
     data-thumbnail-height="<?= $imageHeight ?: '0' ?>"
 >
-
     <!-- Find Button -->
     <a href="javascript:;" class="find-button">
         <span class="find-button-icon oc-icon-image"></span>
@@ -18,9 +17,9 @@
         </div>
 
         <?php if (!$imageExists && !empty($imageUrl)) : ?>
-            <p data-find-error class="help-block">
-                <?= e(trans('backend::lang.mediafinder.no_image')) ?>
-            </p>
+        <p data-find-error class="help-block">
+            <?= e(trans('backend::lang.mediafinder.no_image')) ?>
+        </p>
         <?php endif; ?>
 
         <div class="info">
@@ -40,5 +39,5 @@
         id="<?= $field->getId() ?>"
         value="<?= e($value) ?>"
         data-find-value
-        />
+    />
 </div>

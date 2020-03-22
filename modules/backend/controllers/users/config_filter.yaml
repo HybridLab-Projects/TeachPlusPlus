@@ -3,7 +3,6 @@
 # ===================================
 
 scopes:
-
     is_superuser:
         label: backend::lang.user.superuser
         type: switch

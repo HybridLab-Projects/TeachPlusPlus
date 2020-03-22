@@ -1,12 +1,11 @@
 <div class="layout responsive-sidebar">
     <div class="layout-cell">
-
         <div class="layout">
             <?php if ($breadcrumbContent = Block::placeholder('breadcrumb')): ?>
-                <!-- Breadcrumb -->
-                <div class="control-breadcrumb breadcrumb-flush">
-                    <?= $breadcrumbContent ?>
-                </div>
+            <!-- Breadcrumb -->
+            <div class="control-breadcrumb breadcrumb-flush">
+                <?= $breadcrumbContent ?>
+            </div>
             <?php endif ?>
 
             <!-- Content -->
@@ -16,7 +15,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="layout-cell w-300 form-sidebar control-scrollpanel">
         <div class="layout-relative">

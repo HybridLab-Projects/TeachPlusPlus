@@ -3,7 +3,6 @@
 # ===================================
 
 scopes:
-
     groups:
         # Filter name
         label: rainlab.user::lang.group.label

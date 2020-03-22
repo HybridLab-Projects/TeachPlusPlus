@@ -23,14 +23,14 @@
 .container-fixed() {
     margin-right: auto;
     margin-left: auto;
-    padding-left:  (@grid-gutter-width / 2);
+    padding-left: (@grid-gutter-width / 2);
     padding-right: (@grid-gutter-width / 2);
     &:extend(.clearfix all);
 }
 
 // Creates a wrapper for a series of columns
 .make-row(@gutter: @grid-gutter-width) {
-    margin-left:  (@gutter / -2);
+    margin-left: (@gutter / -2);
     margin-right: (@gutter / -2);
     &:extend(.clearfix all);
 }
@@ -41,7 +41,7 @@
     float: left;
     width: percentage((@columns / @grid-columns));
     min-height: 1px;
-    padding-left:  (@gutter / 2);
+    padding-left: (@gutter / 2);
     padding-right: (@gutter / 2);
 }
 .make-xs-column-offset(@columns) {
@@ -64,7 +64,7 @@
 .make-sm-column(@columns; @gutter: @grid-gutter-width) {
     position: relative;
     min-height: 1px;
-    padding-left:  (@gutter / 2);
+    padding-left: (@gutter / 2);
     padding-right: (@gutter / 2);
 
     @media (min-width: @screen-sm-min) {
@@ -92,7 +92,7 @@
 .make-md-column(@columns; @gutter: @grid-gutter-width) {
     position: relative;
     min-height: 1px;
-    padding-left:  (@gutter / 2);
+    padding-left: (@gutter / 2);
     padding-right: (@gutter / 2);
 
     @media (min-width: @screen-md-min) {
@@ -120,7 +120,7 @@
 .make-lg-column(@columns; @gutter: @grid-gutter-width) {
     position: relative;
     min-height: 1px;
-    padding-left:  (@gutter / 2);
+    padding-left: (@gutter / 2);
     padding-right: (@gutter / 2);
 
     @media (min-width: @screen-lg-min) {
@@ -151,21 +151,24 @@
 
 .make-grid-columns() {
     // Common styles for all sizes of grid columns, widths 1-12
-    .col(@index) when (@index = 1) { // initial
+    .col(@index) when (@index = 1) {
+        // initial
         @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
         .col((@index + 1), @item);
     }
-    .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
+    .col(@index, @list) when (@index =< @grid-columns) {
+        // general; "=<" isn't a typo
         @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
         .col((@index + 1), ~"@{list}, @{item}");
     }
-    .col(@index, @list) when (@index > @grid-columns) { // terminal
+    .col(@index, @list) when (@index > @grid-columns) {
+        // terminal
         @{list} {
             position: relative;
             // Prevent columns from collapsing when empty
             min-height: 1px;
             // Inner gutter via padding
-            padding-left:  (@grid-gutter-width / 2);
+            padding-left: (@grid-gutter-width / 2);
             padding-right: (@grid-gutter-width / 2);
         }
     }
@@ -173,15 +176,18 @@
 }
 
 .float-grid-columns(@class) {
-    .col(@index) when (@index = 1) { // initial
+    .col(@index) when (@index = 1) {
+        // initial
         @item: ~".col-@{class}-@{index}";
         .col((@index + 1), @item);
     }
-    .col(@index, @list) when (@index =< @grid-columns) { // general
+    .col(@index, @list) when (@index =< @grid-columns) {
+        // general
         @item: ~".col-@{class}-@{index}";
         .col((@index + 1), ~"@{list}, @{item}");
     }
-    .col(@index, @list) when (@index > @grid-columns) { // terminal
+    .col(@index, @list) when (@index > @grid-columns) {
+        // terminal
         @{list} {
             float: left;
         }

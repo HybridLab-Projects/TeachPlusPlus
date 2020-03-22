@@ -7,7 +7,7 @@ fields:
         label: cms::lang.editor.filename
         attributes:
             default-focus: 1
-            spellcheck: 'false'
+            spellcheck: "false"
 
     toolbar:
         type: partial
@@ -17,7 +17,7 @@ fields:
 secondaryTabs:
     stretch: true
     fields:
-        formBuilder: 
+        formBuilder:
             type: RainLab\Builder\FormWidgets\FormBuilder
             stretch: true
             cssClass: layout

@@ -3,7 +3,12 @@
     "description": "OctoberCMS",
     "homepage": "https://octobercms.com",
     "type": "project",
-    "keywords": ["october", "cms", "octobercms", "laravel"],
+    "keywords": [
+        "october",
+        "cms",
+        "octobercms",
+        "laravel"
+    ],
     "license": "MIT",
     "authors": [
         {

@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     layout:
         label: system::lang.mail_templates.layout
         type: relation
@@ -30,7 +29,6 @@ fields:
 
 secondaryTabs:
     fields:
-
         content_html:
             type: markdown
             size: giant

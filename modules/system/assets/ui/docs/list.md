@@ -230,7 +230,6 @@ It might be fun to include a status column!
         </table>
     </div>
 
-
 ### Badge column
 
 You can also include an icon badge inside a column.

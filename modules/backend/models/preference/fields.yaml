@@ -4,7 +4,6 @@
 
 tabs:
     fields:
-
         locale:
             tab: backend::lang.backend_preferences.region
             label: backend::lang.backend_preferences.locale

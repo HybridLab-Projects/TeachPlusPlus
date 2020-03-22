@@ -40,9 +40,7 @@
             }
         },
         "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
+        "license": ["MIT"],
         "authors": [
             {
                 "name": "Kyle Robinson Young",

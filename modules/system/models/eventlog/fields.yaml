@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     message:
         type: partial
         path: field_message

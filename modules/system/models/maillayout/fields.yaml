@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     code:
         label: system::lang.mail_templates.code
         comment: system::lang.mail_templates.code_comment
@@ -19,7 +18,6 @@ fields:
 
 secondaryTabs:
     fields:
-
         content_html:
             type: codeeditor
             size: giant

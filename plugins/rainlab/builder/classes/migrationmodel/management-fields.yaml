@@ -8,7 +8,7 @@ fields:
         label: rainlab.builder::lang.migration.field_version
         attributes:
             default-focus: 1
-            spellcheck: 'false'
+            spellcheck: "false"
         cssClass: size-quarter
 
     description:

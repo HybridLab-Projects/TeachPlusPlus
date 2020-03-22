@@ -1,8 +1,11 @@
-ace.define("ace/theme/kr_theme",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
-
-exports.isDark = true;
-exports.cssClass = "ace-kr-theme";
-exports.cssText = ".ace-kr-theme .ace_gutter {\
+ace.define(
+    "ace/theme/kr_theme",
+    ["require", "exports", "module", "ace/lib/dom"],
+    function (require, exports, module) {
+        exports.isDark = true;
+        exports.cssClass = "ace-kr-theme";
+        exports.cssText =
+            ".ace-kr-theme .ace_gutter {\
 background: #1c1917;\
 color: #FCFFE0\
 }\
@@ -99,6 +102,7 @@ color: #BABD9C\
 background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYFBXV/8PAAJoAXX4kT2EAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
-var dom = require("../lib/dom");
-dom.importCssString(exports.cssText, exports.cssClass);
-});
+        var dom = require("../lib/dom");
+        dom.importCssString(exports.cssText, exports.cssClass);
+    }
+);

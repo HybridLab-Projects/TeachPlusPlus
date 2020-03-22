@@ -4,13 +4,14 @@
         class="list-expand-collapse"
         data-request="<?= $this->getEventHandler('onToggleTreeNode') ?>"
         data-stripe-load-indicator
-        data-request-data="node_id: '<?= $record->getKey() ?>', status: <?= $expanded ? 1 : 0 ?>">
+        data-request-data="node_id: '<?= $record->getKey() ?>', status: <?= $expanded ? 1 : 0 ?>"
+    >
         <?php if (!$childCount): ?>
-            <i class="icon-square-o"></i>
+        <i class="icon-square-o"></i>
         <?php elseif ($expanded): ?>
-            <i class="icon-minus-square-o"></i>
+        <i class="icon-minus-square-o"></i>
         <?php else: ?>
-            <i class="icon-plus-square-o"></i>
+        <i class="icon-plus-square-o"></i>
         <?php endif ?>
     </a>
 </td>

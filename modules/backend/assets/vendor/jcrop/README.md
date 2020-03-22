@@ -1,45 +1,40 @@
-Jcrop Image Cropping Plugin
-===========================
+# Jcrop Image Cropping Plugin
 
 Jcrop is the quick and easy way to add image cropping functionality to
 your web application. It combines the ease-of-use of a typical jQuery
 plugin with a powerful cross-platform DHTML cropping engine that is
 faithful to familiar desktop graphics applications.
 
-Cross-platform Compatibility
-----------------------------
+## Cross-platform Compatibility
 
-* Firefox 2+
-* Safari 3+
-* Opera 9.5+
-* Google Chrome 0.2+
-* Internet Explorer 6+
+-   Firefox 2+
+-   Safari 3+
+-   Opera 9.5+
+-   Google Chrome 0.2+
+-   Internet Explorer 6+
 
-Feature Overview
-----------------
+## Feature Overview
 
-* Attaches unobtrusively to any image
-* Supports aspect ratio locking
-* Supports minSize/maxSize setting
-* Callbacks for selection done, or while moving
-* Keyboard support for nudging selection
-* API features to create interactivity, including animation
-* Support for CSS styling
-* Experimental touch-screen support (iOS, Android, etc)
+-   Attaches unobtrusively to any image
+-   Supports aspect ratio locking
+-   Supports minSize/maxSize setting
+-   Callbacks for selection done, or while moving
+-   Keyboard support for nudging selection
+-   API features to create interactivity, including animation
+-   Support for CSS styling
+-   Experimental touch-screen support (iOS, Android, etc)
 
-Contributors
-============
+# Contributors
 
 **Special thanks to the following contributors:**
 
-* [Bruno Agutoli](mailto:brunotla1@gmail.com)
-* dhorrigan
-* Phil-B
-* jaymecd
-* all others who have committed their time and effort to help improve Jcrop
+-   [Bruno Agutoli](mailto:brunotla1@gmail.com)
+-   dhorrigan
+-   Phil-B
+-   jaymecd
+-   all others who have committed their time and effort to help improve Jcrop
 
-MIT License
-===========
+# MIT License
 
 **Jcrop is free software under MIT License.**
 
@@ -63,4 +58,3 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

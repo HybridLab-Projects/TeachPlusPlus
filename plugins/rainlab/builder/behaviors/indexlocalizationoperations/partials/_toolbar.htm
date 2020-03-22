@@ -4,7 +4,8 @@
         class="btn btn-primary oc-icon-check save"
         data-builder-command="localization:cmdSaveLanguage"
         data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
-        data-hotkey="ctrl+s, cmd+s">
+        data-hotkey="ctrl+s, cmd+s"
+    >
         <?= e(trans('backend::lang.form.save')) ?>
     </a>
 
@@ -17,11 +18,12 @@
     >
         <?= e(trans('rainlab.builder::lang.localization.add_missing_strings')) ?>
     </a>
-    
+
     <button
         type="button"
         class="btn btn-default empty oc-icon-trash-o <?php if (!strlen($originalLanguage)): ?>hide<?php endif ?>"
         data-builder-command="localization:cmdDeleteLanguage"
         data-confirm="<?= e(trans('rainlab.builder::lang.localization.confirm_delete')) ?>"
-        data-control="delete-button"></button>
+        data-control="delete-button"
+    ></button>
 </div>

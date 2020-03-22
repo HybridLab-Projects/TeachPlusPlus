@@ -3,7 +3,6 @@
 # ===================================
 
 columns:
-
     id:
         label: backend::lang.access_log.id
         searchable: yes

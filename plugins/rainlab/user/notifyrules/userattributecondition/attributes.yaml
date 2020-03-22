@@ -3,7 +3,6 @@
 # ===================================
 
 attributes:
-
     name:
         label: Name
 

@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     themeName:
         label: cms::lang.theme.theme_label
         disabled: true

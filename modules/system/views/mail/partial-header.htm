@@ -1,17 +1,14 @@
-name = "Header"
-==
-*** {{ body|trim }} <{{ url }}>
-==
+name = "Header" == *** {{ body|trim }} <{{ url }}> ==
 <tr>
     <td class="header">
         {% if url %}
-            <a href="{{ url }}">
-                {{ body }}
-            </a>
+        <a href="{{ url }}">
+            {{ body }}
+        </a>
         {% else %}
-            <span>
-                {{ body }}
-            </span>
+        <span>
+            {{ body }}
+        </span>
         {% endif %}
     </td>
 </tr>

@@ -26,7 +26,7 @@ fields:
 
     format_delimiter:
         label: backend::lang.import_export.delimiter_char
-        default: ','
+        default: ","
         span: left
         trigger:
             action: show
@@ -80,14 +80,30 @@ fields:
         label: backend::lang.import_export.file_columns
         type: partial
         path: ~/modules/backend/behaviors/importexportcontroller/partials/_import_file_columns.htm
-        dependsOn: [import_file, first_row_titles, format_delimiter, format_enclosure, format_escape, format_encoding]
+        dependsOn:
+            [
+                import_file,
+                first_row_titles,
+                format_delimiter,
+                format_enclosure,
+                format_escape,
+                format_encoding,
+            ]
         span: left
 
     import_db_columns:
         label: backend::lang.import_export.database_fields
         type: partial
         path: ~/modules/backend/behaviors/importexportcontroller/partials/_import_db_columns.htm
-        dependsOn: [import_file, first_row_titles, format_delimiter, format_enclosure, format_escape, format_encoding]
+        dependsOn:
+            [
+                import_file,
+                first_row_titles,
+                format_delimiter,
+                format_enclosure,
+                format_escape,
+                format_encoding,
+            ]
         span: right
 
     step3_section:

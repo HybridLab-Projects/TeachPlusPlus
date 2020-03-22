@@ -1,12 +1,14 @@
 <div class="dropdown dropup">
-    <a
-        href="javascript:;"
-        class="manage-widgets"
-        data-toggle="dropdown">
-        <i class="icon-cogs"></i> <?= e(trans('backend::lang.dashboard.manage_widgets')) ?>
+    <a href="javascript:;" class="manage-widgets" data-toggle="dropdown">
+        <i class="icon-cogs"></i>
+        <?= e(trans('backend::lang.dashboard.manage_widgets')) ?>
     </a>
 
-    <ul class="dropdown-menu" role="menu" data-dropdown-title="Manage dashboard">
+    <ul
+        class="dropdown-menu"
+        role="menu"
+        data-dropdown-title="Manage dashboard"
+    >
         <li role="presentation">
             <a
                 role="menuitem"
@@ -14,23 +16,26 @@
                 data-control="popup"
                 data-handler="<?= $this->getEventHandler('onLoadAddPopup') ?>"
                 class="oc-icon-plus"
-                tabindex="-1">
+                tabindex="-1"
+            >
                 <?= e(trans('backend::lang.dashboard.add_widget')) ?>
             </a>
         </li>
         <li role="separator" class="divider"></li>
-        <?php if (\BackendAuth::getUser()->hasAccess('backend.manage_default_dashboard')) : ?>
-            <li role="presentation">
-                <a
-                    role="menuitem"
-                    href="javascript:;"
-                    class="oc-icon-floppy-o"
-                    data-request="<?= $this->getEventHandler('onMakeLayoutDefault') ?>"
-                    data-request-confirm="<?= e(trans('backend::lang.dashboard.make_default_confirm')) ?>"
-                    tabindex="-1">
-                    <?= e(trans('backend::lang.dashboard.make_default')) ?>
-                </a>
-            </li>
+        <?php if (\BackendAuth::getUser()->hasAccess('backend.manage_default_dashboard'))
+        : ?>
+        <li role="presentation">
+            <a
+                role="menuitem"
+                href="javascript:;"
+                class="oc-icon-floppy-o"
+                data-request="<?= $this->getEventHandler('onMakeLayoutDefault') ?>"
+                data-request-confirm="<?= e(trans('backend::lang.dashboard.make_default_confirm')) ?>"
+                tabindex="-1"
+            >
+                <?= e(trans('backend::lang.dashboard.make_default')) ?>
+            </a>
+        </li>
         <?php endif; ?>
         <li role="presentation">
             <a
@@ -40,7 +45,8 @@
                 data-request="<?= $this->getEventHandler('onResetWidgets') ?>"
                 data-request-confirm="<?= e(trans('backend::lang.dashboard.reset_layout_confirm')) ?>"
                 class="oc-icon-repeat"
-                tabindex="-1">
+                tabindex="-1"
+            >
                 <?= e(trans('backend::lang.dashboard.reset_layout')) ?>
             </a>
         </li>

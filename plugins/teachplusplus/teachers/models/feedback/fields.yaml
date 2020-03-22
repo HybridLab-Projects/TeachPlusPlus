@@ -1,7 +1,7 @@
 fields:
     content:
         label: Feedback
-        size: ''
+        size: ""
         mode: tab
         span: full
         type: markdown

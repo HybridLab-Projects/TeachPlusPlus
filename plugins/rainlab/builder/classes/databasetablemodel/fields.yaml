@@ -7,7 +7,7 @@ fields:
         label: rainlab.builder::lang.database.field_name
         attributes:
             default-focus: 1
-            spellcheck: 'false'
+            spellcheck: "false"
 
     toolbar:
         type: partial
@@ -30,8 +30,8 @@ tabs:
             columns:
                 name:
                     title: rainlab.builder::lang.database.column_name_name
-                    validation: 
-                        required: 
+                    validation:
+                        required:
                             message: rainlab.builder::lang.database.column_name_required
                         regex:
                             pattern: ^[0-9_a-z]+$
@@ -39,7 +39,7 @@ tabs:
                 type:
                     title: rainlab.builder::lang.database.column_name_type
                     type: dropdown
-                    options: 
+                    options:
                         integer: Integer
                         smallInteger: Small Integer
                         bigInteger: Big Integer
@@ -53,8 +53,8 @@ tabs:
                         boolean: Boolean
                         decimal: Decimal
                         double: Double
-                    validation: 
-                        required: 
+                    validation:
+                        required:
                             message: rainlab.builder::lang.database.column_type_required
                 length:
                     title: rainlab.builder::lang.database.column_name_length

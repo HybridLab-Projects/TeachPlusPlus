@@ -10,7 +10,10 @@
         'firstDay' => $scope->firstDay,
         'yearRange' => $scope->yearRange,
     ]))
-    ?>">
+    ?>"
+>
     <span class="filter-label"><?= e(trans($scope->label)) ?>:</span>
-    <span class="filter-setting"><?= isset($dateStr) ? $dateStr : e(trans('backend::lang.filter.date_all')) ?></span>
+    <span class="filter-setting"
+        ><?= isset($dateStr) ? $dateStr : e(trans('backend::lang.filter.date_all')) ?></span
+    >
 </a>

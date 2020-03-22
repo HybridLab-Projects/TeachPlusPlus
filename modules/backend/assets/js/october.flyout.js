@@ -1,224 +1,234 @@
 /*
  * Flyout plugin.
  */
-+function ($) { "use strict";
++(function ($) {
+    "use strict";
 
     var Base = $.oc.foundation.base,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
     // SCROLLPAD CLASS DEFINITION
     // ============================
 
-    var Flyout = function(element, options) {
-        this.$el = $(element)
-        this.$overlay = null
-        this.options = options
+    var Flyout = function (element, options) {
+        this.$el = $(element);
+        this.$overlay = null;
+        this.options = options;
 
-        Base.call(this)
+        Base.call(this);
 
-        this.init()
-    }
+        this.init();
+    };
 
-    Flyout.prototype = Object.create(BaseProto)
-    Flyout.prototype.constructor = Flyout
+    Flyout.prototype = Object.create(BaseProto);
+    Flyout.prototype.constructor = Flyout;
 
-    Flyout.prototype.dispose = function() {
-        this.removeOverlay()
-        this.$el.removeData('oc.flyout')
-        this.$el = null
+    Flyout.prototype.dispose = function () {
+        this.removeOverlay();
+        this.$el.removeData("oc.flyout");
+        this.$el = null;
 
         if (this.options.flyoutToggle) {
-            this.removeToggle()
+            this.removeToggle();
         }
 
-        BaseProto.dispose.call(this)
-    }
+        BaseProto.dispose.call(this);
+    };
 
-    Flyout.prototype.show = function() {
-        var $cells = this.$el.find('> .layout-cell'),
-            $flyout = this.$el.find('> .flyout')
+    Flyout.prototype.show = function () {
+        var $cells = this.$el.find("> .layout-cell"),
+            $flyout = this.$el.find("> .flyout");
 
-        $('[data-control=layout-sidepanel]').sidePanelTab('hideSidePanel')
+        $("[data-control=layout-sidepanel]").sidePanelTab("hideSidePanel");
 
-        this.removeOverlay()
+        this.removeOverlay();
 
         for (var i = 0; i < $cells.length; i++) {
             var $cell = $($cells[i]),
-                width = $cell.width()
+                width = $cell.width();
 
-            $cell.css('width', width)
+            $cell.css("width", width);
         }
 
-        this.createOverlay()
+        this.createOverlay();
 
-        window.setTimeout(this.proxy(this.setBodyClass), 1)
-        $flyout.css('width', this.options.flyoutWidth)
+        window.setTimeout(this.proxy(this.setBodyClass), 1);
+        $flyout.css("width", this.options.flyoutWidth);
 
-        this.hideToggle()
-    }
+        this.hideToggle();
+    };
 
-    Flyout.prototype.hide = function() {
-        var $cells = this.$el.find('> .layout-cell'),
-            $flyout = this.$el.find('> .flyout')
+    Flyout.prototype.hide = function () {
+        var $cells = this.$el.find("> .layout-cell"),
+            $flyout = this.$el.find("> .flyout");
 
         for (var i = 0; i < $cells.length; i++) {
-            var $cell = $($cells[i])
+            var $cell = $($cells[i]);
 
-            $cell.css('width', '')
+            $cell.css("width", "");
         }
 
-        $flyout.css('width', 0)
+        $flyout.css("width", 0);
 
-        window.setTimeout(this.proxy(this.removeBodyClass), 1)
-        window.setTimeout(this.proxy(this.removeOverlayAndShowToggle), 300)
-    }
+        window.setTimeout(this.proxy(this.removeBodyClass), 1);
+        window.setTimeout(this.proxy(this.removeOverlayAndShowToggle), 300);
+    };
 
     // FLYOUT INTERNAL METHODS
     // ============================
 
-    Flyout.prototype.init = function() {
-        this.build()
-    }
+    Flyout.prototype.init = function () {
+        this.build();
+    };
 
-    Flyout.prototype.build = function() {
+    Flyout.prototype.build = function () {
         if (this.options.flyoutToggle) {
-            this.buildToggle()
+            this.buildToggle();
         }
-    }
+    };
 
-    Flyout.prototype.buildToggle = function() {
+    Flyout.prototype.buildToggle = function () {
         var $toggleContainer = $(this.options.flyoutToggle),
-            $toggle = $('<div class="flyout-toggle"><i class="icon-chevron-right"></i></div>')
+            $toggle = $(
+                '<div class="flyout-toggle"><i class="icon-chevron-right"></i></div>'
+            );
 
-        $toggle.on('click', this.proxy(this.show))
-        $toggleContainer.append($toggle)
-    }
+        $toggle.on("click", this.proxy(this.show));
+        $toggleContainer.append($toggle);
+    };
 
-    Flyout.prototype.removeToggle = function() {
-        var $toggle = this.getToggle()
+    Flyout.prototype.removeToggle = function () {
+        var $toggle = this.getToggle();
 
-        $toggle.off('click', this.proxy(this.show))
-        $toggle.remove()
-    }
+        $toggle.off("click", this.proxy(this.show));
+        $toggle.remove();
+    };
 
-    Flyout.prototype.hideToggle = function() {
+    Flyout.prototype.hideToggle = function () {
         if (!this.options.flyoutToggle) {
-            return
+            return;
         }
 
-        this.getToggle().hide()
-    }
+        this.getToggle().hide();
+    };
 
-    Flyout.prototype.showToggle = function() {
+    Flyout.prototype.showToggle = function () {
         if (!this.options.flyoutToggle) {
-            return
+            return;
         }
 
-        this.getToggle().show()
-    }
+        this.getToggle().show();
+    };
 
-    Flyout.prototype.getToggle = function() {
-        var $toggleContainer = $(this.options.flyoutToggle)
+    Flyout.prototype.getToggle = function () {
+        var $toggleContainer = $(this.options.flyoutToggle);
 
-        return $toggleContainer.find('.flyout-toggle')
-    }
+        return $toggleContainer.find(".flyout-toggle");
+    };
 
-    Flyout.prototype.setBodyClass = function() {
-        $(document.body).addClass('flyout-visible')
-    }
+    Flyout.prototype.setBodyClass = function () {
+        $(document.body).addClass("flyout-visible");
+    };
 
-    Flyout.prototype.removeBodyClass = function() {
-        $(document.body).removeClass('flyout-visible')
-    }
+    Flyout.prototype.removeBodyClass = function () {
+        $(document.body).removeClass("flyout-visible");
+    };
 
-    Flyout.prototype.createOverlay = function() {
-        this.$overlay = $('<div class="flyout-overlay"/>')
+    Flyout.prototype.createOverlay = function () {
+        this.$overlay = $('<div class="flyout-overlay"/>');
 
-        var position = this.$el.offset()
+        var position = this.$el.offset();
 
         this.$overlay.css({
             top: position.top,
-            left: this.options.flyoutWidth
-        })
+            left: this.options.flyoutWidth,
+        });
 
-        this.$overlay.on('click', this.proxy(this.onOverlayClick))
-        $(document.body).on('keydown', this.proxy(this.onDocumentKeydown))
+        this.$overlay.on("click", this.proxy(this.onOverlayClick));
+        $(document.body).on("keydown", this.proxy(this.onDocumentKeydown));
 
-        $(document.body).append(this.$overlay)
-    }
+        $(document.body).append(this.$overlay);
+    };
 
-    Flyout.prototype.removeOverlay = function() {
+    Flyout.prototype.removeOverlay = function () {
         if (!this.$overlay) {
-            return
+            return;
         }
 
-        this.$overlay.off('click', this.proxy(this.onOverlayClick))
-        $(document.body).off('keydown', this.proxy(this.onDocumentKeydown))
+        this.$overlay.off("click", this.proxy(this.onOverlayClick));
+        $(document.body).off("keydown", this.proxy(this.onDocumentKeydown));
 
-        this.$overlay.remove()
-        this.$overlay = null
-    }
+        this.$overlay.remove();
+        this.$overlay = null;
+    };
 
-    Flyout.prototype.removeOverlayAndShowToggle = function() {
-        this.removeOverlay()
-        this.showToggle()
-    }
+    Flyout.prototype.removeOverlayAndShowToggle = function () {
+        this.removeOverlay();
+        this.showToggle();
+    };
 
     // EVENT HANDLERS
     // ============================
 
-    Flyout.prototype.onOverlayClick = function() {
-        this.hide()
-    }
+    Flyout.prototype.onOverlayClick = function () {
+        this.hide();
+    };
 
-    Flyout.prototype.onDocumentKeydown = function(ev) {
-        if (ev.key === 'Escape') {
+    Flyout.prototype.onDocumentKeydown = function (ev) {
+        if (ev.key === "Escape") {
             this.hide();
         }
-    }
+    };
 
     // FLYOUT PLUGIN DEFINITION
     // ============================
 
     Flyout.DEFAULTS = {
         flyoutWidth: 400,
-        flyoutToggle: null
-    }
+        flyoutToggle: null,
+    };
 
-    var old = $.fn.flyout
+    var old = $.fn.flyout;
 
     $.fn.flyout = function (option) {
-        var args = Array.prototype.slice.call(arguments, 1), 
-            result = undefined
+        var args = Array.prototype.slice.call(arguments, 1),
+            result = undefined;
 
         this.each(function () {
-            var $this   = $(this)
-            var data    = $this.data('oc.flyout')
-            var options = $.extend({}, Flyout.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.flyout', (data = new Flyout(this, options)))
-            if (typeof option == 'string') result = data[option].apply(data, args)
-            if (typeof result != 'undefined') return false
-        })
-        
-        return result ? result : this
-    }
+            var $this = $(this);
+            var data = $this.data("oc.flyout");
+            var options = $.extend(
+                {},
+                Flyout.DEFAULTS,
+                $this.data(),
+                typeof option == "object" && option
+            );
+            if (!data)
+                $this.data("oc.flyout", (data = new Flyout(this, options)));
+            if (typeof option == "string")
+                result = data[option].apply(data, args);
+            if (typeof result != "undefined") return false;
+        });
 
-    $.fn.flyout.Constructor = Flyout
+        return result ? result : this;
+    };
+
+    $.fn.flyout.Constructor = Flyout;
 
     // FLYOUT NO CONFLICT
     // =================
 
     $.fn.flyout.noConflict = function () {
-        $.fn.flyout = old
-        return this
-    }
+        $.fn.flyout = old;
+        return this;
+    };
 
     // FLYOUT DATA-API
     // ===============
 
     // Currently flyouts don't use the document render event
     // and can't be created dynamically (performance considerations).
-    $(document).ready(function(){
-        $('div[data-control=flyout]').flyout()
-    })
-}(window.jQuery);
+    $(document).ready(function () {
+        $("div[data-control=flyout]").flyout();
+    });
+})(window.jQuery);

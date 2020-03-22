@@ -80,7 +80,9 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Composer\\Installers\\": "src/Composer/Installers" }
+        "psr-4": {
+            "Composer\\Installers\\": "src/Composer/Installers"
+        }
     },
     "extra": {
         "class": "Composer\\Installers\\Plugin",

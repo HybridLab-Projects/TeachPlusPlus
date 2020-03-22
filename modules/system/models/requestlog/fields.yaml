@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     url:
         label: system::lang.request_log.url
 

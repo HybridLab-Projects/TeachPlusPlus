@@ -68,7 +68,7 @@ tabs:
 secondaryTabs:
     fields:
         btn_impersonate:
-            label: ''
+            label: ""
             context: [update]
             type: partial
         avatar:
