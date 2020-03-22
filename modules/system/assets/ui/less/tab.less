@@ -12,39 +12,39 @@
 
 @import "tab.base.less";
 
-@color-scroll-indicator:                     #bbbbbb;
+@color-scroll-indicator: #bbbbbb;
 
-@color-tab-border:                           #e0e0e0;
-@color-tab-inactive-text:                    #bbbbbb;
-@color-tab-active-text:                      @color-text-title;
-@color-tab-active-border:                    #d0d0d0;
-@color-tab-bg:                               #ffffff;
-@color-tab-active-marker:                    #ec8017;
-@color-tab-content-active-bg:                #ffffff;
-@color-tab-content-border:                   #e3e5e7;
+@color-tab-border: #e0e0e0;
+@color-tab-inactive-text: #bbbbbb;
+@color-tab-active-text: @color-text-title;
+@color-tab-active-border: #d0d0d0;
+@color-tab-bg: #ffffff;
+@color-tab-active-marker: #ec8017;
+@color-tab-content-active-bg: #ffffff;
+@color-tab-content-border: #e3e5e7;
 
-@nav-link-padding:                          10px 15px;
-@nav-link-hover-bg:                         @gray-lighter;
+@nav-link-padding: 10px 15px;
+@nav-link-hover-bg: @gray-lighter;
 
-@nav-disabled-link-color:                   @gray-light;
-@nav-disabled-link-hover-color:             @gray-light;
+@nav-disabled-link-color: @gray-light;
+@nav-disabled-link-hover-color: @gray-light;
 
-@nav-open-link-hover-color:                 #fff;
+@nav-open-link-hover-color: #fff;
 
-@nav-tabs-border-color:                     #ddd;
+@nav-tabs-border-color: #ddd;
 
-@nav-tabs-link-hover-border-color:          @gray-lighter;
+@nav-tabs-link-hover-border-color: @gray-lighter;
 
-@nav-tabs-active-link-hover-bg:             @body-bg;
-@nav-tabs-active-link-hover-color:          @gray;
-@nav-tabs-active-link-hover-border-color:   #ddd;
+@nav-tabs-active-link-hover-bg: @body-bg;
+@nav-tabs-active-link-hover-color: @gray;
+@nav-tabs-active-link-hover-border-color: #ddd;
 
-@nav-tabs-justified-link-border-color:            #ddd;
-@nav-tabs-justified-active-link-border-color:     @body-bg;
+@nav-tabs-justified-link-border-color: #ddd;
+@nav-tabs-justified-active-link-border-color: @body-bg;
 
-@nav-pills-border-radius:                   @border-radius-base;
-@nav-pills-active-link-hover-bg:            @component-active-bg;
-@nav-pills-active-link-hover-color:         @component-active-color;
+@nav-pills-border-radius: @border-radius-base;
+@nav-pills-active-link-hover-bg: @component-active-bg;
+@nav-pills-active-link-hover-color: @component-active-color;
 
 .control-tabs {
     position: relative;
@@ -56,15 +56,22 @@
 
     .horizontal-scroll-indicators(@color-scroll-indicator);
 
-    &.scroll-active-before:before { color: @color-tab-active-border; }
-    &.scroll-active-after:after { color: @color-tab-active-border; }
+    &.scroll-active-before:before {
+        color: @color-tab-active-border;
+    }
+    &.scroll-active-after:after {
+        color: @color-tab-active-border;
+    }
 
-    &:before, &:after {
+    &:before,
+    &:after {
         top: 10px;
         margin-top: 0;
     }
 
-    > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+    > ul.nav-tabs,
+    > div > ul.nav-tabs,
+    > div > div > ul.nav-tabs {
         white-space: nowrap;
         font-size: 0;
         overflow: hidden;
@@ -133,7 +140,6 @@
                     bottom: 0;
                     background: @color-tab-active-border;
                 }
-
             }
         }
     }
@@ -148,7 +154,7 @@
                 display: block;
 
                 &.layout-cell {
-                   display: table-cell;
+                    display: table-cell;
                 }
             }
 
@@ -162,7 +168,9 @@
     }
 
     &[data-closable] {
-        > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+        > ul.nav-tabs,
+        > div > ul.nav-tabs,
+        > div > div > ul.nav-tabs {
             > li {
                 margin-right: 5px;
 
@@ -217,7 +225,9 @@
     //
 
     &.master-tabs {
-        > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+        > ul.nav-tabs,
+        > div > ul.nav-tabs,
+        > div > div > ul.nav-tabs {
             > li {
                 a {
                     font-size: 15px;
@@ -228,7 +238,9 @@
                 }
 
                 &.active {
-                    a { border-bottom: @color-tab-active-border 4px solid; }
+                    a {
+                        border-bottom: @color-tab-active-border 4px solid;
+                    }
                 }
             }
         }
@@ -241,7 +253,9 @@
     &.primary-tabs {
         margin-bottom: 5px;
 
-        > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+        > ul.nav-tabs,
+        > div > ul.nav-tabs,
+        > div > div > ul.nav-tabs {
             position: relative;
             margin-left: 0;
             margin-right: 0;
@@ -252,7 +266,7 @@
                 height: 1px;
                 width: 100%;
                 z-index: @zindex-tab - 1;
-                content: ' ';
+                content: " ";
                 border-bottom: 2px solid @color-tab-active-border;
             }
 
@@ -287,8 +301,9 @@
                         .box-sizing(border-box);
                         z-index: @zindex-tab;
 
-                        &:before, &:after {
-                            content: '';
+                        &:before,
+                        &:after {
+                            content: "";
                             display: block;
                             border-top: 2px solid @color-tab-border;
                             position: absolute;
@@ -304,14 +319,14 @@
                             left: 0;
                             border-left: 2px solid @color-tab-border;
                             .border-radius(8px 0 0 0);
-                            .transform( ~'skewX(-20deg)');
+                            .transform( ~"skewX(-20deg)");
                         }
 
                         &:after {
                             right: 0;
                             border-right: 2px solid @color-tab-border;
                             .border-radius(0 8px 0 0);
-                            .transform( ~'skewX(20deg)');
+                            .transform( ~"skewX(20deg)");
                         }
                     }
                 }
@@ -333,7 +348,8 @@
                         z-index: @zindex-tab + 2;
                         border-top-color: #d6d6d6;
 
-                        &:before, &:after{
+                        &:before,
+                        &:after {
                             border-color: @color-tab-active-border;
                         }
 
@@ -348,7 +364,7 @@
                         height: 2px;
                         right: 2px;
                         left: 2px;
-                        content: ' ';
+                        content: " ";
                         background-color: @body-bg;
                     }
                 }
@@ -360,7 +376,9 @@
 
         // Tab divider to sit inset the standard padding (20px)
         &.tabs-inset {
-            > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+            > ul.nav-tabs,
+            > div > ul.nav-tabs,
+            > div > div > ul.nav-tabs {
                 margin-left: -20px;
                 margin-right: -20px;
             }
@@ -372,7 +390,9 @@
     //
 
     &.secondary-tabs {
-        > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+        > ul.nav-tabs,
+        > div > ul.nav-tabs,
+        > div > div > ul.nav-tabs {
             > li {
                 padding-right: 10px;
                 margin-right: 10px;
@@ -404,12 +424,11 @@
     //
 
     &.content-tabs {
-
         > ul.nav-tabs {
             position: relative;
 
             &:before {
-                content: ' ';
+                content: " ";
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -458,7 +477,9 @@
 
         // Tab divider to sit inset the standard padding (20px)
         &.tabs-inset {
-            > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+            > ul.nav-tabs,
+            > div > ul.nav-tabs,
+            > div > div > ul.nav-tabs {
                 margin-left: -20px;
                 margin-right: -20px;
                 li:first-child {
@@ -510,7 +531,6 @@
                 margin-right: -20px;
             }
         }
-
     }
 }
 

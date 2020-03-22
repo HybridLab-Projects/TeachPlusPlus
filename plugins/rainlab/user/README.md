@@ -29,9 +29,9 @@ Activation is a process of vetting a user who joins the site. By default, users 
 
 The **Activation mode** specifies the activation workflow:
 
-- **Automatic**: This mode will automatically activate a user when they first register. This is the same as disabling activation entirely and is the default setting.
-- **User**: The user can activate their account by responding to a confirmation message sent to their nominated email address.
-- **Administrator**: The user can only be activated by an administrator via the back-end area.
+-   **Automatic**: This mode will automatically activate a user when they first register. This is the same as disabling activation entirely and is the default setting.
+-   **User**: The user can activate their account by responding to a confirmation message sent to their nominated email address.
+-   **Administrator**: The user can only be activated by an administrator via the back-end area.
 
 You can allow users to sign in without activating by switching **Sign in requires activation** to the OFF setting. This is useful for minimising friction when registering, however with this approach it is often a good idea to disable any "identity sensitive" features until the user has been activated, such as posting content. Alternatively, you could implement a grace period that deletes users (with sufficient warning!) who have not activated within a given period of time.
 
@@ -161,7 +161,7 @@ This plugin makes use of October's [`Flash API`](http://octobercms.com/docs/mark
 
 ### AJAX errors
 
-The User plugin displays AJAX error messages in a simple ``alert()``-box by default. However, this might scare non-technical users. You can change the default behavior of an AJAX error from displaying an ``alert()`` message, like this:
+The User plugin displays AJAX error messages in a simple `alert()`-box by default. However, this might scare non-technical users. You can change the default behavior of an AJAX error from displaying an `alert()` message, like this:
 
     <script>
         $(window).on('ajaxErrorMessage', function(event, message){
@@ -302,14 +302,14 @@ To disable the notification and password reset, pass the first argument as false
 
 This plugin will fire some global events that can be useful for interacting with other plugins.
 
-- **rainlab.user.beforeRegister**: Before the user's registration is processed. Passed the `$data` variable by reference to enable direct modifications to the `$data` provided to the `Auth::register()` method.
-- **rainlab.user.register**: The user has successfully registered. Passed the `$user` object and the submitted `$data` variable.
-- **rainlab.user.beforeAuthenticate**: Before the user is attempting to authenticate using the Account component.
-- **rainlab.user.login**: The user has successfully signed in.
-- **rainlab.user.logout**: The user has successfully signed out.
-- **rainlab.user.deactivate**: The user has opted-out of the site by deactivating their account. This should be used to disable any content the user may want removed.
-- **rainlab.user.reactivate**: The user has reactivated their own account by signing back in. This should revive the users content on the site.
-- **rainlab.user.getNotificationVars**: Fires when sending a user notification to enable passing more variables to the email templates. Passes the `$user` model the template will be for.
+-   **rainlab.user.beforeRegister**: Before the user's registration is processed. Passed the `$data` variable by reference to enable direct modifications to the `$data` provided to the `Auth::register()` method.
+-   **rainlab.user.register**: The user has successfully registered. Passed the `$user` object and the submitted `$data` variable.
+-   **rainlab.user.beforeAuthenticate**: Before the user is attempting to authenticate using the Account component.
+-   **rainlab.user.login**: The user has successfully signed in.
+-   **rainlab.user.logout**: The user has successfully signed out.
+-   **rainlab.user.deactivate**: The user has opted-out of the site by deactivating their account. This should be used to disable any content the user may want removed.
+-   **rainlab.user.reactivate**: The user has reactivated their own account by signing back in. This should revive the users content on the site.
+-   **rainlab.user.getNotificationVars**: Fires when sending a user notification to enable passing more variables to the email templates. Passes the `$user` model the template will be for.
 
 Here is an example of hooking an event:
 

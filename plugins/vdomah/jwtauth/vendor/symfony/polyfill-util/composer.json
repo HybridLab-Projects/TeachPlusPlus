@@ -2,7 +2,12 @@
     "name": "symfony/polyfill-util",
     "type": "library",
     "description": "Symfony utilities for portability of PHP codes",
-    "keywords": ["polyfill", "shim", "compat", "compatibility"],
+    "keywords": [
+        "polyfill",
+        "shim",
+        "compat",
+        "compatibility"
+    ],
     "homepage": "https://symfony.com",
     "license": "MIT",
     "authors": [
@@ -19,7 +24,9 @@
         "php": ">=5.3.3"
     },
     "autoload": {
-        "psr-4": { "Symfony\\Polyfill\\Util\\": "" }
+        "psr-4": {
+            "Symfony\\Polyfill\\Util\\": ""
+        }
     },
     "minimum-stability": "dev",
     "extra": {

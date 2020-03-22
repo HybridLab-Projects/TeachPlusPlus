@@ -22,12 +22,12 @@
     .box-shadow(~"inset 0 -2px 0 rgba(0,0,0,.15)");
 
     &[disabled] {
-        color: rgba(255,255,255,.6);
+        color: rgba(255, 255, 255, 0.6);
     }
 
     &.active,
     &:active {
-        .box-shadow(inset 0 1px 0 rgba(0,0,0,.3));
+        .box-shadow(inset 0 1px 0 rgba(0,0,0,0.3));
     }
 }
 
@@ -38,8 +38,7 @@
 .btn {
     i[class^="icon-"],
     i[class*=" icon-"] {
-        opacity: .6;
-
+        opacity: 0.6;
     }
 
     &.on,
@@ -58,7 +57,7 @@
             font-size: 14px;
             line-height: 14px;
             position: relative;
-            opacity: .6;
+            opacity: 0.6;
         }
 
         &.on,
@@ -76,12 +75,12 @@
     .box-shadow(~"inset 0 -2px 0 rgba(0,0,0,.1)");
 
     &[disabled] {
-        color: rgba(0,0,0,.6);
+        color: rgba(0, 0, 0, 0.6);
     }
 
     &.active,
     &:active {
-        .box-shadow(inset 0 1px 0 rgba(0,0,0,.2));
+        .box-shadow(inset 0 1px 0 rgba(0,0,0,0.2));
     }
 }
 
@@ -92,10 +91,11 @@
 
 .btn-group {
     .btn {
-        border-right: 1px solid rgba(0,0,0,0.09);
+        border-right: 1px solid rgba(0, 0, 0, 0.09);
         margin-left: 0 !important;
 
-        &:last-child, &.last {
+        &:last-child,
+        &.last {
             border-right: none;
         }
 
@@ -108,7 +108,7 @@
         float: left;
 
         &:not(:last-child, .last) > .btn {
-            border-right: 1px solid rgba(0,0,0,0.09);
+            border-right: 1px solid rgba(0, 0, 0, 0.09);
             .border-right-radius(0) !important;
         }
 
@@ -124,7 +124,8 @@
     }
 }
 
-.btn, .btn-group {
+.btn,
+.btn-group {
     &.offset-right {
         margin-right: 10px;
     }

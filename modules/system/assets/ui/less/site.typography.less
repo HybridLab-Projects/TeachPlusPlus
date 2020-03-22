@@ -2,12 +2,21 @@
 // Typography
 // --------------------------------------------------
 
-
 // Headings
 // -------------------------
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     font-family: @headings-font-family;
     font-weight: @headings-font-weight;
     line-height: @headings-line-height;
@@ -21,9 +30,12 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
     margin-top: @line-height-computed;
     margin-bottom: (@line-height-computed / 2);
 
@@ -32,9 +44,12 @@ h3, .h3 {
         font-size: 65%;
     }
 }
-h4, .h4,
-h5, .h5,
-h6, .h6 {
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
     margin-top: (@line-height-computed / 2);
     margin-bottom: (@line-height-computed / 2);
 
@@ -44,13 +59,30 @@ h6, .h6 {
     }
 }
 
-h1, .h1 { font-size: @font-size-h1; }
-h2, .h2 { font-size: @font-size-h2; }
-h3, .h3 { font-size: @font-size-h3; }
-h4, .h4 { font-size: @font-size-h4; }
-h5, .h5 { font-size: @font-size-h5; }
-h6, .h6 { font-size: @font-size-h6; }
-
+h1,
+.h1 {
+    font-size: @font-size-h1;
+}
+h2,
+.h2 {
+    font-size: @font-size-h2;
+}
+h3,
+.h3 {
+    font-size: @font-size-h3;
+}
+h4,
+.h4 {
+    font-size: @font-size-h4;
+}
+h5,
+.h5 {
+    font-size: @font-size-h5;
+}
+h6,
+.h6 {
+    font-size: @font-size-h6;
+}
 
 // Body text
 // -------------------------
@@ -70,22 +102,33 @@ p {
     }
 }
 
-
 // Emphasis & misc
 // -------------------------
 
 // Ex: 14px base font * 85% = about 12px
 small,
-.small  { font-size: 85%; }
+.small {
+    font-size: 85%;
+}
 
 // Undo browser default styling
-cite    { font-style: normal; }
+cite {
+    font-style: normal;
+}
 
 // Alignment
-.text-left           { text-align: left; }
-.text-right          { text-align: right; }
-.text-center         { text-align: center; }
-.text-justify        { text-align: justify; }
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.text-justify {
+    text-align: justify;
+}
 
 // Contextual colors
 .text-muted {
@@ -129,7 +172,6 @@ cite    { font-style: normal; }
     .bg-variant(@state-danger-bg);
 }
 
-
 // Page header
 // -------------------------
 
@@ -138,7 +180,6 @@ cite    { font-style: normal; }
     margin: (@line-height-computed * 2) 0 @line-height-computed;
     border-bottom: 1px solid @page-header-border-color;
 }
-
 
 // Lists
 // --------------------------------------------------
@@ -206,7 +247,9 @@ dd {
         }
         dd {
             margin-left: @component-offset-horizontal;
-            &:extend(.clearfix all); // Clear the floated `dt` if an empty `dd` is present
+            &: extend(
+                .clearfix all
+            ); // Clear the floated `dt` if an empty `dd` is present
         }
     }
 }
@@ -252,7 +295,7 @@ blockquote {
         color: @blockquote-small-color;
 
         &:before {
-            content: '\2014 \00A0'; // em dash, nbsp
+            content: "\2014 \00A0"; // em dash, nbsp
         }
     }
 }
@@ -272,9 +315,11 @@ blockquote.pull-right {
     footer,
     small,
     .small {
-        &:before { content: ''; }
+        &:before {
+            content: "";
+        }
         &:after {
-            content: '\00A0 \2014'; // nbsp, em dash
+            content: "\00A0 \2014"; // nbsp, em dash
         }
     }
 }

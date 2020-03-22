@@ -1,114 +1,136 @@
 /*
  * Inspector localization editor class.
  */
-+function ($) { "use strict";
++(function ($) {
+    "use strict";
 
     var Base = $.oc.inspector.propertyEditors.string,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
-    var LocalizationEditor = function(inspector, propertyDefinition, containerCell, group) {
-        this.localizationInput = null
+    var LocalizationEditor = function (
+        inspector,
+        propertyDefinition,
+        containerCell,
+        group
+    ) {
+        this.localizationInput = null;
 
-        Base.call(this, inspector, propertyDefinition, containerCell, group)
-    }
+        Base.call(this, inspector, propertyDefinition, containerCell, group);
+    };
 
-    LocalizationEditor.prototype = Object.create(BaseProto)
-    LocalizationEditor.prototype.constructor = Base
+    LocalizationEditor.prototype = Object.create(BaseProto);
+    LocalizationEditor.prototype.constructor = Base;
 
-    LocalizationEditor.prototype.dispose = function() {
-        this.removeLocalizationInput()
+    LocalizationEditor.prototype.dispose = function () {
+        this.removeLocalizationInput();
 
-        BaseProto.dispose.call(this)
-    }
+        BaseProto.dispose.call(this);
+    };
 
-    LocalizationEditor.prototype.build = function() {
-        var container = document.createElement('div'),
-            editor = document.createElement('input'),
-            placeholder = this.propertyDefinition.placeholder !== undefined ? this.propertyDefinition.placeholder : '',
-            value = this.inspector.getPropertyValue(this.propertyDefinition.property)
+    LocalizationEditor.prototype.build = function () {
+        var container = document.createElement("div"),
+            editor = document.createElement("input"),
+            placeholder =
+                this.propertyDefinition.placeholder !== undefined
+                    ? this.propertyDefinition.placeholder
+                    : "",
+            value = this.inspector.getPropertyValue(
+                this.propertyDefinition.property
+            );
 
-        editor.setAttribute('type', 'text')
-        editor.setAttribute('class', 'string-editor')
-        editor.setAttribute('placeholder', placeholder)
+        editor.setAttribute("type", "text");
+        editor.setAttribute("class", "string-editor");
+        editor.setAttribute("placeholder", placeholder);
 
-        container.setAttribute('class', 'autocomplete-container')
+        container.setAttribute("class", "autocomplete-container");
 
         if (value === undefined) {
-            value = this.propertyDefinition.default
+            value = this.propertyDefinition.default;
         }
 
         if (value === undefined) {
-            value = ''
+            value = "";
         }
 
-        editor.value = value
+        editor.value = value;
 
-        $.oc.foundation.element.addClass(this.containerCell, 'text autocomplete')
+        $.oc.foundation.element.addClass(
+            this.containerCell,
+            "text autocomplete"
+        );
 
-        container.appendChild(editor)
-        this.containerCell.appendChild(container)
+        container.appendChild(editor);
+        this.containerCell.appendChild(container);
 
-        this.buildLocalizationEditor()
-    }
+        this.buildLocalizationEditor();
+    };
 
-    LocalizationEditor.prototype.buildLocalizationEditor = function() {
-        this.localizationInput = new $.oc.builder.localizationInput(this.getInput(), this.getForm(), {
-            plugin: this.getPluginCode(),
-            beforePopupShowCallback: this.proxy(this.onPopupShown, this),
-            afterPopupHideCallback: this.proxy(this.onPopupHidden, this)
-        })
-    }
+    LocalizationEditor.prototype.buildLocalizationEditor = function () {
+        this.localizationInput = new $.oc.builder.localizationInput(
+            this.getInput(),
+            this.getForm(),
+            {
+                plugin: this.getPluginCode(),
+                beforePopupShowCallback: this.proxy(this.onPopupShown, this),
+                afterPopupHideCallback: this.proxy(this.onPopupHidden, this),
+            }
+        );
+    };
 
-    LocalizationEditor.prototype.removeLocalizationInput = function() {
-        this.localizationInput.dispose()
+    LocalizationEditor.prototype.removeLocalizationInput = function () {
+        this.localizationInput.dispose();
 
-        this.localizationInput = null
-    }
+        this.localizationInput = null;
+    };
 
-    LocalizationEditor.prototype.supportsExternalParameterEditor = function() {
-        return false
-    }
+    LocalizationEditor.prototype.supportsExternalParameterEditor = function () {
+        return false;
+    };
 
-    LocalizationEditor.prototype.registerHandlers = function() {
-        BaseProto.registerHandlers.call(this)
+    LocalizationEditor.prototype.registerHandlers = function () {
+        BaseProto.registerHandlers.call(this);
 
-        $(this.getInput()).on('change', this.proxy(this.onInputKeyUp))
-    }
+        $(this.getInput()).on("change", this.proxy(this.onInputKeyUp));
+    };
 
-    LocalizationEditor.prototype.unregisterHandlers = function() {
-        BaseProto.unregisterHandlers.call(this)
+    LocalizationEditor.prototype.unregisterHandlers = function () {
+        BaseProto.unregisterHandlers.call(this);
 
-        $(this.getInput()).off('change', this.proxy(this.onInputKeyUp))
-    }
+        $(this.getInput()).off("change", this.proxy(this.onInputKeyUp));
+    };
 
-    LocalizationEditor.prototype.getForm = function() {
-        var inspectableElement = this.getRootSurface().getInspectableElement()
+    LocalizationEditor.prototype.getForm = function () {
+        var inspectableElement = this.getRootSurface().getInspectableElement();
 
         if (!inspectableElement) {
-            throw new Error('Cannot determine inspectable element in the Builder localization editor.')
+            throw new Error(
+                "Cannot determine inspectable element in the Builder localization editor."
+            );
         }
 
-        return $(inspectableElement).closest('form')
-    }
+        return $(inspectableElement).closest("form");
+    };
 
-    LocalizationEditor.prototype.getPluginCode = function() {
+    LocalizationEditor.prototype.getPluginCode = function () {
         var $form = this.getForm(),
-            $input = $form.find('input[name=plugin_code]')
+            $input = $form.find("input[name=plugin_code]");
 
         if (!$input.length) {
-            throw new Error('The input "plugin_code" should be defined in the form in order to use the localization Inspector editor.')
+            throw new Error(
+                'The input "plugin_code" should be defined in the form in order to use the localization Inspector editor.'
+            );
         }
 
-        return $input.val()
-    }
+        return $input.val();
+    };
 
-    LocalizationEditor.prototype.onPopupShown = function() {
-        this.getRootSurface().popupDisplayed()
-    }
+    LocalizationEditor.prototype.onPopupShown = function () {
+        this.getRootSurface().popupDisplayed();
+    };
 
-    LocalizationEditor.prototype.onPopupHidden = function() {
-        this.getRootSurface().popupHidden()
-    }
+    LocalizationEditor.prototype.onPopupHidden = function () {
+        this.getRootSurface().popupHidden();
+    };
 
-    $.oc.inspector.propertyEditors.builderLocalization = LocalizationEditor
-}(window.jQuery);
+    $.oc.inspector.propertyEditors.builderLocalization = LocalizationEditor;
+})(window.jQuery);

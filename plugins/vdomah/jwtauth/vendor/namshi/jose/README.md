@@ -15,7 +15,6 @@ This library needs PHP 5.5+ and the library OpenSSL.
 
 It has been tested using `PHP5.5` to `PHP7.0` and `HHVM`.
 
-
 ## Installation
 
 You can install the library directly from
@@ -40,7 +39,7 @@ user.
 
 First, generate the JWS:
 
-``` php
+```php
 <?php
 
 use Namshi\JOSE\SimpleJWS;
@@ -67,7 +66,7 @@ authenticated calls, without sending passwords or credentials.
 Once a request is submitted, you only have to verify that it
 is a valid call:
 
-``` php
+```php
 <?php
 
 use Namshi\JOSE\SimpleJWS;
@@ -92,7 +91,7 @@ if ($jws->isValid($public_key, 'RS256')) {
 
 You may find that you need to use this library in an environment where
 [PHP's wrappers for OpenSSL](http://php.net/manual/en/ref.openssl.php)
-do not work, or OpenSSL simply is not installed.  This library uses
+do not work, or OpenSSL simply is not installed. This library uses
 OpenSSL to encrypt by default, but you can specify that you want to use [PHPSecLib](http://phpseclib.sourceforge.net/) for a pure PHP
 implementation of RSA encryption.
 
@@ -103,7 +102,7 @@ constructing a JWS:
 $jws = new JWS(array('alg' => 'RS256'), 'SecLib');
 ```
 
-You can now use the PHPSecLib implementation of RSA signing.  If you use
+You can now use the PHPSecLib implementation of RSA signing. If you use
 a password protected private key, you can still submit the private key
 to use for signing as a string, as long as you pass the password as the
 second parameter into the `sign` method:
@@ -126,7 +125,7 @@ with a public key and then we will check whether the [token is expired](https://
 
 To give a JWS a TTL, just use the standard `exp` value in the payload:
 
-``` php
+```php
 $date    	= new DateTime('tomorrow');
 $this->jws  = new SimpleJWS(array('alg' => 'RS256'));
 $this->jws->setPayload(array(
@@ -139,7 +138,7 @@ $this->jws->setPayload(array(
 You can allow [unsecure JWSes](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40#page-12)
 by setting the `$allowUnsecure` flag while loading JWSes:
 
-``` php
+```php
 JWS::load($this->jws->getTokenString(), true);
 ```
 
@@ -175,13 +174,15 @@ Added the ability to set custom properties in the header. Moved automatic inclus
 ### 6.x.x - Not Backwards Compatible
 
 #### 6.1.x
-- Dropped support for PHP 5.4
-- phpseclib 2.0
+
+-   Dropped support for PHP 5.4
+-   phpseclib 2.0
 
 #### 6.0.x
-- Dropped support for PHP 5.3
-- Don't escape slashes when generating signin input.
-  This may render tokens generated with earlier versions of Jose incompatible.
+
+-   Dropped support for PHP 5.3
+-   Don't escape slashes when generating signin input.
+    This may render tokens generated with earlier versions of Jose incompatible.
 
 ### 7.x.x
 

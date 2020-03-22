@@ -1,9 +1,9 @@
 // Vars
 @image-margin: 5px;
-@table-border: 1px solid #DDD;
-@blockquote-level1-color: #5E35B1;
-@blockquote-level2-color: #00BCD4;
-@blockquote-level3-color: #43A047;
+@table-border: 1px solid #ddd;
+@blockquote-level1-color: #5e35b1;
+@blockquote-level2-color: #00bcd4;
+@blockquote-level3-color: #43a047;
 @editor-text: #000;
 
 .image-style() {
@@ -98,7 +98,8 @@
         empty-cells: show;
         max-width: 100%;
 
-        td, th {
+        td,
+        th {
             border: @table-border;
 
             &:empty {
@@ -107,7 +108,7 @@
         }
 
         th {
-            background: mix(white, @editor-text, 90%);;
+            background: mix(white, @editor-text, 90%);
         }
     }
 
@@ -151,7 +152,8 @@
 
     span.fr-emoticon {
         font-weight: normal;
-        font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
+        font-family: "Apple Color Emoji", "Segoe UI Emoji", "NotoColorEmoji",
+            "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
         display: inline;
         line-height: 0;
 
@@ -163,7 +165,7 @@
             min-height: 20px;
             min-width: 20px;
             display: inline-block;
-            margin: -.1em .1em .1em;
+            margin: -0.1em 0.1em 0.1em;
             line-height: 1;
             vertical-align: middle;
         }

@@ -22,9 +22,7 @@
     
  */
 
-
-(function($) {
-
+(function ($) {
     /**
      * Hash containing mapping of selectors to settings hashes for target selectors that should be live updated.
      *
@@ -57,10 +55,10 @@
      * @private
      */
     var defaultSettings = {
-                ellipsis: '...',
-                setTitle: 'never',
-                live: false
-            };
+        ellipsis: "...",
+        setTitle: "never",
+        live: false,
+    };
 
     /**
      * Perform ellipsis on selected elements.
@@ -71,13 +69,13 @@
      * @return {jQuery} the current jQuery object for chaining purposes.
      * @this {jQuery} the current jQuery object.
      */
-    $.fn.ellipsis = function(selector, options) {
+    $.fn.ellipsis = function (selector, options) {
         var subjectElements, settings;
 
         subjectElements = $(this);
 
         // Check for options argument only.
-        if (typeof selector !== 'string') {
+        if (typeof selector !== "string") {
             options = selector;
             selector = undefined;
         }
@@ -89,7 +87,7 @@
         settings.selector = selector;
 
         // Do ellipsis on each subject element.
-        subjectElements.each(function() {
+        subjectElements.each(function () {
             var elem = $(this);
 
             // Do ellipsis on subject element.
@@ -99,7 +97,6 @@
         // If live option is enabled, add subject elements to live updater. Otherwise remove from live updater.
         if (settings.live) {
             addToLiveUpdater(subjectElements.selector, settings);
-
         } else {
             removeFromLiveUpdater(subjectElements.selector);
         }
@@ -107,7 +104,6 @@
         // Return jQuery object for chaining.
         return this;
     };
-
 
     /**
      * Perform ellipsis on the given container.
@@ -117,7 +113,7 @@
      * @private
      */
     function ellipsisOnElement(containerElement, settings) {
-        var containerData = containerElement.data('jqae');
+        var containerData = containerElement.data("jqae");
         if (!containerData) containerData = {};
 
         // Check if wrapper div was already created and bound to the container element.
@@ -125,18 +121,18 @@
 
         // If not, create wrapper element.
         if (!wrapperElement) {
-            wrapperElement = containerElement.wrapInner('<div/>').find('>div');
+            wrapperElement = containerElement.wrapInner("<div/>").find(">div");
 
             // Wrapper div should not add extra size.
             wrapperElement.css({
                 margin: 0,
                 padding: 0,
-                border: 0
+                border: 0,
             });
         }
 
         // Check if the original wrapper element content was already bound to the wrapper element.
-        var wrapperElementData = wrapperElement.data('jqae');
+        var wrapperElementData = wrapperElement.data("jqae");
         if (!wrapperElementData) wrapperElementData = {};
 
         var wrapperOriginalContent = wrapperElementData.originalContent;
@@ -144,28 +140,34 @@
         // If so, clone the original content, re-bind the original wrapper content to the clone, and replace the
         // wrapper with the clone.
         if (wrapperOriginalContent) {
-            wrapperElement = wrapperElementData.originalContent.clone(true)
-                    .data('jqae', {originalContent: wrapperOriginalContent}).replaceAll(wrapperElement);
-
+            wrapperElement = wrapperElementData.originalContent
+                .clone(true)
+                .data("jqae", { originalContent: wrapperOriginalContent })
+                .replaceAll(wrapperElement);
         } else {
             // Otherwise, clone the current wrapper element and bind it as original content to the wrapper element.
 
-            wrapperElement.data('jqae', {originalContent: wrapperElement.clone(true)});
+            wrapperElement.data("jqae", {
+                originalContent: wrapperElement.clone(true),
+            });
         }
 
         // Bind the wrapper element and current container width and height to the container element. Current container
         // width and height are stored to detect changes to the container size.
-        containerElement.data('jqae', {
+        containerElement.data("jqae", {
             wrapperElement: wrapperElement,
             containerWidth: containerElement.width(),
-            containerHeight: containerElement.height()
+            containerHeight: containerElement.height(),
         });
 
         // Calculate with current container element height.
         var containerElementHeight = containerElement.height();
 
         // Calculate wrapper offset.
-        var wrapperOffset = (parseInt(containerElement.css('padding-top'), 10) || 0) + (parseInt(containerElement.css('border-top-width'), 10) || 0) - (wrapperElement.offset().top - containerElement.offset().top);
+        var wrapperOffset =
+            (parseInt(containerElement.css("padding-top"), 10) || 0) +
+            (parseInt(containerElement.css("border-top-width"), 10) || 0) -
+            (wrapperElement.offset().top - containerElement.offset().top);
 
         // Normally the ellipsis characters are applied to the last non-empty text-node in the selected element. If the
         // selected element becomes empty during ellipsis iteration, the ellipsis characters cannot be applied to that
@@ -174,35 +176,45 @@
 
         // Loop through all selected elements in reverse order.
         var selectedElements = wrapperElement;
-        if (settings.selector) selectedElements = $(wrapperElement.find(settings.selector).get().reverse());
+        if (settings.selector)
+            selectedElements = $(
+                wrapperElement.find(settings.selector).get().reverse()
+            );
 
-        selectedElements.each(function() {
+        selectedElements.each(function () {
             var selectedElement = $(this),
-                    originalText = selectedElement.text(),
-                    ellipsisApplied = false;
+                originalText = selectedElement.text(),
+                ellipsisApplied = false;
 
             // Check if we can safely remove the selected element. This saves a lot of unnecessary iterations.
-            if (wrapperElement.innerHeight() - selectedElement.innerHeight() > containerElementHeight + wrapperOffset) {
+            if (
+                wrapperElement.innerHeight() - selectedElement.innerHeight() >
+                containerElementHeight + wrapperOffset
+            ) {
                 selectedElement.remove();
-
             } else {
                 // Reverse recursively remove empty elements, until the element that contains a non-empty text-node.
                 removeLastEmptyElements(selectedElement);
 
                 // If the selected element has not become empty, start ellipsis iterations on the selected element.
                 if (selectedElement.contents().length) {
-
                     // If a deffered ellipsis is still pending, apply it now to the last text-node.
                     if (deferAppendEllipsis) {
-                        getLastTextNode(selectedElement).get(0).nodeValue += settings.ellipsis;
+                        getLastTextNode(selectedElement).get(0).nodeValue +=
+                            settings.ellipsis;
                         deferAppendEllipsis = false;
                     }
 
                     // Iterate until wrapper element height is less than or equal to the original container element
                     // height plus possible wrapperOffset.
-                    while (wrapperElement.innerHeight() > containerElementHeight + wrapperOffset) {
+                    while (
+                        wrapperElement.innerHeight() >
+                        containerElementHeight + wrapperOffset
+                    ) {
                         // Apply ellipsis on last text node, by removing one word.
-                        ellipsisApplied = ellipsisOnLastTextNode(selectedElement);
+                        ellipsisApplied = ellipsisOnLastTextNode(
+                            selectedElement
+                        );
 
                         // If ellipsis was succesfully applied, remove any remaining empty last elements and append the
                         // ellipsis characters.
@@ -211,8 +223,9 @@
 
                             // If the selected element is not empty, append the ellipsis characters.
                             if (selectedElement.contents().length) {
-                                getLastTextNode(selectedElement).get(0).nodeValue += settings.ellipsis;
-
+                                getLastTextNode(selectedElement).get(
+                                    0
+                                ).nodeValue += settings.ellipsis;
                             } else {
                                 // If the selected element has become empty, defer the appending of the ellipsis characters
                                 // to the previous selected element.
@@ -220,7 +233,6 @@
                                 selectedElement.remove();
                                 break;
                             }
-
                         } else {
                             // If ellipsis could not be applied, defer the appending of the ellipsis characters to the
                             // previous selected element.
@@ -234,11 +246,14 @@
                     // property is set to "always", the add the "title" attribute with the original text. Else remove the
                     // "title" attribute. When the "setTitle" property is set to "never" we do not touch the "title"
                     // attribute.
-                    if (((settings.setTitle == 'onEllipsis') && ellipsisApplied) || (settings.setTitle == 'always')) {
-                        selectedElement.attr('title', originalText);
-
-                    } else if (settings.setTitle != 'never') {
-                        selectedElement.removeAttr('title');
+                    if (
+                        (settings.setTitle == "onEllipsis" &&
+                            ellipsisApplied) ||
+                        settings.setTitle == "always"
+                    ) {
+                        selectedElement.attr("title", originalText);
+                    } else if (settings.setTitle != "never") {
+                        selectedElement.removeAttr("title");
                     }
                 }
             }
@@ -261,13 +276,12 @@
 
             // Find last space character, and remove text from there. If no space is found the full remaining text is
             // removed.
-            var pos = text.lastIndexOf(' ');
+            var pos = text.lastIndexOf(" ");
             if (pos > -1) {
                 text = $.trim(text.substring(0, pos));
                 lastTextNode.get(0).nodeValue = text;
-
             } else {
-                lastTextNode.get(0).nodeValue = '';
+                lastTextNode.get(0).nodeValue = "";
             }
 
             return true;
@@ -285,7 +299,6 @@
      */
     function getLastTextNode(element) {
         if (element.contents().length) {
-
             // Get last child node.
             var contents = element.contents();
             var lastNode = contents.eq(contents.length - 1);
@@ -293,18 +306,16 @@
             // If last node is a text node, return it.
             if (lastNode.filter(textNodeFilter).length) {
                 return lastNode;
-
             } else {
                 // Else it is an element node, and we recurse into it.
 
                 return getLastTextNode(lastNode);
             }
-
         } else {
             // If there is no last child node, we append an empty text node and return that. Normally this should not
             // happen, as we test for emptiness before calling getLastTextNode.
 
-            element.append('');
+            element.append("");
             var contents = element.contents();
             return contents.eq(contents.length - 1);
         }
@@ -319,7 +330,6 @@
      */
     function removeLastEmptyElements(element) {
         if (element.contents().length) {
-
             // Get last child node.
             var contents = element.contents();
             var lastNode = contents.eq(contents.length - 1);
@@ -329,32 +339,28 @@
                 var text = lastNode.get(0).nodeValue;
                 text = $.trim(text);
 
-                if (text == '') {
+                if (text == "") {
                     // If empty, remove the text node.
                     lastNode.remove();
 
                     return true;
-
                 } else {
                     return false;
                 }
-
             } else {
                 // If the last child node is an element node, remove the last empty child nodes on that node.
-                while (removeLastEmptyElements(lastNode)) {
-                }
+                while (removeLastEmptyElements(lastNode)) {}
 
                 // If the last child node contains no more child nodes, remove the last child node.
                 if (lastNode.contents().length) {
                     return false;
-
                 } else {
                     lastNode.remove();
 
                     return true;
                 }
             }
-        }   
+        }
 
         return false;
     }
@@ -384,7 +390,7 @@
 
         // If the live updater has not yet been started, start it now.
         if (!liveUpdaterIntervalId) {
-            liveUpdaterIntervalId = window.setInterval(function() {
+            liveUpdaterIntervalId = window.setInterval(function () {
                 doLiveUpdater();
             }, 200);
         }
@@ -410,7 +416,7 @@
                 }
             }
         }
-    };
+    }
 
     /**
      * Run the live updater. The live updater is periodically run to check if its monitored target selectors require
@@ -425,23 +431,29 @@
 
             // Loop through target selectors.
             for (var targetSelector in liveUpdatingTargetSelectors) {
-                $(targetSelector).each(function() {
+                $(targetSelector).each(function () {
                     var containerElement, containerData;
 
                     containerElement = $(this);
-                    containerData = containerElement.data('jqae');
+                    containerData = containerElement.data("jqae");
 
                     // If container element dimensions have changed, or the container element is new, run ellipsis on
                     // that container element.
-                    if ((containerData.containerWidth != containerElement.width()) ||
-                            (containerData.containerHeight != containerElement.height())) {
-                        ellipsisOnElement(containerElement, liveUpdatingTargetSelectors[targetSelector]);
+                    if (
+                        containerData.containerWidth !=
+                            containerElement.width() ||
+                        containerData.containerHeight !=
+                            containerElement.height()
+                    ) {
+                        ellipsisOnElement(
+                            containerElement,
+                            liveUpdatingTargetSelectors[targetSelector]
+                        );
                     }
                 });
             }
 
             liveUpdaterRunning = false;
         }
-    };
-
+    }
 })(jQuery);

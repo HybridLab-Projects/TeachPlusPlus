@@ -3,6 +3,7 @@
 ## Container Loading Indicator
 
 #### Loading Indicator
+
 A loading indicator used in a container.
 
     <div class="loading-indicator-container">
@@ -14,6 +15,7 @@ A loading indicator used in a container.
     </div>
 
 #### Text Loading Indicator
+
 A loading indicator can have text by adding a `<div>` element inside.
 
     <div class="loading-indicator-container">

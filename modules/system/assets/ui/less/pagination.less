@@ -9,10 +9,10 @@
 // Pagination
 // --------------------------------------------------
 
-@color-pagination-icon:                      #666666;
-@color-pagination-hover:                     @link-color;
-@color-pagination-inactive:                  #b6b6b6;
-@color-pagination:                           #98a7a8;
+@color-pagination-icon: #666666;
+@color-pagination-hover: @link-color;
+@color-pagination-inactive: #b6b6b6;
+@color-pagination: #98a7a8;
 
 //
 // Pagination
@@ -45,7 +45,8 @@
         border: none;
         background: transparent;
     }
-    select, .select2-container {
+    select,
+    .select2-container {
         text-align: center;
         display: inline-block;
     }
@@ -76,7 +77,10 @@
     // Next and previous
     //
 
-    .page-next, .page-back, .page-last, .page-first {
+    .page-next,
+    .page-back,
+    .page-last,
+    .page-first {
         display: inline-block;
         padding: 10px 15px;
         &:before {
@@ -89,12 +93,18 @@
             top: 2px;
         }
     }
-    a.page-next, a.page-back, a.page-last, a.page-first {
+    a.page-next,
+    a.page-back,
+    a.page-last,
+    a.page-first {
         &:hover:before {
             color: @color-pagination-hover;
         }
     }
-    span.page-next, span.page-back, span.page-last, span.page-first {
+    span.page-next,
+    span.page-back,
+    span.page-last,
+    span.page-first {
         &:before {
             color: @color-pagination-inactive;
         }
@@ -111,8 +121,16 @@
     .page-first {
         padding-right: 6px;
     }
-    .page-next:before { .icon(@angle-right); }
-    .page-back:before { .icon(@angle-left); }
-    .page-last:before { .icon(@angle-double-right); }
-    .page-first:before { .icon(@angle-double-left); }
+    .page-next:before {
+        .icon(@angle-right);
+    }
+    .page-back:before {
+        .icon(@angle-left);
+    }
+    .page-last:before {
+        .icon(@angle-double-right);
+    }
+    .page-first:before {
+        .icon(@angle-double-left);
+    }
 }

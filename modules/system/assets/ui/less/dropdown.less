@@ -1,4 +1,3 @@
-
 //
 // Dependencies
 // --------------------------------------------------
@@ -103,7 +102,9 @@
 
                 &.first-item {
                     a {
-                        &:hover, &:focus, &:active {
+                        &:hover,
+                        &:focus,
+                        &:active {
                             &:after {
                                 .triangle(up, 15px, 8px, @color-dropdown-hover-bg);
                                 position: absolute;
@@ -120,8 +121,12 @@
                     }
                 }
 
-                &.dropdown-title { display: none; }
-                &.divider { margin: 0; }
+                &.dropdown-title {
+                    display: none;
+                }
+                &.divider {
+                    margin: 0;
+                }
 
                 &.active > a {
                     font-weight: bold;
@@ -141,7 +146,8 @@
                 right: 14px;
             }
             li.first-item a {
-                &:hover, &:focus {
+                &:hover,
+                &:focus {
                     &:after {
                         left: auto;
                         right: 15px;
@@ -176,13 +182,17 @@
 
             li.first-item {
                 a {
-                    &:after { display: none; }
+                    &:after {
+                        display: none;
+                    }
                 }
             }
 
             li.last-item {
                 a {
-                    &:hover, &:focus, &:active {
+                    &:hover,
+                    &:focus,
+                    &:active {
                         &:after {
                             .triangle(down, 15px, 8px, @color-dropdown-hover-bg);
                             position: absolute;
@@ -219,7 +229,7 @@
     &.first-item {
         a:hover {
             &:after {
-                content: '';
+                content: "";
                 display: none;
             }
         }
@@ -240,22 +250,21 @@ body.dropdown-open {
 
 @media (max-width: @screen-xs) {
     body.dropdown-open {
-
         overflow: hidden;
 
         .dropdown-overlay {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .dropdown-menu {
             overflow: auto;
             overflow-y: scroll;
-            position: fixed!important;
-            margin: 0!important;
-            top: 0!important;
-            right: 0!important;
-            bottom: 0!important;
-            left: 0!important;
+            position: fixed !important;
+            margin: 0 !important;
+            top: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
             z-index: @zindex-dropdown;
 
             .dropdown-container {
@@ -265,7 +274,10 @@ body.dropdown-open {
                 ul {
                     min-height: 100%;
                     margin-top: 0;
-                    &:before, &:after {display: none;}
+                    &:before,
+                    &:after {
+                        display: none;
+                    }
 
                     li.dropdown-title {
                         display: block;
@@ -286,9 +298,10 @@ body.dropdown-open {
                     }
 
                     li.first-item {
-                        a:hover, :focus {
+                        a:hover,
+                        :focus {
                             &:after {
-                                content: '';
+                                content: "";
                                 display: none;
                             }
                         }
