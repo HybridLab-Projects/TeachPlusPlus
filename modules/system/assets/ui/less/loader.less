@@ -8,9 +8,9 @@
 // Loading indicator
 // --------------------------------------------------
 
-@color-loading-indicator-text:               #999999;
-@color-stripe-loader:                        @brand-accent;
-@loader-image-path:                          @image-path;
+@color-loading-indicator-text: #999999;
+@color-stripe-loader: @brand-accent;
+@loader-image-path: @image-path;
 
 .loading-indicator {
     padding: 20px 20px 20px 60px;
@@ -22,7 +22,8 @@
     z-index: @zindex-loader;
 
     > span {
-        background: transparent url('@{loader-image-path}/loader.gif') no-repeat 0 50%;
+        background: transparent url("@{loader-image-path}/loader.gif") no-repeat
+            0 50%;
         position: absolute;
         width: 40px;
         height: 40px;
@@ -55,7 +56,7 @@
 
 html.cssanimations {
     .loading-indicator > span {
-        background-image: url('@{loader-image-path}/loader-transparent.svg');
+        background-image: url("@{loader-image-path}/loader-transparent.svg");
         background-size: 35px 35px;
         background-position: 50% 50%;
         .animation(spin 1s linear infinite);
@@ -64,7 +65,7 @@ html.cssanimations {
     .loading-indicator.is-opaque,
     .loading-indicator-container.is-opaque .loading-indicator {
         > span {
-            background-image: url('@{loader-image-path}/loader.svg');
+            background-image: url("@{loader-image-path}/loader.svg");
         }
     }
 }
@@ -164,7 +165,8 @@ html.cssanimations {
 
 html.cssanimations {
     .cursor-loading-indicator {
-        background: transparent url('@{loader-image-path}/loader-transparent.svg') no-repeat 50% 50%;
+        background: transparent
+            url("@{loader-image-path}/loader-transparent.svg") no-repeat 50% 50%;
         .animation(spin 1s linear infinite);
         background-size: 20px 20px;
         position: fixed;
@@ -188,7 +190,7 @@ html.cssanimations {
 // --------------------------------------------------
 
 .bar-loading-indicator {
-    .transition(opacity .4s linear);
+    .transition(opacity 0.4s linear);
 
     .progress-bar {
         .animation(infinite-loader 90s ease-in forwards);
@@ -197,11 +199,11 @@ html.cssanimations {
 
     &.bar-loaded {
         .opacity(0);
-        .transition-delay(.3s);
+        .transition-delay(0.3s);
 
         .progress-bar {
             width: 100% !important;
-            .transition(width .3s linear);
+            .transition(width 0.3s linear);
             .animation(none);
         }
     }
@@ -213,7 +215,6 @@ html.cssanimations {
 
 @stripe-loader-height: 4px;
 .stripe-loading-indicator {
-
     height: @stripe-loader-height;
     background: transparent;
     position: fixed;
@@ -223,7 +224,8 @@ html.cssanimations {
     overflow: hidden;
     z-index: @zindex-flashmessage;
 
-    .stripe, .stripe-loaded {
+    .stripe,
+    .stripe-loaded {
         height: @stripe-loader-height;
         display: block;
         background: @color-stripe-loader;
@@ -243,11 +245,11 @@ html.cssanimations {
 
     &.loaded {
         .opacity(0);
-        .transition(opacity .4s linear);
-        .transition-delay(.3s);
+        .transition(opacity 0.4s linear);
+        .transition-delay(0.3s);
         .stripe-loaded {
             .opacity(1);
-            .transition(width .3s linear);
+            .transition(width 0.3s linear);
             width: 100% !important;
         }
     }
@@ -266,12 +268,16 @@ html.cssanimations {
 @start: 0;
 .infinite-class (@index, @val, @count) when (@index = 0) {
     @tmpSelector: ~"@{index}%";
-    @{tmpSelector} { width: 0%; }
+    @{tmpSelector} {
+        width: 0%;
+    }
     .infinite-class(@index + 10, @val + (@val / (@count * 2)), @count + 1);
 }
 .infinite-class (@index, @val, @count) when (@index < 101) and (@index > 9) {
     @tmpSelector: ~"@{index}%";
-    @{tmpSelector} { width: @val; }
+    @{tmpSelector} {
+        width: @val;
+    }
     .infinite-class(@index + 10, @val + (@val / @count), @count * 2);
 }
 
@@ -296,43 +302,83 @@ html.cssanimations {
 // --------------------------------------------------
 
 @-moz-keyframes spin {
-    0% { -moz-transform: rotate(0deg); }
-    100% { -moz-transform: rotate(359deg); }
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(359deg);
+    }
 }
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(359deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+    }
 }
 @-o-keyframes spin {
-    0% { -o-transform: rotate(0deg); }
-    100% { -o-transform: rotate(359deg); }
+    0% {
+        -o-transform: rotate(0deg);
+    }
+    100% {
+        -o-transform: rotate(359deg);
+    }
 }
 @-ms-keyframes spin {
-    0% { -ms-transform: rotate(0deg); }
-    100% { -ms-transform: rotate(359deg); }
+    0% {
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -ms-transform: rotate(359deg);
+    }
 }
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(359deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359deg);
+    }
 }
 
 @-moz-keyframes rspin {
-    0% { -moz-transform: rotate(359deg); }
-    100% { -moz-transform: rotate(0deg); }
+    0% {
+        -moz-transform: rotate(359deg);
+    }
+    100% {
+        -moz-transform: rotate(0deg);
+    }
 }
 @-webkit-keyframes rspin {
-    0% { -webkit-transform: rotate(359deg); }
-    100% { -webkit-transform: rotate(0deg); }
+    0% {
+        -webkit-transform: rotate(359deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
 }
 @-o-keyframes rspin {
-    0% { -o-transform: rotate(359deg); }
-    100% { -o-transform: rotate(0deg); }
+    0% {
+        -o-transform: rotate(359deg);
+    }
+    100% {
+        -o-transform: rotate(0deg);
+    }
 }
 @-ms-keyframes rspin {
-    0% { -ms-transform: rotate(359deg); }
-    100% { -ms-transform: rotate(0deg); }
+    0% {
+        -ms-transform: rotate(359deg);
+    }
+    100% {
+        -ms-transform: rotate(0deg);
+    }
 }
 @keyframes rspin {
-    0% { transform: rotate(359deg); }
-    100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(359deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }

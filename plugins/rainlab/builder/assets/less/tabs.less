@@ -24,13 +24,14 @@
                     }
                 }
 
-                &:hover, &.inspector-open {
+                &:hover,
+                &.inspector-open {
                     span {
                         background: @link-color;
                     }
                 }
 
-                &.global  {
+                &.global {
                     top: 5px;
                     right: 15px;
                 }
@@ -55,16 +56,16 @@
 
                 > div.tab-container {
                     position: relative;
-                    color: #bdc3c7!important;
+                    color: #bdc3c7 !important;
 
                     > div {
-                        .transition(padding .1s);
+                        .transition(padding 0.1s);
                         position: relative;
                     }
                 }
 
                 &:hover > div {
-                    color: #95a5a6!important;
+                    color: #95a5a6 !important;
                 }
 
                 .tab-control {
@@ -86,7 +87,7 @@
                         }
                     }
 
-                    &.inspector-trigger{
+                    &.inspector-trigger {
                         right: 34px;
                         top: 10px;
                     }
@@ -94,7 +95,7 @@
 
                 &.active {
                     > div.tab-container {
-                        color: #95a5a6!important;
+                        color: #95a5a6 !important;
                     }
 
                     .tab-control {
@@ -126,7 +127,7 @@
 
                 &:after {
                     position: absolute;
-                    content: '';
+                    content: "";
                     display: block;
                     height: 2px;
                     left: 0;
@@ -137,7 +138,7 @@
                 }
 
                 > li {
-                    bottom: -2px; 
+                    bottom: -2px;
                     margin-left: -20px;
                     z-index: 105;
 
@@ -147,23 +148,25 @@
 
                         > div {
                             padding: 5px 5px 0 5px;
-                            border-top: 2px solid #e5e5e5; 
+                            border-top: 2px solid #e5e5e5;
 
                             > span {
                                 position: relative;
                                 top: -2px;
-                                .transition(top .1s);
+                                .transition(top 0.1s);
                             }
                         }
 
-                        &:before, &:after {
-                            content: '';
+                        &:before,
+                        &:after {
+                            content: "";
                             display: block;
                             position: absolute;
                             top: 0;
                             height: 27px;
                             width: 21px;
-                            background: transparent url(../images/tab.png) no-repeat;
+                            background: transparent url(../images/tab.png)
+                                no-repeat;
                         }
 
                         &:before {
@@ -181,7 +184,6 @@
                         z-index: 107;
 
                         > div.tab-container {
-
                             &:before {
                                 background-position: 0 0;
                             }
@@ -192,7 +194,7 @@
 
                             > div {
                                 padding-right: 30px;
-                                border-top: 2px solid #bdc3c7; 
+                                border-top: 2px solid #bdc3c7;
 
                                 > span {
                                     top: 0;
@@ -202,7 +204,7 @@
 
                         &:before {
                             position: absolute;
-                            content: '';
+                            content: "";
                             display: block;
                             height: 3px;
                             left: 0;
@@ -252,7 +254,7 @@
                         }
                     }
 
-                    .tab-control { 
+                    .tab-control {
                         right: 23px;
                         top: 7px;
 
@@ -299,7 +301,7 @@ html.gecko {
     .builder-tabs.primary > .tabs > ul.tabs > li {
         // Fixes a visual glitch in FireFox, noticed in v. 42 on Mac.
         //
-        bottom: -3px; 
+        bottom: -3px;
         > div.tab-container > div {
             padding-top: 5px;
         }

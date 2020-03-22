@@ -16,10 +16,8 @@
  *  - bootstrap/tooltip
  */
 
-(function($){
-
-    $(document).render(function(){
-        $('[data-control="tooltip"], [data-toggle="tooltip"]').tooltip()
-    })
-
+(function ($) {
+    $(document).render(function () {
+        $('[data-control="tooltip"], [data-toggle="tooltip"]').tooltip();
+    });
 })(jQuery);

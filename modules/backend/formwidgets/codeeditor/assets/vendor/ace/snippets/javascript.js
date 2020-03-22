@@ -1,7 +1,11 @@
-ace.define("ace/snippets/javascript",["require","exports","module"], function(require, exports, module) {
-"use strict";
+ace.define(
+    "ace/snippets/javascript",
+    ["require", "exports", "module"],
+    function (require, exports, module) {
+        "use strict";
 
-exports.snippetText = "# Prototype\n\
+        exports.snippetText =
+            '# Prototype\n\
 snippet proto\n\
 	${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}) {\n\
 		${4:// body...}\n\
@@ -42,7 +46,7 @@ snippet ter\n\
 # switch\n\
 snippet switch\n\
 	switch (${1:expression}) {\n\
-		case '${3:case}':\n\
+		case \'${3:case}\':\n\
 			${4:// code}\n\
 			break;\n\
 		${5}\n\
@@ -51,7 +55,7 @@ snippet switch\n\
 	}\n\
 # case\n\
 snippet case\n\
-	case '${1:case}':\n\
+	case \'${1:case}\':\n\
 		${2:// code}\n\
 		break;\n\
 	${3}\n\
@@ -83,10 +87,10 @@ regex /\\b/st|timeout|setTimeo?u?t?/\n\
 	setTimeout(function() {${3:$TM_SELECTED_TEXT}}, ${1:10});\n\
 # Get Elements\n\
 snippet gett\n\
-	getElementsBy${1:TagName}('${2}')${3}\n\
+	getElementsBy${1:TagName}(\'${2}\')${3}\n\
 # Get Element\n\
 snippet get\n\
-	getElementBy${1:Id}('${2}')${3}\n\
+	getElementBy${1:Id}(\'${2}\')${3}\n\
 # console.log (Firebug)\n\
 snippet cl\n\
 	console.log(${1});\n\
@@ -159,7 +163,7 @@ regex /^\\s*/clas{0,2}/\n\
 	};\n\
 	\n\
 	(function() {\n\
-		${60:this.prop = \"\"}\n\
+		${60:this.prop = ""}\n\
 	}).call(${1:class}.prototype);\n\
 	\n\
 	exports.${1:class} = ${1:class};\n\
@@ -183,20 +187,20 @@ snippet forr\n\
 #modules\n\
 snippet def\n\
 	define(function(require, exports, module) {\n\
-	\"use strict\";\n\
-	var ${1/.*\\///} = require(\"${1}\");\n\
+	"use strict";\n\
+	var ${1/.*\\///} = require("${1}");\n\
 	\n\
 	$TM_SELECTED_TEXT\n\
 	});\n\
 snippet req\n\
 guard ^\\s*\n\
-	var ${1/.*\\///} = require(\"${1}\");\n\
+	var ${1/.*\\///} = require("${1}");\n\
 	$0\n\
 snippet requ\n\
 guard ^\\s*\n\
-	var ${1/.*\\/(.)/\\u$1/} = require(\"${1}\").${1/.*\\/(.)/\\u$1/};\n\
+	var ${1/.*\\/(.)/\\u$1/} = require("${1}").${1/.*\\/(.)/\\u$1/};\n\
 	$0\n\
-";
-exports.scope = "javascript";
-
-});
+';
+        exports.scope = "javascript";
+    }
+);

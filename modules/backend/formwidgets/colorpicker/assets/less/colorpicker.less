@@ -1,12 +1,10 @@
 @import "../../../../assets/less/core/boot.less";
 
-
 @color-colorpicker-border: #cecece;
 @color-colorpicker-active-border: #fff;
 @color-colorpicker-active: #5fb6f5;
 
 .field-colorpicker {
-
     > ul {
         list-style-type: none;
         padding: 0;
@@ -66,21 +64,32 @@
                 }
             }
         }
-
     }
-
 }
 
 //
 // Spectrum
 //
 
-.sp-hue, .sp-slider { cursor: row-resize }
-.sp-color, .sp-dragger { cursor: crosshair }
-.sp-alpha-inner, .sp-alpha-handle { cursor: col-resize }
+.sp-hue,
+.sp-slider {
+    cursor: row-resize;
+}
+.sp-color,
+.sp-dragger {
+    cursor: crosshair;
+}
+.sp-alpha-inner,
+.sp-alpha-handle {
+    cursor: col-resize;
+}
 
-.sp-hue { left: 90%; }
-.sp-color { right: 15%; }
+.sp-hue {
+    left: 90%;
+}
+.sp-color {
+    right: 15%;
+}
 
 .sp-container {
     border: none;
@@ -100,7 +109,8 @@
     width: 4px;
 }
 
-.sp-color, .sp-hue {
+.sp-color,
+.sp-hue {
     border: 1px solid #ccc;
 }
 
@@ -112,7 +122,7 @@
     width: 22px;
 }
 .sp-dragger {
-    background:transparent;
+    background: transparent;
     box-shadow: 0 0 0 1px #111;
 }
 
@@ -161,13 +171,13 @@
     line-height: 1;
     color: @close-color !important;
     text-shadow: @close-text-shadow;
-    .opacity(.2);
+    .opacity(0.2);
 
     &:hover,
     &:focus {
         text-decoration: none;
         cursor: pointer;
-        .opacity(.5);
+        .opacity(0.5);
     }
 }
 

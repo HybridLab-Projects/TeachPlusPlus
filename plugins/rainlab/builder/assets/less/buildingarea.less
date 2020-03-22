@@ -17,7 +17,8 @@
                 cursor: default;
             }
 
-            &.placeholder, &.loading-control {
+            &.placeholder,
+            &.loading-control {
                 padding: 10px 12px;
                 position: relative;
                 text-align: center;
@@ -41,15 +42,15 @@
                 text-align: left;
             }
 
-            &.updating-control:after, 
+            &.updating-control:after,
             &.loading-control:before {
-                background-image:url(../../../../../modules/system/assets/ui/images/loader-transparent.svg);
+                background-image: url(../../../../../modules/system/assets/ui/images/loader-transparent.svg);
                 background-size: 15px 15px;
                 background-position: 50% 50%;
                 display: inline-block;
                 width: 15px;
                 height: 15px;
-                content: ' ';
+                content: " ";
                 margin-right: 13px;
                 position: relative;
                 top: 2px;
@@ -68,7 +69,7 @@
             }
 
             &.updating-control:before {
-                content: '';
+                content: "";
                 position: absolute;
                 right: 0;
                 top: 0;
@@ -109,7 +110,8 @@
                 display: none;
             }
 
-            &:not(.placeholder):not(.loading-control):not(.updating-control):hover > {
+            &:not(.placeholder):not(.loading-control):not(.updating-control):hover
+                > {
                 > div.remove-control {
                     font-family: sans-serif;
                     display: block;
@@ -133,7 +135,8 @@
                     }
                 }
 
-                &[data-control-type=hint], &[data-control-type=partial] {
+                &[data-control-type="hint"],
+                &[data-control-type="partial"] {
                     > div.remove-control {
                         top: 12px;
                         right: 12px;
@@ -141,7 +144,8 @@
                 }
             }
 
-            &[data-control-type=hint], &[data-control-type=partial] {
+            &[data-control-type="hint"],
+            &[data-control-type="partial"] {
                 &.updating-control {
                     &:before {
                         right: 12px;
@@ -166,20 +170,24 @@
         > li.placeholder.popover-highlight,
         > li.placeholder.control-palette-open {
             background-color: @builder-hover-color!important;
-            color: white!important;
+            color: white !important;
             border-style: solid;
             border-color: @builder-hover-color;
         }
 
-        > li.control:not(.placeholder):not(.loading-control):not([data-unknown]):hover > .control-wrapper *,
-        > li.control.inspector-open:not(.placeholder):not(.loading-control) > .control-wrapper * {
+        > li.control:not(.placeholder):not(.loading-control):not([data-unknown]):hover
+            > .control-wrapper
+            *,
+        > li.control.inspector-open:not(.placeholder):not(.loading-control)
+            > .control-wrapper
+            * {
             color: @builder-hover-color!important;
         }
 
         > li.control.drag-over:not(.placeholder) {
             &:before {
                 position: absolute;
-                content: '';
+                content: "";
                 top: 0;
                 left: 0;
                 width: 10px;
@@ -229,7 +237,7 @@
         margin-top: 6px;
     }
 
-    .builder-control-comment-above, 
+    .builder-control-comment-above,
     .builder-control-comment-below {
         color: #737373;
         font-size: 12px;

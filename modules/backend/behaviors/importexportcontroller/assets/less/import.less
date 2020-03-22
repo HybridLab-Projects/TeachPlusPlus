@@ -7,7 +7,6 @@
 @import-column-font-size: 13px;
 
 .import-behavior {
-
     ul {
         margin: 0;
         padding: 0;
@@ -25,7 +24,7 @@
         li.dragged {
             position: absolute;
             z-index: 2000;
-            .box-shadow(0 3px 6px rgba(0,0,0,.075));
+            .box-shadow(0 3px 6px rgba(0,0,0,0.075));
         }
     }
 
@@ -169,7 +168,7 @@
             padding: @import-column-padding;
             padding-left: 28px;
             content: attr(data-empty-text);
-            color: rgba(0,0,0,.5);
+            color: rgba(0, 0, 0, 0.5);
         }
 
         > li {
@@ -197,5 +196,4 @@
             }
         }
     }
-
 }

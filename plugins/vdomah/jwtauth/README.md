@@ -13,10 +13,10 @@ RainLab.User plugin
 1. After plugin installation you need to copy /plugins/vdomah/jwtauth/config/auth.php to {root}/config/auth.php, otherwise you'll got an error.
 
 2. Generate JWT Authentication Secret. it will be used to sign your tokens.
-A helper command is provided for this: `php artisan jwt:generate`.
-You need to assign the generated value to JWT_SECRET in your .env.
+   A helper command is provided for this: `php artisan jwt:generate`.
+   You need to assign the generated value to JWT_SECRET in your .env.
 
-### Endpoints 
+### Endpoints
 
 The plugin provides 2 endpoints: /api/login and /api/signup.
 
@@ -40,7 +40,8 @@ Expects 1 parameter: token. Tries to invalidate the given token - this can be us
 
 Simply add `->middleware('\Tymon\JWTAuth\Middleware\GetUserFromToken')` to the end of the route in the plugin's routes.php
 
-eg: 
+eg:
+
 ```
 Route::post('test', function (\Request $request) {
    return response()->json(('The test was successful'));

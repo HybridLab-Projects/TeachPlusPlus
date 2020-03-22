@@ -4,7 +4,6 @@
 
 // Give soft priority to all styles
 body {
-
     //
     // Wrapper
     //
@@ -40,7 +39,7 @@ body {
     // Full screen
     //
 
-    .fr-command.fr-btn[data-cmd=fullscreen] {
+    .fr-command.fr-btn[data-cmd="fullscreen"] {
         float: right;
     }
 
@@ -65,13 +64,14 @@ body {
 
         &.fr-above {
             .fr-arrow {
-               bottom: -@arrow-size;
+                bottom: -@arrow-size;
             }
         }
     }
 
     // Command button.
-    .fr-toolbar, .fr-popup {
+    .fr-toolbar,
+    .fr-popup {
         .fr-command.fr-btn {
             // Dropdown is visible.
             &.fr-dropdown.fr-active {
@@ -104,12 +104,12 @@ body {
             .box-shadow(~"inset 0 -2px 0 rgba(0,0,0,.15)");
 
             &[disabled] {
-                color: rgba(255,255,255,.6);
+                color: rgba(255, 255, 255, 0.6);
             }
 
             &.active,
             &:active {
-                .box-shadow(inset 0 1px 0 rgba(0,0,0,.3));
+                .box-shadow(inset 0 1px 0 rgba(0,0,0,0.3));
             }
         }
     }
@@ -141,8 +141,8 @@ body {
     //
 
     .fr-popup .fr-input-line {
-
-        input[type="text"], textarea {
+        input[type="text"],
+        textarea {
             -webkit-appearance: none;
             border: 1px solid @input-border;
             background-color: @input-bg;
@@ -164,12 +164,14 @@ body {
         textarea {
             height: auto;
         }
-        
-        input + label, textarea + label {
-            background: transparent!important;
+
+        input + label,
+        textarea + label {
+            background: transparent !important;
         }
 
-        input.fr-not-empty:focus + label, textarea.fr-not-empty:focus + label {
+        input.fr-not-empty:focus + label,
+        textarea.fr-not-empty:focus + label {
             color: @color-label;
         }
     }
@@ -179,5 +181,4 @@ body {
             border-color: @input-border;
         }
     }
-
 }

@@ -26,9 +26,9 @@
             position: relative;
 
             a {
-                padding: 1.429em .714em;
+                padding: 1.429em 0.714em;
                 display: block;
-                font-size: .929em;
+                font-size: 0.929em;
                 color: @color-sidebarnav-inactive-text;
                 font-weight: normal;
                 position: relative;
@@ -54,9 +54,12 @@
                 padding-top: 2.143em;
             }
 
-            &.active a, a:hover {
+            &.active a,
+            a:hover {
                 color: @color-sidebarnav-active-text;
-                i { color: @color-sidebarnav-active-icon; }
+                i {
+                    color: @color-sidebarnav-active-icon;
+                }
             }
 
             span.counter {
@@ -64,10 +67,10 @@
                 position: absolute;
                 top: 1.071em;
                 right: 1.071em;
-                padding: .143em .429em .214em .286em;
+                padding: 0.143em 0.429em 0.214em 0.286em;
                 background-color: @color-sidebarnav-counter-bg;
                 color: @color-sidebarnav-counter-text;
-                font-size: .786em;
+                font-size: 0.786em;
                 line-height: 100%;
                 .border-radius(3px);
                 .opacity(1);
@@ -111,6 +114,10 @@ html.mobile {
 #layout-sidenav.layout-sidenav ul.drag li:not(.active) a:hover,
 .touch #layout-sidenav.layout-sidenav li:not(.active) a:hover {
     color: @color-sidebarnav-inactive-text !important;
-    i { color: @color-sidebarnav-inactive-icon !important; }
-    &:after { display: none !important; }
+    i {
+        color: @color-sidebarnav-inactive-icon !important;
+    }
+    &:after {
+        display: none !important;
+    }
 }

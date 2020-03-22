@@ -18,17 +18,20 @@
 
 table.table.data {
     .list-head-icon(@icon) {
-        > span, > a {
+        > span,
+        > a {
             &:after {
                 font-size: 14px;
                 line-height: 14px;
                 display: inline-block;
                 margin-left: 6px;
                 vertical-align: baseline;
-                .opacity(.4);
+                .opacity(0.4);
                 .icon(@icon);
             }
-            &:hover:after { .opacity(.8); }
+            &:hover:after {
+                .opacity(0.8);
+            }
         }
     }
 
@@ -42,7 +45,8 @@ table.table.data {
     thead {
         background: @color-list-head-bg;
 
-        td, th {
+        td,
+        th {
             border-width: 1px;
             border-top: 1px solid @color-list-border !important;
             border-bottom: 2px solid @color-list-border !important;
@@ -53,20 +57,28 @@ table.table.data {
             font-size: @font-size-base - 3;
             white-space: nowrap;
 
-            > a, > span {
+            > a,
+            > span {
                 display: block;
                 padding: 13px 15px;
                 color: @color-list-text-head;
                 text-decoration: none;
-                &:hover { color: @color-list-text-active; }
+                &:hover {
+                    color: @color-list-text-active;
+                }
             }
 
-            &.sort-desc { .list-head-icon(@angle-down); }
-            &.sort-asc { .list-head-icon(@angle-up); }
+            &.sort-desc {
+                .list-head-icon(@angle-down);
+            }
+            &.sort-asc {
+                .list-head-icon(@angle-up);
+            }
 
             &.active {
                 background-color: inherit;
-                > span, > a {
+                > span,
+                > a {
                     &:after {
                         color: @color-list-active-sort;
                         .opacity(1) !important;
@@ -90,9 +102,13 @@ table.table.data {
 
     tbody {
         tr:nth-child(even) {
-            td, th { background-color: @color-list-accent; }
+            td,
+            th {
+                background-color: @color-list-accent;
+            }
         }
-        td, th {
+        td,
+        th {
             padding: 12px 15px;
             color: @color-list-text;
             border-top: 2px solid white;
@@ -129,13 +145,15 @@ table.table.data {
         }
 
         tr:first-child {
-            th, td {
+            th,
+            td {
                 border-top-width: 0;
             }
         }
 
         tr:last-child {
-            th, td {
+            th,
+            td {
                 border-bottom-width: 0;
             }
         }
@@ -153,12 +171,15 @@ table.table.data {
             }
         }
 
-        tr.rowlink:not(.nolink):hover td, tr:not(.no-data).selected td {
+        tr.rowlink:not(.nolink):hover td,
+        tr:not(.no-data).selected td {
             background: @color-list-hover-bg !important;
             color: @highlight-hover-text;
 
-            a:not(.btn), span, i[class^="icon-"] {
-               color: @highlight-hover-text;
+            a:not(.btn),
+            span,
+            i[class^="icon-"] {
+                color: @highlight-hover-text;
             }
         }
 
@@ -168,55 +189,85 @@ table.table.data {
         }
 
         tr.hidden {
-            td, th, td a, th a {
+            td,
+            th,
+            td a,
+            th a {
                 display: none;
             }
         }
 
         tr.strike {
-            td, th, td a, th a {
+            td,
+            th,
+            td a,
+            th a {
                 text-decoration: line-through;
             }
         }
 
         tr.frozen {
-            td, th, td a, th a {
+            td,
+            th,
+            td a,
+            th a {
                 color: #337ab7;
             }
         }
 
         tr.processing {
-            td, th, td a, th a {
+            td,
+            th,
+            td a,
+            th a {
                 color: #666666;
             }
         }
 
         tr.negative {
-            td, th, td a, th a {
+            td,
+            th,
+            td a,
+            th a {
                 color: #b2341c;
             }
         }
 
         tr.positive {
-            td, th, td a, th a {
+            td,
+            th,
+            td a,
+            th a {
                 color: #278731;
             }
         }
 
-        tr.disabled, tr.deleted {
-            td, th, td a, th a {
+        tr.disabled,
+        tr.deleted {
+            td,
+            th,
+            td a,
+            th a {
                 color: #888888;
             }
         }
 
-        tr.new, tr.important {
-            td, th, td a, th a {
+        tr.new,
+        tr.important {
+            td,
+            th,
+            td a,
+            th a {
                 font-weight: 600;
             }
         }
 
-        tr.safe, tr.special {
-            td, th, td a, th a {
+        tr.safe,
+        tr.special {
+            td,
+            th,
+            td a,
+            th a {
                 color: #98a7a8;
             }
         }
@@ -274,7 +325,8 @@ table.table.data {
             color: @color-list-text;
             text-decoration: none;
         }
-        td, th {
+        td,
+        th {
             border-color: @color-list-border;
             padding: 10px 15px;
         }
@@ -408,8 +460,12 @@ table.table.data {
     // Tree levels 1 - 10
     .makeTreeLevel(@count) {
         tr.list-tree-level-@{count} {
-            a.list-expand-collapse { left: 10px + (10 * @count); }
-            td.list-cell-index-1 { padding-left: 15px + (10 * @count); }
+            a.list-expand-collapse {
+                left: 10px + (10 * @count);
+            }
+            td.list-cell-index-1 {
+                padding-left: 15px + (10 * @count);
+            }
         }
     }
 
@@ -497,7 +553,7 @@ table.table.data {
                     display: inline-block;
                     margin-left: 8px;
                     vertical-align: baseline;
-                    .opacity(.6);
+                    .opacity(0.6);
                 }
 
                 &:hover:before {
@@ -561,7 +617,10 @@ table.table.data {
 
             tbody {
                 tr:nth-child(even) {
-                    td, th { background-color: transparent; }
+                    td,
+                    th {
+                        background-color: transparent;
+                    }
                 }
             }
         }
@@ -578,7 +637,8 @@ table.table.data {
 
     .horizontal-scroll-indicators(@color-list-text-head);
 
-    &:after, &:before {
+    &:after,
+    &:before {
         margin-top: 0;
         height: 40px;
         padding: 13px 10px;

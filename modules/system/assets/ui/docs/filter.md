@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-- Popover
+-   Popover
 
 # Example
 
