@@ -4,7 +4,7 @@
       <b-col class="col-md-3">
         <Search />
       </b-col>
-      <b-col class="col-md-9" />
+      <b-col class="col-md-9">
         <Teacher />
       </b-col>
     </b-row>
