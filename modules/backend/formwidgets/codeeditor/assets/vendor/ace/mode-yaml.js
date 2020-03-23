@@ -1,256 +1,312 @@
-ace.define("ace/mode/yaml_highlight_rules",["require","exports","module","ace/lib/oop","ace/mode/text_highlight_rules"], function(require, exports, module) {
-"use strict";
+ace.define(
+    "ace/mode/yaml_highlight_rules",
+    [
+        "require",
+        "exports",
+        "module",
+        "ace/lib/oop",
+        "ace/mode/text_highlight_rules",
+    ],
+    function (require, exports, module) {
+        "use strict";
 
-var oop = require("../lib/oop");
-var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
+        var oop = require("../lib/oop");
+        var TextHighlightRules = require("./text_highlight_rules")
+            .TextHighlightRules;
 
-var YamlHighlightRules = function() {
-    this.$rules = {
-        "start" : [
-            {
-                token : "comment",
-                regex : "#.*$"
-            }, {
-                token : "list.markup",
-                regex : /^(?:-{3}|\.{3})\s*(?=#|$)/     
-            },  {
-                token : "list.markup",
-                regex : /^\s*[\-?](?:$|\s)/     
-            }, {
-                token: "constant",
-                regex: "!![\\w//]+"
-            }, {
-                token: "constant.language",
-                regex: "[&\\*][a-zA-Z0-9-_]+"
-            }, {
-                token: ["meta.tag", "keyword"],
-                regex: /^(\s*\w.*?)(\:(?:\s+|$))/
-            },{
-                token: ["meta.tag", "keyword"],
-                regex: /(\w+?)(\s*\:(?:\s+|$))/
-            }, {
-                token : "keyword.operator",
-                regex : "<<\\w*:\\w*"
-            }, {
-                token : "keyword.operator",
-                regex : "-\\s*(?=[{])"
-            }, {
-                token : "string", // single line
-                regex : '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]'
-            }, {
-                token : "string", // multi line string start
-                regex : '[|>][-+\\d\\s]*$',
-                next : "qqstring"
-            }, {
-                token : "string", // single quoted string
-                regex : "['](?:(?:\\\\.)|(?:[^'\\\\]))*?[']"
-            }, {
-                token : "constant.numeric", // float
-                regex : /(\b|[+\-\.])[\d_]+(?:(?:\.[\d_]*)?(?:[eE][+\-]?[\d_]+)?)/
-            }, {
-                token : "constant.numeric", // other number
-                regex : /[+\-]?\.inf\b|NaN\b|0x[\dA-Fa-f_]+|0b[10_]+/
-            }, {
-                token : "constant.language.boolean",
-                regex : "(?:true|false|TRUE|FALSE|True|False|yes|no)\\b"
-            }, {
-                token : "paren.lparen",
-                regex : "[[({]"
-            }, {
-                token : "paren.rparen",
-                regex : "[\\])}]"
-            }
-        ],
-        "qqstring" : [
-            {
-                token : "string",
-                regex : '(?=(?:(?:\\\\.)|(?:[^:]))*?:)',
-                next : "start"
-            }, {
-                token : "string",
-                regex : '.+'
-            }
-        ]};
+        var YamlHighlightRules = function () {
+            this.$rules = {
+                start: [
+                    {
+                        token: "comment",
+                        regex: "#.*$",
+                    },
+                    {
+                        token: "list.markup",
+                        regex: /^(?:-{3}|\.{3})\s*(?=#|$)/,
+                    },
+                    {
+                        token: "list.markup",
+                        regex: /^\s*[\-?](?:$|\s)/,
+                    },
+                    {
+                        token: "constant",
+                        regex: "!![\\w//]+",
+                    },
+                    {
+                        token: "constant.language",
+                        regex: "[&\\*][a-zA-Z0-9-_]+",
+                    },
+                    {
+                        token: ["meta.tag", "keyword"],
+                        regex: /^(\s*\w.*?)(\:(?:\s+|$))/,
+                    },
+                    {
+                        token: ["meta.tag", "keyword"],
+                        regex: /(\w+?)(\s*\:(?:\s+|$))/,
+                    },
+                    {
+                        token: "keyword.operator",
+                        regex: "<<\\w*:\\w*",
+                    },
+                    {
+                        token: "keyword.operator",
+                        regex: "-\\s*(?=[{])",
+                    },
+                    {
+                        token: "string", // single line
+                        regex: '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]',
+                    },
+                    {
+                        token: "string", // multi line string start
+                        regex: "[|>][-+\\d\\s]*$",
+                        next: "qqstring",
+                    },
+                    {
+                        token: "string", // single quoted string
+                        regex: "['](?:(?:\\\\.)|(?:[^'\\\\]))*?[']",
+                    },
+                    {
+                        token: "constant.numeric", // float
+                        regex: /(\b|[+\-\.])[\d_]+(?:(?:\.[\d_]*)?(?:[eE][+\-]?[\d_]+)?)/,
+                    },
+                    {
+                        token: "constant.numeric", // other number
+                        regex: /[+\-]?\.inf\b|NaN\b|0x[\dA-Fa-f_]+|0b[10_]+/,
+                    },
+                    {
+                        token: "constant.language.boolean",
+                        regex: "(?:true|false|TRUE|FALSE|True|False|yes|no)\\b",
+                    },
+                    {
+                        token: "paren.lparen",
+                        regex: "[[({]",
+                    },
+                    {
+                        token: "paren.rparen",
+                        regex: "[\\])}]",
+                    },
+                ],
+                qqstring: [
+                    {
+                        token: "string",
+                        regex: "(?=(?:(?:\\\\.)|(?:[^:]))*?:)",
+                        next: "start",
+                    },
+                    {
+                        token: "string",
+                        regex: ".+",
+                    },
+                ],
+            };
+        };
 
-};
+        oop.inherits(YamlHighlightRules, TextHighlightRules);
 
-oop.inherits(YamlHighlightRules, TextHighlightRules);
+        exports.YamlHighlightRules = YamlHighlightRules;
+    }
+);
 
-exports.YamlHighlightRules = YamlHighlightRules;
-});
+ace.define(
+    "ace/mode/matching_brace_outdent",
+    ["require", "exports", "module", "ace/range"],
+    function (require, exports, module) {
+        "use strict";
 
-ace.define("ace/mode/matching_brace_outdent",["require","exports","module","ace/range"], function(require, exports, module) {
-"use strict";
+        var Range = require("../range").Range;
 
-var Range = require("../range").Range;
+        var MatchingBraceOutdent = function () {};
 
-var MatchingBraceOutdent = function() {};
+        (function () {
+            this.checkOutdent = function (line, input) {
+                if (!/^\s+$/.test(line)) return false;
 
-(function() {
+                return /^\s*\}/.test(input);
+            };
 
-    this.checkOutdent = function(line, input) {
-        if (! /^\s+$/.test(line))
-            return false;
+            this.autoOutdent = function (doc, row) {
+                var line = doc.getLine(row);
+                var match = line.match(/^(\s*\})/);
 
-        return /^\s*\}/.test(input);
-    };
+                if (!match) return 0;
 
-    this.autoOutdent = function(doc, row) {
-        var line = doc.getLine(row);
-        var match = line.match(/^(\s*\})/);
+                var column = match[1].length;
+                var openBracePos = doc.findMatchingBracket({
+                    row: row,
+                    column: column,
+                });
 
-        if (!match) return 0;
+                if (!openBracePos || openBracePos.row == row) return 0;
 
-        var column = match[1].length;
-        var openBracePos = doc.findMatchingBracket({row: row, column: column});
+                var indent = this.$getIndent(doc.getLine(openBracePos.row));
+                doc.replace(new Range(row, 0, row, column - 1), indent);
+            };
 
-        if (!openBracePos || openBracePos.row == row) return 0;
+            this.$getIndent = function (line) {
+                return line.match(/^\s*/)[0];
+            };
+        }.call(MatchingBraceOutdent.prototype));
 
-        var indent = this.$getIndent(doc.getLine(openBracePos.row));
-        doc.replace(new Range(row, 0, row, column-1), indent);
-    };
+        exports.MatchingBraceOutdent = MatchingBraceOutdent;
+    }
+);
 
-    this.$getIndent = function(line) {
-        return line.match(/^\s*/)[0];
-    };
+ace.define(
+    "ace/mode/folding/coffee",
+    [
+        "require",
+        "exports",
+        "module",
+        "ace/lib/oop",
+        "ace/mode/folding/fold_mode",
+        "ace/range",
+    ],
+    function (require, exports, module) {
+        "use strict";
 
-}).call(MatchingBraceOutdent.prototype);
+        var oop = require("../../lib/oop");
+        var BaseFoldMode = require("./fold_mode").FoldMode;
+        var Range = require("../../range").Range;
 
-exports.MatchingBraceOutdent = MatchingBraceOutdent;
-});
+        var FoldMode = (exports.FoldMode = function () {});
+        oop.inherits(FoldMode, BaseFoldMode);
 
-ace.define("ace/mode/folding/coffee",["require","exports","module","ace/lib/oop","ace/mode/folding/fold_mode","ace/range"], function(require, exports, module) {
-"use strict";
+        (function () {
+            this.getFoldWidgetRange = function (session, foldStyle, row) {
+                var range = this.indentationBlock(session, row);
+                if (range) return range;
 
-var oop = require("../../lib/oop");
-var BaseFoldMode = require("./fold_mode").FoldMode;
-var Range = require("../../range").Range;
+                var re = /\S/;
+                var line = session.getLine(row);
+                var startLevel = line.search(re);
+                if (startLevel == -1 || line[startLevel] != "#") return;
 
-var FoldMode = exports.FoldMode = function() {};
-oop.inherits(FoldMode, BaseFoldMode);
+                var startColumn = line.length;
+                var maxRow = session.getLength();
+                var startRow = row;
+                var endRow = row;
 
-(function() {
+                while (++row < maxRow) {
+                    line = session.getLine(row);
+                    var level = line.search(re);
 
-    this.getFoldWidgetRange = function(session, foldStyle, row) {
-        var range = this.indentationBlock(session, row);
-        if (range)
-            return range;
+                    if (level == -1) continue;
 
-        var re = /\S/;
-        var line = session.getLine(row);
-        var startLevel = line.search(re);
-        if (startLevel == -1 || line[startLevel] != "#")
-            return;
+                    if (line[level] != "#") break;
 
-        var startColumn = line.length;
-        var maxRow = session.getLength();
-        var startRow = row;
-        var endRow = row;
+                    endRow = row;
+                }
 
-        while (++row < maxRow) {
-            line = session.getLine(row);
-            var level = line.search(re);
+                if (endRow > startRow) {
+                    var endColumn = session.getLine(endRow).length;
+                    return new Range(startRow, startColumn, endRow, endColumn);
+                }
+            };
+            this.getFoldWidget = function (session, foldStyle, row) {
+                var line = session.getLine(row);
+                var indent = line.search(/\S/);
+                var next = session.getLine(row + 1);
+                var prev = session.getLine(row - 1);
+                var prevIndent = prev.search(/\S/);
+                var nextIndent = next.search(/\S/);
 
-            if (level == -1)
-                continue;
+                if (indent == -1) {
+                    session.foldWidgets[row - 1] =
+                        prevIndent != -1 && prevIndent < nextIndent
+                            ? "start"
+                            : "";
+                    return "";
+                }
+                if (prevIndent == -1) {
+                    if (
+                        indent == nextIndent &&
+                        line[indent] == "#" &&
+                        next[indent] == "#"
+                    ) {
+                        session.foldWidgets[row - 1] = "";
+                        session.foldWidgets[row + 1] = "";
+                        return "start";
+                    }
+                } else if (
+                    prevIndent == indent &&
+                    line[indent] == "#" &&
+                    prev[indent] == "#"
+                ) {
+                    if (session.getLine(row - 2).search(/\S/) == -1) {
+                        session.foldWidgets[row - 1] = "start";
+                        session.foldWidgets[row + 1] = "";
+                        return "";
+                    }
+                }
 
-            if (line[level] != "#")
-                break;
+                if (prevIndent != -1 && prevIndent < indent)
+                    session.foldWidgets[row - 1] = "start";
+                else session.foldWidgets[row - 1] = "";
 
-            endRow = row;
-        }
+                if (indent < nextIndent) return "start";
+                else return "";
+            };
+        }.call(FoldMode.prototype));
+    }
+);
 
-        if (endRow > startRow) {
-            var endColumn = session.getLine(endRow).length;
-            return new Range(startRow, startColumn, endRow, endColumn);
-        }
-    };
-    this.getFoldWidget = function(session, foldStyle, row) {
-        var line = session.getLine(row);
-        var indent = line.search(/\S/);
-        var next = session.getLine(row + 1);
-        var prev = session.getLine(row - 1);
-        var prevIndent = prev.search(/\S/);
-        var nextIndent = next.search(/\S/);
+ace.define(
+    "ace/mode/yaml",
+    [
+        "require",
+        "exports",
+        "module",
+        "ace/lib/oop",
+        "ace/mode/text",
+        "ace/mode/yaml_highlight_rules",
+        "ace/mode/matching_brace_outdent",
+        "ace/mode/folding/coffee",
+    ],
+    function (require, exports, module) {
+        "use strict";
 
-        if (indent == -1) {
-            session.foldWidgets[row - 1] = prevIndent!= -1 && prevIndent < nextIndent ? "start" : "";
-            return "";
-        }
-        if (prevIndent == -1) {
-            if (indent == nextIndent && line[indent] == "#" && next[indent] == "#") {
-                session.foldWidgets[row - 1] = "";
-                session.foldWidgets[row + 1] = "";
-                return "start";
-            }
-        } else if (prevIndent == indent && line[indent] == "#" && prev[indent] == "#") {
-            if (session.getLine(row - 2).search(/\S/) == -1) {
-                session.foldWidgets[row - 1] = "start";
-                session.foldWidgets[row + 1] = "";
-                return "";
-            }
-        }
+        var oop = require("../lib/oop");
+        var TextMode = require("./text").Mode;
+        var YamlHighlightRules = require("./yaml_highlight_rules")
+            .YamlHighlightRules;
+        var MatchingBraceOutdent = require("./matching_brace_outdent")
+            .MatchingBraceOutdent;
+        var FoldMode = require("./folding/coffee").FoldMode;
 
-        if (prevIndent!= -1 && prevIndent < indent)
-            session.foldWidgets[row - 1] = "start";
-        else
-            session.foldWidgets[row - 1] = "";
+        var Mode = function () {
+            this.HighlightRules = YamlHighlightRules;
+            this.$outdent = new MatchingBraceOutdent();
+            this.foldingRules = new FoldMode();
+        };
+        oop.inherits(Mode, TextMode);
 
-        if (indent < nextIndent)
-            return "start";
-        else
-            return "";
-    };
+        (function () {
+            this.lineCommentStart = "#";
 
-}).call(FoldMode.prototype);
+            this.getNextLineIndent = function (state, line, tab) {
+                var indent = this.$getIndent(line);
 
-});
+                if (state == "start") {
+                    var match = line.match(/^.*[\{\(\[]\s*$/);
+                    if (match) {
+                        indent += tab;
+                    }
+                }
 
-ace.define("ace/mode/yaml",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/yaml_highlight_rules","ace/mode/matching_brace_outdent","ace/mode/folding/coffee"], function(require, exports, module) {
-"use strict";
+                return indent;
+            };
 
-var oop = require("../lib/oop");
-var TextMode = require("./text").Mode;
-var YamlHighlightRules = require("./yaml_highlight_rules").YamlHighlightRules;
-var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutdent;
-var FoldMode = require("./folding/coffee").FoldMode;
+            this.checkOutdent = function (state, line, input) {
+                return this.$outdent.checkOutdent(line, input);
+            };
 
-var Mode = function() {
-    this.HighlightRules = YamlHighlightRules;
-    this.$outdent = new MatchingBraceOutdent();
-    this.foldingRules = new FoldMode();
-};
-oop.inherits(Mode, TextMode);
+            this.autoOutdent = function (state, doc, row) {
+                this.$outdent.autoOutdent(doc, row);
+            };
 
-(function() {
+            this.$id = "ace/mode/yaml";
+        }.call(Mode.prototype));
 
-    this.lineCommentStart = "#";
-    
-    this.getNextLineIndent = function(state, line, tab) {
-        var indent = this.$getIndent(line);
-
-        if (state == "start") {
-            var match = line.match(/^.*[\{\(\[]\s*$/);
-            if (match) {
-                indent += tab;
-            }
-        }
-
-        return indent;
-    };
-
-    this.checkOutdent = function(state, line, input) {
-        return this.$outdent.checkOutdent(line, input);
-    };
-
-    this.autoOutdent = function(state, doc, row) {
-        this.$outdent.autoOutdent(doc, row);
-    };
-
-
-    this.$id = "ace/mode/yaml";
-}).call(Mode.prototype);
-
-exports.Mode = Mode;
-
-});
+        exports.Mode = Mode;
+    }
+);

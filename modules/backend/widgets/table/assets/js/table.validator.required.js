@@ -1,32 +1,34 @@
 /*
  * Required table validator.
  */
-+function ($) {
++(function ($) {
     "use strict";
 
     // NAMESPACE CHECK
     // ============================
 
-    if ($.oc.table === undefined) {
-        throw new Error("The $.oc.table namespace is not defined. Make sure that the table.js script is loaded.");
-    }
+    if ($.oc.table === undefined)
+        throw new Error(
+            "The $.oc.table namespace is not defined. Make sure that the table.js script is loaded."
+        );
 
-    if ($.oc.table.validator === undefined) {
-        throw new Error("The $.oc.table.validator namespace is not defined. Make sure that the table.validator.base.js script is loaded.");
-    }
+    if ($.oc.table.validator === undefined)
+        throw new Error(
+            "The $.oc.table.validator namespace is not defined. Make sure that the table.validator.base.js script is loaded."
+        );
 
     // CLASS DEFINITION
     // ============================
 
     var Base = $.oc.table.validator.base,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
     var Required = function (options) {
-        Base.call(this, options)
+        Base.call(this, options);
     };
 
-    Required.prototype = Object.create(BaseProto)
-    Required.prototype.constructor = Required
+    Required.prototype = Object.create(BaseProto);
+    Required.prototype.constructor = Required;
 
     /*
      * Validates a value and returns the error message. If there
@@ -35,14 +37,13 @@
      * target row.
      */
     Required.prototype.validateValue = function (value, rowData) {
-        value = this.trim(value)
+        value = this.trim(value);
 
-        if (value.length === 0) {
-            return this.getMessage("The value should not be empty.")
+        if (value.length === 0)
+            return this.getMessage("The value should not be empty.");
 
-            return
-        }
-    }
+        return;
+    };
 
-    $.oc.table.validator.required = Required
-}(window.jQuery);
+    $.oc.table.validator.required = Required;
+})(window.jQuery);

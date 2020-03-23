@@ -17,79 +17,69 @@
  * Require:
  *  - modernizr/modernizr
  */
-+function ($) {
++(function ($) {
     "use strict";
-    if ($.oc === undefined) {
-        $.oc = {}
+    if ($.oc === undefined) $.oc = {};
 
-        var CursorLoadIndicator = function () {
-            if (Modernizr.touchevents) {
-                return
+    var CursorLoadIndicator = function () {
+        if (Modernizr.touchevents) return;
 
-                this.counter = 0
-                this.indicator = $('<div/>').addClass('cursor-loading-indicator').addClass('hide')
-                $(document.body).append(this.indicator)
-            }
-        }
-    }
+        this.counter = 0;
+        this.indicator = $("<div/>")
+            .addClass("cursor-loading-indicator")
+            .addClass("hide");
+        $(document.body).append(this.indicator);
+    };
 
     CursorLoadIndicator.prototype.show = function (event) {
-        if (Modernizr.touchevents) {
-            return
+        if (Modernizr.touchevents) return;
 
-            this.counter++
+        this.counter++;
 
-            if (this.counter > 1) {
-                return
+        if (this.counter > 1) return;
 
-                var self = this;
-            }
-        }
+        var self = this;
 
         if (event !== undefined && event.clientY !== undefined) {
             self.indicator.css({
                 left: event.clientX + 15,
-                top: event.clientY + 15
-            })
+                top: event.clientY + 15,
+            });
         }
 
-        this.indicator.removeClass('hide')
-        $(window).on('mousemove.cursorLoadIndicator', function (e) {
+        this.indicator.removeClass("hide");
+        $(window).on("mousemove.cursorLoadIndicator", function (e) {
             self.indicator.css({
                 left: e.clientX + 15,
                 top: e.clientY + 15,
-            })
-        })
-    }
+            });
+        });
+    };
 
     CursorLoadIndicator.prototype.hide = function (force) {
-        if (Modernizr.touchevents) {
-            return
+        if (Modernizr.touchevents) return;
 
-            this.counter--
-            if (force !== undefined && force) {
-                this.counter = 0
+        this.counter--;
+        if (force !== undefined && force) this.counter = 0;
 
-                if (this.counter <= 0) {
-                    this.indicator.addClass('hide')
-                    $(window).off('.cursorLoadIndicator');
-                }
-            }
+        if (this.counter <= 0) {
+            this.indicator.addClass("hide");
+            $(window).off(".cursorLoadIndicator");
         }
-    }
+    };
 
     $(document).ready(function () {
         $.oc.cursorLoadIndicator = new CursorLoadIndicator();
-    })
+    });
 
     // CURSORLOADINDICATOR DATA-API
     // ==============
-    
-    $(document)
-        .on('ajaxPromise', '[data-cursor-load-indicator]', function () {
-            $.oc.cursorLoadIndicator.show()
-        }).on('ajaxFail ajaxDone', '[data-cursor-load-indicator]', function () {
-            $.oc.cursorLoadIndicator.hide()
-        })
 
-}(window.jQuery);
+    $(document)
+        .on("ajaxPromise", "[data-cursor-load-indicator]", function () {
+            $.oc.cursorLoadIndicator.show();
+        })
+        .on("ajaxFail ajaxDone", "[data-cursor-load-indicator]", function () {
+            $.oc.cursorLoadIndicator.hide();
+        });
+})(window.jQuery);

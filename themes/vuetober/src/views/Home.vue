@@ -3,9 +3,9 @@
     fluid
     class="alll px-0 pl-5"
   >
-    <div class="row cont_color">
+    <div class="row cont-color">
       <div class="col-md-5 pl-5">
-        <div class="content_container pl-5">
+        <div class="content-container pl-5">
           <h1 class="display-4 mb-4 text-white">
             Čo je to, <strong>Teach++</strong>
           </h1>
@@ -20,6 +20,7 @@
             class="shadow font-weight-bold px-5 py-3 mt-3"
             size="lg"
             variant="danger"
+            to="/login"
           >
             Prihlásiť sa
           </b-button>
@@ -27,7 +28,7 @@
       </div>
       <div class="col-md-7 justify-content-center">
         <img
-          class="cont_img_pic"
+          class="cont-img-pic"
           :src="require(`@/assets/img/Group.svg`)"
           alt
         >
@@ -43,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cont_color {
+.cont-color {
   height: 80vh;
   width: 97.5vw;
   background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
@@ -52,7 +53,7 @@ export default {
   z-index: -10;
 }
 
-.content_container {
+.content-container {
   padding-top: 15rem;
   max-width: 500px;
   min-width: 430px;
@@ -60,7 +61,7 @@ export default {
   z-index: 100;
 }
 
-.cont_img_pic {
+.cont-img-pic {
   height: 80vh;
   transform: translateX(0%) translateY(20%);
 }

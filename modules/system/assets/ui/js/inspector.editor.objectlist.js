@@ -1,114 +1,136 @@
 /*
  * Inspector object list editor class.
  */
-+function ($) {
++(function ($) {
     "use strict";
 
     var Base = $.oc.inspector.propertyEditors.base,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
-    var ObjectListEditor = function (inspector, propertyDefinition, containerCell, group) {
-        this.currentRowInspector = null
-        this.popup = null
+    var ObjectListEditor = function (
+        inspector,
+        propertyDefinition,
+        containerCell,
+        group
+    ) {
+        this.currentRowInspector = null;
+        this.popup = null;
 
         if (propertyDefinition.titleProperty === undefined) {
-            throw new Error('The titleProperty property should be specified in the objectList editor configuration. Property: ' + propertyDefinition.property)
+            throw new Error(
+                "The titleProperty property should be specified in the objectList editor configuration. Property: " +
+                    propertyDefinition.property
+            );
         }
 
         if (propertyDefinition.itemProperties === undefined) {
-            throw new Error('The itemProperties property should be specified in the objectList editor configuration. Property: ' + propertyDefinition.property)
+            throw new Error(
+                "The itemProperties property should be specified in the objectList editor configuration. Property: " +
+                    propertyDefinition.property
+            );
         }
 
-        Base.call(this, inspector, propertyDefinition, containerCell, group)
-    }
+        Base.call(this, inspector, propertyDefinition, containerCell, group);
+    };
 
-    ObjectListEditor.prototype = Object.create(BaseProto)
-    ObjectListEditor.prototype.constructor = Base
+    ObjectListEditor.prototype = Object.create(BaseProto);
+    ObjectListEditor.prototype.constructor = Base;
 
     ObjectListEditor.prototype.init = function () {
         if (this.isKeyValueMode()) {
-            var keyProperty = this.getKeyProperty()
+            var keyProperty = this.getKeyProperty();
 
             if (!keyProperty) {
-                throw new Error('Object list key property ' + this.propertyDefinition.keyProperty
-                    + ' is not defined in itemProperties. Property: ' + this.propertyDefinition.property)
+                throw new Error(
+                    "Object list key property " +
+                        this.propertyDefinition.keyProperty +
+                        " is not defined in itemProperties. Property: " +
+                        this.propertyDefinition.property
+                );
             }
         }
 
-        BaseProto.init.call(this)
-    }
+        BaseProto.init.call(this);
+    };
 
     ObjectListEditor.prototype.dispose = function () {
-        this.unregisterHandlers()
-        this.removeControls()
+        this.unregisterHandlers();
+        this.removeControls();
 
-        this.currentRowInspector = null
-        this.popup = null
+        this.currentRowInspector = null;
+        this.popup = null;
 
-        BaseProto.dispose.call(this)
-    }
+        BaseProto.dispose.call(this);
+    };
 
     ObjectListEditor.prototype.supportsExternalParameterEditor = function () {
-        return false
-    }
+        return false;
+    };
 
     //
     // Building
     //
 
     ObjectListEditor.prototype.build = function () {
-        var link = document.createElement('a')
+        var link = document.createElement("a");
 
-        $.oc.foundation.element.addClass(link, 'trigger')
-        link.setAttribute('href', '#')
-        this.setLinkText(link)
+        $.oc.foundation.element.addClass(link, "trigger");
+        link.setAttribute("href", "#");
+        this.setLinkText(link);
 
-        $.oc.foundation.element.addClass(this.containerCell, 'trigger-cell')
+        $.oc.foundation.element.addClass(this.containerCell, "trigger-cell");
 
-        this.containerCell.appendChild(link)
-    }
+        this.containerCell.appendChild(link);
+    };
 
     ObjectListEditor.prototype.setLinkText = function (link, value) {
-        var value = value !== undefined && value !== null ? value
-                : this.inspector.getPropertyValue(this.propertyDefinition.property)
+        var value =
+            value !== undefined && value !== null
+                ? value
+                : this.inspector.getPropertyValue(
+                      this.propertyDefinition.property
+                  );
 
         if (value === null) {
-            value = undefined
+            value = undefined;
         }
 
         if (value === undefined) {
-            var placeholder = this.propertyDefinition.placeholder
+            var placeholder = this.propertyDefinition.placeholder;
 
             if (placeholder !== undefined) {
-                $.oc.foundation.element.addClass(link, 'placeholder')
-                link.textContent = placeholder
+                $.oc.foundation.element.addClass(link, "placeholder");
+                link.textContent = placeholder;
+            } else {
+                link.textContent = "Items: 0";
             }
-            else {
-                link.textContent = 'Items: 0'
-            }
-        }
-        else {
-            var itemCount = 0
+        } else {
+            var itemCount = 0;
 
             if (!this.isKeyValueMode()) {
                 if (value.length === undefined) {
-                    throw new Error('Object list value should be an array. Property: ' + this.propertyDefinition.property)
+                    throw new Error(
+                        "Object list value should be an array. Property: " +
+                            this.propertyDefinition.property
+                    );
                 }
 
-                itemCount = value.length
-            }
-            else {
-                if (typeof value !== 'object') {
-                    throw new Error('Object list value should be an object. Property: ' + this.propertyDefinition.property)
+                itemCount = value.length;
+            } else {
+                if (typeof value !== "object") {
+                    throw new Error(
+                        "Object list value should be an object. Property: " +
+                            this.propertyDefinition.property
+                    );
                 }
 
-                itemCount = this.getValueKeys(value).length
+                itemCount = this.getValueKeys(value).length;
             }
 
-            $.oc.foundation.element.removeClass(link, 'placeholder')
-            link.textContent = 'Items: ' + itemCount
+            $.oc.foundation.element.removeClass(link, "placeholder");
+            link.textContent = "Items: " + itemCount;
         }
-    }
+    };
 
     ObjectListEditor.prototype.getPopupContent = function () {
         return '<form>                                                                                  \
@@ -175,85 +197,93 @@
                     <button type="submit" class="btn btn-primary">OK</button>                           \
                     <button type="button" class="btn btn-default" data-dismiss="popup">Cancel</button>  \
                 </div>                                                                                  \
-                </form>'
-    }
+                </form>';
+    };
 
     ObjectListEditor.prototype.buildPopupContents = function (popup) {
-        this.buildItemsTable(popup)
-    }
+        this.buildItemsTable(popup);
+    };
 
     ObjectListEditor.prototype.buildItemsTable = function (popup) {
-        var table = popup.querySelector('table'),
-            tbody = document.createElement('tbody'),
-            items = this.inspector.getPropertyValue(this.propertyDefinition.property),
-            titleProperty = this.propertyDefinition.titleProperty
+        var table = popup.querySelector("table"),
+            tbody = document.createElement("tbody"),
+            items = this.inspector.getPropertyValue(
+                this.propertyDefinition.property
+            ),
+            titleProperty = this.propertyDefinition.titleProperty;
 
         if (items === undefined || this.getValueKeys(items).length === 0) {
-            var row = this.buildEmptyRow()
+            var row = this.buildEmptyRow();
 
-            tbody.appendChild(row)
-        }
-        else {
-            var firstRow = undefined
+            tbody.appendChild(row);
+        } else {
+            var firstRow = undefined;
 
             for (var key in items) {
                 var item = items[key],
                     itemInspectorValue = this.addKeyProperty(key, item),
                     itemText = item[titleProperty],
-                    row = this.buildTableRow(itemText, 'rowlink')
+                    row = this.buildTableRow(itemText, "rowlink");
 
-                row.setAttribute('data-inspector-values', JSON.stringify(itemInspectorValue))
-                tbody.appendChild(row)
+                row.setAttribute(
+                    "data-inspector-values",
+                    JSON.stringify(itemInspectorValue)
+                );
+                tbody.appendChild(row);
 
                 if (firstRow === undefined) {
-                    firstRow = row
+                    firstRow = row;
                 }
             }
         }
 
-        table.appendChild(tbody)
+        table.appendChild(tbody);
 
         if (firstRow !== undefined) {
-            this.selectRow(firstRow, true)
+            this.selectRow(firstRow, true);
         }
 
-        this.updateScrollpads()
-    }
+        this.updateScrollpads();
+    };
 
     ObjectListEditor.prototype.buildEmptyRow = function () {
-        return this.buildTableRow('No items found', 'no-data', 'nolink')
-    }
+        return this.buildTableRow("No items found", "no-data", "nolink");
+    };
 
     ObjectListEditor.prototype.removeEmptyRow = function () {
         var tbody = this.getTableBody(),
-            row = tbody.querySelector('tr.no-data')
+            row = tbody.querySelector("tr.no-data");
 
         if (row) {
-            tbody.removeChild(row)
+            tbody.removeChild(row);
         }
-    }
+    };
 
-    ObjectListEditor.prototype.buildTableRow = function (text, rowClass, cellClass) {
-        var row = document.createElement('tr'),
-            cell = document.createElement('td')
+    ObjectListEditor.prototype.buildTableRow = function (
+        text,
+        rowClass,
+        cellClass
+    ) {
+        var row = document.createElement("tr"),
+            cell = document.createElement("td");
 
-        cell.textContent = text
+        cell.textContent = text;
 
         if (rowClass !== undefined) {
-            $.oc.foundation.element.addClass(row, rowClass)
+            $.oc.foundation.element.addClass(row, rowClass);
         }
 
         if (cellClass !== undefined) {
-            $.oc.foundation.element.addClass(cell, cellClass)
+            $.oc.foundation.element.addClass(cell, cellClass);
         }
 
-        row.appendChild(cell)
-        return row
-    }
+        row.appendChild(cell);
+        return row;
+    };
 
     ObjectListEditor.prototype.updateScrollpads = function () {
-        $('.control-scrollpad', this.popup).scrollpad('update')
-    }
+        $(".control-scrollpad", this.popup).scrollpad("update");
+    };
 
     //
     // Built-in Inspector management
@@ -262,39 +292,42 @@
     ObjectListEditor.prototype.selectRow = function (row, forceSelect) {
         var tbody = row.parentNode,
             inspectorContainer = this.getInspectorContainer(),
-            selectedRow = this.getSelectedRow()
+            selectedRow = this.getSelectedRow();
 
         if (selectedRow === row && !forceSelect) {
-            return
+            return;
         }
 
         if (selectedRow) {
             if (!this.validateKeyValue()) {
-                return
+                return;
             }
 
             if (this.currentRowInspector) {
                 if (!this.currentRowInspector.validate()) {
-                    return
+                    return;
                 }
             }
 
-            this.applyDataToRow(selectedRow)
-            $.oc.foundation.element.removeClass(selectedRow, 'active')
+            this.applyDataToRow(selectedRow);
+            $.oc.foundation.element.removeClass(selectedRow, "active");
         }
 
-        this.disposeInspector()
+        this.disposeInspector();
 
-        $.oc.foundation.element.addClass(row, 'active')
+        $.oc.foundation.element.addClass(row, "active");
 
-        this.createInspectorForRow(row, inspectorContainer)
-    }
+        this.createInspectorForRow(row, inspectorContainer);
+    };
 
-    ObjectListEditor.prototype.createInspectorForRow = function (row, inspectorContainer) {
-        var dataStr = row.getAttribute('data-inspector-values')
+    ObjectListEditor.prototype.createInspectorForRow = function (
+        row,
+        inspectorContainer
+    ) {
+        var dataStr = row.getAttribute("data-inspector-values");
 
-        if (dataStr === undefined || typeof dataStr !== 'string') {
-            throw new Error('Values not found for the selected row.')
+        if (dataStr === undefined || typeof dataStr !== "string") {
+            throw new Error("Values not found for the selected row.");
         }
 
         var properties = this.propertyDefinition.itemProperties,
@@ -302,8 +335,8 @@
             options = {
                 enableExternalParameterEditor: false,
                 onChange: this.proxy(this.onInspectorDataChange),
-                inspectorClass: this.inspector.options.inspectorClass
-        }
+                inspectorClass: this.inspector.options.inspectorClass,
+            };
 
         this.currentRowInspector = new $.oc.inspector.surface(
             inspectorContainer,
@@ -311,298 +344,333 @@
             values,
             $.oc.inspector.helpers.generateElementUniqueId(inspectorContainer),
             options
-        )
-    }
+        );
+    };
 
     ObjectListEditor.prototype.disposeInspector = function () {
-        $.oc.foundation.controlUtils.disposeControls(this.popup.querySelector('[data-inspector-container]'))
-        this.currentRowInspector = null
-    }
+        $.oc.foundation.controlUtils.disposeControls(
+            this.popup.querySelector("[data-inspector-container]")
+        );
+        this.currentRowInspector = null;
+    };
 
     ObjectListEditor.prototype.applyDataToRow = function (row) {
         if (this.currentRowInspector === null) {
-            return
+            return;
         }
 
-        var data = this.currentRowInspector.getValues()
-        row.setAttribute('data-inspector-values', JSON.stringify(data))
-    }
+        var data = this.currentRowInspector.getValues();
+        row.setAttribute("data-inspector-values", JSON.stringify(data));
+    };
 
     ObjectListEditor.prototype.updateRowText = function (property, value) {
-        var selectedRow = this.getSelectedRow()
-        
+        var selectedRow = this.getSelectedRow();
+
         if (!selectedRow) {
-            throw new Exception('A row is not found for the updated data')
+            throw new Exception("A row is not found for the updated data");
         }
 
         if (property !== this.propertyDefinition.titleProperty) {
-            return
+            return;
         }
 
-        value = $.trim(value)
+        value = $.trim(value);
 
         if (value.length === 0) {
-            value = '[No title]'
-            $.oc.foundation.element.addClass(selectedRow, 'disabled')
-        }
-        else {
-            $.oc.foundation.element.removeClass(selectedRow, 'disabled')
+            value = "[No title]";
+            $.oc.foundation.element.addClass(selectedRow, "disabled");
+        } else {
+            $.oc.foundation.element.removeClass(selectedRow, "disabled");
         }
 
-        selectedRow.firstChild.textContent = value
-    }
+        selectedRow.firstChild.textContent = value;
+    };
 
     ObjectListEditor.prototype.getSelectedRow = function () {
         if (!this.popup) {
-            throw new Error('Trying to get selected row without a popup reference.')
+            throw new Error(
+                "Trying to get selected row without a popup reference."
+            );
         }
 
-        var rows = this.getTableBody().children
+        var rows = this.getTableBody().children;
 
         for (var i = 0, len = rows.length; i < len; i++) {
-            if ($.oc.foundation.element.hasClass(rows[i], 'active')) {
-                return rows[i]
+            if ($.oc.foundation.element.hasClass(rows[i], "active")) {
+                return rows[i];
             }
         }
 
-        return null
-    }
+        return null;
+    };
 
     ObjectListEditor.prototype.createItem = function () {
-        var selectedRow = this.getSelectedRow()
+        var selectedRow = this.getSelectedRow();
 
         if (selectedRow) {
             if (!this.validateKeyValue()) {
-                return
+                return;
             }
 
             if (this.currentRowInspector) {
                 if (!this.currentRowInspector.validate()) {
-                    return
+                    return;
                 }
             }
 
-            this.applyDataToRow(selectedRow)
-            $.oc.foundation.element.removeClass(selectedRow, 'active')
+            this.applyDataToRow(selectedRow);
+            $.oc.foundation.element.removeClass(selectedRow, "active");
         }
 
-        this.disposeInspector()
+        this.disposeInspector();
 
-        var title = 'New item',
-            row = this.buildTableRow(title, 'rowlink active'),
+        var title = "New item",
+            row = this.buildTableRow(title, "rowlink active"),
             tbody = this.getTableBody(),
-            data = {}
+            data = {};
 
-        data[this.propertyDefinition.titleProperty] = title
+        data[this.propertyDefinition.titleProperty] = title;
 
-        row.setAttribute('data-inspector-values', JSON.stringify(data))
-        tbody.appendChild(row)
+        row.setAttribute("data-inspector-values", JSON.stringify(data));
+        tbody.appendChild(row);
 
-        this.selectRow(row, true)
+        this.selectRow(row, true);
 
-        this.removeEmptyRow()
-        this.updateScrollpads()
-    }
+        this.removeEmptyRow();
+        this.updateScrollpads();
+    };
 
     ObjectListEditor.prototype.deleteItem = function () {
-        var selectedRow = this.getSelectedRow()
+        var selectedRow = this.getSelectedRow();
 
         if (!selectedRow) {
-            return
+            return;
         }
 
         var nextRow = selectedRow.nextElementSibling,
             prevRow = selectedRow.previousElementSibling,
-            tbody = this.getTableBody()
+            tbody = this.getTableBody();
 
-        this.disposeInspector()
-        tbody.removeChild(selectedRow)
+        this.disposeInspector();
+        tbody.removeChild(selectedRow);
 
-        var newSelectedRow = nextRow ? nextRow : prevRow
+        var newSelectedRow = nextRow ? nextRow : prevRow;
 
         if (newSelectedRow) {
-            this.selectRow(newSelectedRow)
-        }
-        else {
-            tbody.appendChild(this.buildEmptyRow())
+            this.selectRow(newSelectedRow);
+        } else {
+            tbody.appendChild(this.buildEmptyRow());
         }
 
-        this.updateScrollpads()
-    }
+        this.updateScrollpads();
+    };
 
     ObjectListEditor.prototype.applyDataToParentInspector = function () {
         var selectedRow = this.getSelectedRow(),
             tbody = this.getTableBody(),
-            dataRows = tbody.querySelectorAll('tr[data-inspector-values]'),
+            dataRows = tbody.querySelectorAll("tr[data-inspector-values]"),
             link = this.getLink(),
-            result = this.getEmptyValue()
+            result = this.getEmptyValue();
 
         if (selectedRow) {
             if (!this.validateKeyValue()) {
-                return
+                return;
             }
 
             if (this.currentRowInspector) {
                 if (!this.currentRowInspector.validate()) {
-                    return
+                    return;
                 }
             }
 
-            this.applyDataToRow(selectedRow)
+            this.applyDataToRow(selectedRow);
         }
 
         for (var i = 0, len = dataRows.length; i < len; i++) {
             var dataRow = dataRows[i],
-                rowData = JSON.parse(dataRow.getAttribute('data-inspector-values'))
+                rowData = JSON.parse(
+                    dataRow.getAttribute("data-inspector-values")
+                );
 
             if (!this.isKeyValueMode()) {
-                result.push(rowData)
-            }
-            else {
-                var rowKey = rowData[this.propertyDefinition.keyProperty]
+                result.push(rowData);
+            } else {
+                var rowKey = rowData[this.propertyDefinition.keyProperty];
 
-                result[rowKey] = this.removeKeyProperty(rowData)
+                result[rowKey] = this.removeKeyProperty(rowData);
             }
         }
 
-        this.inspector.setPropertyValue(this.propertyDefinition.property, result)
-        this.setLinkText(link, result)
+        this.inspector.setPropertyValue(
+            this.propertyDefinition.property,
+            result
+        );
+        this.setLinkText(link, result);
 
-        $(link).popup('hide')
-        return false
-    }
+        $(link).popup("hide");
+        return false;
+    };
 
     ObjectListEditor.prototype.validateKeyValue = function () {
         if (!this.isKeyValueMode()) {
-            return true
+            return true;
         }
 
         if (this.currentRowInspector === null) {
-            return true
+            return true;
         }
 
         var data = this.currentRowInspector.getValues(),
-            keyProperty = this.propertyDefinition.keyProperty
+            keyProperty = this.propertyDefinition.keyProperty;
 
         if (data[keyProperty] === undefined) {
-            throw new Error('Key property ' + keyProperty + ' is not found in the Inspector data. Property: ' + this.propertyDefinition.property)
+            throw new Error(
+                "Key property " +
+                    keyProperty +
+                    " is not found in the Inspector data. Property: " +
+                    this.propertyDefinition.property
+            );
         }
 
         var keyPropertyValue = data[keyProperty],
-            keyPropertyTitle = this.getKeyProperty().title
+            keyPropertyTitle = this.getKeyProperty().title;
 
-        if (typeof keyPropertyValue !== 'string') {
-            throw new Error('Key property (' + keyProperty + ') value should be a string. Property: ' + this.propertyDefinition.property)
+        if (typeof keyPropertyValue !== "string") {
+            throw new Error(
+                "Key property (" +
+                    keyProperty +
+                    ") value should be a string. Property: " +
+                    this.propertyDefinition.property
+            );
         }
 
         if ($.trim(keyPropertyValue).length === 0) {
-            $.oc.flashMsg({text: 'The value of key property ' + keyPropertyTitle + ' cannot be empty.', 'class': 'error', 'interval': 3})
-            return false
+            $.oc.flashMsg({
+                text:
+                    "The value of key property " +
+                    keyPropertyTitle +
+                    " cannot be empty.",
+                class: "error",
+                interval: 3,
+            });
+            return false;
         }
 
         var selectedRow = this.getSelectedRow(),
             tbody = this.getTableBody(),
-            dataRows = tbody.querySelectorAll('tr[data-inspector-values]')
+            dataRows = tbody.querySelectorAll("tr[data-inspector-values]");
 
         for (var i = 0, len = dataRows.length; i < len; i++) {
             var dataRow = dataRows[i],
-                rowData = JSON.parse(dataRow.getAttribute('data-inspector-values'))
+                rowData = JSON.parse(
+                    dataRow.getAttribute("data-inspector-values")
+                );
 
             if (selectedRow == dataRow) {
-                continue
+                continue;
             }
 
             if (rowData[keyProperty] == keyPropertyValue) {
-                $.oc.flashMsg({text: 'The value of key property ' + keyPropertyTitle + ' should be unique.', 'class': 'error', 'interval': 3})
-                return false
+                $.oc.flashMsg({
+                    text:
+                        "The value of key property " +
+                        keyPropertyTitle +
+                        " should be unique.",
+                    class: "error",
+                    interval: 3,
+                });
+                return false;
             }
         }
 
-        return true
-    }
+        return true;
+    };
 
     //
     // Helpers
     //
 
     ObjectListEditor.prototype.getLink = function () {
-        return this.containerCell.querySelector('a.trigger')
-    }
+        return this.containerCell.querySelector("a.trigger");
+    };
 
     ObjectListEditor.prototype.getPopupFormElement = function () {
-        var form = this.popup.querySelector('form')
+        var form = this.popup.querySelector("form");
 
         if (!form) {
-            this.throwError('Cannot find form element in the popup window.')
+            this.throwError("Cannot find form element in the popup window.");
         }
 
-        return form
-    }
+        return form;
+    };
 
     ObjectListEditor.prototype.getInspectorContainer = function () {
-        return this.popup.querySelector('div[data-inspector-container]')
-    }
+        return this.popup.querySelector("div[data-inspector-container]");
+    };
 
     ObjectListEditor.prototype.getTableBody = function () {
-        return this.popup.querySelector('table.inspector-table-list tbody')
-    }
+        return this.popup.querySelector("table.inspector-table-list tbody");
+    };
 
     ObjectListEditor.prototype.isKeyValueMode = function () {
-        return this.propertyDefinition.keyProperty !== undefined
-    }
+        return this.propertyDefinition.keyProperty !== undefined;
+    };
 
     ObjectListEditor.prototype.getKeyProperty = function () {
-        for (var i = 0, len = this.propertyDefinition.itemProperties.length; i < len; i++) {
-            var property = this.propertyDefinition.itemProperties[i]
+        for (
+            var i = 0, len = this.propertyDefinition.itemProperties.length;
+            i < len;
+            i++
+        ) {
+            var property = this.propertyDefinition.itemProperties[i];
 
             if (property.property == this.propertyDefinition.keyProperty) {
-                return property
+                return property;
             }
         }
-    }
+    };
 
     ObjectListEditor.prototype.getValueKeys = function (value) {
-        var result = []
+        var result = [];
 
         for (var key in value) {
-            result.push(key)
+            result.push(key);
         }
 
-        return result
-    }
+        return result;
+    };
 
     ObjectListEditor.prototype.addKeyProperty = function (key, value) {
         if (!this.isKeyValueMode()) {
-            return value
+            return value;
         }
 
-        value[this.propertyDefinition.keyProperty] = key
+        value[this.propertyDefinition.keyProperty] = key;
 
-        return value
-    }
+        return value;
+    };
 
     ObjectListEditor.prototype.removeKeyProperty = function (value) {
         if (!this.isKeyValueMode()) {
-            return value
+            return value;
         }
 
-        var result = value
+        var result = value;
 
         if (result[this.propertyDefinition.keyProperty] !== undefined) {
-            delete result[this.propertyDefinition.keyProperty]
+            delete result[this.propertyDefinition.keyProperty];
         }
 
-        return result
-    }
+        return result;
+    };
 
     ObjectListEditor.prototype.getEmptyValue = function () {
         if (this.isKeyValueMode()) {
-            return {}
+            return {};
+        } else {
+            return [];
         }
-        else {
-            return []
-        }
-    }
+    };
 
     //
     // Event handlers
@@ -610,86 +678,100 @@
 
     ObjectListEditor.prototype.registerHandlers = function () {
         var link = this.getLink(),
-            $link = $(link)
+            $link = $(link);
 
-        link.addEventListener('click', this.proxy(this.onTriggerClick))
-        $link.on('shown.oc.popup', this.proxy(this.onPopupShown))
-        $link.on('hidden.oc.popup', this.proxy(this.onPopupHidden))
-    }
+        link.addEventListener("click", this.proxy(this.onTriggerClick));
+        $link.on("shown.oc.popup", this.proxy(this.onPopupShown));
+        $link.on("hidden.oc.popup", this.proxy(this.onPopupHidden));
+    };
 
     ObjectListEditor.prototype.unregisterHandlers = function () {
         var link = this.getLink(),
-            $link = $(link)
+            $link = $(link);
 
-        link.removeEventListener('click', this.proxy(this.onTriggerClick))
-        $link.off('shown.oc.popup', this.proxy(this.onPopupShown))
-        $link.off('hidden.oc.popup', this.proxy(this.onPopupHidden))
-    }
+        link.removeEventListener("click", this.proxy(this.onTriggerClick));
+        $link.off("shown.oc.popup", this.proxy(this.onPopupShown));
+        $link.off("hidden.oc.popup", this.proxy(this.onPopupHidden));
+    };
 
     ObjectListEditor.prototype.onTriggerClick = function (ev) {
-        $.oc.foundation.event.stop(ev)
+        $.oc.foundation.event.stop(ev);
 
-        var content = this.getPopupContent()
+        var content = this.getPopupContent();
 
-        content = content.replace('{{property}}', this.propertyDefinition.title)
+        content = content.replace(
+            "{{property}}",
+            this.propertyDefinition.title
+        );
 
         $(ev.target).popup({
-            content: content
-        })
+            content: content,
+        });
 
-        return false
-    }
+        return false;
+    };
 
     ObjectListEditor.prototype.onPopupShown = function (ev, link, popup) {
-        $(popup).on('submit.inspector', 'form', this.proxy(this.onSubmit))
-        $(popup).on('click', 'tr.rowlink', this.proxy(this.onRowClick))
-        $(popup).on('click.inspector', '[data-cmd]', this.proxy(this.onCommand))
-        
-        this.popup = popup.get(0)
+        $(popup).on("submit.inspector", "form", this.proxy(this.onSubmit));
+        $(popup).on("click", "tr.rowlink", this.proxy(this.onRowClick));
+        $(popup).on(
+            "click.inspector",
+            "[data-cmd]",
+            this.proxy(this.onCommand)
+        );
 
-        this.buildPopupContents(this.popup)
-        this.getRootSurface().popupDisplayed()
-    }
+        this.popup = popup.get(0);
+
+        this.buildPopupContents(this.popup);
+        this.getRootSurface().popupDisplayed();
+    };
 
     ObjectListEditor.prototype.onPopupHidden = function (ev, link, popup) {
-        $(popup).off('.inspector', this.proxy(this.onSubmit))
-        $(popup).off('click', 'tr.rowlink', this.proxy(this.onRowClick))
-        $(popup).off('click.inspector', '[data-cmd]', this.proxy(this.onCommand))
+        $(popup).off(".inspector", this.proxy(this.onSubmit));
+        $(popup).off("click", "tr.rowlink", this.proxy(this.onRowClick));
+        $(popup).off(
+            "click.inspector",
+            "[data-cmd]",
+            this.proxy(this.onCommand)
+        );
 
-        this.disposeInspector()
-        $.oc.foundation.controlUtils.disposeControls(this.popup)
+        this.disposeInspector();
+        $.oc.foundation.controlUtils.disposeControls(this.popup);
 
-        this.popup = null
-        this.getRootSurface().popupHidden()
-    }
+        this.popup = null;
+        this.getRootSurface().popupHidden();
+    };
 
     ObjectListEditor.prototype.onSubmit = function (ev) {
-        this.applyDataToParentInspector()
+        this.applyDataToParentInspector();
 
-        ev.preventDefault()
-        return false
-    }
+        ev.preventDefault();
+        return false;
+    };
 
     ObjectListEditor.prototype.onRowClick = function (ev) {
-        this.selectRow(ev.currentTarget)
-    }
+        this.selectRow(ev.currentTarget);
+    };
 
-    ObjectListEditor.prototype.onInspectorDataChange = function (property, value) {
-        this.updateRowText(property, value)
-    }
+    ObjectListEditor.prototype.onInspectorDataChange = function (
+        property,
+        value
+    ) {
+        this.updateRowText(property, value);
+    };
 
     ObjectListEditor.prototype.onCommand = function (ev) {
-        var command = ev.currentTarget.getAttribute('data-cmd')
+        var command = ev.currentTarget.getAttribute("data-cmd");
 
         switch (command) {
-            case 'create-item' :
-                this.createItem()
-            break;
-            case 'delete-item' :
-                this.deleteItem()
-            break;
+            case "create-item":
+                this.createItem();
+                break;
+            case "delete-item":
+                this.deleteItem();
+                break;
         }
-    }
+    };
 
     //
     // Disposing
@@ -697,9 +779,9 @@
 
     ObjectListEditor.prototype.removeControls = function () {
         if (this.popup) {
-            this.disposeInspector(this.popup)
+            this.disposeInspector(this.popup);
         }
-    }
+    };
 
-    $.oc.inspector.propertyEditors.objectList = ObjectListEditor
-}(window.jQuery);
+    $.oc.inspector.propertyEditors.objectList = ObjectListEditor;
+})(window.jQuery);

@@ -1,23 +1,21 @@
 /*
  * Scripts for the Export controller behavior.
  */
-+function ($) {
++(function ($) {
     "use strict";
 
     var ExportBehavior = function () {
-
         this.processExport = function () {
-            var $form = $('#exportColumns').closest('form')
+            var $form = $("#exportColumns").closest("form");
 
-            $form.request('onExport', {
+            $form.request("onExport", {
                 success: function (data) {
-                    $('#exportContainer').html(data.result)
-                    $(document).trigger('render')
-                }
-            })
-        }
+                    $("#exportContainer").html(data.result);
+                    $(document).trigger("render");
+                },
+            });
+        };
+    };
 
-    }
-
-    $.oc.exportBehavior = new ExportBehavior;
-}(window.jQuery);
+    $.oc.exportBehavior = new ExportBehavior();
+})(window.jQuery);

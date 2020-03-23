@@ -35,7 +35,7 @@
                 .icon(@circle);
                 font-size: 6px;
                 position: absolute;
-                left: -18px; 
+                left: -18px;
                 top: 11px;
             }
 
@@ -47,7 +47,9 @@
                 &:hover {
                     color: @color-list-hover-bg;
                 }
-                &:before { .icon(@bars); }
+                &:before {
+                    .icon(@bars);
+                }
             }
             > span {
                 color: @color-list-text;
@@ -62,9 +64,12 @@
             width: auto !important; // Prevent browser scrollbars
             height: auto !important;
             > div.record {
-                .opacity(.5);
+                .opacity(0.5);
                 background: @color-list-hover-bg !important;
-                > a.move:before, > span { color: white; }
+                > a.move:before,
+                > span {
+                    color: white;
+                }
 
                 &:before {
                     display: none;
@@ -88,6 +93,5 @@
                 z-index: 2000;
             }
         }
-
     }
 }

@@ -1,8 +1,11 @@
-ace.define("ace/theme/sqlserver",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
-
-exports.isDark = false;
-exports.cssClass = "ace-sqlserver";
-exports.cssText = ".ace-sqlserver .ace_gutter {\
+ace.define(
+    "ace/theme/sqlserver",
+    ["require", "exports", "module", "ace/lib/dom"],
+    function (require, exports, module) {
+        exports.isDark = false;
+        exports.cssClass = "ace-sqlserver";
+        exports.cssText =
+            '.ace-sqlserver .ace_gutter {\
 background: #ebebeb;\
 color: #333;\
 overflow: hidden;\
@@ -129,10 +132,11 @@ color: #FF0000;\
 color: #994409;\
 }\
 .ace-sqlserver .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;\
 }\
-";
+';
 
-var dom = require("../lib/dom");
-dom.importCssString(exports.cssText, exports.cssClass);
-});
+        var dom = require("../lib/dom");
+        dom.importCssString(exports.cssText, exports.cssClass);
+    }
+);

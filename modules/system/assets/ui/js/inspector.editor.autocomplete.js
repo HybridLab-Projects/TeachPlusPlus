@@ -3,255 +3,289 @@
  *
  * Depends on october.autocomplete.js
  */
-+function ($) {
++(function ($) {
     "use strict";
 
     var Base = $.oc.inspector.propertyEditors.string,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
-    var AutocompleteEditor = function (inspector, propertyDefinition, containerCell, group) {
-        this.autoUpdateTimeout = null
+    var AutocompleteEditor = function (
+        inspector,
+        propertyDefinition,
+        containerCell,
+        group
+    ) {
+        this.autoUpdateTimeout = null;
 
-        Base.call(this, inspector, propertyDefinition, containerCell, group)
-    }
+        Base.call(this, inspector, propertyDefinition, containerCell, group);
+    };
 
-    AutocompleteEditor.prototype = Object.create(BaseProto)
-    AutocompleteEditor.prototype.constructor = Base
+    AutocompleteEditor.prototype = Object.create(BaseProto);
+    AutocompleteEditor.prototype.constructor = Base;
 
     AutocompleteEditor.prototype.dispose = function () {
-        this.clearAutoUpdateTimeout()
-        this.removeAutocomplete()
+        this.clearAutoUpdateTimeout();
+        this.removeAutocomplete();
 
-        BaseProto.dispose.call(this)
-    }
+        BaseProto.dispose.call(this);
+    };
 
     AutocompleteEditor.prototype.build = function () {
-        var container = document.createElement('div'),
-            editor = document.createElement('input'),
-            placeholder = this.propertyDefinition.placeholder !== undefined ? this.propertyDefinition.placeholder : '',
-            value = this.inspector.getPropertyValue(this.propertyDefinition.property)
+        var container = document.createElement("div"),
+            editor = document.createElement("input"),
+            placeholder =
+                this.propertyDefinition.placeholder !== undefined
+                    ? this.propertyDefinition.placeholder
+                    : "",
+            value = this.inspector.getPropertyValue(
+                this.propertyDefinition.property
+            );
 
-        editor.setAttribute('type', 'text')
-        editor.setAttribute('class', 'string-editor')
-        editor.setAttribute('placeholder', placeholder)
+        editor.setAttribute("type", "text");
+        editor.setAttribute("class", "string-editor");
+        editor.setAttribute("placeholder", placeholder);
 
-        container.setAttribute('class', 'autocomplete-container')
+        container.setAttribute("class", "autocomplete-container");
 
         if (value === undefined) {
-            value = this.propertyDefinition.default
+            value = this.propertyDefinition.default;
         }
 
         if (value === undefined) {
-            value = ''
+            value = "";
         }
 
-        editor.value = value
+        editor.value = value;
 
-        $.oc.foundation.element.addClass(this.containerCell, 'text autocomplete')
+        $.oc.foundation.element.addClass(
+            this.containerCell,
+            "text autocomplete"
+        );
 
-        container.appendChild(editor)
-        this.containerCell.appendChild(container)
+        container.appendChild(editor);
+        this.containerCell.appendChild(container);
 
         if (this.propertyDefinition.items !== undefined) {
-            this.buildAutoComplete(this.propertyDefinition.items)
+            this.buildAutoComplete(this.propertyDefinition.items);
+        } else {
+            this.loadDynamicItems();
         }
-        else {
-            this.loadDynamicItems()
-        }
-    }
+    };
 
     AutocompleteEditor.prototype.buildAutoComplete = function (items) {
-        var input = this.getInput()
+        var input = this.getInput();
 
         if (items === undefined) {
-            items = []
+            items = [];
         }
 
         var $input = $(input),
-            autocomplete = $input.data('autocomplete')
+            autocomplete = $input.data("autocomplete");
 
         if (!autocomplete) {
             $input.autocomplete({
                 source: this.prepareItems(items),
-                matchWidth: true
-            })
+                matchWidth: true,
+            });
+        } else {
+            autocomplete.source = this.prepareItems(items);
         }
-        else {
-            autocomplete.source = this.prepareItems(items)
-        }
-    }
+    };
 
     AutocompleteEditor.prototype.removeAutocomplete = function () {
-        var input = this.getInput()
+        var input = this.getInput();
 
-        $(input).autocomplete('destroy')
-    }
+        $(input).autocomplete("destroy");
+    };
 
     AutocompleteEditor.prototype.prepareItems = function (items) {
-        var result = {}
+        var result = {};
 
         if ($.isArray(items)) {
             for (var i = 0, len = items.length; i < len; i++) {
-                result[items[i]] = items[i]
+                result[items[i]] = items[i];
             }
-        }
-        else {
-            result = items
+        } else {
+            result = items;
         }
 
-        return result
-    }
+        return result;
+    };
 
     AutocompleteEditor.prototype.supportsExternalParameterEditor = function () {
-        return false
-    }
+        return false;
+    };
 
     AutocompleteEditor.prototype.getContainer = function () {
-        return this.getInput().parentNode
-    }
+        return this.getInput().parentNode;
+    };
 
     AutocompleteEditor.prototype.registerHandlers = function () {
-        BaseProto.registerHandlers.call(this)
+        BaseProto.registerHandlers.call(this);
 
-        $(this.getInput()).on('change', this.proxy(this.onInputKeyUp))
-    }
+        $(this.getInput()).on("change", this.proxy(this.onInputKeyUp));
+    };
 
     AutocompleteEditor.prototype.unregisterHandlers = function () {
-        BaseProto.unregisterHandlers.call(this)
+        BaseProto.unregisterHandlers.call(this);
 
-        $(this.getInput()).off('change', this.proxy(this.onInputKeyUp))
-    }
+        $(this.getInput()).off("change", this.proxy(this.onInputKeyUp));
+    };
 
     AutocompleteEditor.prototype.saveDependencyValues = function () {
-        this.prevDependencyValues = this.getDependencyValues()
-    }
+        this.prevDependencyValues = this.getDependencyValues();
+    };
 
     AutocompleteEditor.prototype.getDependencyValues = function () {
-        var result = ''
+        var result = "";
 
-        for (var i = 0, len = this.propertyDefinition.depends.length; i < len; i++) {
+        for (
+            var i = 0, len = this.propertyDefinition.depends.length;
+            i < len;
+            i++
+        ) {
             var property = this.propertyDefinition.depends[i],
-                value = this.inspector.getPropertyValue(property)
+                value = this.inspector.getPropertyValue(property);
 
             if (value === undefined) {
-                value = '';
+                value = "";
             }
 
-            result += property + ':' + value + '-'
+            result += property + ":" + value + "-";
         }
 
-        return result
-    }
+        return result;
+    };
 
-    AutocompleteEditor.prototype.onInspectorPropertyChanged = function (property, value) {
-        if (!this.propertyDefinition.depends || this.propertyDefinition.depends.indexOf(property) === -1) {
-            return
+    AutocompleteEditor.prototype.onInspectorPropertyChanged = function (
+        property,
+        value
+    ) {
+        if (
+            !this.propertyDefinition.depends ||
+            this.propertyDefinition.depends.indexOf(property) === -1
+        ) {
+            return;
         }
 
-        this.clearAutoUpdateTimeout()
+        this.clearAutoUpdateTimeout();
 
-        if (this.prevDependencyValues === undefined || this.prevDependencyValues != dependencyValues) {
-            this.autoUpdateTimeout = setTimeout(this.proxy(this.loadDynamicItems), 200)
+        if (
+            this.prevDependencyValues === undefined ||
+            this.prevDependencyValues != dependencyValues
+        ) {
+            this.autoUpdateTimeout = setTimeout(
+                this.proxy(this.loadDynamicItems),
+                200
+            );
         }
-    }
+    };
 
     AutocompleteEditor.prototype.clearAutoUpdateTimeout = function () {
         if (this.autoUpdateTimeout !== null) {
-            clearTimeout(this.autoUpdateTimeout)
-            this.autoUpdateTimeout = null
+            clearTimeout(this.autoUpdateTimeout);
+            this.autoUpdateTimeout = null;
         }
-    }
+    };
 
     //
     // Dynamic items
     //
 
     AutocompleteEditor.prototype.showLoadingIndicator = function () {
-        $(this.getContainer()).loadIndicator()
-    }
+        $(this.getContainer()).loadIndicator();
+    };
 
     AutocompleteEditor.prototype.hideLoadingIndicator = function () {
         if (this.isDisposed()) {
-            return
+            return;
         }
 
-        var $container = $(this.getContainer())
+        var $container = $(this.getContainer());
 
-        $container.loadIndicator('hide')
-        $container.loadIndicator('destroy')
+        $container.loadIndicator("hide");
+        $container.loadIndicator("destroy");
 
-        $container.removeClass('loading-indicator-container')
-    }
+        $container.removeClass("loading-indicator-container");
+    };
 
     AutocompleteEditor.prototype.loadDynamicItems = function () {
         if (this.isDisposed()) {
-            return
+            return;
         }
 
-        this.clearAutoUpdateTimeout()
+        this.clearAutoUpdateTimeout();
 
         var container = this.getContainer(),
             data = this.getRootSurface().getValues(),
-            $form = $(container).closest('form')
+            $form = $(container).closest("form");
 
-        $.oc.foundation.element.addClass(container, 'loading-indicator-container size-small')
-        this.showLoadingIndicator()
+        $.oc.foundation.element.addClass(
+            container,
+            "loading-indicator-container size-small"
+        );
+        this.showLoadingIndicator();
 
         if (this.triggerGetItems(data) === false) {
-            return
+            return;
         }
 
-        data['inspectorProperty'] = this.getPropertyPath()
-        data['inspectorClassName'] = this.inspector.options.inspectorClass
+        data["inspectorProperty"] = this.getPropertyPath();
+        data["inspectorClassName"] = this.inspector.options.inspectorClass;
 
-        $form.request('onInspectableGetOptions', {
-            data: data,
-        })
-        .done(this.proxy(this.itemsRequestDone))
-        .always(this.proxy(this.hideLoadingIndicator))
-    }
+        $form
+            .request("onInspectableGetOptions", {
+                data: data,
+            })
+            .done(this.proxy(this.itemsRequestDone))
+            .always(this.proxy(this.hideLoadingIndicator));
+    };
 
     AutocompleteEditor.prototype.triggerGetItems = function (values) {
-        var $inspectable = this.getInspectableElement()
+        var $inspectable = this.getInspectableElement();
         if (!$inspectable) {
-            return true
+            return true;
         }
 
-        var itemsEvent = $.Event('autocompleteitems.oc.inspector')
+        var itemsEvent = $.Event("autocompleteitems.oc.inspector");
 
-        $inspectable.trigger(itemsEvent, [{
-            values: values,
-            callback: this.proxy(this.itemsRequestDone),
-            property: this.inspector.getPropertyPath(this.propertyDefinition.property),
-            propertyDefinition: this.propertyDefinition
-        }])
+        $inspectable.trigger(itemsEvent, [
+            {
+                values: values,
+                callback: this.proxy(this.itemsRequestDone),
+                property: this.inspector.getPropertyPath(
+                    this.propertyDefinition.property
+                ),
+                propertyDefinition: this.propertyDefinition,
+            },
+        ]);
 
         if (itemsEvent.isDefaultPrevented()) {
-            return false
+            return false;
         }
 
-        return true
-    }
+        return true;
+    };
 
     AutocompleteEditor.prototype.itemsRequestDone = function (data) {
         if (this.isDisposed()) {
             // Handle the case when the asynchronous request finishes after
             // the editor is disposed
-            return
+            return;
         }
 
-        this.hideLoadingIndicator()
+        this.hideLoadingIndicator();
 
-        var loadedItems = {}
+        var loadedItems = {};
 
         if (data.options) {
-            for (var i = data.options.length-1; i >= 0; i--) {
-                loadedItems[data.options[i].value] = data.options[i].title
+            for (var i = data.options.length - 1; i >= 0; i--) {
+                loadedItems[data.options[i].value] = data.options[i].title;
             }
         }
 
-        this.buildAutoComplete(loadedItems)
-    }
+        this.buildAutoComplete(loadedItems);
+    };
 
-    $.oc.inspector.propertyEditors.autocomplete = AutocompleteEditor
-}(window.jQuery);
+    $.oc.inspector.propertyEditors.autocomplete = AutocompleteEditor;
+})(window.jQuery);

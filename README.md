@@ -56,10 +56,10 @@ The CMS uses [Laravel](https://laravel.com) as a foundation PHP framework.
 
 You can communicate with us using the following mediums:
 
-* [Follow us on Twitter](https://twitter.com/octobercms) for announcements and updates.
-* [Follow us on Facebook](https://facebook.com/octobercms) for announcements and updates.
-* [Join the Official Forum](https://octobercms.com/forum) to engage with the community.
-* [Join us on Discord](https://octobercms.com/chat) to chat with us.
+-   [Follow us on Twitter](https://twitter.com/octobercms) for announcements and updates.
+-   [Follow us on Facebook](https://facebook.com/octobercms) for announcements and updates.
+-   [Join the Official Forum](https://octobercms.com/forum) to engage with the community.
+-   [Join us on Discord](https://octobercms.com/chat) to chat with us.
 
 ### Premium Support
 
@@ -73,9 +73,9 @@ Before sending or reviewing Pull Requests, be sure to review the [Contributing G
 
 Please follow the following guides and code standards:
 
-* [PSR 4 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
-* [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-* [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
+-   [PSR 4 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
+-   [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
+-   [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
 
 ### Code of Conduct
 

@@ -38,46 +38,41 @@
  * - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
  *
  */
-+function ($) {
++(function ($) {
     "use strict";
-    if ($.oc === undefined) {
-        $.oc = {}
+    if ($.oc === undefined) $.oc = {};
 
-        if ($.oc.foundation === undefined) {
-            $.oc.foundation = {}
+    if ($.oc.foundation === undefined) $.oc.foundation = {};
 
-            $.oc.foundation._proxyCounter = 0
+    $.oc.foundation._proxyCounter = 0;
 
-            var Base = function () {
-                this.proxiedMethods = {}
-            }
-        }
-    }
+    var Base = function () {
+        this.proxiedMethods = {};
+    };
 
     Base.prototype.dispose = function () {
         for (var key in this.proxiedMethods) {
-            this.proxiedMethods[key] = null
+            this.proxiedMethods[key] = null;
         }
 
-        this.proxiedMethods = null
-    }
+        this.proxiedMethods = null;
+    };
 
     /*
      * Creates a proxied method reference or returns an existing proxied method.
      */
     Base.prototype.proxy = function (method) {
         if (method.ocProxyId === undefined) {
-            $.oc.foundation._proxyCounter++
-            method.ocProxyId = $.oc.foundation._proxyCounter
+            $.oc.foundation._proxyCounter++;
+            method.ocProxyId = $.oc.foundation._proxyCounter;
         }
 
-        if (this.proxiedMethods[method.ocProxyId] !== undefined) {
-            return this.proxiedMethods[method.ocProxyId]
+        if (this.proxiedMethods[method.ocProxyId] !== undefined)
+            return this.proxiedMethods[method.ocProxyId];
 
-            this.proxiedMethods[method.ocProxyId] = method.bind(this)
-            return this.proxiedMethods[method.ocProxyId]
-        }
-    }
+        this.proxiedMethods[method.ocProxyId] = method.bind(this);
+        return this.proxiedMethods[method.ocProxyId];
+    };
 
     $.oc.foundation.base = Base;
-}(window.jQuery);
+})(window.jQuery);

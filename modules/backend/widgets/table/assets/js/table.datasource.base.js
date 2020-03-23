@@ -1,34 +1,33 @@
 /*
  * Base class for the table data sources.
  */
-+function ($) {
++(function ($) {
     "use strict";
 
     // DATASOURCE NAMESPACES
     // ============================
 
-    if ($.oc.table === undefined) {
-        throw new Error("The $.oc.table namespace is not defined. Make sure that the table.js script is loaded.");
-    }
+    if ($.oc.table === undefined)
+        throw new Error(
+            "The $.oc.table namespace is not defined. Make sure that the table.js script is loaded."
+        );
 
-    if ($.oc.table.datasource === undefined) {
-        $.oc.table.datasource = {}
+    if ($.oc.table.datasource === undefined) $.oc.table.datasource = {};
 
     // CLASS DEFINITION
     // ============================
 
-        var Base = function (tableObj) {
-            //
-            // State properties
-            //
+    var Base = function (tableObj) {
+        //
+        // State properties
+        //
 
-            this.tableObj = tableObj
-        }
-    }
+        this.tableObj = tableObj;
+    };
 
     Base.prototype.dispose = function () {
-        this.tableObj = null
-    }
+        this.tableObj = null;
+    };
 
     /*
      * Fetches records from the underlying data source and
@@ -39,15 +38,15 @@
      * widget options.
      */
     Base.prototype.getRecords = function (offset, count, onSuccess) {
-        onSuccess([])
-    }
+        onSuccess([]);
+    };
 
     /*
      * Identical to getRecords except using a search query.
      */
     Base.prototype.searchRecords = function (query, offset, count, onSuccess) {
-        onSuccess([])
-    }
+        onSuccess([]);
+    };
 
     /*
      * Creates a record with the passed data and returns the updated page records
@@ -62,9 +61,16 @@
      *
      * The onSuccess callback parameters: records, totalCount.
      */
-    Base.prototype.createRecord = function (recordData, placement, relativeToKey, offset, count, onSuccess) {
-        onSuccess([], 0)
-    }
+    Base.prototype.createRecord = function (
+        recordData,
+        placement,
+        relativeToKey,
+        offset,
+        count,
+        onSuccess
+    ) {
+        onSuccess([], 0);
+    };
 
     /*
      * Updates a record with the specified key with the passed data
@@ -72,8 +78,7 @@
      * - key - the record key in the dataset (primary key, etc)
      * - recordData - the record fields.
      */
-    Base.prototype.updateRecord = function (key, recordData) {
-    }
+    Base.prototype.updateRecord = function (key, recordData) {};
 
     /*
      * Deletes a record with the specified key.
@@ -87,9 +92,15 @@
      *
      * The onSuccess callback parameters: records, totalCount.
      */
-    Base.prototype.deleteRecord = function (key, newRecordData, offset, count, onSuccess) {
-        onSuccess([], 0)
-    }
+    Base.prototype.deleteRecord = function (
+        key,
+        newRecordData,
+        offset,
+        count,
+        onSuccess
+    ) {
+        onSuccess([], 0);
+    };
 
     $.oc.table.datasource.base = Base;
-}(window.jQuery);
+})(window.jQuery);

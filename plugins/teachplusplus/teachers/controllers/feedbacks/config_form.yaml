@@ -1,0 +1,10 @@
+name: Feedbacks
+form: $/teachplusplus/teachers/models/feedback/fields.yaml
+modelClass: Teachplusplus\Teachers\Models\Feedback
+defaultRedirect: teachplusplus/teachers/feedbacks
+create:
+    redirect: 'teachplusplus/teachers/feedbacks/update/:id'
+    redirectClose: teachplusplus/teachers/feedbacks
+update:
+    redirect: teachplusplus/teachers/feedbacks
+    redirectClose: teachplusplus/teachers/feedbacks

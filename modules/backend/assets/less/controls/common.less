@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 //
-// The scroll panel can host a scrollbar control. It has a right border that covers 
+// The scroll panel can host a scrollbar control. It has a right border that covers
 // the scrollbar to satisfy the design requirements.
 //
 .control-scrollpanel {
@@ -11,7 +11,9 @@
     background: @color-panel-light;
 
     .control-scrollbar {
-        &.vertical > .scrollbar-scrollbar {right: 0;}
+        &.vertical > .scrollbar-scrollbar {
+            right: 0;
+        }
     }
 }
 
@@ -54,13 +56,13 @@
     position: relative;
 
     &:after {
-        content: '';
+        content: "";
         display: table-cell;
         position: absolute;
         left: 0;
         top: 0;
         height: 100%;
         width: 100%;
-        background: rgba(249,249,249,0.7);
+        background: rgba(249, 249, 249, 0.7);
     }
 }

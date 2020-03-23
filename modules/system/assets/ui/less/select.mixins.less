@@ -33,13 +33,14 @@
 
 // dropdown arrow when dropdown is open
 .dropdown-arrow() {
-        .select2-selection--single {
+    .select2-selection--single {
         //
         // Make the dropdown arrow point up while the dropdown is visible.
         //
         .select2-selection__arrow b {
             border-color: transparent transparent @color-select-icon transparent;
-            border-width: 0 @caret-width-large @caret-width-large @caret-width-large;
+            border-width: 0 @caret-width-large @caret-width-large
+                @caret-width-large;
         }
     }
 }

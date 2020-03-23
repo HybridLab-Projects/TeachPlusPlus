@@ -102,8 +102,8 @@ Unit tests can be performed by running `phpunit` in the root directory or inside
 
 Functional tests can be performed by running `phpunit` in the `/tests/functional` directory. Ensure the following configuration is met:
 
-- Active theme is `demo`
-- Language preference is `en`
+-   Active theme is `demo`
+-   Language preference is `en`
 
 #### Selenium set up
 

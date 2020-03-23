@@ -20,7 +20,9 @@
             "homepage": "http://nesbot.com"
         }
     ],
-    "bin": ["bin/upgrade-carbon"],
+    "bin": [
+        "bin/upgrade-carbon"
+    ],
     "require": {
         "php": ">=5.3.9",
         "kylekatarnls/update-helper": "^1.1",

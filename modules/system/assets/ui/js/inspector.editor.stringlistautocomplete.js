@@ -3,65 +3,76 @@
  *
  * TODO: validation is not implemented in this editor. See the Dictionary editor for reference.
  */
-+function ($) {
++(function ($) {
     "use strict";
 
     var Base = $.oc.inspector.propertyEditors.popupBase,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
-    var StringListAutocomplete = function (inspector, propertyDefinition, containerCell, group) {
-        this.items = null
+    var StringListAutocomplete = function (
+        inspector,
+        propertyDefinition,
+        containerCell,
+        group
+    ) {
+        this.items = null;
 
-        Base.call(this, inspector, propertyDefinition, containerCell, group)
-    }
+        Base.call(this, inspector, propertyDefinition, containerCell, group);
+    };
 
-    StringListAutocomplete.prototype = Object.create(BaseProto)
-    StringListAutocomplete.prototype.constructor = Base
+    StringListAutocomplete.prototype = Object.create(BaseProto);
+    StringListAutocomplete.prototype.constructor = Base;
 
     StringListAutocomplete.prototype.dispose = function () {
-        BaseProto.dispose.call(this)
-    }
+        BaseProto.dispose.call(this);
+    };
 
     StringListAutocomplete.prototype.init = function () {
-        BaseProto.init.call(this)
-    }
+        BaseProto.init.call(this);
+    };
 
     StringListAutocomplete.prototype.supportsExternalParameterEditor = function () {
-        return false
-    }
+        return false;
+    };
 
     StringListAutocomplete.prototype.setLinkText = function (link, value) {
-        var value = value !== undefined ? value
-                : this.inspector.getPropertyValue(this.propertyDefinition.property)
+        var value =
+            value !== undefined
+                ? value
+                : this.inspector.getPropertyValue(
+                      this.propertyDefinition.property
+                  );
 
         if (value === undefined) {
-            value = this.propertyDefinition.default
+            value = this.propertyDefinition.default;
         }
 
-        this.checkValueType(value)
+        this.checkValueType(value);
 
         if (!value) {
-            value = this.propertyDefinition.placeholder
-            $.oc.foundation.element.addClass(link, 'placeholder')
+            value = this.propertyDefinition.placeholder;
+            $.oc.foundation.element.addClass(link, "placeholder");
 
             if (!value) {
-                value = '[]'
+                value = "[]";
             }
 
-            link.textContent = value
+            link.textContent = value;
+        } else {
+            $.oc.foundation.element.removeClass(link, "placeholder");
+
+            link.textContent = "[" + value.join(", ") + "]";
         }
-        else {
-            $.oc.foundation.element.removeClass(link, 'placeholder')
-    
-            link.textContent = '[' + value.join(', ') + ']'
-        }
-    }
+    };
 
     StringListAutocomplete.prototype.checkValueType = function (value) {
-        if (value && Object.prototype.toString.call(value) !== '[object Array]') {
-            this.throwError('The string list value should be an array.')
+        if (
+            value &&
+            Object.prototype.toString.call(value) !== "[object Array]"
+        ) {
+            this.throwError("The string list value should be an array.");
         }
-    }
+    };
 
     //
     // Popup editor methods
@@ -106,211 +117,220 @@
                     <button type="submit" class="btn btn-primary">OK</button>                           \
                     <button type="button" class="btn btn-default" data-dismiss="popup">Cancel</button>   \
                 </div>                                                                                  \
-                </form>'
-    }
+                </form>';
+    };
 
     StringListAutocomplete.prototype.configurePopup = function (popup) {
-        this.initAutocomplete()
+        this.initAutocomplete();
 
-        this.buildItemsTable(popup.get(0))
+        this.buildItemsTable(popup.get(0));
 
-        this.focusFirstInput()
-    }
+        this.focusFirstInput();
+    };
 
     StringListAutocomplete.prototype.handleSubmit = function ($form) {
-        return this.applyValues()
-    }
+        return this.applyValues();
+    };
 
     //
     // Building and row management
     //
 
     StringListAutocomplete.prototype.buildItemsTable = function (popup) {
-        var table = popup.querySelector('table.inspector-dictionary-table'),
-            tbody = document.createElement('tbody'),
-            items = this.inspector.getPropertyValue(this.propertyDefinition.property)
+        var table = popup.querySelector("table.inspector-dictionary-table"),
+            tbody = document.createElement("tbody"),
+            items = this.inspector.getPropertyValue(
+                this.propertyDefinition.property
+            );
 
         if (items === undefined) {
-            items = this.propertyDefinition.default
+            items = this.propertyDefinition.default;
         }
 
         if (items === undefined || this.getValueKeys(items).length === 0) {
-            var row = this.buildEmptyRow()
+            var row = this.buildEmptyRow();
 
-            tbody.appendChild(row)
-        }
-        else {
+            tbody.appendChild(row);
+        } else {
             for (var key in items) {
-                var row = this.buildTableRow(items[key])
+                var row = this.buildTableRow(items[key]);
 
-                tbody.appendChild(row)
+                tbody.appendChild(row);
             }
         }
 
-        table.appendChild(tbody)
-        this.updateScrollpads()
-    }
+        table.appendChild(tbody);
+        this.updateScrollpads();
+    };
 
     StringListAutocomplete.prototype.buildTableRow = function (value) {
-        var row = document.createElement('tr'),
-            valueCell = document.createElement('td')
+        var row = document.createElement("tr"),
+            valueCell = document.createElement("td");
 
-        this.createInput(valueCell, value)
+        this.createInput(valueCell, value);
 
-        row.appendChild(valueCell)
+        row.appendChild(valueCell);
 
-        return row
-    }
+        return row;
+    };
 
     StringListAutocomplete.prototype.buildEmptyRow = function () {
-        return this.buildTableRow(null)
-    }
+        return this.buildTableRow(null);
+    };
 
     StringListAutocomplete.prototype.createInput = function (container, value) {
-        var input = document.createElement('input'),
-            controlContainer = document.createElement('div')
+        var input = document.createElement("input"),
+            controlContainer = document.createElement("div");
 
-        input.setAttribute('type', 'text')
-        input.setAttribute('class', 'form-control')
-        input.value = value
+        input.setAttribute("type", "text");
+        input.setAttribute("class", "form-control");
+        input.value = value;
 
-        controlContainer.appendChild(input)
-        container.appendChild(controlContainer)
-    }
+        controlContainer.appendChild(input);
+        container.appendChild(controlContainer);
+    };
 
     StringListAutocomplete.prototype.setActiveCell = function (input) {
-        var activeCells = this.popup.querySelectorAll('td.active')
+        var activeCells = this.popup.querySelectorAll("td.active");
 
-        for (var i = activeCells.length-1; i >= 0; i--) {
-            $.oc.foundation.element.removeClass(activeCells[i], 'active')
+        for (var i = activeCells.length - 1; i >= 0; i--) {
+            $.oc.foundation.element.removeClass(activeCells[i], "active");
         }
 
-        var activeCell = input.parentNode.parentNode // input / div / td
-        $.oc.foundation.element.addClass(activeCell, 'active')
+        var activeCell = input.parentNode.parentNode; // input / div / td
+        $.oc.foundation.element.addClass(activeCell, "active");
 
-        this.buildAutoComplete(input)
-    }
+        this.buildAutoComplete(input);
+    };
 
     StringListAutocomplete.prototype.createItem = function () {
         var activeRow = this.getActiveRow(),
             newRow = this.buildEmptyRow(),
             tbody = this.getTableBody(),
-            nextSibling = activeRow ? activeRow.nextElementSibling : null
+            nextSibling = activeRow ? activeRow.nextElementSibling : null;
 
-        tbody.insertBefore(newRow, nextSibling)
+        tbody.insertBefore(newRow, nextSibling);
 
-        this.focusAndMakeActive(newRow.querySelector('input'))
-        this.updateScrollpads()
-    }
+        this.focusAndMakeActive(newRow.querySelector("input"));
+        this.updateScrollpads();
+    };
 
     StringListAutocomplete.prototype.deleteItem = function () {
         var activeRow = this.getActiveRow(),
-            tbody = this.getTableBody()
+            tbody = this.getTableBody();
 
         if (!activeRow) {
-            return
+            return;
         }
 
         var nextRow = activeRow.nextElementSibling,
             prevRow = activeRow.previousElementSibling,
-            input = this.getRowInputByIndex(activeRow, 0)
+            input = this.getRowInputByIndex(activeRow, 0);
 
         if (input) {
-            this.removeAutocomplete(input)
+            this.removeAutocomplete(input);
         }
 
-        tbody.removeChild(activeRow)
+        tbody.removeChild(activeRow);
 
-        var newSelectedRow = nextRow ? nextRow : prevRow
+        var newSelectedRow = nextRow ? nextRow : prevRow;
 
         if (!newSelectedRow) {
-            newSelectedRow = this.buildEmptyRow()
-            tbody.appendChild(newSelectedRow)
+            newSelectedRow = this.buildEmptyRow();
+            tbody.appendChild(newSelectedRow);
         }
 
-        this.focusAndMakeActive(newSelectedRow.querySelector('input'))
-        this.updateScrollpads()
-    }
+        this.focusAndMakeActive(newSelectedRow.querySelector("input"));
+        this.updateScrollpads();
+    };
 
     StringListAutocomplete.prototype.applyValues = function () {
         var tbody = this.getTableBody(),
-            dataRows = tbody.querySelectorAll('tr'),
+            dataRows = tbody.querySelectorAll("tr"),
             link = this.getLink(),
-            result = []
+            result = [];
 
         for (var i = 0, len = dataRows.length; i < len; i++) {
             var dataRow = dataRows[i],
                 valueInput = this.getRowInputByIndex(dataRow, 0),
-                value = $.trim(valueInput.value)
+                value = $.trim(valueInput.value);
 
             if (value.length == 0) {
-                continue
+                continue;
             }
 
-            result.push(value)
+            result.push(value);
         }
 
-        this.inspector.setPropertyValue(this.propertyDefinition.property, result)
-        this.setLinkText(link, result)
-    }
+        this.inspector.setPropertyValue(
+            this.propertyDefinition.property,
+            result
+        );
+        this.setLinkText(link, result);
+    };
 
     //
     // Helpers
     //
 
     StringListAutocomplete.prototype.getValueKeys = function (value) {
-        var result = []
+        var result = [];
 
         for (var key in value) {
-            result.push(key)
+            result.push(key);
         }
 
-        return result
-    }
+        return result;
+    };
 
     StringListAutocomplete.prototype.getActiveRow = function () {
-        var activeCell = this.popup.querySelector('td.active')
+        var activeCell = this.popup.querySelector("td.active");
 
         if (!activeCell) {
-            return null
+            return null;
         }
 
-        return activeCell.parentNode
-    }
+        return activeCell.parentNode;
+    };
 
     StringListAutocomplete.prototype.getTableBody = function () {
-        return this.popup.querySelector('table.inspector-dictionary-table tbody')
-    }
+        return this.popup.querySelector(
+            "table.inspector-dictionary-table tbody"
+        );
+    };
 
     StringListAutocomplete.prototype.updateScrollpads = function () {
-        $('.control-scrollpad', this.popup).scrollpad('update')
-    }
+        $(".control-scrollpad", this.popup).scrollpad("update");
+    };
 
     StringListAutocomplete.prototype.focusFirstInput = function () {
-        var input = this.popup.querySelector('td input')
+        var input = this.popup.querySelector("td input");
 
         if (input) {
-            input.focus()
-            this.setActiveCell(input)
+            input.focus();
+            this.setActiveCell(input);
         }
-    }
+    };
 
     StringListAutocomplete.prototype.getEditorCell = function (cell) {
-        return cell.parentNode.parentNode // cell / div / td
-    }
+        return cell.parentNode.parentNode; // cell / div / td
+    };
 
     StringListAutocomplete.prototype.getEditorRow = function (cell) {
-        return cell.parentNode.parentNode.parentNode // cell / div / td / tr
-    }
+        return cell.parentNode.parentNode.parentNode; // cell / div / td / tr
+    };
 
     StringListAutocomplete.prototype.focusAndMakeActive = function (input) {
-        input.focus()
-        this.setActiveCell(input)
-    }
+        input.focus();
+        this.setActiveCell(input);
+    };
 
-    StringListAutocomplete.prototype.getRowInputByIndex = function (row, index) {
-        return row.cells[index].querySelector('input')
-    }
+    StringListAutocomplete.prototype.getRowInputByIndex = function (
+        row,
+        index
+    ) {
+        return row.cells[index].querySelector("input");
+    };
 
     //
     // Navigation
@@ -319,30 +339,34 @@
     StringListAutocomplete.prototype.navigateDown = function (ev) {
         var cell = this.getEditorCell(ev.currentTarget),
             row = this.getEditorRow(ev.currentTarget),
-            nextRow = row.nextElementSibling
+            nextRow = row.nextElementSibling;
 
         if (!nextRow) {
-            return
+            return;
         }
 
-        var newActiveEditor = nextRow.cells[cell.cellIndex].querySelector('input')
+        var newActiveEditor = nextRow.cells[cell.cellIndex].querySelector(
+            "input"
+        );
 
-        this.focusAndMakeActive(newActiveEditor)
-    }
+        this.focusAndMakeActive(newActiveEditor);
+    };
 
     StringListAutocomplete.prototype.navigateUp = function (ev) {
         var cell = this.getEditorCell(ev.currentTarget),
             row = this.getEditorRow(ev.currentTarget),
-            prevRow = row.previousElementSibling
+            prevRow = row.previousElementSibling;
 
         if (!prevRow) {
-            return
+            return;
         }
 
-        var newActiveEditor = prevRow.cells[cell.cellIndex].querySelector('input')
+        var newActiveEditor = prevRow.cells[cell.cellIndex].querySelector(
+            "input"
+        );
 
-        this.focusAndMakeActive(newActiveEditor)
-    }
+        this.focusAndMakeActive(newActiveEditor);
+    };
 
     //
     // Autocomplete
@@ -350,201 +374,210 @@
 
     StringListAutocomplete.prototype.initAutocomplete = function () {
         if (this.propertyDefinition.items !== undefined) {
-            this.items = this.prepareItems(this.propertyDefinition.items)
-            this.initializeAutocompleteForCurrentInput()
+            this.items = this.prepareItems(this.propertyDefinition.items);
+            this.initializeAutocompleteForCurrentInput();
+        } else {
+            this.loadDynamicItems();
         }
-        else {
-            this.loadDynamicItems()
-        }
-    }
+    };
 
     StringListAutocomplete.prototype.initializeAutocompleteForCurrentInput = function () {
-        var activeElement = document.activeElement
+        var activeElement = document.activeElement;
 
         if (!activeElement) {
-            return
+            return;
         }
 
-        var inputs = this.popup.querySelectorAll('td input.form-control')
+        var inputs = this.popup.querySelectorAll("td input.form-control");
 
         if (!inputs) {
-            return
+            return;
         }
 
-        for (var i=inputs.length-1; i>=0; i--) {
+        for (var i = inputs.length - 1; i >= 0; i--) {
             if (inputs[i] === activeElement) {
-                this.buildAutoComplete(inputs[i])
-                return
+                this.buildAutoComplete(inputs[i]);
+                return;
             }
         }
-    }
+    };
 
     StringListAutocomplete.prototype.buildAutoComplete = function (input) {
         if (this.items === null) {
-            return
+            return;
         }
 
         $(input).autocomplete({
             source: this.items,
             matchWidth: true,
-            menu: '<ul class="autocomplete dropdown-menu inspector-autocomplete"></ul>',
-            bodyContainer: true
-        })
-    }
+            menu:
+                '<ul class="autocomplete dropdown-menu inspector-autocomplete"></ul>',
+            bodyContainer: true,
+        });
+    };
 
     StringListAutocomplete.prototype.removeAutocomplete = function (input) {
-        var $input = $(input)
+        var $input = $(input);
 
-        if (!$input.data('autocomplete')) {
-            return
+        if (!$input.data("autocomplete")) {
+            return;
         }
 
-        $input.autocomplete('destroy')
-    }
+        $input.autocomplete("destroy");
+    };
 
     StringListAutocomplete.prototype.prepareItems = function (items) {
-        var result = {}
+        var result = {};
 
         if ($.isArray(items)) {
             for (var i = 0, len = items.length; i < len; i++) {
-                result[items[i]] = items[i]
+                result[items[i]] = items[i];
             }
-        }
-        else {
-            result = items
+        } else {
+            result = items;
         }
 
-        return result
-    }
+        return result;
+    };
 
     StringListAutocomplete.prototype.loadDynamicItems = function () {
         if (this.isDisposed()) {
-            return
+            return;
         }
 
         var data = this.getRootSurface().getValues(),
-            $form = $(this.popup).find('form')
+            $form = $(this.popup).find("form");
 
         if (this.triggerGetItems(data) === false) {
-            return
+            return;
         }
 
-        data['inspectorProperty'] = this.getPropertyPath()
-        data['inspectorClassName'] = this.inspector.options.inspectorClass
+        data["inspectorProperty"] = this.getPropertyPath();
+        data["inspectorClassName"] = this.inspector.options.inspectorClass;
 
-        $form.request('onInspectableGetOptions', {
-            data: data,
-        })
-        .done(this.proxy(this.itemsRequestDone))
-    }
+        $form
+            .request("onInspectableGetOptions", {
+                data: data,
+            })
+            .done(this.proxy(this.itemsRequestDone));
+    };
 
     StringListAutocomplete.prototype.triggerGetItems = function (values) {
-        var $inspectable = this.getInspectableElement()
+        var $inspectable = this.getInspectableElement();
         if (!$inspectable) {
-            return true
+            return true;
         }
 
-        var itemsEvent = $.Event('autocompleteitems.oc.inspector')
+        var itemsEvent = $.Event("autocompleteitems.oc.inspector");
 
-        $inspectable.trigger(itemsEvent, [{
-            values: values,
-            callback: this.proxy(this.itemsRequestDone),
-            property: this.inspector.getPropertyPath(this.propertyDefinition.property),
-            propertyDefinition: this.propertyDefinition
-        }])
+        $inspectable.trigger(itemsEvent, [
+            {
+                values: values,
+                callback: this.proxy(this.itemsRequestDone),
+                property: this.inspector.getPropertyPath(
+                    this.propertyDefinition.property
+                ),
+                propertyDefinition: this.propertyDefinition,
+            },
+        ]);
 
         if (itemsEvent.isDefaultPrevented()) {
-            return false
+            return false;
         }
 
-        return true
-    }
+        return true;
+    };
 
     StringListAutocomplete.prototype.itemsRequestDone = function (data) {
         if (this.isDisposed()) {
             // Handle the case when the asynchronous request finishes after
             // the editor is disposed
-            return
+            return;
         }
 
-        var loadedItems = {}
+        var loadedItems = {};
 
         if (data.options) {
-            for (var i = data.options.length-1; i >= 0; i--) {
-                loadedItems[data.options[i].value] = data.options[i].title
+            for (var i = data.options.length - 1; i >= 0; i--) {
+                loadedItems[data.options[i].value] = data.options[i].title;
             }
         }
 
-        this.items = this.prepareItems(loadedItems)
-        this.initializeAutocompleteForCurrentInput()
-    }
+        this.items = this.prepareItems(loadedItems);
+        this.initializeAutocompleteForCurrentInput();
+    };
 
     StringListAutocomplete.prototype.removeAutocompleteFromAllRows = function () {
-        var inputs = this.popup.querySelector('td input.form-control')
+        var inputs = this.popup.querySelector("td input.form-control");
 
-        for (var i=inputs.length-1; i>=0; i--) {
-            this.removeAutocomplete(inputs[i])
+        for (var i = inputs.length - 1; i >= 0; i--) {
+            this.removeAutocomplete(inputs[i]);
         }
-    }
+    };
 
     //
     // Event handlers
     //
 
     StringListAutocomplete.prototype.onPopupShown = function (ev, link, popup) {
-        BaseProto.onPopupShown.call(this,ev, link, popup)
+        BaseProto.onPopupShown.call(this, ev, link, popup);
 
-        popup.on('focus.inspector', 'td input', this.proxy(this.onFocus))
-        popup.on('blur.inspector', 'td input', this.proxy(this.onBlur))
-        popup.on('keydown.inspector', 'td input', this.proxy(this.onKeyDown))
-        popup.on('click.inspector', '[data-cmd]', this.proxy(this.onCommand))
-    }
+        popup.on("focus.inspector", "td input", this.proxy(this.onFocus));
+        popup.on("blur.inspector", "td input", this.proxy(this.onBlur));
+        popup.on("keydown.inspector", "td input", this.proxy(this.onKeyDown));
+        popup.on("click.inspector", "[data-cmd]", this.proxy(this.onCommand));
+    };
 
-    StringListAutocomplete.prototype.onPopupHidden = function (ev, link, popup) {
-        popup.off('.inspector', 'td input')
-        popup.off('.inspector', '[data-cmd]', this.proxy(this.onCommand))
+    StringListAutocomplete.prototype.onPopupHidden = function (
+        ev,
+        link,
+        popup
+    ) {
+        popup.off(".inspector", "td input");
+        popup.off(".inspector", "[data-cmd]", this.proxy(this.onCommand));
 
-        this.removeAutocompleteFromAllRows()
-        this.items = null
+        this.removeAutocompleteFromAllRows();
+        this.items = null;
 
-        BaseProto.onPopupHidden.call(this, ev, link, popup)
-    }
+        BaseProto.onPopupHidden.call(this, ev, link, popup);
+    };
 
     StringListAutocomplete.prototype.onFocus = function (ev) {
-        this.setActiveCell(ev.currentTarget)
-    }
+        this.setActiveCell(ev.currentTarget);
+    };
 
     StringListAutocomplete.prototype.onBlur = function (ev) {
-        if ($(ev.relatedTarget).closest('ul.inspector-autocomplete').length > 0) {
+        if (
+            $(ev.relatedTarget).closest("ul.inspector-autocomplete").length > 0
+        ) {
             // Do not close the autocomplete results if a drop-down
             // menu item was clicked
-            return
+            return;
         }
 
-        this.removeAutocomplete(ev.currentTarget)
-    }
+        this.removeAutocomplete(ev.currentTarget);
+    };
 
     StringListAutocomplete.prototype.onCommand = function (ev) {
-        var command = ev.currentTarget.getAttribute('data-cmd')
+        var command = ev.currentTarget.getAttribute("data-cmd");
 
         switch (command) {
-            case 'create-item' :
-                this.createItem()
-            break;
-            case 'delete-item' :
-                this.deleteItem()
-            break;
+            case "create-item":
+                this.createItem();
+                break;
+            case "delete-item":
+                this.deleteItem();
+                break;
         }
-    }
+    };
 
     StringListAutocomplete.prototype.onKeyDown = function (ev) {
-        if (ev.key === 'ArrowDown') {
-            return this.navigateDown(ev)
+        if (ev.key === "ArrowDown") {
+            return this.navigateDown(ev);
+        } else if (ev.key === "ArrowUp") {
+            return this.navigateUp(ev);
         }
-        else if (ev.key === 'ArrowUp') {
-            return this.navigateUp(ev)
-        }
-    }
+    };
 
-    $.oc.inspector.propertyEditors.stringListAutocomplete = StringListAutocomplete
-}(window.jQuery);
+    $.oc.inspector.propertyEditors.stringListAutocomplete = StringListAutocomplete;
+})(window.jQuery);

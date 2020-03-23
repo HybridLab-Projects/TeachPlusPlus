@@ -7,7 +7,7 @@
     }
 
     &.absolute {
-        position: absolute!important;
+        position: absolute !important;
     }
 
     &.fill-container {
@@ -24,8 +24,11 @@
     .flex-direction-row();
 }
 
-.flex-layout-column, .flex-layout-row {
-    &.justify-center {.justify-content(center);}
+.flex-layout-column,
+.flex-layout-row {
+    &.justify-center {
+        .justify-content(center);
+    }
     &.align-center {
         .align-items(center);
         .align-content(center);
@@ -39,12 +42,24 @@
 
 .flex-layout-item {
     margin: 0;
-    &.fix { .flex-fix(); }
-    &.stretch { .flex-stretch(); }
-    &.stretch-constrain { .flex-stretch-constrain(); }
-    &.center { .align-self(center); }
+    &.fix {
+        .flex-fix();
+    }
+    &.stretch {
+        .flex-stretch();
+    }
+    &.stretch-constrain {
+        .flex-stretch-constrain();
+    }
+    &.center {
+        .align-self(center);
+    }
 
-    &.relative { position: relative; }
+    &.relative {
+        position: relative;
+    }
 
-    &.layout-container { max-width: none; }
+    &.layout-container {
+        max-width: none;
+    }
 }

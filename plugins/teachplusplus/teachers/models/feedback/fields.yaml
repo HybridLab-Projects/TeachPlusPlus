@@ -1,0 +1,19 @@
+fields:
+    content:
+        label: Feedback
+        size: ''
+        mode: tab
+        span: full
+        type: markdown
+    teacher:
+        label: Učitel
+        nameFrom: surname
+        descriptionFrom: description
+        span: auto
+        type: relation
+    subject:
+        label: Predmet
+        nameFrom: subject_name
+        descriptionFrom: description
+        span: auto
+        type: relation
