@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <b-row>
+  <div class="col-md-12">
+    <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
-        <h6 class="my-auto">
-          Teach++
-        </h6>
+        <img
+          class="mb-4"
+          :src="require(`@/assets/img/Logo.svg`)"
+          alt=""
+        >
       </b-col>
     </b-row>
     <b-row>
