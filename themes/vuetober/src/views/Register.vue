@@ -144,6 +144,7 @@ export default {
   .cont_img {
     background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
     border-radius: 150px 0px 150px 150px;
+    z-index: -1;
   }
 
   .cont_img_pic {
