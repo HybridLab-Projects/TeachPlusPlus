@@ -22,6 +22,7 @@
           v-for="teacher in teachers"
           :key="teacher.id"
           class="d-flex align-items-center"
+          @click="findTeacher(teacher)"
         >
           <h5 class="mr-auto my-auto">
             {{ teacher.name }} {{ teacher.surname }}
@@ -58,6 +59,11 @@ export default {
     ]),
     teachers() {
       return this.getTeachers(this.searchTeacher);
+    },
+  },
+  methods: {
+    findTeacher(teacher) {
+      this.$store.dispatch('selectTeacher', teacher);
     },
   },
 };

@@ -11,6 +11,7 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     teachers: [],
+    selectedTeacher: [],
   },
   mutations: {
     auth_request(state) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     addTeachers(state, teachers) {
       state.teachers = teachers;
+    },
+    selectTeacher(state, teacher) {
+      state.selectedTeacher = teacher;
     },
   },
   actions: {
@@ -98,11 +102,15 @@ export default new Vuex.Store({
           commit('addTeachers', data);
         });
     },
+    selectTeacher({ commit }, teacher) {
+      commit('selectTeacher', teacher);
+    },
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
     getTeachers: (state) => (search) => state.teachers
       .filter((teacher) => teacher.surname.toLowerCase().includes(search)),
+    getSelectedTeacher: (state) => state.selectedTeacher,
   },
 });
