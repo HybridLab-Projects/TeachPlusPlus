@@ -1,10 +1,10 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col cols="5">
+      <b-col class="col-md-3">
         <Search />
       </b-col>
-      <b-col>
+      <b-col class="col-md-9">
         <Teacher />
       </b-col>
     </b-row>
