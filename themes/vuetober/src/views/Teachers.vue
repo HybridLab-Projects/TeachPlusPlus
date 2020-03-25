@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss" scoped>
   .test {
-    background-color: #F0F0F0;
+    background-color: #F4F5F8;
     height: 100vh;
   }
 </style>
