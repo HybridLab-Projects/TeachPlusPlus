@@ -6,11 +6,13 @@
           class="pr-5 my-auto text-secondary"
           @click="logout"
         >
-          Odhlásenie z aplikácie
-          <b-icon-box-arrow-right
-            font-scale="1.5"
-            shift-v="-2"
-          />
+          <strong>
+            Odhlásenie z aplikácie
+            <b-icon-box-arrow-right
+              font-scale="1.5"
+              shift-v="-2"
+            />
+          </strong>
         </b-link>
         <b-button
           variant="danger"
@@ -57,15 +59,27 @@
               title="Najnovšie feedbacky"
               active
             >
-              <b-list-group>
-                <b-list-group-item
-                  v-for="feedback in selectedTeacher.feedbacks"
-                  :key="feedback.id"
-                  class="d-flex align-items-center"
-                >
-                  {{ feedback.content }}
-                </b-list-group-item>
-              </b-list-group>
+              <b-row>
+                <b-col class="ml-4">
+                  <img
+                    :src="require(`@/assets/img/user1.png`)"
+                    alt=""
+                  >
+                </b-col>
+                <b-col cols="10">
+                  <b-list-group>
+                    <b-list-group-item
+                      v-for="feedback in selectedTeacher.feedbacks"
+                      :key="feedback.id"
+                      class="d-flex align-items-center mb-5"
+                    >
+                      <div class="p-2">
+                        {{ feedback.content }}
+                      </div>
+                    </b-list-group-item>
+                  </b-list-group>
+                </b-col>
+              </b-row>
             </b-tab>
             <b-tab title="Zoradiť podľa počtu hlasov">
               <b-badge variant="danger">

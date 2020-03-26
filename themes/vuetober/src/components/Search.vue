@@ -12,14 +12,17 @@
     <b-row>
       <b-col>
         <b-form-input
-          class="my-3"
+          class="mt-3 mb-5 w-80"
           type="text"
           name="Učiteľ"
-          placeholder="Meno učiteľa"
+          placeholder="Search"
           v-model="searchTeacher"
         />
-
-        <b-list-group>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="p-0">
+        <b-list-group class="test">
           <b-list-group-item
             v-for="teacher in teachers"
             :key="teacher.id"
@@ -27,9 +30,9 @@
             @click="selectTeacher(teacher)"
             :class="{ active: teacher.id === isActive || false }"
           >
-            <h5 class="mr-auto my-auto">
+            <h6 class="mr-auto my-auto teacher-name">
               {{ teacher.name }} {{ teacher.surname }}
-            </h5>
+            </h6>
             <b-badge
               variant="warning"
               class="my-auto ml-2"
@@ -38,9 +41,6 @@
             >
               {{ subject.short }}
             </b-badge>
-            <h6 class="my-auto ml-2">
-              >
-            </h6>
           </b-list-group-item>
         </b-list-group>
       </b-col>
@@ -77,5 +77,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .teacher-name {
+    color: #5352f6;
+    font-weight: bold;
+  }
 
+  .test {
+    width: 100%;
+  }
 </style>
