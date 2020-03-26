@@ -1,10 +1,10 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col cols="3">
+      <b-col class="col-md-3 test1">
         <Search />
       </b-col>
-      <b-col class="test">
+      <b-col class="test2">
         <Teacher />
       </b-col>
     </b-row>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .test {
+  .test2 {
     background-color: #F0F0F0;
     height: 100vh;
   }
