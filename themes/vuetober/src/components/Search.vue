@@ -24,18 +24,20 @@
             v-for="teacher in teachers"
             :key="teacher.id"
             class="d-flex align-items-center"
-            @click="findTeacher(teacher)"
+            @click="selectTeacher(teacher)"
+            :class="{ active: teacher.id === isActive || false }"
           >
             <h5 class="mr-auto my-auto">
               {{ teacher.name }} {{ teacher.surname }}
             </h5>
-            <h6
+            <b-badge
+              variant="warning"
               class="my-auto ml-2"
               v-for="subject in teacher.subjects"
               :key="subject.id"
             >
               {{ subject.short }}
-            </h6>
+            </b-badge>
             <h6 class="my-auto ml-2">
               >
             </h6>
@@ -54,6 +56,7 @@ export default {
   data() {
     return {
       searchTeacher: '',
+      isActive: -1,
     };
   },
   computed: {
@@ -65,8 +68,9 @@ export default {
     },
   },
   methods: {
-    findTeacher(teacher) {
+    selectTeacher(teacher) {
       this.$store.dispatch('selectTeacher', teacher);
+      this.isActive = teacher.id;
     },
   },
 };
