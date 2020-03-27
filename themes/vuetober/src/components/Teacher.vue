@@ -59,14 +59,18 @@
               title="Najnovšie feedbacky"
               active
             >
-              <b-row>
-                <b-col class="ml-4">
+              <b-row class="mx-auto">
+                <b-col class="p-0">
                   <img
                     :src="require(`@/assets/img/user1.png`)"
                     alt=""
+                    class="mr-auto"
                   >
                 </b-col>
-                <b-col cols="10">
+                <b-col
+                  cols="10"
+                  class="pr-5"
+                >
                   <b-list-group>
                     <b-list-group-item
                       v-for="feedback in selectedTeacher.feedbacks"
