@@ -3,3 +3,7 @@ columns:
         label: Feedbacks
         type: text
         sortable: true
+    likes:
+        label: Likes
+        type: number
+        sortable: true

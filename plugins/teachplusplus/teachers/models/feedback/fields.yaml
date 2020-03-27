@@ -17,3 +17,7 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
+    likes:
+        label: Number
+        span: auto
+        type: number
