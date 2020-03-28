@@ -31,12 +31,12 @@
           <b-list-group-item
             v-for="teacher in teachers"
             :key="teacher.id"
-            class="d-flex align-items-center test2"
+            class="d-flex align-items-center test2 p-3"
             @click="selectTeacher(teacher)"
             :class="{ active: teacher.id === isActive || false }"
           >
-            <h6 class="mr-auto my-auto teacher-name">
-              {{ teacher.name }} {{ teacher.surname }}
+            <h6 class="mr-auto my-auto ml-4 teacher-name">
+              <strong>{{ teacher.name }} {{ teacher.surname }}</strong>
             </h6>
             <b-badge
               variant="warning"
@@ -83,25 +83,30 @@ export default {
 
 <style lang="scss" scoped>
   .teacher-name {
-    color: #5352f6;
-    font-weight: bold;
+    font-size: 14px;
   }
 
   .active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
     border-bottom: 1px solid #5352f6;
     box-shadow: 0 1px 0 0 #5352f6;
     border-radius: 1px;
-    background-color: #f3f5f8;
   }
 
   .test {
     border: none;
     box-shadow: none;
+    background-color: #f3f5f8;
   }
 
   .test2 {
     border: none;
-    border-bottom: 1px solid #f3f5f8;
+    border-bottom: 1px solid #D7D7E8;
   }
 
+  .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    z-index: 2;
+    color: #5352f6;
+    background-color: #D7D7E8;
+    border-color: #D7D7E8;
+  }
 </style>
