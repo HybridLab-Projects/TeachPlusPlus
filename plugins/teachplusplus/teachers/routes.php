@@ -1,7 +1,8 @@
 <?php
 use Teachplusplus\Teachers\Models\Teacher;
 
-Route::get('api/teacher', function () {
+Route::group(['prefix' => 'api'], function () {
+Route::get('teacher', function () {
 
     $teachers = Teacher::with('subjects', 'feedbacks')->get();
     
@@ -9,11 +10,12 @@ Route::get('api/teacher', function () {
     return $teachers;
 });
 
-Route::get('api/teacher/{id}', function ($id) {
+Route::get('teacher/{id}', function ($id) {
 
     $teacher = Teacher::with('subjects', 'feedbacks')->findOrFail($id);
     
    
 
     return $teacher;
+});
 });
