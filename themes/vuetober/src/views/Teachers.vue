@@ -3,7 +3,6 @@
     <b-row>
       <b-col
         cols="3"
-        class="p-0"
       >
         <Search />
       </b-col>

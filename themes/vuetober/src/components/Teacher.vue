@@ -3,16 +3,14 @@
     <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center">
         <b-link
-          class="pr-5 my-auto text-secondary"
+          class="pr-5 my-auto text-muted font-weight-bold"
           @click="logout"
         >
-          <strong>
-            Odhlásenie z aplikácie
-            <b-icon-box-arrow-right
-              font-scale="1.5"
-              shift-v="-2"
-            />
-          </strong>
+          Odhlásenie z aplikácie
+          <b-icon-box-arrow-right
+            font-scale="1.5"
+            shift-v="-2"
+          />
         </b-link>
         <b-button
           variant="danger"
@@ -31,32 +29,16 @@
             alt=""
           >
           <div class="my-auto ml-4">
-            <p class="text-muted">
-              <strong>SPSE Hálova</strong>
+            <p class="text-muted font-weight-bold">
+              SPŠE Hálova
             </p>
-            <h1>
-              <strong>{{ selectedTeacher.name }} {{ selectedTeacher.surname }}</strong>
+            <h1 class="font-weight-bold">
+              {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
             </h1>
             <div class="d-flex align-items-center">
-              <b-row>
-                <p class="text-muted my-auto ml-3">
-                  Predmety
-                </p>
-                <b-badge
-                  href="#"
-                  variant="warning"
-                  class="ml-3"
-                >
-                  Warning
-                </b-badge>
-                <b-badge
-                  href="#"
-                  variant="danger"
-                  class="mx-3"
-                >
-                  Danger
-                </b-badge>
-              </b-row>
+              <p class="text-muted my-auto mr-3">
+                Predmety
+              </p>
               <b-badge
                 variant="primary my-auto mr-1"
                 v-for="subject in selectedTeacher.subjects"
@@ -87,7 +69,7 @@
                     <b-list-group-item
                       v-for="feedback in selectedTeacher.feedbacks"
                       :key="feedback.id"
-                      class="d-flex align-items-center mb-5 border-0"
+                      class="d-flex align-items-center mb-4 border-0 shadow"
                     >
                       <div class="p-2">
                         {{ feedback.content }}
@@ -103,7 +85,6 @@
               <b-badge variant="danger">
                 Danger
               </b-badge>
-              asdf
             </b-tab>
           </b-tabs>
         </b-col>
