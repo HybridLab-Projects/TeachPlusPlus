@@ -82,31 +82,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $purpleColor: #5352f6;
+  $bgColor:  #f3f5f8;
+  $darkerbgColor: #D7D7E8;
+
   .teacher-name {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   .active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
-    border-bottom: 1px solid #5352f6;
-    box-shadow: 0 1px 0 0 #5352f6;
+    border-bottom: 1px solid $purpleColor;
+    box-shadow: 0 1px 0 0 $purpleColor;
     border-radius: 1px;
   }
 
   .test {
     border: none;
     box-shadow: none;
-    background-color: #f3f5f8;
+    background-color: $bgColor;
   }
 
   .test2 {
     border: none;
-    border-bottom: 1px solid #D7D7E8;
+    border-bottom: 1px solid $darkerbgColor;
   }
 
   .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
     z-index: 2;
-    color: #5352f6;
-    background-color: #D7D7E8;
-    border-color: #D7D7E8;
+    color: $purpleColor;
+    background-color: $darkerbgColor;
+    border-color: $darkerbgColor;
   }
 </style>
