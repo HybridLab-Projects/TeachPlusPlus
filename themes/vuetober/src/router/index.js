@@ -34,6 +34,11 @@ const routes = [
       if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
     },
   },
+  {
+    path: '/feedback',
+    name: 'Feedback',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Feedback.vue'),
+  },
 ];
 
 const router = new VueRouter({
