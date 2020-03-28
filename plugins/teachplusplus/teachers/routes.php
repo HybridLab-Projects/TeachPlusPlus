@@ -1,5 +1,6 @@
 <?php
 use Teachplusplus\Teachers\Models\Teacher;
+use Teachplusplus\Teachers\Models\Feedback;
 
 Route::group(['prefix' => 'api'], function () {
 Route::get('teacher', function () {
@@ -18,4 +19,14 @@ Route::get('teacher/{id}', function ($id) {
 
     return $teacher;
 });
+
+Route::post('feedback', function () {
+
+
+    $data = request()->only([
+        'content'
+    ]);
+    Feedback::create($data);
+    });
+
 });

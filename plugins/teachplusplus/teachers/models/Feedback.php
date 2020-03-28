@@ -12,7 +12,13 @@ class Feedback extends Model
 
     /**
      * @var string The database table used by the model.
+     * 
+     * 
      */
+    protected $fillable = [
+        'content'
+    ];
+
     public $table = 'teachplusplus_teachers_feedbacks';
 
 
