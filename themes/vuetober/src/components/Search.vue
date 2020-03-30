@@ -39,7 +39,7 @@
             :key="teacher.id"
             class="d-flex align-items-center test2 p-3"
             @click="selectTeacher(teacher)"
-            :class="{ active: teacher.id === isActive || false }"
+            :class="{ active: teacher.id === selectedTeacher.id}"
           >
             <h6 class="mr-auto my-auto ml-4 teacher-name font-weight-bold">
               {{ teacher.name }} {{ teacher.surname }}
@@ -67,13 +67,13 @@ export default {
   data() {
     return {
       searchTeacher: '',
-      isActive: -1,
     };
   },
   computed: {
-    ...mapGetters([
-      'getTeachers',
-    ]),
+    ...mapGetters({
+      getTeachers: 'getTeachers',
+      selectedTeacher: 'getSelectedTeacher',
+    }),
     teachers() {
       return this.getTeachers(this.searchTeacher);
     },
@@ -81,7 +81,6 @@ export default {
   methods: {
     selectTeacher(teacher) {
       this.$store.dispatch('selectTeacher', teacher);
-      this.isActive = teacher.id;
     },
   },
 };
