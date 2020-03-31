@@ -107,7 +107,6 @@ export default new Vuex.Store({
           commit('addTeachers', data);
         });
     },
-<<<<<<< HEAD
     createFeedback({ commit }, feedbackData) {
       return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
         .then(({ data }) => {
@@ -117,10 +116,9 @@ export default new Vuex.Store({
           console.log('failed', err);
           throw err;
         });
-=======
+    },
     selectTeacher({ commit }, teacher) {
       commit('selectTeacher', teacher);
->>>>>>> develop
     },
   },
   getters: {
