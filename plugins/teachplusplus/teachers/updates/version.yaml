@@ -48,3 +48,6 @@
 1.0.17:
     - 'Updated table teachplusplus_teachers_subjects'
     - builder_table_update_teachplusplus_teachers_subjects_4.php
+1.0.18:
+    - 'Updated table teachplusplus_teachers_feedbacks'
+    - builder_table_update_teachplusplus_teachers_feedbacks_3.php

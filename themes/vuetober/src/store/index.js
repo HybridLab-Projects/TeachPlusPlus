@@ -36,6 +36,11 @@ export default new Vuex.Store({
     addTeachers(state, teachers) {
       state.teachers = teachers;
     },
+    addFeedback(state, feedback) {
+      state.teachers[feedback.teacher_id - 1].feedbacks = [
+        ...state.teachers[feedback.teacher_id - 1].feedbacks, feedback,
+      ];
+    },
   },
   actions: {
     register({ commit }, authUser) {
@@ -96,6 +101,16 @@ export default new Vuex.Store({
       return Axios
         .get('/api/teacher').then(({ data }) => {
           commit('addTeachers', data);
+        });
+    },
+    createFeedback({ commit }, feedbackData) {
+      return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
+        .then(({ data }) => {
+          console.log('success', data);
+          commit('addFeedback', data);
+        }).catch((err) => {
+          console.log('failed', err);
+          throw err;
         });
     },
   },

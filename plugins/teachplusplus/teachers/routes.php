@@ -20,14 +20,16 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('feedback', function () {
         $data = request()->only([
-        'content'
-    ]);
-        $teacherId = request()->input('teacher_id');
+            'feedback'
+        ]);
+        $teacherId = request()->input('teacherId');
 
         $teacher = Teacher::find($teacherId);
 
         $feedback = Feedback::create($data);
         $feedback->teacher()->associate($teacher);
         $feedback->save();
+
+        return $feedback;
     });
 });

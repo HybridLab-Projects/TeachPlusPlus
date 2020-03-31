@@ -2,7 +2,8 @@ columns:
     id:
         label: id
         type: number
-    content:
+        sortable: true
+    feedback:
         label: Feedbacks
         type: text
         sortable: true
@@ -12,3 +13,6 @@ columns:
     updated_at:
         label: updated_at
         type: datetime
+    teacher_id:
+        label: teacher_id
+        type: number

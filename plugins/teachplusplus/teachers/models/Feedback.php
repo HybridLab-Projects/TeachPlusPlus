@@ -16,7 +16,7 @@ class Feedback extends Model
      *
      */
     protected $fillable = [
-        'content'
+        'feedback'
     ];
 
     public $table = 'teachplusplus_teachers_feedbacks';

@@ -5,7 +5,9 @@
         <p class="pr-5 my-auto">
           Odhlasemie z aplikacie
         </p>
-        <b-button>Pridat feedback</b-button>
+        <b-button to="feedback">
+          Pridat feedback
+        </b-button>
       </b-col>
     </b-row>
     <b-row class="mt-5">
