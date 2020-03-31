@@ -12,8 +12,8 @@ class Feedback extends Model
 
     /**
      * @var string The database table used by the model.
-     * 
-     * 
+     *
+     *
      */
     protected $fillable = [
         'content'
@@ -22,7 +22,7 @@ class Feedback extends Model
     public $table = 'teachplusplus_teachers_feedbacks';
 
 
-    public $hasOne =[ 
+    public $hasOne =[
 
         'subject' => 'Teachplusplus\teachers\Models\Subject'
         ];
