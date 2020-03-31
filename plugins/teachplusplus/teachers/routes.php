@@ -26,12 +26,12 @@ Route::post('feedback', function () {
     $data = request()->only([
         'content'
     ]);
+    $teacherId = request()->input('teacher_id');
+
+    $teacher = Teacher::find($teacherId);
+
     $feedback = Feedback::create($data);
-    
-    $teacher = Teacher::find(2);
-
     $feedback->teacher()->associate($teacher);
-
     $feedback->save();
 
     });
