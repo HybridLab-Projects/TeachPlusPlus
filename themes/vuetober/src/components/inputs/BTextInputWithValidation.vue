@@ -1,5 +1,5 @@
 <template>
-  <div class="input_form">
+  <div>
     <ValidationProvider
       :vid="vid"
       :name="$attrs.name"
@@ -7,11 +7,14 @@
       v-slot="{ valid, errors }"
       mode="eager"
     >
-      <b-form-group v-bind="$attrs">
+      <b-form-group
+        v-bind="$attrs"
+      >
         <b-form-input
           v-model="innerValue"
           v-bind="$attrs"
           :state="errors[0] ? false : (valid ? true : null)"
+          class="mb-3 mt-0"
         />
         <b-form-invalid-feedback id="inputLiveFeedback">
           {{ errors[0] }}
@@ -66,7 +69,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .input_form {
-    width: 30vw;
+  input.form-control[type=text]:focus:not([readonly]),
+  input.form-control[type=password]:focus:not([readonly]) {
+    border-bottom: 1px solid #5352f6;
+    box-shadow: 0 1px 0 0 #5352f6;
+    border-radius: 0;
+  }
+
+  input {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid gray;
+    box-shadow: none;
   }
 </style>

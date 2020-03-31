@@ -1,41 +1,60 @@
 <template>
   <div>
-    <b-row>
+    <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
-        <h6 class="my-auto">
-          Teach++
-        </h6>
+        <img
+          class="mb-4"
+          :src="require(`@/assets/img/Logo.svg`)"
+          alt=""
+        >
       </b-col>
     </b-row>
     <b-row>
-      <b-form-input
-        class="my-3"
-        type="text"
-        name="Učiteľ"
-        placeholder="Meno učiteľa"
-        v-model="searchTeacher"
-      />
-      <b-list-group>
-        <b-list-group-item
-          v-for="teacher in teachers"
-          :key="teacher.id"
-          class="d-flex align-items-center"
-        >
-          <h5 class="mr-auto my-auto">
-            {{ teacher.name }} {{ teacher.surname }}
-          </h5>
-          <h6
-            class="my-auto ml-2"
-            v-for="subject in teacher.subjects"
-            :key="subject.id"
+      <b-col>
+        <b-input-group class="mt-2 mb-5">
+          <b-input-group-prepend
+            is-text
+            class="border-0"
           >
-            {{ subject.short }}
-          </h6>
-          <h6 class="my-auto ml-2">
+            <b-icon-search class="border-0" />
+          </b-input-group-prepend>
+          <b-form-input
+            class="border-0 bg-search"
+            type="text"
+            name="Učiteľ"
+            placeholder="Vyhľadaj"
+            v-model="searchTeacher"
+          />
+        </b-input-group>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="p-0">
+        <h6 class="text-secondary ml-4 mb-4 font-weight-bold">
+          Zoznam ucitelov
+        </h6>
+        <b-list-group>
+          <b-list-group-item
+            v-for="teacher in teachers"
+            :key="teacher.id"
+            class="d-flex align-items-center test2 p-3"
+            @click="selectTeacher(teacher)"
+            :class="{ active: teacher.id === selectedTeacher.id}"
+          >
+            <h6 class="mr-auto my-auto ml-4 teacher-name font-weight-bold">
+              {{ teacher.name }} {{ teacher.surname }}
+            </h6>
+            <b-badge
+              variant="warning"
+              class="my-auto ml-2"
+              v-for="subject in teacher.subjects"
+              :key="subject.id"
             >
-          </h6>
-        </b-list-group-item>
-      </b-list-group>
+              {{ subject.short }}
+            </b-badge>
+          </b-list-group-item>
+        </b-list-group>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -51,16 +70,50 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'getTeachers',
-    ]),
+    ...mapGetters({
+      getTeachers: 'getTeachers',
+      selectedTeacher: 'getSelectedTeacher',
+    }),
     teachers() {
       return this.getTeachers(this.searchTeacher);
+    },
+  },
+  methods: {
+    selectTeacher(teacher) {
+      this.$store.dispatch('selectTeacher', teacher);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+$purpleColor: #5352f6;
+$bgColor:  #f3f5f8;
+$darkerbgColor: #D7D7E8;
 
+.teacher-name {
+  font-size: 0.875rem;
+}
+
+input.form-control[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid $purpleColor;
+  box-shadow: 0 1px 0 0 $purpleColor;
+  border-radius: 1px;
+}
+
+.bg-search {
+  background-color: $bgColor;
+}
+
+.test2 {
+  border: none;
+  border-bottom: 1px solid $darkerbgColor;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  z-index: 2;
+  color: $purpleColor;
+  background-color: $darkerbgColor;
+  border-color: $darkerbgColor;
+}
 </style>
