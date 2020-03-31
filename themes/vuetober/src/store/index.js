@@ -11,6 +11,7 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     teachers: [],
+    selectedTeacher: [],
   },
   mutations: {
     auth_request(state) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     addTeachers(state, teachers) {
       state.teachers = teachers;
+    },
+    selectTeacher(state, teacher) {
+      state.selectedTeacher = teacher;
     },
     addFeedback(state, feedback) {
       state.teachers[feedback.teacher_id - 1].feedbacks = [
@@ -103,6 +107,7 @@ export default new Vuex.Store({
           commit('addTeachers', data);
         });
     },
+<<<<<<< HEAD
     createFeedback({ commit }, feedbackData) {
       return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
         .then(({ data }) => {
@@ -112,12 +117,18 @@ export default new Vuex.Store({
           console.log('failed', err);
           throw err;
         });
+=======
+    selectTeacher({ commit }, teacher) {
+      commit('selectTeacher', teacher);
+>>>>>>> develop
     },
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
     getTeachers: (state) => (search) => state.teachers
-      .filter((teacher) => teacher.surname.toLowerCase().includes(search)),
+      .filter((teacher) => teacher.surname.toLowerCase().includes(search)
+        || teacher.name.toLowerCase().includes(search)),
+    getSelectedTeacher: (state) => state.selectedTeacher,
   },
 });
