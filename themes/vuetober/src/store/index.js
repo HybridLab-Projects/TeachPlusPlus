@@ -88,7 +88,6 @@ export default new Vuex.Store({
           throw err;
         });
     },
-
     logout({ commit, state }) {
       return Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
         .then(() => {
@@ -100,7 +99,6 @@ export default new Vuex.Store({
           throw err;
         });
     },
-
     fetchTeachers({ commit }) {
       return Axios
         .get('/api/teacher').then(({ data }) => {

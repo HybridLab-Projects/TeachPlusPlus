@@ -75,7 +75,7 @@ export default {
   name: 'Feedback',
   data() {
     return {
-      teacherId: 3,
+      teacherId: 2,
       feedback: '',
     };
   },
