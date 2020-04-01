@@ -3,10 +3,11 @@
     <b-row>
       <b-col
         cols="3"
+        class="searchbg"
       >
         <Search />
       </b-col>
-      <b-col class="bg">
+      <b-col class="teacherbg">
         <Teacher />
       </b-col>
     </b-row>
@@ -30,8 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .bg {
-    background-color: #f3f5f8;
-    height: 100vh;
+  .searchbg {
+    background-color: #fff;
   }
 </style>
