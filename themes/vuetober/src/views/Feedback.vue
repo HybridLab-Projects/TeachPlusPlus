@@ -29,9 +29,9 @@
         </div>
       </b-col>
       <b-col cols="9">
-        <div class="d-flex justify-content-end m-3">
-          <p class="text-secondary mr-3 py-auto">
-            <strong class="pt-5">
+        <div class="d-flex justify-content-end mt-3">
+          <p class="text-secondary my-auto mr-3">
+            <strong class="">
               Nechcem dat feedback
             </strong>
           </p>
@@ -67,7 +67,6 @@
                 :options="[{ text: 'Choose...', value: null }, 'One', 'Two', 'Three']"
                 :value="null"
               />
-
               <b-button
                 variant="danger"
                 class="px-4 py-2"
@@ -84,6 +83,7 @@
             id="textarea-rows"
             placeholder="Tall textarea"
             rows="8"
+            class="textfield"
           />
         </b-form>
       </b-col>
@@ -105,5 +105,13 @@ $purpleColor: #5352f6;
 
 .form1 {
   width: 30%;
+  background-color: #f8f5f3;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid $purpleColor;
+}
+
+.textfield {
+  border-radius: 0px;
 }
 </style>
