@@ -11,6 +11,7 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     teachers: [],
+    selectedTeacher: [],
   },
   mutations: {
     auth_request(state) {
@@ -35,6 +36,14 @@ export default new Vuex.Store({
     },
     addTeachers(state, teachers) {
       state.teachers = teachers;
+    },
+    selectTeacher(state, teacher) {
+      state.selectedTeacher = teacher;
+    },
+    addFeedback(state, feedback) {
+      state.teachers[feedback.teacher_id - 1].feedbacks = [
+        ...state.teachers[feedback.teacher_id - 1].feedbacks, feedback,
+      ];
     },
   },
   actions: {
@@ -79,7 +88,6 @@ export default new Vuex.Store({
           throw err;
         });
     },
-
     logout({ commit, state }) {
       return Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
         .then(() => {
@@ -91,18 +99,32 @@ export default new Vuex.Store({
           throw err;
         });
     },
-
     fetchTeachers({ commit }) {
       return Axios
         .get('/api/teacher').then(({ data }) => {
           commit('addTeachers', data);
         });
     },
+    createFeedback({ commit }, feedbackData) {
+      return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
+        .then(({ data }) => {
+          console.log('success', data);
+          commit('addFeedback', data);
+        }).catch((err) => {
+          console.log('failed', err);
+          throw err;
+        });
+    },
+    selectTeacher({ commit }, teacher) {
+      commit('selectTeacher', teacher);
+    },
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
     getTeachers: (state) => (search) => state.teachers
-      .filter((teacher) => teacher.surname.toLowerCase().includes(search)),
+      .filter((teacher) => teacher.surname.toLowerCase().includes(search)
+        || teacher.name.toLowerCase().includes(search)),
+    getSelectedTeacher: (state) => state.selectedTeacher,
   },
 });

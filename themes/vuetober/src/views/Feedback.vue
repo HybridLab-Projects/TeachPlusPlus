@@ -69,7 +69,8 @@
               />
               <b-button
                 variant="danger"
-                class="px-4 py-2"
+                class="px-3 py-2"
+                @click.prevent="createFeedback"
               >
                 Odoslat feedback
               </b-button>
@@ -78,14 +79,16 @@
         </b-col>
         <hr>
 
-        <b-form>
-          <b-form-textarea
-            id="textarea-rows"
-            placeholder="Tall textarea"
-            rows="8"
-            class="textfield"
-          />
-        </b-form>
+          <b-form>
+            <b-form-textarea
+              id="textarea-rows"
+              placeholder="Tall textarea"
+              rows="8"
+              class="textfield"
+              v-model="feedback"
+            />
+          </b-form>
+        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -94,6 +97,20 @@
 <script>
 export default {
   name: 'Feedback',
+  data() {
+    return {
+      teacherId: 2,
+      feedback: '',
+    };
+  },
+  methods: {
+    createFeedback() {
+      const { teacherId, feedback } = this;
+      this.$store.dispatch('createFeedback', { teacherId, feedback }).finally(() => {
+        this.$router.push('teachers');
+      });
+    },
+  },
 };
 </script>
 

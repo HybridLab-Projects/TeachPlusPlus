@@ -1,55 +1,120 @@
 <template>
-  <div>
-    <b-row>
+  <div class="pl-5">
+    <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center">
-        <p class="pr-5 my-auto">
-          Odhlasemie z aplikacie
-        </p>
-        <b-button>Pridat feedback</b-button>
-      </b-col>
-    </b-row>
-    <b-row class="mt-5">
-      <b-col class="d-flex align-items-center">
-        <img
-          src="https://via.placeholder.com/150/"
-          class="mr-5"
+        <b-link
+          class="pr-5 my-auto text-muted font-weight-bold"
+          @click="logout"
         >
-        <div class="my-auto">
-          <h5>SPSE HALOVA</h5>
-          <h1>Emilia Jancuskova</h1>
-          <p>Predmety</p>
-        </div>
-      </b-col>
-    </b-row>
-    <b-row class="mt-5">
-      <b-col>
-        <b-tabs
-          content-class="mt-3"
+          Odhlásenie z aplikácie
+          <b-icon-box-arrow-right
+            font-scale="1.5"
+            shift-v="-2"
+          />
+        </b-link>
+        <b-button
+          variant="danger"
+          class="py-3 px-5"
+          to="feedback"
         >
-          <b-tab
-            title="First"
-            active
-          >
-            <p>I'm the first tab</p>
-          </b-tab>
-          <b-tab title="Second">
-            <p>I'm the second tab</p>
-          </b-tab>
-          <b-tab
-            title="Disabled"
-            disabled
-          >
-            <p>I'm a disabled tab!</p>
-          </b-tab>
-        </b-tabs>
+          Pridať feedback
+        </b-button>
       </b-col>
     </b-row>
+    <div v-if="selectedTeacher">
+      <b-row class="mt-5">
+        <b-col class="d-flex align-items-center">
+          <img
+            class="mb-4"
+            :src="require(`@/assets/img/teacher.png`)"
+            alt=""
+          >
+          <div class="my-auto ml-4">
+            <p class="text-muted font-weight-bold">
+              SPŠE Hálova
+            </p>
+            <h1 class="font-weight-bold">
+              {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
+            </h1>
+            <div class="d-flex align-items-center">
+              <p class="text-muted my-auto mr-3">
+                Predmety
+              </p>
+              <b-badge
+                variant="primary my-auto mr-1"
+                v-for="subject in selectedTeacher.subjects"
+                :key="subject.id"
+              >
+                {{ subject.short }}
+              </b-badge>
+            </div>
+          </div>
+        </b-col>
+      </b-row>
+      <b-row class="mt-5">
+        <b-col>
+          <b-tabs
+            content-class="mt-4"
+            class="tabbs"
+          >
+            <b-tab
+              title="Najnovšie feedbacky"
+              active
+            >
+              <b-row>
+                <b-col
+                  cols="12"
+                  class="pr-5"
+                >
+                  <b-list-group>
+                    <b-list-group-item
+                      v-for="feedback in selectedTeacher.feedbacks"
+                      :key="feedback.id"
+                      class="d-flex align-items-center mb-4 border-0 shadow"
+                    >
+                      <div class="p-2">
+                        {{ feedback.feedback }}
+                      </div>
+                    </b-list-group-item>
+                  </b-list-group>
+                </b-col>
+              </b-row>
+            </b-tab>
+            <b-tab
+              title="Zoradiť podľa počtu hlasov"
+            >
+              <b-badge variant="danger">
+                Danger
+              </b-badge>
+            </b-tab>
+          </b-tabs>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Teacher',
+  computed: {
+    ...mapGetters({
+      selectedTeacher: 'getSelectedTeacher',
+    }),
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+        .then(() => this.$router.push('/'))
+        .catch((err) => {
+          console.log(err.response.data.error);
+          this.$router.push('/');
+        });
+    },
+  },
 };
 </script>
 

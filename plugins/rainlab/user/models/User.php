@@ -160,8 +160,7 @@ class User extends UserBase
     {
         if (is_string($options)) {
             $options = ['default' => $options];
-        }
-        elseif (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = [];
         }
 
@@ -170,8 +169,7 @@ class User extends UserBase
 
         if ($this->avatar) {
             return $this->avatar->getThumb($size, $size, $options);
-        }
-        else {
+        } else {
             return '//www.gravatar.com/avatar/'.
                 md5(strtolower(trim($this->email))).
                 '?s='.$size.
@@ -212,7 +210,7 @@ class User extends UserBase
 
     public function scopeFilterByGroup($query, $filter)
     {
-        return $query->whereHas('groups', function($group) use ($filter) {
+        return $query->whereHas('groups', function ($group) use ($filter) {
             $group->whereIn('id', $filter);
         });
     }
@@ -275,7 +273,8 @@ class User extends UserBase
         if ($this->is_guest) {
             $login = $this->getLogin();
             throw new AuthException(sprintf(
-                'Cannot login user "%s" as they are not registered.', $login
+                'Cannot login user "%s" as they are not registered.',
+                $login
             ));
         }
 
@@ -298,8 +297,7 @@ class User extends UserBase
             ]);
 
             Event::fire('rainlab.user.reactivate', [$this]);
-        }
-        else {
+        } else {
             parent::afterLogin();
         }
 
