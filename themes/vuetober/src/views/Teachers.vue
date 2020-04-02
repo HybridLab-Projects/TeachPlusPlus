@@ -33,5 +33,11 @@ export default {
 <style lang="scss" scoped>
   .searchbg {
     background-color: #fff;
+    height: 100vh;
+  }
+
+  .teacherbg {
+    background-color: #f8f5f3;
+    height: 100vh;
   }
 </style>

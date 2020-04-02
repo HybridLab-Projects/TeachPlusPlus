@@ -1,5 +1,5 @@
 <template>
-  <div class="pl-5">
+  <div class="pl-5 appteacher">
     <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center">
         <b-link
@@ -63,19 +63,21 @@
               <b-row>
                 <b-col
                   cols="12"
-                  class="pr-5"
+                  class="pr-5 feeder"
                 >
-                  <b-list-group>
-                    <b-list-group-item
-                      v-for="feedback in selectedTeacher.feedbacks"
-                      :key="feedback.id"
-                      class="d-flex align-items-center mb-4 border-0 shadow"
-                    >
-                      <div class="p-2">
-                        {{ feedback.content }}
-                      </div>
-                    </b-list-group-item>
-                  </b-list-group>
+                  <div class="">
+                    <b-list-group>
+                      <b-list-group-item
+                        v-for="feedback in selectedTeacher.feedbacks"
+                        :key="feedback.id"
+                        class="d-flex align-items-center mb-4 border-0 shadow"
+                      >
+                        <div class="p-2">
+                          {{ feedback.content }}
+                        </div>
+                      </b-list-group-item>
+                    </b-list-group>
+                  </div>
                 </b-col>
               </b-row>
             </b-tab>
@@ -116,7 +118,9 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
-
+  .feeder {
+    height: 40vh;
+    overflow: auto;
+  }
 </style>

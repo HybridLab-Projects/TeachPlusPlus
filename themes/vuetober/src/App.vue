@@ -23,8 +23,4 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
   font-family: 'Inter', sans-serif;
 }
-
-.appbg {
-  background-color: #f8f5f3;
-}
 </style>
