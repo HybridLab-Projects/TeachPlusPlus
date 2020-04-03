@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="app"
-    class="appbg"
-  >
+  <div id="app">
     <NavBar v-if="!['Teachers'].includes($route.name)" />
     <router-view />
   </div>
