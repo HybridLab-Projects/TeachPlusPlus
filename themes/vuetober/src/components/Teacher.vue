@@ -1,5 +1,5 @@
 <template>
-  <div class="pl-5 appteacher">
+  <div class="pl-5">
     <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center">
         <b-link
@@ -65,7 +65,6 @@
                   cols="12"
                   class="pr-5 feeder"
                 >
-                  <div class="">
                     <b-list-group>
                       <b-list-group-item
                         v-for="feedback in selectedTeacher.feedbacks"
@@ -77,7 +76,6 @@
                         </div>
                       </b-list-group-item>
                     </b-list-group>
-                  </div>
                 </b-col>
               </b-row>
             </b-tab>
