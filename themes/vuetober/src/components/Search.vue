@@ -31,7 +31,7 @@
     <b-row>
       <b-col class="p-0">
         <h6 class="text-secondary ml-4 mb-4 font-weight-bold">
-          Zoznam ucitelov
+          Zoznam učiteľov
         </h6>
         <b-list-group>
           <b-list-group-item

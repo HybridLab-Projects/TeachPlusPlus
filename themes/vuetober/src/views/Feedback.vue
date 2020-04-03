@@ -62,14 +62,26 @@
             >
               <b-form-select
                 class="mr-2 form1"
-                :options="[{ text: 'Choose...', value: null }, 'One', 'Two', 'Three']"
-                :value="null"
-              />
+                v-model="feedback.teacherId"
+              >
+                <b-form-select-option :value="0">
+                  Meno učiteľa
+                </b-form-select-option>
+                <b-form-select-option
+                  v-for="teacher in teachers"
+                  :key="teacher.id"
+                  :value="teacher.id"
+                >
+                  {{ teacher.name }}  {{ teacher.surname }}
+                </b-form-select-option>
+              </b-form-select>
               <b-form-select
                 class="mr-2 form1"
                 :options="[{ text: 'Choose...', value: null }, 'One', 'Two', 'Three']"
                 :value="null"
-              />
+              >
+                ccx
+              </b-form-select>
               <b-button
                 variant="danger"
                 class="px-3 py-2"
@@ -88,7 +100,7 @@
             placeholder="Tall textarea"
             rows="8"
             class="textfield"
-            v-model="feedback"
+            v-model="feedback.feedback"
           />
         </b-form>
       </b-col>
@@ -97,22 +109,43 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Feedback',
   data() {
     return {
-      teacherId: 2,
-      feedback: '',
+      feedback: {
+        feedback: '',
+        teacherId: 0,
+      },
     };
+  },
+  created() {
+    this.$store.dispatch('fetchTeachers');
   },
   methods: {
     createFeedback() {
-      const { teacherId, feedback } = this;
+      const { teacherId, feedback } = this.feedback;
       this.$store.dispatch('createFeedback', { teacherId, feedback }).finally(() => {
         this.$router.push('teachers');
       });
     },
   },
+  computed: {
+    ...mapGetters({
+      getTeachers: 'getTeachers',
+    }),
+    teachers() {
+      return this.getTeachers('').map((teacher) => ({
+        id: teacher.id,
+        name: teacher.name,
+        surname: teacher.surname,
+      }));
+    },
+  },
+
+
 };
 </script>
 
