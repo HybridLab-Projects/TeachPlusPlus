@@ -118,7 +118,7 @@ input.form-control[type=text]:focus:not([readonly]) {
 }
 
 .teachers {
-  height: 70vh;
+  height: 81vh;
   overflow: auto;
 }
 </style>
