@@ -147,9 +147,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      getTeachers: 'getTeachers',
-    }),
+    ...mapGetters([
+      'getTeachers',
+      'getSelectedTeacher',
+    ]),
     teachers() {
       return this.getTeachers('');
     },
@@ -157,7 +158,9 @@ export default {
       return this.teachers.map((teacher) => teacher.subjects);
     },
   },
-
+  mounted() {
+    this.feedback.teacherId = this.getSelectedTeacher.id;
+  },
 
 };
 </script>
