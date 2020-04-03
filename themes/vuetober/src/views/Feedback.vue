@@ -77,10 +77,19 @@
               </b-form-select>
               <b-form-select
                 class="mr-2 form1"
-                :options="[{ text: 'Choose...', value: null }, 'One', 'Two', 'Three']"
-                :value="null"
+                v-model="feedback.subjectId"
+                :disabled="feedback.teacherId === 0"
               >
-                ccx
+                <b-form-select-option :value="0">
+                  Predmet
+                </b-form-select-option>
+                <b-form-select-option
+                  v-for="subject in subjects[feedback.teacherId-1]"
+                  :key="subject.id"
+                  :value="subject.id"
+                >
+                  {{ subject.subject_name }}
+                </b-form-select-option>
               </b-form-select>
               <b-button
                 variant="danger"
@@ -118,6 +127,7 @@ export default {
       feedback: {
         feedback: '',
         teacherId: 0,
+        subjectId: 0,
       },
     };
   },
@@ -127,7 +137,7 @@ export default {
   methods: {
     createFeedback() {
       const { teacherId, feedback } = this.feedback;
-      this.$store.dispatch('createFeedback', { teacherId, feedback }).finally(() => {
+      this.$store.dispatch('createFeedback', { teacherId, feedback }).then(() => {
         this.$router.push('teachers');
       });
     },
@@ -137,11 +147,10 @@ export default {
       getTeachers: 'getTeachers',
     }),
     teachers() {
-      return this.getTeachers('').map((teacher) => ({
-        id: teacher.id,
-        name: teacher.name,
-        surname: teacher.surname,
-      }));
+      return this.getTeachers('');
+    },
+    subjects() {
+      return this.teachers.map((teacher) => teacher.subjects);
     },
   },
 
