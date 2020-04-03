@@ -32,7 +32,10 @@
         cols="9"
         class="mt-4"
       >
-        <div class="d-flex justify-content-end mt-3">
+        <b-link
+          to="teachers"
+          class="d-flex justify-content-end mt-3"
+        >
           <p class="text-muted my-auto mr-2 font-weight-bold">
             Nechcem dať feedback
           </p>
@@ -40,7 +43,8 @@
             :src="require(`@/assets/img/Cross.png`)"
             alt="x"
           >
-        </div>
+        </b-link>
+
         <div class="d-flex align-items-center">
           <img
             :src="require(`@/assets/img/feedplus.png`)"
