@@ -64,7 +64,7 @@
               <b-row>
                 <b-col
                   cols="12"
-                  class="pr-5"
+                  class="pr-5 feeder"
                 >
                   <b-list-group>
                     <b-list-group-item
@@ -117,7 +117,9 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
-
+  .feeder {
+    height: 40vh;
+    overflow: auto;
+  }
 </style>

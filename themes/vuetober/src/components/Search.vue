@@ -29,7 +29,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="p-0">
+      <b-col class="p-0 teachers">
         <h6 class="text-secondary ml-4 mb-4 font-weight-bold">
           Zoznam učiteľov
         </h6>
@@ -115,5 +115,10 @@ input.form-control[type=text]:focus:not([readonly]) {
   color: $purpleColor;
   background-color: $darkerbgColor;
   border-color: $darkerbgColor;
+}
+
+.teachers {
+  height: 81vh;
+  overflow: auto;
 }
 </style>
