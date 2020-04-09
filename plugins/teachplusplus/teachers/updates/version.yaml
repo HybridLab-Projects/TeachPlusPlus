@@ -48,3 +48,9 @@
 1.0.17:
     - 'Updated table teachplusplus_teachers_subjects'
     - builder_table_update_teachplusplus_teachers_subjects_4.php
+1.0.18:
+    - 'Created table teachplusplus_teachers_likes'
+    - builder_table_create_teachplusplus_teachers_likes.php
+1.0.19:
+    - 'Updated table teachplusplus_teachers_likes'
+    - builder_table_update_teachplusplus_teachers_likes.php

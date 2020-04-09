@@ -1,19 +1,44 @@
 <?php
+
+use RainLab\User\Models\User;
+use Teachplusplus\Teachers\Models\Feedback;
+use Teachplusplus\Teachers\Models\Like;
 use Teachplusplus\Teachers\Models\Teacher;
 
-Route::get('api/teacher', function () {
+Route::group(['prefix' => 'api'], function() {
 
-    $teachers = Teacher::with('subjects', 'feedbacks')->get();
+    Route::get('teacher', function () {
+
+        $teachers = Teacher::with('subjects', 'feedbacks.likes')->get();
+        
+        return $teachers;
+    });
     
-
-    return $teachers;
-});
-
-Route::get('api/teacher/{id}', function ($id) {
-
-    $teacher = Teacher::with('subjects', 'feedbacks')->findOrFail($id);
+    Route::get('teacher/{id}', function ($id) {
     
-   
+        $teacher = Teacher::with('subjects', 'feedbacks.likes')->findOrFail($id);
+        
+        return $teacher;
+    });
+    
+    Route::post('like', function () {
 
-    return $teacher;
+        $feedbackId = request()->input('feedback_id');
+        $userId = request()->input('user_id');
+
+        $feedback = Feedback::find($feedbackId);
+        $user = User::find($userId);
+
+        if(Like::where('feedback_id', $feedbackId)->where('user_id', $userId)->exists()) {
+            $like = Like::where('feedback_id', $feedbackId)->where('user_id', $userId)->first();
+            $like->delete();
+            $like->save();
+            
+        } else {
+            $like = Like::create();
+            $like->feedback()->associate($feedback);
+            $like->user()->associate($user);
+            $like->save();
+        }
+    });
 });

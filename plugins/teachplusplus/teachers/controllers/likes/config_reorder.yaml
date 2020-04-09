@@ -1,0 +1,4 @@
+title: Likes
+modelClass: Teachplusplus\Teachers\Models\Like
+toolbar:
+    buttons: reorder_toolbar

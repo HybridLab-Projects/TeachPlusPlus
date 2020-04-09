@@ -17,13 +17,15 @@ class Feedback extends Model
 
 
     public $hasOne =[ 
-
         'subject' => 'Teachplusplus\teachers\Models\Subject'
-        ];
+    ];
 
     public $belongsTo = [
         'teacher' => 'Teachplusplus\Teachers\Models\Teacher',
+    ];
 
+    public $hasMany = [
+        'likes' => 'Teachplusplus\Teachers\Models\Like',
     ];
 
 
