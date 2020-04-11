@@ -1,4 +1,7 @@
 columns:
+    id:
+        label: id
+        type: number
     subject_name:
         label: Predmet
         type: text

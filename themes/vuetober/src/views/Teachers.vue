@@ -24,7 +24,7 @@ export default {
     Search,
     Teacher,
   },
-  created() {
+  mounted() {
     this.$store.dispatch('fetchTeachers');
   },
 };

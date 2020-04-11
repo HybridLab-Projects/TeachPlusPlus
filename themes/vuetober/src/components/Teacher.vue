@@ -15,6 +15,7 @@
         <b-button
           variant="danger"
           class="py-3 px-5"
+          to="feedback"
         >
           Pridať feedback
         </b-button>
@@ -72,7 +73,7 @@
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
                       <div class="p-2">
-                        {{ feedback.content }}
+                        {{ feedback.feedback }}
                       </div>
                     </b-list-group-item>
                   </b-list-group>

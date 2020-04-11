@@ -83,7 +83,6 @@ export default new Vuex.Store({
           throw err;
         });
     },
-
     logout({ commit, state }) {
       return Axios({ url: '/api/invalidate', data: { token: state.token }, method: 'POST' })
         .then(() => {
@@ -95,11 +94,27 @@ export default new Vuex.Store({
           throw err;
         });
     },
-
     fetchTeachers({ commit }) {
       return Axios
         .get('/api/teacher').then(({ data }) => {
           commit('addTeachers', data);
+          console.log(data);
+        });
+    },
+    fetchSelectedTeacher({ commit }, teacherId) {
+      return Axios
+        .get(`api/teacher/${teacherId}`).then(({ data }) => {
+          commit('selectTeacher', data);
+        });
+    },
+    createFeedback({ commit, dispatch }, feedbackData) {
+      return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
+        .then(({ data }) => {
+          console.log('success', data);
+          dispatch('fetchSelectedTeacher', data.teacher.id);
+        }).catch((err) => {
+          console.log('failed', err);
+          throw err;
         });
     },
     selectTeacher({ commit }, teacher) {
