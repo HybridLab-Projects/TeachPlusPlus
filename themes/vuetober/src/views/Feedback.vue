@@ -72,7 +72,7 @@
                   Meno učiteľa
                 </b-form-select-option>
                 <b-form-select-option
-                  v-for="teacher in teachers"
+                  v-for="teacher in getTeachers('')"
                   :key="teacher.id"
                   :value="teacher.id"
                 >
@@ -151,11 +151,8 @@ export default {
       'getTeachers',
       'getSelectedTeacher',
     ]),
-    teachers() {
-      return this.getTeachers('');
-    },
     subjects() {
-      return this.teachers.map((teacher) => teacher.subjects);
+      return this.getTeachers('').map((teacher) => teacher.subjects);
     },
   },
   mounted() {
