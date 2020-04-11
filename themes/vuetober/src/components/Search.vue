@@ -75,7 +75,7 @@ export default {
       selectedTeacher: 'getSelectedTeacher',
     }),
     teachers() {
-      return this.getTeachers(this.searchTeacher);
+      return this.getTeachers(this.searchTeacher.toLowerCase());
     },
   },
   methods: {
