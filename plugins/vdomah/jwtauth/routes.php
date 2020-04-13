@@ -71,7 +71,7 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::post('/signup', function () {
-        $credentials = Input::only('name', 'surname', 'username', 'email', 'password', 'password_confirmation');
+        $credentials = Input::only('name', 'surname', 'username', 'email', 'password', 'password_confirmation', 'agree');
 
         try {
             $userModel = UserModel::create($credentials);
@@ -86,6 +86,7 @@ Route::group(['prefix' => 'api'], function () {
                     'username' => $userModel->username,
                     'email' => $userModel->email,
                     'is_activated' => $userModel->is_activated,
+                    'agree' => $userModel->agree,
                 ];
             }
         } catch (Exception $e) {
