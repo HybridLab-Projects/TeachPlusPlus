@@ -3,7 +3,7 @@
     <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
         <img
-          class="mb-4"
+          class="pb-3"
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
         >

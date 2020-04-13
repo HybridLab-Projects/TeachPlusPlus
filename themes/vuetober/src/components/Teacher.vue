@@ -75,12 +75,16 @@
                       <div class="p-2 mr-auto">
                         {{ feedback.feedback }}
                       </div>
-                      <div class="">
-                        {{ feedback.likes.length }}
+                      <div class="row like-cont">
+                        <div class="like pr-2 p-0 my-auto col">
+                          <p class="font-weight-bold m-0">
+                            {{ feedback.likes.length }}
+                          </p>
+                        </div>
+                        <h3 class="m-0 p-0 col">
+                          <b-link @click="like(feedback)"><b-icon-heart variant="danger" /></b-link>
+                        </h3>
                       </div>
-                      <b-button @click="like(feedback)">
-                        +
-                      </b-button>
                     </b-list-group-item>
                   </b-list-group>
                 </b-col>
@@ -130,5 +134,10 @@ export default {
   .feeder {
     height: 40vh;
     overflow: auto;
+  }
+
+  .icon-btn {
+    background-color: white;
+    border: none;
   }
 </style>
