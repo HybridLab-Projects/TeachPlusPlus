@@ -75,16 +75,19 @@
                       <div class="p-2 mr-auto">
                         {{ feedback.feedback }}
                       </div>
-                      <div class="row like-cont">
-                        <div class="like pr-2 p-0 my-auto col">
-                          <p class="font-weight-bold m-0">
-                            {{ feedback.likes.length }}
-                          </p>
-                        </div>
-                        <h3 class="m-0 p-0 col">
-                          <b-link @click="like(feedback)"><b-icon-heart variant="danger" /></b-link>
-                        </h3>
-                      </div>
+                      <p class="font-weight-bold my-0 pr-2">
+                        {{ feedback.likes.length }}
+                      </p>
+                      <b-link @click="like(feedback)">
+                        <b-icon-heart
+                          variant="danger"
+                          v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
+                        />
+                        <b-icon-heart-fill
+                          variant="danger"
+                          v-else
+                        />
+                      </b-link>
                     </b-list-group-item>
                   </b-list-group>
                 </b-col>
@@ -113,6 +116,7 @@ export default {
   computed: {
     ...mapGetters({
       selectedTeacher: 'getSelectedTeacher',
+      user: 'getUser',
     }),
   },
   methods: {

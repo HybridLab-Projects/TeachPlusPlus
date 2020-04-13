@@ -136,6 +136,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
+    getUser: (state) => state.user,
     getTeachers: (state) => (search) => state.teachers
       .filter((teacher) => teacher.surname.toLowerCase().includes(search)
         || teacher.name.toLowerCase().includes(search)),
