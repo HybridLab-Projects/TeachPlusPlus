@@ -1,4 +1,7 @@
 columns:
+    id:
+        label: id
+        type: number
     name:
         label: Meno
         type: text

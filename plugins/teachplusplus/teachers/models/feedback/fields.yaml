@@ -1,5 +1,5 @@
 fields:
-    content:
+    feedback:
         label: Feedback
         size: ''
         mode: tab

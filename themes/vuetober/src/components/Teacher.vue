@@ -15,6 +15,7 @@
         <b-button
           variant="danger"
           class="py-3 px-5"
+          to="feedback"
         >
           Pridať feedback
         </b-button>
@@ -63,7 +64,7 @@
               <b-row>
                 <b-col
                   cols="12"
-                  class="pr-5"
+                  class="pr-5 feeder"
                 >
                   <b-list-group>
                     <b-list-group-item
@@ -72,7 +73,7 @@
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
                       <div class="p-2">
-                        {{ feedback.content }}
+                        {{ feedback.feedback }}
                       </div>
                     </b-list-group-item>
                   </b-list-group>
@@ -116,7 +117,9 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
-
+  .feeder {
+    height: 40vh;
+    overflow: auto;
+  }
 </style>
