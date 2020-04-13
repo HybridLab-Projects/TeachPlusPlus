@@ -39,17 +39,18 @@
           <p class="text-muted my-auto mr-2 font-weight-bold">
             Nechcem dať feedback
           </p>
-          <img
-            :src="require(`@/assets/img/Cross.png`)"
-            alt="x"
-          >
+          <b-icon-x-circle-fill
+            variant="secondary"
+            font-scale="1.5"
+          />
         </b-link>
 
         <div class="d-flex align-items-center">
-          <img
-            :src="require(`@/assets/img/feedplus.png`)"
-            alt="+"
-          >
+          <b-icon-plus-circle-fill
+            font-scale="5"
+            shift-h="2.5"
+            variant="primary"
+          />
           <div class="ml-5 mb-3 w-100">
             <h6 class="text-muted font-weight-bold">
               SPŠE Hálova
