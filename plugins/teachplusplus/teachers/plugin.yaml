@@ -18,3 +18,8 @@ navigation:
         label: Feedbacks
         url: teachplusplus/teachers/feedbacks
         icon: icon-comment
+        sideMenu:
+            likes:
+                label: Likes
+                url: teachplusplus/teachers/likes
+                icon: icon-thumbs-up

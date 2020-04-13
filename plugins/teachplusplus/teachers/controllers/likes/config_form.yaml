@@ -1,0 +1,10 @@
+name: Likes
+form: $/teachplusplus/teachers/models/like/fields.yaml
+modelClass: Teachplusplus\Teachers\Models\Like
+defaultRedirect: teachplusplus/teachers/likes
+create:
+    redirect: 'teachplusplus/teachers/likes/update/:id'
+    redirectClose: teachplusplus/teachers/likes
+update:
+    redirect: teachplusplus/teachers/likes
+    redirectClose: teachplusplus/teachers/likes
