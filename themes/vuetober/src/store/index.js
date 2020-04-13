@@ -101,17 +101,17 @@ export default new Vuex.Store({
           console.log(data);
         });
     },
-    fetchSelectedTeacher({ commit }, teacherId) {
+    fetchTeacher({ commit }, teacherId) {
       return Axios
         .get(`api/teacher/${teacherId}`).then(({ data }) => {
           commit('selectTeacher', data);
         });
     },
-    createFeedback({ commit, dispatch }, feedbackData) {
+    createFeedback({ dispatch }, feedbackData) {
       return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
         .then(({ data }) => {
           console.log('success', data);
-          dispatch('fetchSelectedTeacher', data.teacher.id);
+          dispatch('fetchTeacher', data.teacher.id);
         }).catch((err) => {
           console.log('failed', err);
           throw err;
@@ -119,6 +119,18 @@ export default new Vuex.Store({
     },
     selectTeacher({ commit }, teacher) {
       commit('selectTeacher', teacher);
+    },
+    like({ dispatch, state }, { id }) {
+      return Axios(
+        { url: '/api/like', data: { feedback_id: id, user_id: state.user.id }, method: 'POST' },
+      )
+        .then((data) => {
+          console.log('liked', data);
+          dispatch('fetchTeacher', state.selectedTeacher.id);
+        }).catch((err) => {
+          console.log(err);
+          throw err;
+        });
     },
   },
   getters: {

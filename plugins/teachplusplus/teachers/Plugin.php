@@ -15,7 +15,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         User::extend(function ($model) {
-            $model->hasMany['like'] = ['Teachplusplus\Teachers\Models\Like'];
+            $model->hasMany['likes'] = ['Teachplusplus\Teachers\Models\Like'];
             $model->addFillable(['agree']);
             $model->bindEvent('model.beforeValidate', function () use ($model) {
                 $model->rules['agree'] = 'required|accepted';

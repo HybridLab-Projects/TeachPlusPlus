@@ -1,13 +1,13 @@
 fields:
-    feedback_id:
+    feedback:
         label: Feedback
-        nameFrom: name
+        nameFrom: feedback
         descriptionFrom: description
         span: auto
         type: relation
-    user_id:
+    user:
         label: Používateľ
-        nameFrom: name
+        nameFrom: username
         descriptionFrom: description
         span: auto
         type: relation

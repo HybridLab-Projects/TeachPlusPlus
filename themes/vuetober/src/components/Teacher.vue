@@ -72,9 +72,15 @@
                       :key="feedback.id"
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
-                      <div class="p-2">
+                      <div class="p-2 mr-auto">
                         {{ feedback.feedback }}
                       </div>
+                      <div class="">
+                        {{ feedback.likes.length }}
+                      </div>
+                      <b-button @click="like(feedback)">
+                        +
+                      </b-button>
                     </b-list-group-item>
                   </b-list-group>
                 </b-col>
@@ -113,6 +119,9 @@ export default {
           console.log(err.response.data.error);
           this.$router.push('/');
         });
+    },
+    like(feedback) {
+      this.$store.dispatch('like', feedback);
     },
   },
 };
