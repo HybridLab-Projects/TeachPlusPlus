@@ -64,7 +64,7 @@
               placeholder="Potvrď heslo"
             />
             <BCheckboxWithValidation
-              v-model="user.confirmation"
+              v-model="user.agree"
               :rules="{ required: { allowFalse: false } }"
             >
               Suhlas
@@ -120,7 +120,7 @@ export default {
         email: '',
         password: '',
         password_confirmation: '',
-        confirmation: false,
+        agree: false,
       },
       error: '',
     };
