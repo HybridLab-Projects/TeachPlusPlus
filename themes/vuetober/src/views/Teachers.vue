@@ -40,6 +40,5 @@ export default {
 
   .teacherbg {
     background-color: #f8f5f3;
-    height: 100vh;
   }
 </style>

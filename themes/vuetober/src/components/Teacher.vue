@@ -68,13 +68,13 @@
                 <b-col
                   class="pr-5 feeder"
                 >
-                  <b-list-group>
+                  <b-list-group class="sajt">
                     <b-list-group-item
                       v-for="feedback in selectedTeacher.feedbacks"
                       :key="feedback.id"
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
-                      <div class="p-2 mr-auto testing">
+                      <div class="p-2 mr-auto">
                         <div class="text-break">
                           {{ feedback.feedback }}
                         </div>
@@ -139,16 +139,28 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .test {
-    height: 100vh;
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
 
-  .feeder {
-    overflow: auto;
-  }
+.feeder {
+  overflow: auto;
+}
 
-  .icon-btn {
-    background-color: white;
-    border: none;
-  }
+.icon-btn {
+  background-color: white;
+  border: none;
+}
+
+.sajt {
+  height: calc(100vh - 365px);
+  overflow-y: scroll;
+  overflow-x: none;
+  padding-right: 10px;
+}
 </style>
