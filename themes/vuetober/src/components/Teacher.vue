@@ -1,5 +1,5 @@
 <template>
-  <div class="pl-5">
+  <div class="pl-5 test">
     <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center">
         <b-link
@@ -21,7 +21,10 @@
         </b-button>
       </b-col>
     </b-row>
-    <div v-if="selectedTeacher">
+    <div
+      class="cont-all"
+      v-if="selectedTeacher"
+    >
       <b-row class="mt-5">
         <b-col class="d-flex align-items-center">
           <img
@@ -63,7 +66,6 @@
             >
               <b-row>
                 <b-col
-                  cols="12"
                   class="pr-5 feeder"
                 >
                   <b-list-group>
@@ -72,10 +74,12 @@
                       :key="feedback.id"
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
-                      <div class="p-2 mr-auto">
-                        {{ feedback.feedback }}
+                      <div class="p-2 mr-auto testing">
+                        <div class="text-break">
+                          {{ feedback.feedback }}
+                        </div>
                       </div>
-                      <p class="font-weight-bold my-0 pr-2">
+                      <p class="font-weight-bold my-0 pr-2 pl-5">
                         {{ feedback.likes.length }}
                       </p>
                       <b-link @click="like(feedback)">
@@ -135,8 +139,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+  .test {
+    height: 100vh;
+  }
+
   .feeder {
-    height: 40vh;
     overflow: auto;
   }
 

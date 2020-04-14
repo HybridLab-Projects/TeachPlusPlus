@@ -3,7 +3,7 @@
     <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
         <img
-          class="pb-3"
+          class="pb-5 w-50"
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
         >
@@ -118,7 +118,6 @@ input.form-control[type=text]:focus:not([readonly]) {
 }
 
 .teachers {
-  height: 81vh;
   overflow: auto;
 }
 </style>
