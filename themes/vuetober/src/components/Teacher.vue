@@ -68,7 +68,7 @@
                 <b-col
                   class="pr-5 feeder"
                 >
-                  <b-list-group class="sajt">
+                  <b-list-group class="feedbacks">
                     <b-list-group-item
                       v-for="feedback in selectedTeacher.feedbacks"
                       :key="feedback.id"
@@ -157,7 +157,7 @@ export default {
   border: none;
 }
 
-.sajt {
+.feedback {
   height: calc(100vh - 365px);
   overflow-y: scroll;
   overflow-x: none;
