@@ -20,6 +20,6 @@ class Plugin extends PluginBase
             $model->bindEvent('model.beforeValidate', function () use ($model) {
                 $model->rules['agree'] = 'required|accepted';
             });
-        }); 
+        });
     }
 }
