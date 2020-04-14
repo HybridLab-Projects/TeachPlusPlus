@@ -157,7 +157,7 @@ export default {
     },
   },
   mounted() {
-    this.feedback.teacherId = this.getSelectedTeacher.id;
+    this.feedback.teacherId = this.getSelectedTeacher.id || 0;
   },
 
 };
