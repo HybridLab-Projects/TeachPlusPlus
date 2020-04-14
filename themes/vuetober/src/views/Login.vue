@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-6 my-auto">
+    <div class="col-md-6 my-auto p-0">
       <h1 class="d-flex justify-content-center test2 mb-5">
         LOGIN
       </h1>
@@ -14,6 +14,7 @@
               name="Používateľské meno"
               v-model="user.username"
               placeholder="Zadaj používateľské meno"
+              class=""
             />
 
             <BTextInputWithValidation
@@ -44,9 +45,7 @@
         </ValidationObserver>
       </div>
     </div>
-    <div class="col-md-2">
-      i
-    </div>
+    <div class="col-md-2 p-0" />
     <div class="d-flex justify-content-center col-md-4 p-0 mb-5 cont_img">
       <img
         class="cont_img_pic"

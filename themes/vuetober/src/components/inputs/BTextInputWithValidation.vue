@@ -81,5 +81,6 @@ export default {
     border-radius: 0;
     border-bottom: 1px solid gray;
     box-shadow: none;
+    width: 30vw;
   }
 </style>

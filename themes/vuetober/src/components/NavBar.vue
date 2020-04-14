@@ -16,6 +16,7 @@
         <img
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
+          class="w-75"
         >
       </b-navbar-brand>
 
@@ -39,7 +40,7 @@
           >
             <b-button
               variant="outline-primary"
-              class="font-weight-bold px-3"
+              class="font-weight-bold px-3 custombtn"
             >
               Registruj sa
             </b-button>
@@ -81,11 +82,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .brand {
-    color: #000;
-  }
+.brand {
+  color: #000;
+}
 
-  .navbar-toggler-icon {
-    color: black;
-  }
+.navbar-toggler-icon {
+  color: black;
+}
 </style>
