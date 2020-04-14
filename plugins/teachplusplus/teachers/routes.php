@@ -23,15 +23,19 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::post('feedback', function () {
         $data = request()->only([
-            'feedback'
+            'feedback',
         ]);
-        $teacherId = request()->input('teacherId');
+        $teacherId = request()->input('teacher_id');
+        $userId = request()->input('user_id');
 
         $teacher = Teacher::find($teacherId);
+        $user = User::find($userId);
 
         $feedback = Feedback::create($data);
         $feedback->teacher()->associate($teacher);
+        $feedback->user()->associate($user);
         $feedback->save();
+        
 
         return $feedback;
     });

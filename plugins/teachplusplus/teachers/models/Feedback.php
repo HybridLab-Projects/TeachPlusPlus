@@ -16,7 +16,8 @@ class Feedback extends Model
      *
      */
     protected $fillable = [
-        'feedback'
+        'feedback',
+        'user_id'
     ];
 
     public $table = 'teachplusplus_teachers_feedbacks';
@@ -28,6 +29,7 @@ class Feedback extends Model
 
     public $belongsTo = [
         'teacher' => 'Teachplusplus\Teachers\Models\Teacher',
+        'user' => 'RainLab\User\Models\User'
     ];
 
     public $hasMany = [
