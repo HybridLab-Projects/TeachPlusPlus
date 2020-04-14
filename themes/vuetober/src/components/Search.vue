@@ -79,8 +79,8 @@ export default {
     },
   },
   methods: {
-    selectTeacher(teacher) {
-      this.$store.dispatch('selectTeacher', teacher);
+    selectTeacher({ id }) {
+      this.$store.dispatch('selectTeacher', id);
     },
   },
 };

@@ -37,8 +37,10 @@ export default new Vuex.Store({
     addTeachers(state, teachers) {
       state.teachers = teachers;
     },
-    selectTeacher(state, teacher) {
-      state.selectedTeacher = teacher;
+    selectTeacher(state, teacherId) {
+      state.selectedTeacher = state.teachers.find(
+        (teacher) => +teacher.id === +teacherId,
+      );
     },
   },
   actions: {
@@ -117,8 +119,8 @@ export default new Vuex.Store({
           throw err;
         });
     },
-    selectTeacher({ commit }, teacher) {
-      commit('selectTeacher', teacher);
+    selectTeacher({ commit }, teacherId) {
+      commit('selectTeacher', teacherId);
     },
     like({ dispatch, state }, { id }) {
       return Axios(
