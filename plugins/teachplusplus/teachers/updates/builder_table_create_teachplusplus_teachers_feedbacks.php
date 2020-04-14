@@ -12,6 +12,7 @@ class BuilderTableCreateTeachplusplusTeachersFeedbacks extends Migration
             $table->increments('id')->unsigned();
             $table->text('feedback')->nullable();
             $table->integer('teacher_id')->nullable();
+            $table->integer('author_id')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

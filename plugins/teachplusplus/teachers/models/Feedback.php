@@ -29,7 +29,7 @@ class Feedback extends Model
 
     public $belongsTo = [
         'teacher' => 'Teachplusplus\Teachers\Models\Teacher',
-        'user' => 'RainLab\User\Models\User'
+        'author' => 'RainLab\User\Models\User'
     ];
 
     public $hasMany = [
