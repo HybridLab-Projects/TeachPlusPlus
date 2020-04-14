@@ -2,6 +2,7 @@
 
 use RainLab\User\Models\User;
 use System\Classes\PluginBase;
+use RainLab\User\Controllers\Users as UsersController;
 
 class Plugin extends PluginBase
 {
@@ -21,5 +22,22 @@ class Plugin extends PluginBase
                 $model->rules['agree'] = 'required|accepted';
             });
         });
+
+
+        UsersController::extendFormFields(function($form, $model, $context){
+
+            $form->addFields([
+
+                'agree' => [
+                    'label' => 'Agree',
+                    'type' => 'checkbox',
+                    'default' => false
+                
+                ],
+
+            ]);
+
+        });
+
     }
 }
