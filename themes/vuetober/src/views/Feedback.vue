@@ -65,11 +65,11 @@
               inline
               class="mt-4"
             >
-              <b-form-select
-                class="mr-2 form1"
+              <BSelectWithValidation
+                rules="required"
                 v-model="feedback.teacherId"
               >
-                <b-form-select-option :value="0">
+                <b-form-select-option :value="''">
                   Meno učiteľa
                 </b-form-select-option>
                 <b-form-select-option
@@ -79,23 +79,24 @@
                 >
                   {{ teacher.name }}  {{ teacher.surname }}
                 </b-form-select-option>
-              </b-form-select>
-              <b-form-select
+              </BSelectWithValidation>
+              <BSelectWithValidation
                 class="mr-2 form1"
                 v-model="feedback.subjectId"
-                :disabled="feedback.teacherId === 0"
+                :disabled="feedback.teacherId === ''"
+                rules="required"
               >
-                <b-form-select-option :value="0">
+                <b-form-select-option :value="''">
                   Predmet
                 </b-form-select-option>
                 <b-form-select-option
-                  v-for="subject in subjects[feedback.teacherId-1]"
+                  v-for="subject in subjects"
                   :key="subject.id"
                   :value="subject.id"
                 >
                   {{ subject.subject_name }}
                 </b-form-select-option>
-              </b-form-select>
+              </BSelectWithValidation>
               <b-button
                 variant="danger"
                 class="px-3 py-2"
@@ -124,15 +125,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import BSelectWithValidation from '@/components/inputs/BSelectWithValidation.vue';
 
 export default {
   name: 'Feedback',
+  components: {
+    BSelectWithValidation,
+  },
   data() {
     return {
       feedback: {
         feedback: '',
-        teacherId: '0',
-        subjectId: '0',
+        teacherId: '',
+        subjectId: '',
       },
     };
   },
@@ -152,11 +157,20 @@ export default {
       'getSelectedTeacher',
     ]),
     subjects() {
-      return this.getTeachers('').map((teacher) => teacher.subjects);
+      if (this.getSelectedTeacher.id) {
+        return this.getSelectedTeacher.subjects.map((subject) => subject);
+      }
+      return [];
     },
   },
   mounted() {
-    this.feedback.teacherId = this.getSelectedTeacher.id || 0;
+    this.feedback.teacherId = this.getSelectedTeacher.id || '';
+  },
+  watch: {
+    // eslint-disable-next-line func-names
+    'feedback.teacherId': function (newId) {
+      this.$store.dispatch('selectTeacher', newId);
+    },
   },
 
 };
@@ -164,6 +178,7 @@ export default {
 
 <style lang="scss" scoped>
 $purpleColor: #5352f6;
+
 .bg-all {
   background-color: $purpleColor;
 }

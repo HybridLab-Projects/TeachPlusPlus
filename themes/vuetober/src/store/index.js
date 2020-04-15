@@ -41,7 +41,7 @@ export default new Vuex.Store({
     selectTeacher(state, teacherId) {
       state.selectedTeacher = state.teachers.find(
         (teacher) => teacher.id === teacherId,
-      );
+      ) || [];
     },
   },
   actions: {
@@ -145,6 +145,7 @@ export default new Vuex.Store({
     getTeachers: (state) => (search) => state.teachers
       .filter((teacher) => teacher.surname.toLowerCase().includes(search)
         || teacher.name.toLowerCase().includes(search)),
+    getTeacherById: (state) => (id) => state.teachers.find((teacher) => teacher.id === id),
     getSelectedTeacher: (state) => state.selectedTeacher,
   },
 });
