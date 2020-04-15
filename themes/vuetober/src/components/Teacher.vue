@@ -118,7 +118,7 @@
         </b-col>
       </b-row>
     </div>
-<!--
+    <!--
     <b-row>
       <b-col>
         <p class="footer-text text-right text-muted pt-4">
