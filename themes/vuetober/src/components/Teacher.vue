@@ -175,7 +175,7 @@ export default {
 }
 
 .feedbacks {
-  height: calc(100vh - 365px);
+  height: calc(100vh - 345px);
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
