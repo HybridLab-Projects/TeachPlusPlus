@@ -131,8 +131,8 @@ export default {
     return {
       feedback: {
         feedback: '',
-        teacherId: 0,
-        subjectId: 0,
+        teacherId: '0',
+        subjectId: '0',
       },
     };
   },
@@ -141,8 +141,7 @@ export default {
   },
   methods: {
     createFeedback() {
-      const { teacherId, feedback } = this.feedback;
-      this.$store.dispatch('createFeedback', { teacherId, feedback }).then(() => {
+      this.$store.dispatch('createFeedback', this.feedback).then(() => {
         this.$router.push('teachers');
       });
     },
