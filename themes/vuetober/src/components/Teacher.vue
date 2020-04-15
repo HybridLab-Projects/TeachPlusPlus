@@ -74,8 +74,18 @@
                       :key="feedback.id"
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
+                      <img
+                        class="mr-4"
+                        :src="require(`@/assets/img/user.svg`)"
+                        alt=""
+                      >
                       <div class="p-2 mr-auto">
                         <div class="text-break">
+                          <p class="text-secondary mb-0 font-weight-light">
+                            5 minutes ago
+                          </p> <h5 class="font-weight-bold">
+                            Maros
+                          </h5>
                           {{ feedback.feedback }}
                         </div>
                       </div>
