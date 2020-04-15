@@ -26,8 +26,18 @@ export default {
     Search,
     Teacher,
   },
+  props: {
+    id: {
+      type: String,
+      default: '',
+    },
+  },
   mounted() {
-    this.$store.dispatch('fetchTeachers');
+    this.$store.dispatch('fetchTeachers').then(() => {
+      if (this.id) {
+        this.$store.dispatch('selectTeacher', this.id);
+      }
+    });
   },
 };
 </script>

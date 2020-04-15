@@ -33,6 +33,7 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       state.teachers = [];
+      state.selectedTeacher = [];
     },
     addTeachers(state, teachers) {
       state.teachers = teachers;

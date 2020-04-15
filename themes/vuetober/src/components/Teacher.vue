@@ -15,7 +15,7 @@
         <b-button
           variant="danger"
           class="py-3 px-5"
-          to="feedback"
+          to="/feedback"
         >
           Pridať feedback
         </b-button>

@@ -87,7 +87,9 @@ export default {
   },
   methods: {
     selectTeacher({ id }) {
-      this.$store.dispatch('selectTeacher', id);
+      this.$store.dispatch('selectTeacher', id).then(() => {
+        this.$router.push(`/teachers/${id}`).catch(() => {});
+      });
     },
   },
 };

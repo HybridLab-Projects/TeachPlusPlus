@@ -33,7 +33,7 @@
         class="mt-4"
       >
         <b-link
-          to="teachers"
+          to="/teachers"
           class="d-flex justify-content-end mt-3"
         >
           <p class="text-muted my-auto mr-2 font-weight-bold">
@@ -142,7 +142,7 @@ export default {
   methods: {
     createFeedback() {
       this.$store.dispatch('createFeedback', this.feedback).then(() => {
-        this.$router.push('teachers');
+        this.$router.push(`/teachers/${this.getSelectedTeacher.id}`).catch(() => {});
       });
     },
   },

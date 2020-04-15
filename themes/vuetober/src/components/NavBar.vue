@@ -35,7 +35,7 @@
             <strong class="text-secondary">Ešte nemáš účet?</strong>
           </p>
           <b-nav-item
-            to="register"
+            to="/register"
             v-if="!isLoggedIn"
           >
             <b-button

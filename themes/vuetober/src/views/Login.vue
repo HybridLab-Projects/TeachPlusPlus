@@ -80,7 +80,7 @@ export default {
       this.error = '';
       const { user } = this;
       this.$store.dispatch('login', user)
-        .then(() => this.$router.push('teachers'))
+        .then(() => this.$router.push('/teachers'))
         .catch((err) => { this.error = err.response.data.error; });
     },
   },
