@@ -39,7 +39,7 @@ export default new Vuex.Store({
     },
     selectTeacher(state, teacherId) {
       state.selectedTeacher = state.teachers.find(
-        (teacher) => +teacher.id === +teacherId,
+        (teacher) => teacher.id === teacherId,
       );
     },
   },
