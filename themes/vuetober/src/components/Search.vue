@@ -14,7 +14,7 @@
         <b-input-group class="mt-2 mb-5">
           <b-input-group-prepend
             is-text
-            class="border-0"
+            class="border-0 searchbar"
           >
             <b-icon-search class="border-0" />
           </b-input-group-prepend>
@@ -143,5 +143,9 @@ input.form-control[type=text]:focus:not([readonly]) {
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
+}
+
+.searchbar {
+  border: none;
 }
 </style>

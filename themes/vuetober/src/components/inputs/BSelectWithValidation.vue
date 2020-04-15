@@ -16,6 +16,7 @@
         v-bind="$attrs"
         :state="errors[0] ? false : (valid ? true : null)"
         v-model="innerValue"
+        class="addFeedback my-auto"
       >
         <slot />
       </b-form-select>
@@ -72,3 +73,24 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+input.form-control[type=text]:focus:not([readonly]),
+input.form-control[type=password]:focus:not([readonly]) {
+  border-bottom: 1px solid #5352f6;
+  box-shadow: 0 1px 0 0 #5352f6;
+  border-radius: 0;
+}
+.addFeedback {
+  border: none;
+  border-radius: 1px;
+  background-color: #F4F5F8;
+}
+
+.form1[data-v-65d59982] {
+  background-color: #fff;
+  border-radius: 0px;
+  border: none;
+}
+</style>

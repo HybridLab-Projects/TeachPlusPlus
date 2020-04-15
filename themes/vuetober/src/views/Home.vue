@@ -4,16 +4,15 @@
     class="alll px-0 pl-5"
   >
     <div class="row cont-color">
-      <div class="col-md-5 pl-5">
+      <div class="col-lg-5 pl-5">
         <div class="content-container pl-5">
-          <h1 class="display-4 mb-4 text-white">
-            Čo je to, <strong>Teach++</strong>
-          </h1>
+          <h2 class="display-4 mb-4 text-white">
+            Čo je to, <strong class="display-4">Teach++</strong>
+          </h2>
           <p class="text-white">
             <strong>
-              Loorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non lectus erat.
-              Pellentesque tempus lorem a diam finibus, ut consequat lorem aliquam.
-              Nunc pretium tincidunt lacus, at consectetur ex.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut soluta voluptatem exceptu
+              ri nihil consequuntur, eveniet lau
             </strong>
           </p>
           <b-button
@@ -26,7 +25,7 @@
           </b-button>
         </div>
       </div>
-      <div class="col-md-7 justify-content-center">
+      <div class="col-lg-7 justify-content-center">
         <img
           class="cont-img-pic"
           :src="require(`@/assets/img/Group.svg`)"
@@ -54,7 +53,8 @@ export default {
 }
 
 .content-container {
-  padding-top: 15rem;
+  padding-top: 10rem;
+  padding-left: 0px;
   max-width: 500px;
   min-width: 430px;
   position: absolute;

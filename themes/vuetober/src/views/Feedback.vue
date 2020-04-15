@@ -46,21 +46,27 @@
         </b-link>
 
         <div class="d-flex align-items-center">
-          <b-icon-plus-circle-fill
-            font-scale="5"
-            shift-h="2.5"
-            variant="primary"
-          />
           <div class="ml-5 mb-3 w-100">
-            <h6 class="text-muted font-weight-bold">
-              SPŠE Hálova
-            </h6>
-            <h1 class="font-weight-bold">
-              Pridať feedback
-            </h1>
-            <p class="text-muted">
-              Pridajte si učiteľa a predmet, ktorý vyučuje
-            </p>
+            <div class="row">
+              <div class="col-md-2 my-auto">
+                <b-icon-plus-circle-fill
+                  font-scale="4"
+                  shift-h="2.5"
+                  variant="primary"
+                />
+              </div>
+              <div class="col-md-10">
+                <h6 class="text-muted font-weight-bold">
+                  SPŠE Hálova
+                </h6>
+                <h1 class="font-weight-bold">
+                  Pridať feedback
+                </h1>
+                <p class="text-muted">
+                  Pridajte si učiteľa a predmet, ktorý vyučuje
+                </p>
+              </div>
+            </div>
             <ValidationObserver
               v-slot="{ passes }"
             >
@@ -72,10 +78,12 @@
                   <BSelectWithValidation
                     rules="required"
                     name="Meno učiteľa"
-                    class="flex-fill mx-3"
+                    class="flex-fill"
                     v-model="feedback.teacherId"
                   >
-                    <b-form-select-option :value="''">
+                    <b-form-select-option
+                      :value="''"
+                    >
                       Meno učiteľa
                     </b-form-select-option>
                     <b-form-select-option

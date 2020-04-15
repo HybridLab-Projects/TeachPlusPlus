@@ -81,12 +81,14 @@
                       >
                       <div class="p-2 mr-auto">
                         <div class="text-break">
-                          <p class="text-secondary mb-0 font-weight-light">
+                          <p class="text-secondary mb-0 font-weight-light time">
                             {{ toTime(feedback.created_at) }}
-                          </p> <h5 class="font-weight-bold">
+                          </p> <h6 class="font-weight-bold">
                             {{ feedback.author.username }}
-                          </h5>
-                          {{ feedback.feedback }}
+                          </h6>
+                          <div>
+                            {{ feedback.feedback }}
+                          </div>
                         </div>
                       </div>
                       <p class="font-weight-bold my-0 pr-2 pl-5">
@@ -170,6 +172,10 @@ export default {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
+}
+
+.time {
+  font-size: 0.75em;
 }
 
 .feeder {

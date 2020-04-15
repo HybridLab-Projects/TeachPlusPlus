@@ -16,7 +16,7 @@
         <img
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
-          class="w-75"
+          class="w-50"
         >
       </b-navbar-brand>
 
