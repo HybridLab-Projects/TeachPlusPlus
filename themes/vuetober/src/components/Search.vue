@@ -139,7 +139,7 @@ input.form-control[type=text]:focus:not([readonly]) {
 }
 
 .search {
-  height: calc(100vh - 295px);
+  height: calc(100vh - 20rem);
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
