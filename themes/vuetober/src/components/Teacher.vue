@@ -174,7 +174,7 @@ export default {
   border: none;
 }
 
-.feedback {
+.feedbacks {
   height: calc(100vh - 365px);
   overflow-y: scroll;
   overflow-x: none;
