@@ -141,8 +141,8 @@ export default {
   },
   methods: {
     createFeedback() {
-      const { teacherId, feedback } = this.feedback;
-      this.$store.dispatch('createFeedback', { teacherId, feedback }).then(() => {
+      const { teacherId, subjectId, feedback } = this.feedback;
+      this.$store.dispatch('createFeedback', { teacherId, subjectId, feedback }).then(() => {
         this.$router.push('teachers');
       });
     },

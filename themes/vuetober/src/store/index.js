@@ -106,11 +106,17 @@ export default new Vuex.Store({
     fetchTeacher({ commit }, teacherId) {
       return Axios
         .get(`api/teacher/${teacherId}`).then(({ data }) => {
-          commit('selectTeacher', data);
+          commit('selectTeacher', data.id);
         });
     },
-    createFeedback({ dispatch }, feedbackData) {
-      return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
+    createFeedback({ dispatch, state }, { teacherId, subjectId, feedback }) {
+      return Axios({
+        url: '/api/feedback',
+        data: {
+          feedback, teacher_id: teacherId, subject_id: subjectId, user_id: state.user.id,
+        },
+        method: 'POST',
+      })
         .then(({ data }) => {
           console.log('success', data);
           dispatch('fetchTeacher', data.teacher.id);

@@ -104,6 +104,13 @@
         </b-col>
       </b-row>
     </div>
+    <b-row>
+      <b-col>
+        <p class="footer-text text-right text-muted pt-4">
+          Sledujte nás na sociálnych sieťach
+        </p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -135,13 +142,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .feeder {
-    height: 40vh;
-    overflow: auto;
-  }
+.feeder {
+  height: 54.5vh;
+  overflow: auto;
+}
 
-  .icon-btn {
-    background-color: white;
-    border: none;
-  }
+.icon-btn {
+  background-color: white;
+  border: none;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  border-top: 1px #D7D7E8 solid;
+}
+
 </style>
