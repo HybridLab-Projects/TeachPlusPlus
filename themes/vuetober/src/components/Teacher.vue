@@ -118,6 +118,7 @@
         </b-col>
       </b-row>
     </div>
+<!--
     <b-row>
       <b-col>
         <p class="footer-text text-right text-muted pt-4">
@@ -125,6 +126,7 @@
         </p>
       </b-col>
     </b-row>
+-->
   </div>
 </template>
 
@@ -175,7 +177,7 @@ export default {
 }
 
 .feedbacks {
-  height: calc(100vh - 345px);
+  height: calc(100vh - 365px);
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;

@@ -3,7 +3,7 @@
     <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
         <b-img
-          class="pb-3 w-25"
+          class="pb-3 w-50"
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
         />
@@ -33,7 +33,7 @@
         <h6 class="text-secondary ml-4 mb-4 font-weight-bold">
           Zoznam učiteľov
         </h6>
-        <b-list-group>
+        <b-list-group class="search">
           <b-list-group-item
             v-for="teacher in teachers"
             :key="teacher.id"
@@ -100,6 +100,14 @@ $purpleColor: #5352f6;
 $bgColor:  #f3f5f8;
 $darkerbgColor: #D7D7E8;
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 .teacher-name {
   font-size: 0.875rem;
 }
@@ -126,12 +134,14 @@ input.form-control[type=text]:focus:not([readonly]) {
   border-color: $darkerbgColor;
 }
 
-.teachers {
-  height: 74vh;
-  overflow: auto;
-}
-
 .footer-text {
   font-size: 0.875rem;
+}
+
+.search {
+  height: calc(100vh - 295px);
+  overflow-y: scroll;
+  overflow-x: none;
+  padding-right: 10px;
 }
 </style>
