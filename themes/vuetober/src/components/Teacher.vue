@@ -118,6 +118,13 @@
         </b-col>
       </b-row>
     </div>
+    <b-row>
+      <b-col>
+        <p class="footer-text text-right text-muted pt-4">
+          Sledujte nás na sociálnych sieťach
+        </p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -172,5 +179,10 @@ export default {
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  border-top: 1px #D7D7E8 solid;
 }
 </style>

@@ -2,11 +2,11 @@
   <div>
     <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
-        <img
-          class="pb-5 w-50"
+        <b-img
+          class="pb-3 w-25"
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
-        >
+        />
       </b-col>
     </b-row>
     <b-row>
@@ -54,6 +54,13 @@
             </b-badge>
           </b-list-group-item>
         </b-list-group>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <p class="footer-text text-center text-muted mt-5">
+          &copy; 2020 Všetky práva vyhradené <strong>TEACH++</strong>
+        </p>
       </b-col>
     </b-row>
   </div>
@@ -118,6 +125,11 @@ input.form-control[type=text]:focus:not([readonly]) {
 }
 
 .teachers {
+  height: 74vh;
   overflow: auto;
+}
+
+.footer-text {
+  font-size: 0.875rem;
 }
 </style>
