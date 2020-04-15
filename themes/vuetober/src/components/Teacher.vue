@@ -157,7 +157,7 @@ export default {
     },
     toTime(time) {
       Moment.locale('sk');
-      return Moment(time).format('DD. MMMM YYYY, H:m');
+      return Moment(Moment.utc(time)).local().format('DD. MMMM YYYY, H:mm');
     },
   },
 };
