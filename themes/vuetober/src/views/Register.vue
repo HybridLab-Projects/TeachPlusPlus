@@ -89,7 +89,7 @@
         </ValidationObserver>
       </div>
     </div>
-    <div class="d-flex justify-content-center col-lg-6 p-0 mb-5 cont_img">
+    <div class="d-flex justify-content-center col-sm-6 p-0 mb-5 cont_img">
       <img
         class="cont_img_pic"
         :src="require(`@/assets/img/Group.svg`)"
