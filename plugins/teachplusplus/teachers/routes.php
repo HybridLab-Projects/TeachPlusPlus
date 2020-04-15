@@ -19,7 +19,7 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::post('feedback', function () {
-        $data = request()->only([
+        $feedbackData = request()->only([
             'feedback',
         ]);
         $teacherId = request()->input('teacher_id');
@@ -28,12 +28,11 @@ Route::group(['prefix' => 'api'], function () {
         $teacher = Teacher::find($teacherId);
         $author = User::find($authorId);
 
-        $feedback = Feedback::create($data);
+        $feedback = Feedback::create($feedbackData);
         $feedback->teacher()->associate($teacher);
         $feedback->author()->associate($author);
         $feedback->save();
         
-
         return $feedback;
     });
   
@@ -44,8 +43,8 @@ Route::group(['prefix' => 'api'], function () {
         $feedback = Feedback::find($feedbackId);
         $user = User::find($userId);
 
-        if (Like::where('feedback_id', $feedbackId)->where('user_id', $userId)->exists()) {
-            $like = Like::where('feedback_id', $feedbackId)->where('user_id', $userId)->first();
+        if (Like::where(['feedback_id' => $feedbackId, 'user_id' => $userId])->exists()) {
+            $like = Like::where(['feedback_id' => $feedbackId, 'user_id' => $userId])->first();
             $like->delete();
             $like->save();
         } else {
