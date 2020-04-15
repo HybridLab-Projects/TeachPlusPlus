@@ -87,6 +87,6 @@ export default {
 }
 
 .navbar-toggler-icon {
-  color: black;
+  color: #000;
 }
 </style>
