@@ -61,63 +61,72 @@
             <p class="text-muted">
               Pridajte si učiteľa a predmet, ktorý vyučuje
             </p>
-            <b-form
-              inline
-              class="mt-4"
+            <ValidationObserver
+              v-slot="{ passes }"
             >
-              <BSelectWithValidation
-                rules="required"
-                v-model="feedback.teacherId"
+              <b-form
+                class="mt-4"
+                @submit.enter.prevent="passes(createFeedback)"
               >
-                <b-form-select-option :value="''">
-                  Meno učiteľa
-                </b-form-select-option>
-                <b-form-select-option
-                  v-for="teacher in getTeachers('')"
-                  :key="teacher.id"
-                  :value="teacher.id"
-                >
-                  {{ teacher.name }}  {{ teacher.surname }}
-                </b-form-select-option>
-              </BSelectWithValidation>
-              <BSelectWithValidation
-                class="mr-2 form1"
-                v-model="feedback.subjectId"
-                :disabled="feedback.teacherId === ''"
-                rules="required"
-              >
-                <b-form-select-option :value="''">
-                  Predmet
-                </b-form-select-option>
-                <b-form-select-option
-                  v-for="subject in subjects"
-                  :key="subject.id"
-                  :value="subject.id"
-                >
-                  {{ subject.subject_name }}
-                </b-form-select-option>
-              </BSelectWithValidation>
-              <b-button
-                variant="danger"
-                class="px-3 py-2"
-                @click.prevent="createFeedback"
-              >
-                Odoslať feedback
-              </b-button>
-            </b-form>
+                <div class="d-flex">
+                  <BSelectWithValidation
+                    rules="required"
+                    name="Meno učiteľa"
+                    class="flex-fill mx-3"
+                    v-model="feedback.teacherId"
+                  >
+                    <b-form-select-option :value="''">
+                      Meno učiteľa
+                    </b-form-select-option>
+                    <b-form-select-option
+                      v-for="teacher in getTeachers('')"
+                      :key="teacher.id"
+                      :value="teacher.id"
+                    >
+                      {{ teacher.name }}  {{ teacher.surname }}
+                    </b-form-select-option>
+                  </BSelectWithValidation>
+                  <BSelectWithValidation
+                    class="mr-2 form1 flex-fill mx-3"
+                    v-model="feedback.subjectId"
+                    :disabled="feedback.teacherId === ''"
+                    rules="required"
+                    name="Predmet"
+                  >
+                    <b-form-select-option :value="''">
+                      Predmet
+                    </b-form-select-option>
+                    <b-form-select-option
+                      v-for="subject in subjects"
+                      :key="subject.id"
+                      :value="subject.id"
+                    >
+                      {{ subject.subject_name }}
+                    </b-form-select-option>
+                  </BSelectWithValidation>
+                  <b-button
+                    variant="danger"
+                    type="submit"
+                    class="px-3 py-2 flex-fill mx-3"
+                  >
+                    Odoslať feedback
+                  </b-button>
+                </div>
+                <hr>
+
+                <BTextAreaWithValidation
+                  id="textarea-rows"
+                  placeholder="Feedback"
+                  rows="8"
+                  class="textfield"
+                  v-model="feedback.feedback"
+                  name="Feedback"
+                  rules="required"
+                />
+              </b-form>
+            </ValidationObserver>
           </div>
         </div>
-        <hr>
-
-        <b-form>
-          <b-form-textarea
-            id="textarea-rows"
-            placeholder="Tall textarea"
-            rows="8"
-            class="textfield"
-            v-model="feedback.feedback"
-          />
-        </b-form>
       </b-col>
     </b-row>
   </b-container>
@@ -125,12 +134,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { ValidationObserver } from 'vee-validate';
 import BSelectWithValidation from '@/components/inputs/BSelectWithValidation.vue';
+import BTextAreaWithValidation from '@/components/inputs/BTextAreaWithValidation.vue';
 
 export default {
   name: 'Feedback',
   components: {
     BSelectWithValidation,
+    BTextAreaWithValidation,
+    ValidationObserver,
   },
   data() {
     return {
@@ -184,7 +197,6 @@ $purpleColor: #5352f6;
 }
 
 .form1 {
-  width: 30%;
   background-color: #F4F5F8;
   border-radius: 0px;
   border: none;
