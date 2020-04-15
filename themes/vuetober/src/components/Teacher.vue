@@ -1,5 +1,5 @@
 <template>
-  <div class="pl-5">
+  <div class="pl-5 test">
     <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center">
         <b-link
@@ -21,7 +21,10 @@
         </b-button>
       </b-col>
     </b-row>
-    <div v-if="selectedTeacher">
+    <div
+      class="cont-all"
+      v-if="selectedTeacher"
+    >
       <b-row class="mt-5">
         <b-col class="d-flex align-items-center">
           <img
@@ -63,19 +66,30 @@
             >
               <b-row>
                 <b-col
-                  cols="12"
                   class="pr-5 feeder"
                 >
-                  <b-list-group>
+                  <b-list-group class="feedbacks">
                     <b-list-group-item
                       v-for="feedback in selectedTeacher.feedbacks"
                       :key="feedback.id"
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
+                      <img
+                        class="mr-4"
+                        :src="require(`@/assets/img/user.svg`)"
+                        alt=""
+                      >
                       <div class="p-2 mr-auto">
-                        {{ feedback.feedback }}
+                        <div class="text-break">
+                          <p class="text-secondary mb-0 font-weight-light">
+                            5 minutes ago
+                          </p> <h5 class="font-weight-bold">
+                            Maros
+                          </h5>
+                          {{ feedback.feedback }}
+                        </div>
                       </div>
-                      <p class="font-weight-bold my-0 pr-2">
+                      <p class="font-weight-bold my-0 pr-2 pl-5">
                         {{ feedback.likes.length }}
                       </p>
                       <b-link @click="like(feedback)">
@@ -142,8 +156,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 .feeder {
-  height: 54.5vh;
   overflow: auto;
 }
 
@@ -152,9 +174,15 @@ export default {
   border: none;
 }
 
+.feedback {
+  height: calc(100vh - 365px);
+  overflow-y: scroll;
+  overflow-x: none;
+  padding-right: 10px;
+}
+
 .footer-text {
   font-size: 0.875rem;
   border-top: 1px #D7D7E8 solid;
 }
-
 </style>

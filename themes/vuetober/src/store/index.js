@@ -39,7 +39,7 @@ export default new Vuex.Store({
     },
     selectTeacher(state, teacherId) {
       state.selectedTeacher = state.teachers.find(
-        (teacher) => +teacher.id === +teacherId,
+        (teacher) => teacher.id === teacherId,
       );
     },
   },
@@ -96,20 +96,17 @@ export default new Vuex.Store({
           throw err;
         });
     },
-    fetchTeachers({ commit }) {
+    fetchTeachers({ commit, state }) {
       return Axios
         .get('/api/teacher').then(({ data }) => {
           commit('addTeachers', data);
+          if (state.selectedTeacher.id) {
+            commit('selectTeacher', state.selectedTeacher.id);
+          }
           console.log(data);
         });
     },
-    fetchTeacher({ commit }, teacherId) {
-      return Axios
-        .get(`api/teacher/${teacherId}`).then(({ data }) => {
-          commit('selectTeacher', data.id);
-        });
-    },
-    createFeedback({ dispatch, state }, { teacherId, subjectId, feedback }) {
+    createFeedback({ state }, { feedback, teacherId, subjectId }) {
       return Axios({
         url: '/api/feedback',
         data: {
@@ -119,7 +116,6 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log('success', data);
-          dispatch('fetchTeacher', data.teacher.id);
         }).catch((err) => {
           console.log('failed', err);
           throw err;
@@ -134,7 +130,7 @@ export default new Vuex.Store({
       )
         .then((data) => {
           console.log('liked', data);
-          dispatch('fetchTeacher', state.selectedTeacher.id);
+          dispatch('fetchTeachers');
         }).catch((err) => {
           console.log(err);
           throw err;
