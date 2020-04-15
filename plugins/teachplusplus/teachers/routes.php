@@ -7,7 +7,7 @@ use Teachplusplus\Teachers\Models\Teacher;
 
 Route::group(['prefix' => 'api'], function () {
     Route::get('teacher', function () {
-        $teachers = Teacher::with('subjects', 'feedbacks.likes')->get();
+        $teachers = Teacher::with('subjects', 'feedbacks.likes', 'feedbacks.author')->get();
         
         return $teachers;
     });

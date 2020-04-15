@@ -82,9 +82,9 @@
                       <div class="p-2 mr-auto">
                         <div class="text-break">
                           <p class="text-secondary mb-0 font-weight-light">
-                            5 minutes ago
+                            {{ toTime(feedback.created_at) }}
                           </p> <h5 class="font-weight-bold">
-                            Maros
+                            {{ feedback.author.username }}
                           </h5>
                           {{ feedback.feedback }}
                         </div>
@@ -133,6 +133,7 @@
 <script>
 
 import { mapGetters } from 'vuex';
+import Moment from 'moment';
 
 export default {
   name: 'Teacher',
@@ -153,6 +154,10 @@ export default {
     },
     like(feedback) {
       this.$store.dispatch('like', feedback);
+    },
+    toTime(time) {
+      Moment.locale('sk');
+      return Moment(time).format('DD. MMMM YYYY, H:m');
     },
   },
 };
