@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'backendTimezone' => 'UTC',
+    'backendTimezone' => 'Europe/Bratislava',
 
     /*
     |--------------------------------------------------------------------------
