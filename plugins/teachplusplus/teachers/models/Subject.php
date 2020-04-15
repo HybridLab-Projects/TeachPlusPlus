@@ -29,8 +29,8 @@ class Subject extends Model
         ]
     ];
 
-    public $belongsTo = [
-        'feedback' => 'Teachplusplus\Teachers\Models\Feedback'
+    public $hasMany = [
+        'feedbacks' => 'Teachplusplus\Teachers\Models\Feedback'
     ];
 
    

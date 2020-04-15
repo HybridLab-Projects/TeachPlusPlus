@@ -51,3 +51,6 @@
 1.0.20:
     - 'Created table teachplusplus_teachers_extend_user'
     - builder_table_create_teachplusplus_teachers_extend_user.php
+1.0.21:
+    - 'Updated table teachplusplus_teachers_subjects'
+    - builder_table_update_teachplusplus_teachers_subjects_5.php

@@ -22,14 +22,10 @@ class Feedback extends Model
 
     public $table = 'teachplusplus_teachers_feedbacks';
 
-
-    public $hasOne =[
-        'subject' => 'Teachplusplus\teachers\Models\Subject'
-    ];
-
     public $belongsTo = [
         'teacher' => 'Teachplusplus\Teachers\Models\Teacher',
-        'author' => 'RainLab\User\Models\User'
+        'author' => 'RainLab\User\Models\User',
+        'subject' => 'Teachplusplus\Teachers\Models\Subject'
     ];
 
     public $hasMany = [

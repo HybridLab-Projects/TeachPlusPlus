@@ -3,6 +3,7 @@
 use RainLab\User\Models\User;
 use Teachplusplus\Teachers\Models\Feedback;
 use Teachplusplus\Teachers\Models\Like;
+use Teachplusplus\Teachers\Models\Subject;
 use Teachplusplus\Teachers\Models\Teacher;
 
 Route::group(['prefix' => 'api'], function () {
@@ -23,13 +24,17 @@ Route::group(['prefix' => 'api'], function () {
             'feedback',
         ]);
         $teacherId = request()->input('teacher_id');
+        $subjectId = request()->input('subject_id');
         $authorId = request()->input('user_id');
+        
 
         $teacher = Teacher::find($teacherId);
+        $subject = Subject::find($subjectId);
         $author = User::find($authorId);
 
         $feedback = Feedback::create($feedbackData);
         $feedback->teacher()->associate($teacher);
+        $feedback->subject()->associate($subject);
         $feedback->author()->associate($author);
         $feedback->save();
         
