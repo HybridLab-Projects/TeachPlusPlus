@@ -3,16 +3,18 @@
     fluid
     class="alll px-0 pl-5"
   >
-    <div class="row cont-color">
-      <div class="col-lg-5 pl-5">
+    <b-row class="cont-color">
+      <b-col
+        cols="5"
+        class="pl-5"
+      >
         <div class="content-container pl-5">
           <h2 class="display-4 mb-4 text-white">
-            Čo je to, <strong class="display-4">Teach++</strong>
+            Čo je to, <strong>Teach++</strong>
           </h2>
           <p class="text-white">
             <strong>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut soluta voluptatem exceptu
-              ri nihil consequuntur, eveniet lau
+              Zanechaj učiteľovi spätnú väzbu, vďaka ktorej bude hodina pre obe strany príjemnejšia!
             </strong>
           </p>
           <b-button
@@ -24,15 +26,18 @@
             Prihlásiť sa
           </b-button>
         </div>
-      </div>
-      <div class="col-lg-7 justify-content-center">
+      </b-col>
+      <b-col
+        cols="7"
+        class="justify-content-center"
+      >
         <img
           class="cont-img-pic"
           :src="require(`@/assets/img/Group.svg`)"
           alt
         >
-      </div>
-    </div>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -53,9 +58,9 @@ export default {
 }
 
 .content-container {
-  padding-top: 10rem;
+  padding-top: 15rem;
   padding-left: 0px;
-  max-width: 500px;
+  max-width: 550px;
   min-width: 430px;
   position: absolute;
   z-index: 100;

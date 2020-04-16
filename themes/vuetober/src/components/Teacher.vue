@@ -22,8 +22,8 @@
       </b-col>
     </b-row>
     <div
-      class="cont-all"
-      v-if="selectedTeacher"
+      class=""
+      v-if="selectedTeacher.id"
     >
       <b-row class="mt-5">
         <b-col class="d-flex align-items-center">
@@ -120,6 +120,37 @@
         </b-col>
       </b-row>
     </div>
+    <div v-else>
+      <b-row class="">
+        <b-col class="d-flex align-items-center">
+          <img
+            class="mb-4"
+            :src="require(`@/assets/img/user.svg`)"
+            alt=""
+          >
+          <div class="my-auto ml-4">
+            <p class="text-muted font-weight-bold">
+              SPŠE Hálova
+            </p>
+            <h1 class="font-weight-bold">
+              Vitaj {{ user.name }} {{ user.surname }}
+            </h1>
+            <div class="d-flex align-items-center">
+              <p class="text-muted my-auto mr-3">
+                Vyber si učiteľa, ktorého feedbacky chceš prezerať!
+              </p>
+              <b-badge
+                variant="primary my-auto mr-1"
+                v-for="subject in selectedTeacher.subjects"
+                :key="subject.id"
+              >
+                {{ subject.short }}
+              </b-badge>
+            </div>
+          </div>
+        </b-col>
+      </b-row>
+    </div>
     <!--
     <b-row>
       <b-col>
@@ -198,4 +229,5 @@ export default {
   font-size: 0.875rem;
   border-top: 1px #D7D7E8 solid;
 }
+
 </style>

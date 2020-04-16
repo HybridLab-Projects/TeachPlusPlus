@@ -21,10 +21,8 @@
         <hr class="border-white">
         <div class="pl-3">
           <p class="mt-5 pt-5">
-            Milý pán učiteľ,<br><br>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Magni temporibus provident mollitia exercitationem in
-            voluptatum ut assumenda iste consequuntur cum.
+            Milý pán učiteľ/Milá pani učiteľka,<br><br>
+            Na dnešnej hodine sa mi páčilo že ..., no mohli by sme/ste ...
           </p>
         </div>
       </b-col>
@@ -33,7 +31,7 @@
         class="mt-4"
       >
         <b-link
-          to="/teachers"
+          :to="`/teachers/${this.getSelectedTeacher.id}`"
           class="d-flex justify-content-end mt-3"
         >
           <p class="text-muted my-auto mr-2 font-weight-bold">
@@ -63,7 +61,7 @@
                   Pridať feedback
                 </h1>
                 <p class="text-muted">
-                  Pridajte si učiteľa a predmet, ktorý vyučuje
+                  Vyberte si učiteľa a predmet, ktorý vyučuje
                 </p>
               </div>
             </div>
@@ -191,6 +189,7 @@ export default {
     // eslint-disable-next-line func-names
     'feedback.teacherId': function (newId) {
       this.$store.dispatch('selectTeacher', newId);
+      this.feedback.subjectId = '';
     },
   },
 
