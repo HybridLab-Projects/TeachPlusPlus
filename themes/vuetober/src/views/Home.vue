@@ -38,6 +38,13 @@
         >
       </b-col>
     </b-row>
+    <b-row class="footer">
+      <b-col>
+        <p class="footer-text text-center text-muted mt-5">
+          &copy; 2020 Všetky práva vyhradené <strong>TEACH++</strong>
+        </p>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -50,7 +57,7 @@ export default {
 <style lang="scss" scoped>
 .cont-color {
   height: 80vh;
-  width: 97.5vw;
+  width: 97vw;
   background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
   border-radius: 0px 0px 0px 10rem;
   position: absolute;
@@ -69,5 +76,14 @@ export default {
 .cont-img-pic {
   height: 80vh;
   transform: translateX(0%) translateY(20%);
+}
+
+.footer {
+  position: absolute;
+  top: 90vh;
+}
+
+.footer-text {
+  font-size: 0.875rem;
 }
 </style>
