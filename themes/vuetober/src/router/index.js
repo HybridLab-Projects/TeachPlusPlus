@@ -9,6 +9,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isLoggedIn) { next({ name: 'Teachers' }); } else next();
+    },
   },
   {
     path: '/login',
@@ -39,6 +42,9 @@ const routes = [
     path: '/feedback',
     name: 'Feedback',
     component: () => import(/* webpackChunkName: "about" */ '../views/Feedback.vue'),
+    beforeEnter: (to, from, next) => {
+      if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
+    },
   },
 ];
 
