@@ -16,6 +16,7 @@
         <img
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
+          class="w-50"
         >
       </b-navbar-brand>
 
@@ -34,12 +35,12 @@
             <strong class="text-secondary">Ešte nemáš účet?</strong>
           </p>
           <b-nav-item
-            to="register"
+            to="/register"
             v-if="!isLoggedIn"
           >
             <b-button
               variant="outline-primary"
-              class="font-weight-bold px-3"
+              class="font-weight-bold px-3 custombtn"
             >
               Registruj sa
             </b-button>
@@ -81,11 +82,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .brand {
-    color: #000;
-  }
+.brand {
+  color: #000;
+}
 
-  .navbar-toggler-icon {
-    color: black;
-  }
+.navbar-toggler-icon {
+  color: #000;
+}
 </style>

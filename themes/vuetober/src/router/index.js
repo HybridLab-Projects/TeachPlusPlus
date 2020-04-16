@@ -27,12 +27,13 @@ const routes = [
     },
   },
   {
-    path: '/teachers',
+    path: '/teachers/:id?',
     name: 'Teachers',
     component: () => import(/* webpackChunkName: "about" */ '../views/Teachers.vue'),
     beforeEnter: (to, from, next) => {
       if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
     },
+    props: true,
   },
   {
     path: '/feedback',

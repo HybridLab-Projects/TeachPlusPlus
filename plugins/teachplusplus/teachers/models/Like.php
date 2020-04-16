@@ -17,7 +17,7 @@ class Like extends Model
 
 
     public $belongsTo = [
-        'feedback' => 'Teachplusplus\Teachers\Models\Feedback',
+        'feedback' => 'Teachplusplus\teachers\Models\Feedback',
         'user' => 'Rainlab\User\Models\User',
     ];
 

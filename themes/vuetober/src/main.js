@@ -31,6 +31,7 @@ extend('containsNumber', {
   validate: (value) => /\d/.test(value),
   message: '{_field_} musí obsahovať číslicu',
 });
+
 Vue.component('ValidationProvider', ValidationProvider);
 
 

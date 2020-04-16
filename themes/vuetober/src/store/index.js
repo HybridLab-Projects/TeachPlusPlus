@@ -33,12 +33,15 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       state.teachers = [];
+      state.selectedTeacher = [];
     },
     addTeachers(state, teachers) {
       state.teachers = teachers;
     },
-    selectTeacher(state, teacher) {
-      state.selectedTeacher = teacher;
+    selectTeacher(state, teacherId) {
+      state.selectedTeacher = state.teachers.find(
+        (teacher) => teacher.id === teacherId,
+      ) || [];
     },
   },
   actions: {
@@ -94,39 +97,55 @@ export default new Vuex.Store({
           throw err;
         });
     },
-    fetchTeachers({ commit }) {
+    fetchTeachers({ commit, state }) {
       return Axios
         .get('/api/teacher').then(({ data }) => {
           commit('addTeachers', data);
+          if (state.selectedTeacher.id) {
+            commit('selectTeacher', state.selectedTeacher.id);
+          }
           console.log(data);
         });
     },
-    fetchSelectedTeacher({ commit }, teacherId) {
-      return Axios
-        .get(`api/teacher/${teacherId}`).then(({ data }) => {
-          commit('selectTeacher', data);
-        });
-    },
-    createFeedback({ commit, dispatch }, feedbackData) {
-      return Axios({ url: '/api/feedback', data: feedbackData, method: 'POST' })
+    createFeedback({ state }, { feedback, teacherId, subjectId }) {
+      return Axios({
+        url: '/api/feedback',
+        data: {
+          feedback, teacher_id: teacherId, subject_id: subjectId, user_id: state.user.id,
+        },
+        method: 'POST',
+      })
         .then(({ data }) => {
           console.log('success', data);
-          dispatch('fetchSelectedTeacher', data.teacher.id);
         }).catch((err) => {
           console.log('failed', err);
           throw err;
         });
     },
-    selectTeacher({ commit }, teacher) {
-      commit('selectTeacher', teacher);
+    selectTeacher({ commit }, teacherId) {
+      commit('selectTeacher', teacherId);
+    },
+    like({ dispatch, state }, { id }) {
+      return Axios(
+        { url: '/api/like', data: { feedback_id: id, user_id: state.user.id }, method: 'POST' },
+      )
+        .then((data) => {
+          console.log('liked', data);
+          dispatch('fetchTeachers');
+        }).catch((err) => {
+          console.log(err);
+          throw err;
+        });
     },
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
+    getUser: (state) => state.user,
     getTeachers: (state) => (search) => state.teachers
       .filter((teacher) => teacher.surname.toLowerCase().includes(search)
         || teacher.name.toLowerCase().includes(search)),
+    getTeacherById: (state) => (id) => state.teachers.find((teacher) => teacher.id === id),
     getSelectedTeacher: (state) => state.selectedTeacher,
   },
 });

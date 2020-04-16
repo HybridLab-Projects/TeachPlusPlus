@@ -10,7 +10,7 @@
       <b-form-group
         v-bind="$attrs"
       >
-        <b-form-input
+        <b-form-textarea
           v-model="innerValue"
           v-bind="$attrs"
           :state="errors[0] ? false : (valid ? true : null)"
@@ -28,7 +28,7 @@
 import { ValidationProvider } from 'vee-validate';
 
 export default {
-  name: 'BTextInputWithValidation',
+  name: 'BTextAreaWithValidation',
   components: {
     ValidationProvider,
   },

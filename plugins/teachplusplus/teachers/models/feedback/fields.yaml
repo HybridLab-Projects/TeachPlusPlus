@@ -17,3 +17,9 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
+    author:
+        label: Používateľ
+        nameFrom: username
+        descriptionFrom: description
+        span: auto
+        type: relation
