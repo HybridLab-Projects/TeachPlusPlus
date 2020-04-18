@@ -103,7 +103,7 @@
                       Predmet
                     </b-form-select-option>
                     <b-form-select-option
-                      v-for="subject in subjects"
+                      v-for="subject in getSelectedTeacher.subjects"
                       :key="subject.id"
                       :value="subject.id"
                     >
@@ -175,12 +175,6 @@ export default {
       'getTeachers',
       'getSelectedTeacher',
     ]),
-    subjects() {
-      if (this.getSelectedTeacher.id) {
-        return this.getSelectedTeacher.subjects.map((subject) => subject);
-      }
-      return [];
-    },
   },
   mounted() {
     this.feedback.teacherId = this.getSelectedTeacher.id || '';
