@@ -44,7 +44,7 @@
         "october/backend": "~1.0",
         "october/cms": "~1.0",
         "laravel/framework": "^5.5.40",
-        "wikimedia/composer-merge-plugin": "dev-master"
+        "wikimedia/composer-merge-plugin": "1.4.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.7",
@@ -77,7 +77,7 @@
     "config": {
         "preferred-install": "dist",
         "platform": {
-            "php": "7.2.0"
+            "php": "7.0.8"
         }
     },
     "minimum-stability": "dev",
