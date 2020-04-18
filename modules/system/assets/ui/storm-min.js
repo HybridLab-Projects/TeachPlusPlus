@@ -5846,14 +5846,19 @@
                     path = this.matrix ? mapPath(path, this.matrix) : path;
                     for (var i = 1; i < c + 1; i++) {
                         out.push(
-                            r.path(path).attr({
-                                stroke: s.color,
-                                fill: s.fill ? s.color : "none",
-                                "stroke-linejoin": "round",
-                                "stroke-linecap": "round",
-                                "stroke-width": +((s.width / c) * i).toFixed(3),
-                                opacity: +(s.opacity / c).toFixed(3),
-                            })
+                            r
+                                .path(path)
+                                .attr({
+                                    stroke: s.color,
+                                    fill: s.fill ? s.color : "none",
+                                    "stroke-linejoin": "round",
+                                    "stroke-linecap": "round",
+                                    "stroke-width": +(
+                                        (s.width / c) *
+                                        i
+                                    ).toFixed(3),
+                                    opacity: +(s.opacity / c).toFixed(3),
+                                })
                         );
                     }
                     return out

@@ -139,10 +139,12 @@
             function () {
                 editor.setTheme("ace/theme/" + options.theme);
                 var inline = options.language === "php";
-                editor.getSession().setMode({
-                    path: "ace/mode/" + options.language,
-                    inline: inline,
-                });
+                editor
+                    .getSession()
+                    .setMode({
+                        path: "ace/mode/" + options.language,
+                        inline: inline,
+                    });
             }
         );
 

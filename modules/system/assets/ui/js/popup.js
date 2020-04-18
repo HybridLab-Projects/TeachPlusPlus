@@ -108,9 +108,9 @@
                 },
             });
         } else if (this.options.ajax) {
-            /*
-             * Regular AJAX
-             */
+        /*
+         * Regular AJAX
+         */
             $.ajax({
                 url: this.options.ajax,
                 data: paramToObj("data-extra-data", this.options.extraData),
@@ -120,9 +120,9 @@
                 cache: false,
             });
         } else if (this.options.content) {
-            /*
-             * Specified content
-             */
+        /*
+         * Specified content
+         */
             var content =
                 typeof this.options.content == "function"
                     ? this.options.content.call(this.$el[0], this)

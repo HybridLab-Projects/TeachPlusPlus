@@ -1457,12 +1457,14 @@
         }
     };
     MediaManagerImageCropPopup.prototype.showResizePopup = function () {
-        this.$popupElement.find("button[data-command=resize]").popup({
-            content: this.$popupElement
-                .find('[data-control="resize-template"]')
-                .html(),
-            zIndex: 1220,
-        });
+        this.$popupElement
+            .find("button[data-command=resize]")
+            .popup({
+                content: this.$popupElement
+                    .find('[data-control="resize-template"]')
+                    .html(),
+                zIndex: 1220,
+            });
     };
     MediaManagerImageCropPopup.prototype.onResizePopupShown = function (
         ev,
