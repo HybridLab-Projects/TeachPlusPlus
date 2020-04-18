@@ -70,7 +70,7 @@
                 >
                   <b-list-group class="feedbacks">
                     <b-list-group-item
-                      v-for="feedback in selectedTeacher.feedbacks"
+                      v-for="feedback in sortedByDate"
                       :key="feedback.id"
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
@@ -114,9 +114,52 @@
             <b-tab
               title="Zoradiť podľa počtu hlasov"
             >
-              <b-badge variant="danger">
-                Danger
-              </b-badge>
+              <b-row>
+                <b-col
+                  class="pr-5 feeder"
+                >
+                  <b-list-group class="feedbacks">
+                    <b-list-group-item
+                      v-for="feedback in sortedByLikes"
+                      :key="feedback.id"
+                      class="d-flex align-items-center mb-4 border-0 shadow"
+                    >
+                      <img
+                        class="mr-4"
+                        :src="require(`@/assets/img/user.svg`)"
+                        alt=""
+                      >
+                      <div class="p-2 mr-auto">
+                        <div class="text-break">
+                          <p class="text-secondary mb-0 font-weight-light time">
+                            {{ toTime(feedback.created_at) }}
+                          </p>
+                          <h6 class="font-weight-bold">
+                            {{ feedback.author.username }}
+                          </h6>
+                          <div>
+                            {{ feedback.feedback }}
+                          </div>
+                          <b-badge>{{ feedback.subject.short }}</b-badge>
+                        </div>
+                      </div>
+                      <p class="font-weight-bold my-0 pr-2 pl-5">
+                        {{ feedback.likes.length }}
+                      </p>
+                      <b-link @click="like(feedback)">
+                        <b-icon-heart
+                          variant="danger"
+                          v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
+                        />
+                        <b-icon-heart-fill
+                          variant="danger"
+                          v-else
+                        />
+                      </b-link>
+                    </b-list-group-item>
+                  </b-list-group>
+                </b-col>
+              </b-row>
             </b-tab>
           </b-tabs>
         </b-col>
@@ -177,6 +220,14 @@ export default {
       selectedTeacher: 'getSelectedTeacher',
       user: 'getUser',
     }),
+    sortedByLikes() {
+      return this.selectedTeacher.feedbacks.concat()
+        .sort((a, b) => b.likes.length - a.likes.length);
+    },
+    sortedByDate() {
+      return this.selectedTeacher.feedbacks.concat()
+        .sort((a, b) => Moment(b.created_at).diff(Moment(a.created_at)));
+    },
   },
   methods: {
     logout() {
