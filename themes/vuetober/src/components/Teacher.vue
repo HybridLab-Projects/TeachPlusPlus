@@ -82,7 +82,7 @@
                       <div class="p-2 mr-auto">
                         <div class="text-break">
                           <p class="text-secondary mb-0 font-weight-light time">
-                            {{ toTime(feedback.created_at) }}
+                            {{ toTime(feedback.created_at) }} - {{ feedback.subject.subject_name }}
                           </p>
                           <h6 class="font-weight-bold">
                             {{ feedback.author.username }}
@@ -90,7 +90,6 @@
                           <div>
                             {{ feedback.feedback }}
                           </div>
-                          <b-badge>{{ feedback.subject.short }}</b-badge>
                         </div>
                       </div>
                       <p class="font-weight-bold my-0 pr-2 pl-5">
@@ -132,7 +131,7 @@
                       <div class="p-2 mr-auto">
                         <div class="text-break">
                           <p class="text-secondary mb-0 font-weight-light time">
-                            {{ toTime(feedback.created_at) }}
+                            {{ toTime(feedback.created_at) }} - {{ feedback.subject.subject_name }}
                           </p>
                           <h6 class="font-weight-bold">
                             {{ feedback.author.username }}
@@ -140,7 +139,6 @@
                           <div>
                             {{ feedback.feedback }}
                           </div>
-                          <b-badge>{{ feedback.subject.short }}</b-badge>
                         </div>
                       </div>
                       <p class="font-weight-bold my-0 pr-2 pl-5">
