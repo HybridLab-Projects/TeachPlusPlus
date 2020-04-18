@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. git clone https://github.com/TeachPlusPlus-Developers/TeachPlusPlus.git . (inside htdocs)
+1. git clone https://github.com/TeachPlusPlus-Developers/TeachPlusPlus.git
 2. cd TeachPlusPlus
 3. composer install
 4. touch storage/database.sqlite
