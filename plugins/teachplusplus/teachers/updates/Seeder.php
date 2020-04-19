@@ -12,8 +12,8 @@ class UserSeeder extends Seeder
     {
         $user1 = User::create([
             'name' => 'user',
-            'surname' => 'user',
-            'username' => 'user',
+            'surname' => 'jeden',
+            'username' => 'userJeden',
             'email' => 'user@user.sk',
             'password' => 'Password1234',
             'password_confirmation' => 'Password1234',
@@ -21,9 +21,9 @@ class UserSeeder extends Seeder
             'is_activated' => true
         ]);
         $user2 = User::create([
-            'name' => 'user2',
-            'surname' => 'user2',
-            'username' => 'user2',
+            'name' => 'user',
+            'surname' => 'dva',
+            'username' => 'userDva',
             'email' => 'user2@user.sk',
             'password' => 'Password1234',
             'password_confirmation' => 'Password1234',
