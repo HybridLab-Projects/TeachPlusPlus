@@ -5,6 +5,7 @@ use Teachplusplus\Teachers\Models\Feedback;
 use Teachplusplus\Teachers\Models\Like;
 use Teachplusplus\Teachers\Models\Subject;
 use Teachplusplus\Teachers\Models\Teacher;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 Route::group(['prefix' => 'api'], function () {
     Route::get('teacher', function () {
@@ -25,12 +26,12 @@ Route::group(['prefix' => 'api'], function () {
         ]);
         $teacherId = request()->input('teacher_id');
         $subjectId = request()->input('subject_id');
-        $authorId = request()->input('user_id');
+        $token = request()->input('token');
         
 
         $teacher = Teacher::find($teacherId);
         $subject = Subject::find($subjectId);
-        $author = User::find($authorId);
+        $author = JWTAuth::toUser($token);
 
         $feedback = Feedback::create($feedbackData);
         $feedback->teacher()->associate($teacher);
@@ -43,13 +44,14 @@ Route::group(['prefix' => 'api'], function () {
   
     Route::post('like', function () {
         $feedbackId = request()->input('feedback_id');
-        $userId = request()->input('user_id');
+        $token = request()->input('token');
+        
 
         $feedback = Feedback::find($feedbackId);
-        $user = User::find($userId);
+        $user = JWTAuth::toUser($token);
 
-        if (Like::where(['feedback_id' => $feedbackId, 'user_id' => $userId])->exists()) {
-            $like = Like::where(['feedback_id' => $feedbackId, 'user_id' => $userId])->first();
+        if (Like::where(['feedback_id' => $feedback->id, 'user_id' => $user->id])->exists()) {
+            $like = Like::where(['feedback_id' => $feedback->id, 'user_id' => $user->id])->first();
             $like->delete();
             $like->save();
         } else {
