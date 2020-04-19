@@ -111,7 +111,7 @@ export default new Vuex.Store({
       return Axios({
         url: '/api/feedback',
         data: {
-          feedback, teacher_id: teacherId, subject_id: subjectId, user_id: state.user.id,
+          feedback, teacher_id: teacherId, subject_id: subjectId, token: state.token,
         },
         method: 'POST',
       })
@@ -127,7 +127,7 @@ export default new Vuex.Store({
     },
     like({ dispatch, state }, { id }) {
       return Axios(
-        { url: '/api/like', data: { feedback_id: id, user_id: state.user.id }, method: 'POST' },
+        { url: '/api/like', data: { feedback_id: id, token: state.token }, method: 'POST' },
       )
         .then((data) => {
           console.log('liked', data);
