@@ -53,8 +53,8 @@ new Vue({
     Axios.interceptors.response.use(
       (response) => response,
       (error) => {
-        if (error.response.status === 400) {
-          this.$store.dispatch('logout');
+        if (error.response.status === 401) {
+          this.$store.commit('logout');
           this.$router.push('/');
         }
         return Promise.reject(error);

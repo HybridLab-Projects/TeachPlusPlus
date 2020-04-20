@@ -7,7 +7,7 @@ use Teachplusplus\Teachers\Models\Subject;
 use Teachplusplus\Teachers\Models\Teacher;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'api', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function () {
     Route::get('teacher', function () {
         $teachers = Teacher::with('subjects', 'feedbacks.likes', 'feedbacks.author', 'feedbacks.subject')->get();
         
