@@ -72,7 +72,7 @@
                     <b-list-group-item
                       v-for="feedback in sortedByDate"
                       :key="feedback.id"
-                      class="d-flex flex-column align-items-end mb-4 border-0 shadow"
+                      class="d-flex flex-column align-items-end mb-2 border-0 shadow"
                     >
                       <div class="d-flex align-items-center w-100">
                         <img
@@ -89,8 +89,15 @@
                             <h6 class="font-weight-bold">
                               {{ feedback.author.username }}
                             </h6>
-                            <div>
+                            <div class="mb-3">
                               {{ feedback.feedback }}
+                            </div>
+                            <div>
+                              <img
+                                class="rounded-circle like-avatar"
+                                :src="`https://api.adorable.io/avatars/284/1`"
+                                alt=""
+                              >
                             </div>
                           </div>
                         </div>
@@ -107,15 +114,6 @@
                             v-else
                           />
                         </b-link>
-                      </div>
-                      <div>
-                        <img
-                          v-for="like in feedback.likes"
-                          :key="like.id"
-                          class="rounded-circle like-avatar ml-2"
-                          :src="`https://api.adorable.io/avatars/285/${like.user.email}`"
-                          alt=""
-                        >
                       </div>
                     </b-list-group-item>
                   </b-list-group>
