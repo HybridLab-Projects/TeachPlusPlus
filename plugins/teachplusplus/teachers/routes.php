@@ -9,7 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 Route::group(['prefix' => 'api', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function () {
     Route::get('teacher', function () {
-        $teachers = Teacher::with('subjects', 'feedbacks.likes', 'feedbacks.author', 'feedbacks.subject')->get();
+        $teachers = Teacher::with('subjects', 'feedbacks.likes.user', 'feedbacks.author', 'feedbacks.subject')->get();
         
         return $teachers;
     });
