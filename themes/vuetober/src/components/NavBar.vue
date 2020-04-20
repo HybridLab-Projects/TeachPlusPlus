@@ -28,15 +28,15 @@
       >
         <b-navbar-nav
           class="ml-auto"
+          v-if="this.$route.path !== '/register'"
         >
           <p
-            class="my-auto text-muted mr-3"
+            class="my-auto text-muted mr-3 font-weight-bold"
           >
-            <strong class="text-secondary">Ešte nemáš účet?</strong>
+            Ešte nemáš účet?
           </p>
           <b-nav-item
             to="/register"
-            v-if="!isLoggedIn"
           >
             <b-button
               variant="outline-primary"
@@ -45,11 +45,25 @@
               Registruj sa
             </b-button>
           </b-nav-item>
-          <b-nav-item
-            @click="logout"
-            v-if="isLoggedIn"
+        </b-navbar-nav>
+        <b-navbar-nav
+          class="ml-auto"
+          v-else
+        >
+          <p
+            class="my-auto text-muted mr-3 font-weight-bold"
           >
-            Odhlásiť
+            Máš už účet?
+          </p>
+          <b-nav-item
+            to="/login"
+          >
+            <b-button
+              variant="outline-primary"
+              class="font-weight-bold px-3 custombtn"
+            >
+              Prihlás sa
+            </b-button>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -59,25 +73,8 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'NavBar',
-  computed: {
-    ...mapGetters([
-      'isLoggedIn',
-    ]),
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout')
-        .then(() => this.$router.push('/'))
-        .catch((err) => {
-          console.log(err.response.data.error);
-          this.$router.push('/');
-        });
-    },
-  },
 };
 </script>
 
