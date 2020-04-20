@@ -92,7 +92,7 @@
                             <div class="mb-3">
                               {{ feedback.feedback }}
                             </div>
-                            <div class="">
+                            <div>
                               <img
                                 class="rounded-circle like-avatar"
                                 :src="`https://api.adorable.io/avatars/284/1`"
