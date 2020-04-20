@@ -72,39 +72,51 @@
                     <b-list-group-item
                       v-for="feedback in sortedByDate"
                       :key="feedback.id"
-                      class="d-flex align-items-center mb-4 border-0 shadow"
+                      class="d-flex flex-column align-items-end mb-4 border-0 shadow"
                     >
-                      <img
-                        class="mr-4 rounded-circle user-avatar"
-                        :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
-                        alt=""
-                      >
-                      <div class="p-2 mr-auto">
-                        <div class="text-break">
-                          <p class="text-secondary mb-1 font-weight-light time">
-                            {{ toTime(feedback.created_at) }} - {{ feedback.subject.subject_name }}
-                          </p>
-                          <h6 class="font-weight-bold">
-                            {{ feedback.author.username }}
-                          </h6>
-                          <div>
-                            {{ feedback.feedback }}
+                      <div class="d-flex align-items-center w-100">
+                        <img
+                          class="mr-4 rounded-circle user-avatar"
+                          :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
+                          alt=""
+                        >
+                        <div class="p-2 mr-auto">
+                          <div class="text-break">
+                            <p class="text-secondary mb-1 font-weight-light time">
+                              {{ toTime(feedback.created_at) }} -
+                              {{ feedback.subject.subject_name }}
+                            </p>
+                            <h6 class="font-weight-bold">
+                              {{ feedback.author.username }}
+                            </h6>
+                            <div>
+                              {{ feedback.feedback }}
+                            </div>
                           </div>
                         </div>
+                        <p class="font-weight-bold my-0 pr-2 pl-5">
+                          {{ feedback.likes.length }}
+                        </p>
+                        <b-link @click="likeFeedback(feedback)">
+                          <b-icon-heart
+                            variant="danger"
+                            v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
+                          />
+                          <b-icon-heart-fill
+                            variant="danger"
+                            v-else
+                          />
+                        </b-link>
                       </div>
-                      <p class="font-weight-bold my-0 pr-2 pl-5">
-                        {{ feedback.likes.length }}
-                      </p>
-                      <b-link @click="like(feedback)">
-                        <b-icon-heart
-                          variant="danger"
-                          v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
-                        />
-                        <b-icon-heart-fill
-                          variant="danger"
-                          v-else
-                        />
-                      </b-link>
+                      <div>
+                        <img
+                          v-for="like in feedback.likes"
+                          :key="like.id"
+                          class="rounded-circle like-avatar ml-2"
+                          :src="`https://api.adorable.io/avatars/285/${like.user.email}`"
+                          alt=""
+                        >
+                      </div>
                     </b-list-group-item>
                   </b-list-group>
                 </b-col>
@@ -121,39 +133,49 @@
                     <b-list-group-item
                       v-for="feedback in sortedByLikes"
                       :key="feedback.id"
-                      class="d-flex align-items-center mb-4 border-0 shadow"
+                      class="d-flex flex-column align-items-end mb-4 border-0 shadow"
                     >
-                      <img
-                        class="mr-4 rounded-circle user-avatar"
-                        :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
-                        alt=""
-                      >
-                      <div class="p-2 mr-auto">
-                        <div class="text-break">
-                          <p class="text-secondary mb-1 font-weight-light time">
-                            {{ toTime(feedback.created_at) }} - {{ feedback.subject.subject_name }}
-                          </p>
-                          <h6 class="font-weight-bold">
-                            {{ feedback.author.username }}
-                          </h6>
-                          <div>
-                            {{ feedback.feedback }}
+                      <div class="d-flex align-items-center w-100">
+                        <img
+                          class="mr-4 rounded-circle user-avatar"
+                          :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
+                          alt=""
+                        >
+                        <div class="p-2 mr-auto">
+                          <div class="text-break">
+                            <p class="text-secondary mb-1 font-weight-light time">
+                              {{ toTime(feedback.created_at) }} -
+                              {{ feedback.subject.subject_name }}
+                            </p>
+                            <h6 class="font-weight-bold">
+                              {{ feedback.author.username }}
+                            </h6>
+                            <div>
+                              {{ feedback.feedback }}
+                            </div>
                           </div>
                         </div>
+                        <p class="font-weight-bold my-0 pr-2 pl-5">
+                          {{ feedback.likes.length }}
+                        </p>
+                        <b-link @click="likeFeedback(feedback)">
+                          <b-icon-heart
+                            variant="danger"
+                            v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
+                          />
+                          <b-icon-heart-fill
+                            variant="danger"
+                            v-else
+                          />
+                        </b-link>
                       </div>
-                      <p class="font-weight-bold my-0 pr-2 pl-5">
-                        {{ feedback.likes.length }}
-                      </p>
-                      <b-link @click="like(feedback)">
-                        <b-icon-heart
-                          variant="danger"
-                          v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
-                        />
-                        <b-icon-heart-fill
-                          variant="danger"
-                          v-else
-                        />
-                      </b-link>
+                      <div class="d-flex">
+                        <img
+                          class="rounded-circle like-avatar"
+                          :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
+                          alt=""
+                        >
+                      </div>
                     </b-list-group-item>
                   </b-list-group>
                 </b-col>
@@ -167,8 +189,8 @@
       <b-row class="">
         <b-col class="d-flex align-items-center">
           <img
-            class="mb-4"
-            :src="require(`@/assets/img/user.svg`)"
+            class="mb-4 user-avatar rounded-circle"
+            :src="`https://api.adorable.io/avatars/285/${user.email}`"
             alt=""
           >
           <div class="my-auto ml-4">
@@ -237,7 +259,7 @@ export default {
           this.$router.push('/');
         });
     },
-    like(feedback) {
+    likeFeedback(feedback) {
       this.$store.dispatch('like', feedback);
     },
     toTime(time) {
@@ -284,6 +306,10 @@ export default {
 
 .user-avatar {
   width: 64px;
+}
+
+.like-avatar {
+  width: 32px;
 }
 
 </style>
