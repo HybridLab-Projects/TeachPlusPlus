@@ -97,6 +97,7 @@ export default {
 
 <style lang="scss" scoped>
 $purpleColor: #5352f6;
+$hoverColor: #E7E7E9;
 $bgColor:  #f3f5f8;
 $darkerbgColor: #D7D7E8;
 
@@ -127,11 +128,16 @@ input.form-control[type=text]:focus:not([readonly]) {
   border-bottom: 1px solid $darkerbgColor;
 }
 
-.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+.list-group-item.active {
   z-index: 2;
   color: $purpleColor;
   background-color: $darkerbgColor;
   border-color: $darkerbgColor;
+}
+
+.list-group-item:hover {
+  background-color: $hoverColor;
+  cursor: pointer;
 }
 
 .footer-text {

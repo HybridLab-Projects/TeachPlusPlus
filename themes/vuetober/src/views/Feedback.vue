@@ -35,7 +35,7 @@
           class="d-flex justify-content-end mt-3"
         >
           <p class="text-muted my-auto mr-2 font-weight-bold">
-            Nechcem dať feedback
+            Vrátiť sa späť
           </p>
           <b-icon-x-circle-fill
             variant="secondary"

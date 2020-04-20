@@ -36,7 +36,7 @@
                 type="submit"
                 variant="danger"
               >
-                Submit
+                Odoslať
               </b-button>
               <b-alert
                 show

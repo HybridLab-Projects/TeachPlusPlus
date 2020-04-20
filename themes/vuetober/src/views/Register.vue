@@ -71,7 +71,7 @@
                 v-model="user.agree"
                 :rules="{ required: { allowFalse: false } }"
               >
-                Suhlas
+                Súhlas
               </BCheckboxWithValidation>
 
               <b-button
@@ -79,7 +79,7 @@
                 variant="danger"
                 class="py-10 px-5 mt-3"
               >
-                Submit
+                Odoslať
               </b-button>
               <b-alert
                 show

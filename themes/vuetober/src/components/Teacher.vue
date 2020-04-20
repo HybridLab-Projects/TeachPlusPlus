@@ -75,13 +75,13 @@
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
                       <img
-                        class="mr-4"
-                        :src="require(`@/assets/img/user.svg`)"
+                        class="mr-4 rounded-circle user-avatar"
+                        :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
                         alt=""
                       >
                       <div class="p-2 mr-auto">
                         <div class="text-break">
-                          <p class="text-secondary mb-0 font-weight-light time">
+                          <p class="text-secondary mb-1 font-weight-light time">
                             {{ toTime(feedback.created_at) }} - {{ feedback.subject.subject_name }}
                           </p>
                           <h6 class="font-weight-bold">
@@ -124,13 +124,13 @@
                       class="d-flex align-items-center mb-4 border-0 shadow"
                     >
                       <img
-                        class="mr-4"
-                        :src="require(`@/assets/img/user.svg`)"
+                        class="mr-4 rounded-circle user-avatar"
+                        :src="`https://api.adorable.io/avatars/285/${feedback.author.email}`"
                         alt=""
                       >
                       <div class="p-2 mr-auto">
                         <div class="text-break">
-                          <p class="text-secondary mb-0 font-weight-light time">
+                          <p class="text-secondary mb-1 font-weight-light time">
                             {{ toTime(feedback.created_at) }} - {{ feedback.subject.subject_name }}
                           </p>
                           <h6 class="font-weight-bold">
@@ -220,7 +220,8 @@ export default {
     }),
     sortedByLikes() {
       return this.selectedTeacher.feedbacks.concat()
-        .sort((a, b) => b.likes.length - a.likes.length);
+        .sort((a, b) => b.likes.length - a.likes.length
+          || Moment(b.created_at).diff(Moment(a.created_at)));
     },
     sortedByDate() {
       return this.selectedTeacher.feedbacks.concat()
@@ -279,6 +280,10 @@ export default {
 .footer-text {
   font-size: 0.875rem;
   border-top: 1px #D7D7E8 solid;
+}
+
+.user-avatar {
+  width: 64px;
 }
 
 </style>
