@@ -5,6 +5,7 @@ composer.phar
 .idea
 .env.*.php
 .env.php
+.env
 php_errors.log
 nginx-error.log
 nginx-access.log
