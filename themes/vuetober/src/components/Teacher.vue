@@ -112,7 +112,7 @@
                         <img
                           v-for="like in feedback.likes"
                           :key="like.id"
-                          class="rounded-circle like-avatar"
+                          class="rounded-circle like-avatar ml-1"
                           :src="`https://api.adorable.io/avatars/285/${like.user.email}`"
                           alt=""
                         >
@@ -173,7 +173,7 @@
                         <img
                           v-for="like in feedback.likes"
                           :key="like.id"
-                          class="rounded-circle like-avatar"
+                          class="rounded-circle like-avatar ml-1"
                           :src="`https://api.adorable.io/avatars/285/${like.user.email}`"
                           alt=""
                         >
