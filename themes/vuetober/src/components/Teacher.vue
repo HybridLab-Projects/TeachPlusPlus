@@ -77,7 +77,7 @@
                       <div class="d-flex align-items-center w-100">
                         <img
                           class="mr-4 rounded-circle user-avatar"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg`"
+                          :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
                           alt=""
                         >
                         <div class="p-2 mr-auto">
@@ -113,7 +113,7 @@
                           v-for="like in feedback.likes"
                           :key="like.id"
                           class="rounded-circle like-avatar ml-1"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg`"
+                          :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
                           alt=""
                         >
                       </div>
@@ -138,7 +138,7 @@
                       <div class="d-flex align-items-center w-100">
                         <img
                           class="mr-4 rounded-circle user-avatar"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg`"
+                          :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
                           alt=""
                         >
                         <div class="p-2 mr-auto">
@@ -174,7 +174,7 @@
                           v-for="like in feedback.likes"
                           :key="like.id"
                           class="rounded-circle like-avatar ml-1"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg`"
+                          :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
                           alt=""
                         >
                       </div>
@@ -192,7 +192,7 @@
         <b-col class="d-flex align-items-center">
           <img
             class="mb-4 user-avatar rounded-circle"
-            :src="`https://avatars.dicebear.com/v2/avataaars/${user.email}.svg`"
+            :src="`https://avatars.dicebear.com/v2/avataaars/${user.email}.svg?options[mood][]=happy`"
             alt=""
           >
           <div class="my-auto ml-4">
