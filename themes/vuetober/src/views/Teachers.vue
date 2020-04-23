@@ -32,10 +32,13 @@ export default {
       default: '',
     },
   },
-  mounted() {
+  created() {
+    this.$store.dispatch('fetchTeachers');
+  },
+  beforeRouteUpdate(to, from, next) {
     this.$store.dispatch('fetchTeachers').then(() => {
-      if (this.id) {
-        this.$store.dispatch('selectTeacher', this.id);
+      if (to.params.id) {
+        this.$store.dispatch('selectTeacher', to.params.id).then(() => next());
       }
     });
   },
