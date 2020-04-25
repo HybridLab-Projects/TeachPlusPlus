@@ -5,9 +5,9 @@
     height: 0;
     margin-left: 2px;
     vertical-align: middle;
-    border-top: @caret-width-base solid;
+    border-top:   @caret-width-base solid;
     border-right: @caret-width-base solid transparent;
-    border-left: @caret-width-base solid transparent;
+    border-left:  @caret-width-base solid transparent;
 }
 
 // The dropdown wrapper (div)
@@ -37,7 +37,7 @@
     border: 1px solid @dropdown-fallback-border; // IE8 fallback
     border: 1px solid @dropdown-border;
     .border-radius(@border-radius-base);
-    .box-shadow(0 6px 12px rgba(0,0,0,0.175));
+    .box-shadow(0 6px 12px rgba(0,0,0,.175));
     background-clip: padding-box;
 
     // Aligns the dropdown menu to right
@@ -108,9 +108,7 @@
         text-decoration: none;
         background-color: transparent;
         background-image: none; // Remove CSS gradient
-        filter: e(
-            %("progid:DXImageTransform.Microsoft.gradient(enabled = false)")
-        );
+        filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
         cursor: not-allowed;
     }
 }
@@ -188,3 +186,4 @@
         margin-bottom: 1px;
     }
 }
+

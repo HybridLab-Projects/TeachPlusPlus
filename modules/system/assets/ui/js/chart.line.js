@@ -22,14 +22,13 @@
  * - Flot Time (jquery.flot.time.js)
  */
 
-+(function ($) {
-    "use strict";
++function ($) { "use strict";
 
     // LINE CHART CLASS DEFINITION
     // ============================
 
-    var ChartLine = function (element, options) {
-        var self = this;
+    var ChartLine = function(element, options) {
+        var self = this
 
         /*
          * Flot options
@@ -37,84 +36,78 @@
         this.chartOptions = {
             xaxis: {
                 mode: "time",
-                tickLength: 5,
+                tickLength: 5
             },
             selection: { mode: "x" },
             grid: {
-                markingsColor: "rgba(0,0,0, 0.02)",
+                markingsColor:   "rgba(0,0,0, 0.02)",
                 backgroundColor: { colors: ["#fff", "#fff"] },
-                borderColor: "#7bafcc",
-                borderWidth: 0,
-                color: "#ddd",
-                hoverable: true,
-                clickable: true,
-                labelMargin: 10,
+                borderColor:     "#7bafcc",
+                borderWidth:     0,
+                color:           "#ddd",
+                hoverable:       true,
+                clickable:       true,
+                labelMargin:     10
             },
             series: {
                 lines: {
                     show: true,
-                    fill: true,
+                    fill: true
                 },
                 points: {
-                    show: true,
-                },
+                    show: true
+                }
             },
             tooltip: true,
             tooltipOpts: {
                 defaultTheme: false,
-                content: "%x: <strong>%y</strong>",
-                dateFormat: "%y-%0m-%0d",
+                content:      "%x: <strong>%y</strong>",
+                dateFormat:   "%y-%0m-%0d",
                 shifts: {
                     x: 10,
-                    y: 20,
-                },
+                    y: 20
+                }
             },
             legend: {
                 show: true,
-                noColumns: 2,
-            },
-        };
+                noColumns: 2
+            }
+        }
 
         this.defaultDataSetOptions = {
-            shadowSize: 0,
-        };
+            shadowSize: 0
+        }
 
-        var parsedOptions = {};
+        var parsedOptions = {}
         try {
             parsedOptions = ocJSON("{" + options.chartOptions + "}");
         } catch (e) {
-            throw new Error(
-                "Error parsing the data-chart-options attribute value. " + e
-            );
+            throw new Error('Error parsing the data-chart-options attribute value. '+e);
         }
 
-        this.chartOptions = $.extend({}, this.chartOptions, parsedOptions);
+        this.chartOptions = $.extend({}, this.chartOptions, parsedOptions)
 
-        this.options = options;
-        this.$el = $(element);
-        this.fullDataSet = [];
-        this.resetZoomLink = $(options.resetZoomLink);
+        this.options       = options
+        this.$el           = $(element)
+        this.fullDataSet   = []
+        this.resetZoomLink = $(options.resetZoomLink)
 
-        this.$el.trigger("oc.chartLineInit", [this]);
+        this.$el.trigger('oc.chartLineInit', [this])
 
         /*
          * Bind Events
          */
 
-        this.resetZoomLink.on("click", $.proxy(this.clearZoom, this));
+        this.resetZoomLink.on('click', $.proxy(this.clearZoom, this));
 
         if (this.options.zoomable) {
             this.$el.on("plotselected", function (event, ranges) {
                 var newCoords = {
-                    xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
-                };
+                    xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
+                }
 
-                $.plot(
-                    self.$el,
-                    self.fullDataSet,
-                    $.extend(true, {}, self.chartOptions, newCoords)
-                );
-                self.resetZoomLink.show();
+                $.plot(self.$el, self.fullDataSet, $.extend(true, {}, self.chartOptions, newCoords))
+                self.resetZoomLink.show()
             });
         }
 
@@ -122,42 +115,37 @@
          * Markings Helper
          */
 
-        if (
-            this.chartOptions.xaxis.mode == "time" &&
-            this.options.timeMode == "weeks"
-        )
-            this.chartOptions.markings = weekendAreas;
+        if (this.chartOptions.xaxis.mode == "time" && this.options.timeMode == "weeks")
+            this.chartOptions.markings = weekendAreas
 
         function weekendAreas(axes) {
             var markings = [],
                 d = new Date(axes.xaxis.min);
 
             // Go to the first Saturday
-            d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7));
-            d.setUTCSeconds(0);
-            d.setUTCMinutes(0);
-            d.setUTCHours(0);
-            var i = d.getTime();
+            d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 1) % 7))
+            d.setUTCSeconds(0)
+            d.setUTCMinutes(0)
+            d.setUTCHours(0)
+            var i = d.getTime()
 
             do {
                 // When we don't set yaxis, the rectangle automatically
                 // extends to infinity upwards and downwards
-                markings.push({
-                    xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 },
-                });
-                i += 7 * 24 * 60 * 60 * 1000;
-            } while (i < axes.xaxis.max);
+                markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } })
+                i += 7 * 24 * 60 * 60 * 1000
+            } while (i < axes.xaxis.max)
 
-            return markings;
+            return markings
         }
 
         /*
          * Process the datasets
          */
 
-        this.initializing = true;
+        this.initializing = true
 
-        this.$el.find('>[data-chart="dataset"]').each(function () {
+        this.$el.find('>[data-chart="dataset"]').each(function(){
             var data = $(this).data(),
                 processedData = {};
 
@@ -165,33 +153,29 @@
                 var normalizedKey = key.substring(3),
                     value = data[key];
 
-                normalizedKey =
-                    normalizedKey.charAt(0).toLowerCase() +
-                    normalizedKey.slice(1);
-                if (normalizedKey == "data")
-                    value = JSON.parse("[" + value + "]");
+                normalizedKey = normalizedKey.charAt(0).toLowerCase() + normalizedKey.slice(1);
+                if (normalizedKey == 'data')
+                    value = JSON.parse('['+value+']');
 
                 processedData[normalizedKey] = value;
             }
 
-            self.addDataSet(
-                $.extend({}, self.defaultDataSetOptions, processedData)
-            );
-        });
+            self.addDataSet($.extend({}, self.defaultDataSetOptions, processedData));
+        })
 
         /*
          * Build chart
          */
 
-        this.initializing = false;
-        this.rebuildChart();
-    };
+        this.initializing = false
+        this.rebuildChart()
+    }
 
     ChartLine.DEFAULTS = {
         chartOptions: "",
         timeMode: null,
-        zoomable: false,
-    };
+        zoomable: false
+    }
 
     /*
      * Adds a data set to the chart.
@@ -199,59 +183,53 @@
      * of supported data set options.
      */
     ChartLine.prototype.addDataSet = function (dataSet) {
-        this.fullDataSet.push(dataSet);
+        this.fullDataSet.push(dataSet)
 
-        if (!this.initializing) this.rebuildChart();
-    };
+        if (!this.initializing)
+            this.rebuildChart()
+    }
 
-    ChartLine.prototype.rebuildChart = function () {
-        this.$el.trigger("oc.beforeChartLineRender", [this]);
+    ChartLine.prototype.rebuildChart = function() {
+        this.$el.trigger('oc.beforeChartLineRender', [this])
 
-        $.plot(this.$el, this.fullDataSet, this.chartOptions);
-    };
+        $.plot(this.$el, this.fullDataSet, this.chartOptions)
+    }
 
-    ChartLine.prototype.clearZoom = function () {
-        this.rebuildChart();
-        this.resetZoomLink.hide();
-    };
+    ChartLine.prototype.clearZoom = function() {
+        this.rebuildChart()
+        this.resetZoomLink.hide()
+    }
 
     // LINE CHART PLUGIN DEFINITION
     // ============================
 
-    var old = $.fn.chartLine;
+    var old = $.fn.chartLine
 
     $.fn.chartLine = function (option) {
         return this.each(function () {
-            var $this = $(this);
-            var data = $this.data("october.chartLine");
-            var options = $.extend(
-                {},
-                ChartLine.DEFAULTS,
-                $this.data(),
-                typeof option == "object" && option
-            );
-            if (!data)
-                $this.data(
-                    "october.chartLine",
-                    (data = new ChartLine(this, options))
-                );
-            if (typeof option == "string") data[option].call($this);
-        });
-    };
+            var $this   = $(this)
+            var data    = $this.data('october.chartLine')
+            var options = $.extend({}, ChartLine.DEFAULTS, $this.data(), typeof option == 'object' && option)
+            if (!data) $this.data('october.chartLine', (data = new ChartLine(this, options)))
+            if (typeof option == 'string') data[option].call($this)
+        })
+    }
 
-    $.fn.chartLine.Constructor = ChartLine;
+    $.fn.chartLine.Constructor = ChartLine
 
     // LINE CHART NO CONFLICT
     // =================
 
     $.fn.chartLine.noConflict = function () {
-        $.fn.chartLine = old;
-        return this;
-    };
+        $.fn.chartLine = old
+        return this
+    }
+
 
     // LINE CHART DATA-API
     // ===============
     $(document).render(function () {
-        $('[data-control="chart-line"]').chartLine();
-    });
-})(window.jQuery);
+        $('[data-control="chart-line"]').chartLine()
+    })
+
+}(window.jQuery);

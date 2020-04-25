@@ -33,7 +33,7 @@ div.control-scrollpad {
         }
     }
 
-    &[data-direction="horizontal"] > div {
+    &[data-direction=horizontal] > div {
         overflow-x: scroll;
         overflow-y: hidden;
         width: 100%;
@@ -67,12 +67,12 @@ div.control-scrollpad {
         }
 
         &:hover {
-            .opacity(0.7);
+            .opacity(.7);
             .transition(opacity 0 linear);
         }
 
         &[data-visible] {
-            .opacity(0.7);
+            .opacity(.7);
         }
 
         &[data-hidden] {
@@ -80,7 +80,7 @@ div.control-scrollpad {
         }
     }
 
-    &[data-direction="horizontal"] > .scrollpad-scrollbar {
+    &[data-direction=horizontal] > .scrollpad-scrollbar {
         top: auto;
         left: 0;
         width: auto;

@@ -20,8 +20,7 @@
     .theme-description {
         border-top: 1px solid #f2f3f4;
 
-        h3,
-        p {
+        h3, p {
             .opacity(0.6);
         }
 
@@ -67,9 +66,9 @@
         .theme-thumbnail {
             background: #bdc3c7;
             border-top-color: #bdc3c7;
-        }
+       }
 
-        .thumbnail-container {
+       .thumbnail-container {
             position: relative;
 
             &:after {
@@ -79,15 +78,13 @@
                 top: 50%;
                 margin-top: -14px;
             }
-        }
+       }
     }
 
     .layout-row {
-        &.active,
-        &:hover {
+        &.active, &:hover {
             .theme-description {
-                h3,
-                p {
+                h3, p {
                     .opacity(1);
                 }
             }
@@ -99,10 +96,8 @@
             }
         }
 
-        &:first-child,
-        &.links {
-            .theme-description,
-            .theme-thumbnail {
+        &:first-child, &.links {
+            .theme-description, .theme-thumbnail {
                 border-top: none;
             }
         }
@@ -143,11 +138,10 @@
 
 @media (max-width: @screen-sm) {
     .theme-selector-layout {
-        .layout-cell,
-        .layout-row {
-            display: block !important;
-            width: auto !important;
-            height: auto !important;
+        .layout-cell, .layout-row {
+            display: block!important;
+            width: auto!important;
+            height: auto!important;
         }
 
         .theme-thumbnail {

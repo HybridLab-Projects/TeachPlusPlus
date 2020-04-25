@@ -7,61 +7,25 @@
 // @brand-accent
 //
 
-.br-p {
-    color: @brand-primary;
-}
-.br-s {
-    color: @brand-secondary;
-}
-.br-a {
-    color: @brand-accent;
-}
-.br-p-s10 {
-    color: saturate(@brand-primary, 10%);
-}
-.br-s-s10 {
-    color: saturate(@brand-secondary, 10%);
-}
-.br-a-s10 {
-    color: saturate(@brand-accent, 10%);
-}
-.br-p-s20 {
-    color: saturate(@brand-primary, 20%);
-}
-.br-s-s20 {
-    color: saturate(@brand-secondary, 20%);
-}
-.br-a-s20 {
-    color: saturate(@brand-accent, 20%);
-}
+.br-p     { color: @brand-primary; }
+.br-s     { color: @brand-secondary; }
+.br-a     { color: @brand-accent; }
+.br-p-s10 { color: saturate(@brand-primary,   10%); }
+.br-s-s10 { color: saturate(@brand-secondary, 10%); }
+.br-a-s10 { color: saturate(@brand-accent,    10%); }
+.br-p-s20 { color: saturate(@brand-primary,   20%); }
+.br-s-s20 { color: saturate(@brand-secondary, 20%); }
+.br-a-s20 { color: saturate(@brand-accent,    20%); }
 
-.bg-p {
-    background-color: @brand-primary;
-}
-.bg-s {
-    background-color: @brand-secondary;
-}
-.bg-a {
-    background-color: @brand-accent;
-}
-.bg-p-s10 {
-    background-color: saturate(@brand-primary, 10%);
-}
-.bg-s-s10 {
-    background-color: saturate(@brand-secondary, 10%);
-}
-.bg-a-s10 {
-    background-color: saturate(@brand-accent, 10%);
-}
-.bg-p-s20 {
-    background-color: saturate(@brand-primary, 20%);
-}
-.bg-s-s20 {
-    background-color: saturate(@brand-secondary, 20%);
-}
-.bg-a-s20 {
-    background-color: saturate(@brand-accent, 20%);
-}
+.bg-p     { background-color: @brand-primary; }
+.bg-s     { background-color: @brand-secondary; }
+.bg-a     { background-color: @brand-accent; }
+.bg-p-s10 { background-color: saturate(@brand-primary,   10%); }
+.bg-s-s10 { background-color: saturate(@brand-secondary, 10%); }
+.bg-a-s10 { background-color: saturate(@brand-accent,    10%); }
+.bg-p-s20 { background-color: saturate(@brand-primary,   20%); }
+.bg-s-s20 { background-color: saturate(@brand-secondary, 20%); }
+.bg-a-s20 { background-color: saturate(@brand-accent,    20%); }
 
 @custom-dark-accent: mix(black, desaturate(@brand-accent, 35%), 20%);
 @custom-dark-secondary: mix(black, saturate(@brand-secondary, 20%), 25%);
@@ -119,12 +83,12 @@ body.outer {
 // Logos
 //
 
-.oc-logo-transparent when not (@logo-image = "") {
-    background-image: url("@{logo-image}") !important;
+.oc-logo-transparent when not (@logo-image = '') {
+    background-image: url('@{logo-image}') !important;
 }
 
-.oc-logo when not (@logo-image = "") {
-    background-image: url("@{logo-image}");
+.oc-logo when not (@logo-image = '') {
+    background-image: url('@{logo-image}');
 }
 
 //
@@ -156,17 +120,13 @@ table.table.data {
 .fancy-layout .control-tabs.master-tabs,
 .fancy-layout.control-tabs.master-tabs {
     > div > div.tabs-container > ul.nav-tabs > li.active a > span.title {
-        &,
-        &:before,
-        &:after {
+        &, &:before, &:after {
             background: @brand-secondary;
         }
     }
 
     > div > div.tabs-container > ul.nav-tabs > li a > span.title {
-        &,
-        &:before,
-        &:after {
+        &, &:before, &:after {
             background-color: mix(black, saturate(@brand-secondary, 20%), 31%);
         }
     }
@@ -183,8 +143,7 @@ table.table.data {
     }
 }
 
-.fancy-layout
-    .control-tabs.secondary-tabs.secondary-content-tabs.primary-collapsed,
+.fancy-layout .control-tabs.secondary-tabs.secondary-content-tabs.primary-collapsed,
 .fancy-layout.control-tabs.secondary-tabs.secondary-content-tabs.primary-collapsed {
     > div > ul.nav-tabs {
         background: @brand-secondary;
@@ -210,8 +169,7 @@ div.control-componentlist {
 //
 
 .stripe-loading-indicator {
-    .stripe,
-    .stripe-loaded {
+    .stripe, .stripe-loaded {
         background: @brand-accent;
     }
 }

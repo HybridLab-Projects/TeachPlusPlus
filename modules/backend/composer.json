@@ -3,11 +3,7 @@
     "type": "october-module",
     "description": "Backend module for October CMS",
     "homepage": "https://octobercms.com",
-    "keywords": [
-        "october cms",
-        "october",
-        "backend"
-    ],
+    "keywords": ["october cms", "october", "backend"],
     "license": "MIT",
     "authors": [
         {

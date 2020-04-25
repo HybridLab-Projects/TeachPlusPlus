@@ -54,10 +54,9 @@ Define the popover content as a template and reference it with `data-content-fro
 ### Event specified content
 
 ```js
-$("#btn1").on("showing.oc.popover", function (e, popover) {
-    popover.options.content =
-        '<div class="popover-body">Some other content</div>';
-});
+$('#btn1').on('showing.oc.popover', function(e, popover) {
+    popover.options.content = '<div class="popover-body">Some other content</div>'
+})
 ```
 
     <a
@@ -93,40 +92,40 @@ Closes the popover. There are 3 ways to close the popover: call it's `hide()` me
 
 ### Supported options
 
--   `placement`: top | bottom | left | right | center. The placement could automatically be changed if the popover doesn't fit into the desired position.
+- `placement`: top | bottom | left | right | center. The placement could automatically be changed if the popover doesn't fit into the desired position.
 
--   `fallbackPlacement`: top | bottom | left | right. The placement to use if the default placement and all other possible placements do not work. The default value is "bottom".
+- `fallbackPlacement`: top | bottom | left | right. The placement to use if the default placement and all other possible placements do not work. The default value is "bottom".
 
--   `content`: content HTML string or callback
+- `content`: content HTML string or callback
 
--   `contentFrom`: selector to source the content HTML
+- `contentFrom`: selector to source the content HTML
 
--   `width`: content width, optional. If not specified, the content width will be used.
+- `width`: content width, optional. If not specified, the content width will be used.
 
--   `modal`: make the popover modal
+- `modal`: make the popover modal
 
--   `highlightModalTarget`: "pop" the popover target above the overlay, making it highlighted. The feature assigns the target position relative.
+- `highlightModalTarget`: "pop" the popover target above the overlay, making it highlighted. The feature assigns the target position relative.
 
--   `closeOnPageClick`: close the popover if the page was clicked outside the popover area.
+- `closeOnPageClick`: close the popover if the page was clicked outside the popover area.
 
--   `container`: the popover container selector or element. The default container is the document body. The container must be relative positioned.
+- `container`: the popover container selector or element. The default container is the document body. The container must be relative positioned.
 
--   `containerClass` - a CSS class to apply to the popover container element
+- `containerClass` - a CSS class to apply to the popover container element
 
--   `offset` - offset in pixels to add to the calculated position, to make the position more "random"
+- `offset` - offset in pixels to add to the calculated position, to make the position more "random"
 
--   `offsetX` - X offset in pixels to add to the calculated position, to make the position more "random". If specified, overrides the offset property for the bottom and top popover placement.
+- `offsetX` - X offset in pixels to add to the calculated position, to make the position more "random". If specified, overrides the offset property for the bottom and top popover placement.
 
--   `offsetY` - Y offset in pixels to add to the calculated position, to make the position more "random". If specified, overrides the offset property for the left and right popover placement.
+- `offsetY` - Y offset in pixels to add to the calculated position, to make the position more "random". If specified, overrides the offset property for the left and right popover placement.
 
--   `useAnimation`: adds animation to the open and close sequence, the equivalent of adding the CSS class 'fade' to the containerClass.
+- `useAnimation`: adds animation to the open and close sequence, the equivalent of adding the CSS class 'fade' to the containerClass.
 
 ### Supported events
 
--   `showing.oc.popover` - triggered before the popover is displayed. Allows to override the popover options (for example the content) or cancel the action with e.preventDefault()
+- `showing.oc.popover` - triggered before the popover is displayed. Allows to override the popover options (for example the content) or cancel the action with e.preventDefault()
 
--   `show.oc.popover` - triggered after the popover is displayed.
+- `show.oc.popover` - triggered after the popover is displayed.
 
--   `hiding.oc.popover` - triggered before the popover is closed. Allows to cancel the action with e.preventDefault()
+- `hiding.oc.popover` - triggered before the popover is closed. Allows to cancel the action with e.preventDefault()
 
--   `hide.oc.popover` - triggered after the popover is hidden.
+- `hide.oc.popover` - triggered after the popover is hidden.

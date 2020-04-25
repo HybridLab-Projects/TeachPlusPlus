@@ -5,10 +5,12 @@
 }
 
 .control-updatelist {
+
     border: 1px solid #ccc;
     margin-bottom: @line-height-computed;
 
     .update-item {
+
         border-bottom: 1px solid #ccc;
 
         .item-header {
@@ -47,8 +49,7 @@
             margin-bottom: 0;
             .clearfix;
 
-            dt,
-            dd {
+            dt, dd {
                 float: left;
                 padding: 5px 0;
                 line-height: 20px;
@@ -76,13 +77,13 @@
                 background-color: #ab2a1c;
                 color: #fff;
                 display: inline-block;
-                padding: 0.2em 0.6em 0.3em;
+                padding: .2em .6em .3em;
                 font-size: 75%;
                 line-height: 1;
                 text-align: center;
                 white-space: nowrap;
                 vertical-align: baseline;
-                .border-radius(0.25em);
+                .border-radius(.25em);
             }
         }
 
@@ -93,22 +94,14 @@
         &.item-danger {
             .item-header {
                 background-color: @state-danger-bg;
-                h5,
-                i,
-                & {
-                    color: @state-danger-text;
-                }
+                h5, i, & { color: @state-danger-text; }
             }
         }
 
         &.item-success {
             .item-header {
                 background-color: @state-success-bg;
-                h5,
-                i,
-                & {
-                    color: @state-success-text;
-                }
+                h5, i, & { color: @state-success-text; }
             }
         }
 
@@ -116,15 +109,13 @@
             border-bottom: none;
 
             .item-header {
-                h5,
-                i,
-                & {
-                    color: rgba(0, 0, 0, 0.35);
-                }
+                h5, i, & { color: rgba(0,0,0,.35); }
             }
             dl {
                 display: none;
             }
         }
+
     }
+
 }

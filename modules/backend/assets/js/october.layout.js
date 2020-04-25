@@ -1,84 +1,84 @@
-(function ($) {
-    var OctoberLayout = function () {
-        this.$accountMenuOverlay = null;
-    };
+(function($){
+    var OctoberLayout = function() {
+        this.$accountMenuOverlay = null
+    }
 
-    OctoberLayout.prototype.setPageTitle = function (title) {
-        var $title = $("title");
+    OctoberLayout.prototype.setPageTitle = function(title) {
+        var $title = $('title')
 
         if (this.pageTitleTemplate === undefined)
-            this.pageTitleTemplate = $title.data("titleTemplate");
+            this.pageTitleTemplate = $title.data('titleTemplate')
 
-        $title.text(this.pageTitleTemplate.replace("%s", title));
-    };
+        $title.text(this.pageTitleTemplate.replace('%s', title))
+    }
 
-    OctoberLayout.prototype.updateLayout = function (title) {
-        var $children, $el, fixedWidth, margin;
+    OctoberLayout.prototype.updateLayout = function(title) {
+        var $children, $el, fixedWidth, margin
 
-        $("[data-calculate-width]").each(function () {
-            $children = $(this).children();
+        $('[data-calculate-width]').each(function(){
+            $children = $(this).children()
 
             if ($children.length > 0) {
-                fixedWidth = 0;
+                fixedWidth = 0
 
-                $children.each(function () {
-                    $el = $(this);
-                    margin = $el.data("oc.layoutMargin");
+                $children.each(function() {
+                    $el = $(this)
+                    margin = $el.data('oc.layoutMargin')
 
                     if (margin === undefined) {
-                        margin =
-                            parseInt($el.css("marginRight")) +
-                            parseInt($el.css("marginLeft"));
-                        $el.data("oc.layoutMargin", margin);
+                        margin = parseInt($el.css('marginRight')) + parseInt($el.css('marginLeft'))
+                        $el.data('oc.layoutMargin', margin)
                     }
-                    fixedWidth += $el.get(0).offsetWidth + margin;
-                });
+                    fixedWidth += $el.get(0).offsetWidth + margin
+                })
 
-                $(this).width(fixedWidth);
-                $(this).trigger("oc.widthFixed");
+                $(this).width(fixedWidth)
+                $(this).trigger('oc.widthFixed')
             }
-        });
-    };
+        })
+    }
 
-    OctoberLayout.prototype.toggleAccountMenu = function (el) {
+    OctoberLayout.prototype.toggleAccountMenu = function(el) {
         var self = this,
             $el = $(el),
             $parent = $(el).parent(),
-            $menu = $el.next();
+            $menu = $el.next()
 
-        $el.tooltip("hide");
+        $el.tooltip('hide')
 
-        if ($menu.hasClass("active")) {
-            self.$accountMenuOverlay.remove();
-            $parent.removeClass("highlight");
-            $menu.removeClass("active");
-        } else {
-            self.$accountMenuOverlay = $("<div />").addClass("popover-overlay");
-            $(document.body).append(self.$accountMenuOverlay);
-            $parent.addClass("highlight");
-            $menu.addClass("active");
-
-            self.$accountMenuOverlay.one("click", function () {
-                self.$accountMenuOverlay.remove();
-                $menu.removeClass("active");
-                $parent.removeClass("highlight");
-            });
+        if ($menu.hasClass('active')) {
+            self.$accountMenuOverlay.remove()
+            $parent.removeClass('highlight')
+            $menu.removeClass('active')
         }
-    };
+        else {
+            self.$accountMenuOverlay = $('<div />').addClass('popover-overlay')
+            $(document.body).append(self.$accountMenuOverlay)
+            $parent.addClass('highlight')
+            $menu.addClass('active')
 
-    if ($.oc === undefined) $.oc = {};
+            self.$accountMenuOverlay.one('click', function(){
+                self.$accountMenuOverlay.remove()
+                $menu.removeClass('active')
+                $parent.removeClass('highlight')
+            })
+        }
+    }
 
-    $.oc.layout = new OctoberLayout();
+    if ($.oc === undefined)
+        $.oc = {}
 
-    $(document).ready(function () {
-        $.oc.layout.updateLayout();
+    $.oc.layout = new OctoberLayout()
 
-        window.setTimeout($.oc.layout.updateLayout, 100);
-    });
-    $(window).on("resize", function () {
-        $.oc.layout.updateLayout();
-    });
-    $(window).on("oc.updateUi", function () {
-        $.oc.layout.updateLayout();
-    });
+    $(document).ready(function(){
+        $.oc.layout.updateLayout()
+
+        window.setTimeout($.oc.layout.updateLayout, 100)
+    })
+    $(window).on('resize', function() {
+        $.oc.layout.updateLayout()
+    })
+    $(window).on('oc.updateUi', function() {
+        $.oc.layout.updateLayout()
+    })
 })(jQuery);

@@ -57,10 +57,10 @@ Include the `no-icon` class to omit the icon.
 
 ### Data attributes:
 
--   data-dismiss="callout" - when assigned to an element, the callout hides on click
+- data-dismiss="callout" - when assigned to an element, the callout hides on click
 
 ## JavaScript API
 
 ### Events
 
--   close.oc.callout - triggered when the callout is closed
+- close.oc.callout - triggered when the callout is closed

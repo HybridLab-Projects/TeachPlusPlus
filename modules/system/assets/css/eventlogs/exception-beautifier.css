@@ -58,7 +58,7 @@
 }
 
 .plugin-exception-beautifier .beautifier-stacktrace-line-internal {
-    color: #2c3e50;
+    color: #2C3E50;
 }
 
 .plugin-exception-beautifier .beautifier-stacktrace-line-function {
@@ -108,11 +108,11 @@
 }
 
 .plugin-exception-beautifier .beautifier-string {
-    color: #0ea804;
+    color: #0EA804;
 }
 
 .plugin-exception-beautifier .beautifier-number {
-    color: #2196f3;
+    color: #2196F3;
 }
 
 .plugin-exception-beautifier .beautifier-formatted-content,
@@ -129,7 +129,7 @@
 }
 
 .plugin-exception-beautifier .beautifier-raw-content br {
-    content: "";
+    content: '';
     display: block;
     margin-bottom: 15px;
 }

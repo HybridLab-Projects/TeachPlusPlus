@@ -16,6 +16,7 @@ Displays a floating flash message on the screen.
 
 <br />
 
+
 ### Trigger
 
     <p>
@@ -31,6 +32,7 @@ Displays a floating flash message on the screen.
             Show Warning
         </a>
     </p>
+
 
 ### Display static
 
@@ -54,15 +56,15 @@ A flash message can be rendered as a static element by attaching the `static` cl
 
 ### Data attributes
 
--   data-control="flash-message" - enables the flash message plugin
--   data-interval="2" - the interval to display the message in seconds, optional. Default: 2
+- data-control="flash-message" - enables the flash message plugin
+- data-interval="2" - the interval to display the message in seconds, optional. Default: 2
 
 ### JavaScript API
 
 ```js
 $.oc.flashMsg({
-    text: "Record saved.",
-    class: "success",
-    interval: 3,
-});
+    'text': 'Record saved.',
+    'class': 'success',
+    'interval': 3
+})
 ```

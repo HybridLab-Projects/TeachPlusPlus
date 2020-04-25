@@ -8,14 +8,14 @@
 // Progress bars
 // --------------------------------------------------
 
-@progress-bg: #d9dee0;
-@progress-bar-color: #fff;
+@progress-bg:                 #d9dee0;
+@progress-bar-color:          #fff;
 
-@progress-bar-bg: #2f99da;
-@progress-bar-success-bg: @brand-success;
-@progress-bar-warning-bg: @brand-warning;
-@progress-bar-danger-bg: @brand-danger;
-@progress-bar-info-bg: @brand-info;
+@progress-bar-bg:             #2f99da;
+@progress-bar-success-bg:     @brand-success;
+@progress-bar-warning-bg:     @brand-warning;
+@progress-bar-danger-bg:      @brand-danger;
+@progress-bar-info-bg:        @brand-info;
 
 // Bar itself
 // -------------------------
@@ -39,7 +39,7 @@
     color: @progress-bar-color;
     text-align: center;
     background-color: @progress-bar-bg;
-    .transition(width 0.6s ease);
+    .transition(width .6s ease);
 }
 
 // Call animation for the active one
@@ -71,20 +71,12 @@
 
 // WebKit
 @-webkit-keyframes progress-bar-stripes {
-    from {
-        background-position: 40px 0;
-    }
-    to {
-        background-position: 0 0;
-    }
+    from  { background-position: 40px 0; }
+    to    { background-position: 0 0; }
 }
 
 // Spec and IE10+
 @keyframes progress-bar-stripes {
-    from {
-        background-position: 40px 0;
-    }
-    to {
-        background-position: 0 0;
-    }
+    from  { background-position: 40px 0; }
+    to    { background-position: 0 0; }
 }

@@ -9,16 +9,14 @@
 // Flash Messages
 // --------------------------------------------------
 
-@color-flash-success-bg: #8da85e;
-@color-flash-error-bg: #cc3300;
-@color-flash-warning-bg: #f0ad4e;
-@color-flash-info-bg: #5fb6f5;
-@color-flash-text: #ffffff;
+@color-flash-success-bg:                     #8da85e;
+@color-flash-error-bg:                       #cc3300;
+@color-flash-warning-bg:                     #f0ad4e;
+@color-flash-info-bg:                        #5fb6f5;
+@color-flash-text:                           #ffffff;
 
 #layout-canvas {
-    .flash-message {
-        display: none;
-    }
+    .flash-message{ display: none; }
 }
 
 .flash-message {
@@ -38,27 +36,19 @@
 
     &.fade {
         .opacity(0);
-        .transition(~"all 0.5s, width 0s");
-        .transform(~"scale(0.9)");
+        .transition(~'all 0.5s, width 0s');
+        .transform(~'scale(0.9)');
     }
 
     &.fade.in {
         .opacity(1);
-        .transform( ~"scale(1)");
+        .transform( ~'scale(1)');
     }
 
-    &.success {
-        background: @color-flash-success-bg;
-    }
-    &.error {
-        background: @color-flash-error-bg;
-    }
-    &.warning {
-        background: @color-flash-warning-bg;
-    }
-    &.info {
-        background: @color-flash-info-bg;
-    }
+    &.success { background: @color-flash-success-bg; }
+    &.error { background: @color-flash-error-bg; }
+    &.warning { background: @color-flash-warning-bg; }
+    &.info { background: @color-flash-info-bg; }
 
     button {
         float: none;
@@ -70,7 +60,7 @@
         outline: none;
 
         &:hover {
-            color: white;
+            color: white
         }
     }
 

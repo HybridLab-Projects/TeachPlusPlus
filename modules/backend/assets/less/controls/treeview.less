@@ -36,7 +36,7 @@
                 }
 
                 &:before {
-                    content: " ";
+                    content: ' ';
                     background-image: url(../images/treeview-icons.png);
                     background-position: 0px -28px;
                     background-repeat: no-repeat;
@@ -116,15 +116,11 @@
                     display: none;
                     margin-left: 15px;
 
-                    background: transparent
-                        url(../images/treeview-submenu-tabs.png) repeat-x left -39px;
+                    background: transparent url(../images/treeview-submenu-tabs.png) repeat-x left -39px;
 
-                    &:before,
-                    &:after {
-                        background: transparent
-                            url(../images/treeview-submenu-tabs.png) no-repeat
-                            left top;
-                        content: " ";
+                    &:before, &:after {
+                        background: transparent url(../images/treeview-submenu-tabs.png) no-repeat left top;
+                        content: ' ';
                         display: block;
                         width: 20px;
                         height: 37px;
@@ -207,15 +203,13 @@
                         color: @color-treeview-hover-text !important;
                     }
 
-                    > ul.submenu,
-                    > span.drag-handle {
-                        display: none !important;
+                    > ul.submenu, > span.drag-handle {
+                        display: none!important;
                     }
                 }
             }
 
-            &.dragged div,
-            > div:hover {
+            &.dragged div, > div:hover {
                 background-color: @color-treeview-hover-bg !important;
 
                 > a {
@@ -255,21 +249,20 @@
 
             &[data-no-drag-mode] div:hover {
                 span.drag-handle {
-                    cursor: default !important;
-                    .opacity(0.3) !important;
+                    cursor: default!important;
+                    .opacity(.3)!important;
                 }
             }
 
             &.dragged {
-                li.has-subitems,
-                &.has-subitems {
+                li.has-subitems, &.has-subitems {
                     > div:before {
                         background-position: 0px -52px;
                     }
                 }
 
                 div > ul.submenu {
-                    display: none !important;
+                    display: none!important;
                 }
             }
 
@@ -278,7 +271,7 @@
                 padding-right: 20px;
             }
 
-            &[data-status="collapsed"] > ol {
+            &[data-status=collapsed] > ol {
                 display: none;
             }
 
@@ -291,11 +284,8 @@
                         left: 26px;
                     }
 
-                    &:hover,
-                    &.popover-highlight {
-                        &:before {
-                            background-position: 0px -52px;
-                        }
+                    &:hover, &.popover-highlight {
+                        &:before { background-position: 0px -52px; }
                     }
 
                     span.expand {
@@ -306,13 +296,13 @@
 
             &.placeholder {
                 position: relative;
-                .opacity(0.5);
+                .opacity(.5);
             }
 
             &.dragged {
                 position: absolute;
                 z-index: 2000;
-                .opacity(0.25);
+                .opacity(.25);
 
                 > div {
                     .border-radius(3px);
@@ -321,7 +311,7 @@
 
             &.drop-target {
                 > div {
-                    background-color: #2581b8 !important;
+                    background-color: #2581b8!important;
 
                     > a {
                         color: @color-treeview-hover-text;
@@ -340,8 +330,8 @@
                 }
             }
 
-            &[data-status="expanded"] > div > span.expand {
-                .transform( ~"rotate(90deg) translate(0, 0)" );
+            &[data-status=expanded] > div > span.expand {
+                .transform( ~'rotate(90deg) translate(0, 0)' );
             }
 
             &.drag-ghost {
@@ -361,18 +351,16 @@
                         bottom: -1px;
                         background: @color-list-active-border;
                         display: block;
-                        content: " ";
+                        content: ' ';
                     }
 
-                    > span.comment,
-                    > span.expand {
+                    > span.comment, > span.expand {
                         color: @color-treeview-item-active-comment;
                     }
 
                     > span.borders {
-                        &:before,
-                        &:after {
-                            content: " ";
+                        &:before, &:after {
+                            content: ' ';
                             position: absolute;
                             width: 100%;
                             height: 1px;
@@ -381,12 +369,8 @@
                             background-color: @color-list-active;
                         }
 
-                        &:before {
-                            top: -1px;
-                        }
-                        &:after {
-                            bottom: -1px;
-                        }
+                        &:before {top: -1px;}
+                        &:after {bottom: -1px;}
                     }
                 }
             }
@@ -402,21 +386,21 @@
             > li {
                 > ol {
                     > li > div {
-                        margin-left: -20- (@max-level - @level) * 20px;
-                        margin-right: -20- (@max-level - @level) * 20px;
-                        padding-left: 61+ (@max-level - @level + 1) * 10px;
+                        margin-left: -20-(@max-level - @level)*20px;
+                        margin-right: -20-(@max-level - @level)*20px;
+                        padding-left: 61+(@max-level - @level + 1)*10px;
 
                         > a {
-                            margin-left: -61- (@max-level - @level + 1) * 10px;
-                            padding-left: 61+ (@max-level - @level + 1) * 10px;
+                            margin-left: -61-(@max-level - @level + 1)*10px;
+                            padding-left: 61+(@max-level - @level + 1)*10px;
                         }
 
                         &:before {
-                            margin-left: (@max-level - @level + 1) * 10px;
+                            margin-left: (@max-level - @level + 1)*10px;
                         }
 
                         > span.expand {
-                            left: 2+ (@max-level - @level + 1) * 10px;
+                            left: 2+(@max-level - @level + 1)*10px;
                         }
                     }
 
@@ -444,8 +428,7 @@
         border-radius: 5px;
         vertical-align: middle;
 
-        &:hover,
-        &:focus {
+        &:hover, &:focus {
             text-decoration: none;
             background-color: @color-treeview-hover-bg;
             color: @color-treeview-hover-text;
@@ -499,7 +482,7 @@
                         height: 100%;
                         width: 60px;
                         background: @color-treeview-light-submenu-bg;
-                        .transition(none) !important;
+                        .transition(none)!important;
 
                         &:before {
                             position: absolute;
@@ -520,8 +503,7 @@
                         white-space: nowrap;
                         font-size: 0;
 
-                        &:before,
-                        &:after {
+                        &:before, &:after {
                             display: none;
                         }
 
@@ -529,8 +511,7 @@
                             height: 100%;
                             display: inline-block;
                             background: @color-treeview-light-submenu-bg;
-                            border-right: 1px solid
-                                @color-treeview-light-submenu-border;
+                            border-right: 1px solid @color-treeview-light-submenu-border;
 
                             p {
                                 display: table;
@@ -565,8 +546,7 @@
 //
 
 body.dragging .control-treeview {
-    ol.dragging,
-    ol.dragging ol {
+    ol.dragging, ol.dragging ol {
         background: #ccc;
         padding-right: 20px;
         .transition(padding 1s);
@@ -577,7 +557,7 @@ body.dragging .control-treeview {
                 .transition(margin 1s);
 
                 .custom-checkbox {
-                    .transition(opacity 0.5s);
+                    .transition(opacity .5s);
                     .opacity(0);
                 }
             }
@@ -585,9 +565,8 @@ body.dragging .control-treeview {
     }
 
     &.treeview-light {
-        ol.dragging,
-        ol.dragging ol {
-            > li > div {
+        ol.dragging, ol.dragging ol {
+            > li > div  {
                 background-color: #f9f9f9;
             }
         }
@@ -598,15 +577,11 @@ body.dragging .control-treeview {
 // Retina
 //
 
-@media only screen and (min--moz-device-pixel-ratio: 1.5),
-    only screen and (-o-min-device-pixel-ratio: 3/2),
-    only screen and (-webkit-min-device-pixel-ratio: 1.5),
-    only screen and (min-devicepixel-ratio: 1.5),
-    only screen and (min-resolution: 1.5dppx) {
+@media only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
     .control-treeview {
         ol {
             > li {
-                > div {
+                > div{
                     &:before {
                         background-position: 0px -79px;
                         background-size: 21px auto;
@@ -614,29 +589,18 @@ body.dragging .control-treeview {
                 }
 
                 &.has-subitems > div {
-                    &:before {
-                        background-position: 0px -52px;
-                    }
-                    &:hover,
-                    &.popover-highlight {
-                        &:before {
-                            background-position: 0px -102px;
-                        }
+                    &:before {background-position: 0px -52px;}
+                    &:hover, &.popover-highlight {
+                        &:before {background-position: 0px -102px;}
                     }
                 }
 
-                &.dragged > div,
-                &.dragged li > div,
-                > div:hover,
-                > div.popover-highlight {
-                    &:before {
-                        background-position: 0px -129px;
-                    }
+                &.dragged > div, &.dragged li > div, > div:hover, > div.popover-highlight {
+                    &:before {background-position: 0px -129px;}
                 }
 
                 &.dragged {
-                    li.has-subitems,
-                    &.has-subitems {
+                    li.has-subitems, &.has-subitems {
                         > div:before {
                             background-position: 0px -102px;
                         }

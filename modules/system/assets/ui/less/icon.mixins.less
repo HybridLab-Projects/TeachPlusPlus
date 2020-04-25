@@ -63,9 +63,7 @@
             color: @color;
         }
 
-        &.before {
-            top: 0;
-        }
+        &.before {top: 0;}
         &.after {
             bottom: 3px;
             &:after {
@@ -74,17 +72,12 @@
         }
     }
 
-    &.scroll-before .scroll-marker.before {
-        display: block;
-    }
-    &.scroll-after .scroll-marker.after {
-        display: block;
-    }
+    &.scroll-before .scroll-marker.before { display: block; }
+    &.scroll-after .scroll-marker.after { display: block; }
 }
 
 .horizontal-scroll-indicators(@color) {
-    &:after,
-    &:before {
+    &:after, &:before {
         display: none;
         position: absolute;
         top: 50%;
@@ -104,10 +97,6 @@
         .icon(@angle-right);
     }
 
-    &.scroll-before:before {
-        display: block;
-    }
-    &.scroll-after:after {
-        display: block;
-    }
+    &.scroll-before:before { display: block; }
+    &.scroll-after:after { display: block; }
 }

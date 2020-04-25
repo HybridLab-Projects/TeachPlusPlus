@@ -1,48 +1,43 @@
 /*
  * Base class for Inspector editors that create popups.
  */
-+(function ($) {
-    "use strict";
++function ($) { "use strict";
 
     var Base = $.oc.inspector.propertyEditors.base,
-        BaseProto = Base.prototype;
+        BaseProto = Base.prototype
 
-    var PopupBase = function (
-        inspector,
-        propertyDefinition,
-        containerCell,
-        group
-    ) {
-        this.popup = null;
+    var PopupBase = function(inspector, propertyDefinition, containerCell, group) {
+        this.popup = null
 
-        Base.call(this, inspector, propertyDefinition, containerCell, group);
-    };
+        Base.call(this, inspector, propertyDefinition, containerCell, group)
+    }
 
-    PopupBase.prototype = Object.create(BaseProto);
-    PopupBase.prototype.constructor = Base;
+    PopupBase.prototype = Object.create(BaseProto)
+    PopupBase.prototype.constructor = Base
 
-    PopupBase.prototype.dispose = function () {
-        this.unregisterHandlers();
-        this.popup = null;
+    PopupBase.prototype.dispose = function() {
+        this.unregisterHandlers()
+        this.popup = null
 
-        BaseProto.dispose.call(this);
-    };
+        BaseProto.dispose.call(this)
+    }
 
-    PopupBase.prototype.build = function () {
-        var link = document.createElement("a");
+    PopupBase.prototype.build = function() {
+        var link = document.createElement('a')
 
-        $.oc.foundation.element.addClass(link, "trigger");
-        link.setAttribute("href", "#");
-        this.setLinkText(link);
+        $.oc.foundation.element.addClass(link, 'trigger')
+        link.setAttribute('href', '#')
+        this.setLinkText(link)
 
-        $.oc.foundation.element.addClass(this.containerCell, "trigger-cell");
+        $.oc.foundation.element.addClass(this.containerCell, 'trigger-cell')
 
-        this.containerCell.appendChild(link);
-    };
+        this.containerCell.appendChild(link)
+    }
 
-    PopupBase.prototype.setLinkText = function (link, value) {};
+    PopupBase.prototype.setLinkText = function(link, value) {
+    }
 
-    PopupBase.prototype.getPopupContent = function () {
+    PopupBase.prototype.getPopupContent = function() {
         return '<form>                                                                                  \
                 <div class="modal-header">                                                              \
                     <button type="button" class="close" data-dismiss="popup">&times;</button>           \
@@ -56,88 +51,87 @@
                     <button type="submit" class="btn btn-primary">OK</button>                           \
                     <button type="button" class="btn btn-default" data-dismiss="popup">Cancel</button>  \
                 </div>                                                                                  \
-                </form>';
-    };
+                </form>'
+    }
 
-    PopupBase.prototype.updateDisplayedValue = function (value) {
-        this.setLinkText(this.getLink(), value);
-    };
+    PopupBase.prototype.updateDisplayedValue = function(value) {
+        this.setLinkText(this.getLink(), value)
+    }
 
-    PopupBase.prototype.registerHandlers = function () {
+    PopupBase.prototype.registerHandlers = function() {
         var link = this.getLink(),
-            $link = $(link);
+            $link = $(link)
 
-        link.addEventListener("click", this.proxy(this.onTriggerClick));
-        $link.on("shown.oc.popup", this.proxy(this.onPopupShown));
-        $link.on("hidden.oc.popup", this.proxy(this.onPopupHidden));
-    };
+        link.addEventListener('click', this.proxy(this.onTriggerClick))
+        $link.on('shown.oc.popup', this.proxy(this.onPopupShown))
+        $link.on('hidden.oc.popup', this.proxy(this.onPopupHidden))
+    }
 
-    PopupBase.prototype.unregisterHandlers = function () {
+    PopupBase.prototype.unregisterHandlers = function() {
         var link = this.getLink(),
-            $link = $(link);
+            $link = $(link)
 
-        link.removeEventListener("click", this.proxy(this.onTriggerClick));
-        $link.off("shown.oc.popup", this.proxy(this.onPopupShown));
-        $link.off("hidden.oc.popup", this.proxy(this.onPopupHidden));
-    };
+        link.removeEventListener('click', this.proxy(this.onTriggerClick))
+        $link.off('shown.oc.popup', this.proxy(this.onPopupShown))
+        $link.off('hidden.oc.popup', this.proxy(this.onPopupHidden))
+    }
 
-    PopupBase.prototype.getLink = function () {
-        return this.containerCell.querySelector("a.trigger");
-    };
+    PopupBase.prototype.getLink = function() {
+        return this.containerCell.querySelector('a.trigger')
+    }
 
-    PopupBase.prototype.configurePopup = function (popup) {};
+    PopupBase.prototype.configurePopup = function(popup) {
+    }
 
-    PopupBase.prototype.handleSubmit = function ($form) {};
+    PopupBase.prototype.handleSubmit = function($form) {
+    }
 
-    PopupBase.prototype.hidePopup = function () {
-        $(this.getLink()).popup("hide");
-    };
+    PopupBase.prototype.hidePopup = function() {
+        $(this.getLink()).popup('hide')
+    }
 
-    PopupBase.prototype.onTriggerClick = function (ev) {
-        $.oc.foundation.event.stop(ev);
+    PopupBase.prototype.onTriggerClick = function(ev) {
+        $.oc.foundation.event.stop(ev)
 
-        var content = this.getPopupContent();
+        var content = this.getPopupContent()
 
-        content = content.replace(
-            "{{property}}",
-            this.propertyDefinition.title
-        );
+        content = content.replace('{{property}}', this.propertyDefinition.title)
 
         $(ev.target).popup({
-            content: content,
-        });
+            content: content
+        })
 
-        return false;
-    };
+        return false
+    }
 
-    PopupBase.prototype.onPopupShown = function (ev, link, popup) {
-        $(popup).on("submit.inspector", "form", this.proxy(this.onSubmit));
+    PopupBase.prototype.onPopupShown = function(ev, link, popup) {
+        $(popup).on('submit.inspector', 'form', this.proxy(this.onSubmit))
 
-        this.popup = popup.get(0);
+        this.popup = popup.get(0)
 
-        this.configurePopup(popup);
+        this.configurePopup(popup)
 
-        this.getRootSurface().popupDisplayed();
-    };
+        this.getRootSurface().popupDisplayed()
+    }
 
-    PopupBase.prototype.onPopupHidden = function (ev, link, popup) {
-        $(popup).off(".inspector", "form", this.proxy(this.onSubmit));
-        this.popup = null;
+    PopupBase.prototype.onPopupHidden = function(ev, link, popup) {
+        $(popup).off('.inspector', 'form', this.proxy(this.onSubmit))
+        this.popup = null
 
-        this.getRootSurface().popupHidden();
-    };
+        this.getRootSurface().popupHidden()
+    }
 
-    PopupBase.prototype.onSubmit = function (ev) {
-        ev.preventDefault();
+    PopupBase.prototype.onSubmit = function(ev) {
+        ev.preventDefault()
 
         if (this.handleSubmit($(ev.target)) === false) {
-            return false;
+            return false
         }
 
-        this.setLinkText(this.getLink());
-        this.hidePopup();
-        return false;
-    };
+        this.setLinkText(this.getLink())
+        this.hidePopup()
+        return false
+    }
 
-    $.oc.inspector.propertyEditors.popupBase = PopupBase;
-})(window.jQuery);
+    $.oc.inspector.propertyEditors.popupBase = PopupBase
+}(window.jQuery);

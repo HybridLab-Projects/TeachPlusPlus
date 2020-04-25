@@ -42,16 +42,10 @@
 
         .horizontal-scroll-indicators(@color-scroll-indicator);
 
-        &:before {
-            left: -10px;
-        }
-        &:after {
-            right: 6px;
-        }
+        &:before { left: -10px; }
+        &:after { right: 6px; }
 
-        .btn,
-        .btn-group,
-        .dropdown {
+        .btn, .btn-group, .dropdown {
             white-space: nowrap;
             float: none;
             display: inline-block;
@@ -71,8 +65,7 @@
         }
 
         .btn-group {
-            > .btn,
-            > .dropdown {
+            > .btn, > .dropdown {
                 margin-right: 0;
                 display: inline-block;
                 float: none;
@@ -91,7 +84,7 @@
         }
     }
 
-    input.form-control[type="text"] {
+    input.form-control[type=text] {
         height: auto;
         padding: 6px 13px 6px;
     }
@@ -101,14 +94,14 @@
     }
 }
 
-[data-control="toolbar"] {
+[data-control=toolbar] {
     white-space: nowrap;
     width: 100%;
     overflow: hidden;
 }
 
 html.mobile {
-    [data-control="toolbar"].is-native-drag {
+    [data-control=toolbar].is-native-drag {
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
@@ -136,7 +129,7 @@ html.mobile {
     height: 28px;
 
     > i {
-        .opacity(0.2);
+        .opacity(.2);
     }
 
     &:hover,
@@ -145,12 +138,12 @@ html.mobile {
         text-decoration: none;
         cursor: pointer;
         > i {
-            .opacity(0.5);
+            .opacity(.5);
         }
     }
 
     &:focus {
-        outline: none;
+         outline: none;
     }
 }
 
@@ -167,9 +160,7 @@ html.mobile {
     border-bottom: 2px solid @color-toolbar-editor-border;
 
     .toolbar-item {
-        .btn,
-        .btn-group,
-        .dropdown {
+        .btn, .btn-group, .dropdown {
             margin: 0;
             padding: 0;
         }
@@ -188,7 +179,7 @@ html.mobile {
             border-radius: 0;
             font-size: 14px;
 
-            > i {
+            > i  {
                 opacity: 1;
             }
 
@@ -242,8 +233,7 @@ html.mobile {
 #layout-side-panel,
 .compact-toolbar {
     div.control-toolbar {
-        &,
-        &.toolbar-padded {
+        &, &.toolbar-padded {
             padding: 0;
         }
 
@@ -256,7 +246,7 @@ html.mobile {
         }
 
         .btn {
-            .border-radius(0) !important;
+            .border-radius(0)!important;
             padding-top: 12px;
             padding-bottom: 13px;
             margin-right: 0;

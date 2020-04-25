@@ -1,11 +1,8 @@
-ace.define(
-    "ace/theme/github",
-    ["require", "exports", "module", "ace/lib/dom"],
-    function (require, exports, module) {
-        exports.isDark = false;
-        exports.cssClass = "ace-github";
-        exports.cssText =
-            '\
+ace.define("ace/theme/github",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
+
+exports.isDark = false;
+exports.cssClass = "ace-github";
+exports.cssText = "\
 .ace-github .ace_gutter {\
 background: #e8e8e8;\
 color: #AAA;\
@@ -98,10 +95,9 @@ width: 1px;\
 background: #e8e8e8;\
 }\
 .ace-github .ace_indent-guide {\
-background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;\
-}';
+background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+}";
 
-        var dom = require("../lib/dom");
-        dom.importCssString(exports.cssText, exports.cssClass);
-    }
-);
+    var dom = require("../lib/dom");
+    dom.importCssString(exports.cssText, exports.cssClass);
+});

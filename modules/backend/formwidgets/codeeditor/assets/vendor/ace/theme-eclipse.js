@@ -1,12 +1,8 @@
-ace.define(
-    "ace/theme/eclipse",
-    ["require", "exports", "module", "ace/lib/dom"],
-    function (require, exports, module) {
-        "use strict";
+ace.define("ace/theme/eclipse",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
+"use strict";
 
-        exports.isDark = false;
-        exports.cssText =
-            '.ace-eclipse .ace_gutter {\
+exports.isDark = false;
+exports.cssText = ".ace-eclipse .ace_gutter {\
 background: #ebebeb;\
 border-right: 1px solid rgb(159, 159, 159);\
 color: rgb(136, 136, 136);\
@@ -92,12 +88,11 @@ background-color : #DADADA;\
 border: 1px solid rgb(181, 213, 255);\
 }\
 .ace-eclipse .ace_indent-guide {\
-background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;\
-}';
+background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+}";
 
-        exports.cssClass = "ace-eclipse";
+exports.cssClass = "ace-eclipse";
 
-        var dom = require("../lib/dom");
-        dom.importCssString(exports.cssText, exports.cssClass);
-    }
-);
+var dom = require("../lib/dom");
+dom.importCssString(exports.cssText, exports.cssClass);
+});

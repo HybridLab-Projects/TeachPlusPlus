@@ -26,8 +26,7 @@ body.mainmenu-open {
         background-color: transparent;
     }
 
-    &:active,
-    &:focus {
+    &:active, &:focus {
         text-decoration: none;
         color: @color-mainmenu-inactive;
     }
@@ -89,12 +88,12 @@ ul.mainmenu-nav {
         span.counter {
             display: block;
             position: absolute;
-            top: 0.143em;
+            top: .143em;
             right: 0;
-            padding: 0.143em 0.429em 0.214em 0.286em;
+            padding: .143em .429em .214em .286em;
             background-color: @color-sidebarnav-counter-bg;
             color: @color-sidebarnav-counter-text;
-            font-size: 0.786em;
+            font-size: .786em;
             line-height: 100%;
             .border-radius(3px);
             .opacity(1);
@@ -160,8 +159,7 @@ nav#layout-mainmenu {
     .toolbar-item {
         padding-right: 0;
 
-        &:before,
-        &:after {
+        &:before, &:after {
             margin-top: 0;
         }
 
@@ -310,8 +308,7 @@ nav#layout-mainmenu ul li .mainmenu-accountmenu {
             font-size: @font-size-base;
             color: @color-accountmenu-text;
 
-            &:hover,
-            &:focus {
+            &:hover, &:focus {
                 background: @highlight-hover-bg;
                 color: @highlight-hover-text;
             }
@@ -323,9 +320,7 @@ nav#layout-mainmenu ul li .mainmenu-accountmenu {
         }
 
         &:first-child a {
-            &:hover,
-            &:focus,
-            &:active {
+            &:hover, &:focus, &:active {
                 &:after {
                     .triangle(up, 17px, 7px, @highlight-hover-bg);
                     position: absolute;
@@ -370,10 +365,7 @@ nav#layout-mainmenu.navbar-mode-inline_no_icons {
                     margin-right: 5px;
                     width: @mainmenu-icon-dimension;
                     height: @mainmenu-icon-dimension;
-                    i,
-                    img {
-                        margin: 0;
-                    }
+                    i, img { margin: 0; }
                 }
                 .nav-label {
                     line-height: @mainmenu-icon-dimension;
@@ -396,6 +388,7 @@ nav#layout-mainmenu.navbar-mode-inline_no_icons {
             //     margin-left: 0;
             // }
         }
+
     }
 }
 
@@ -432,16 +425,10 @@ nav#layout-mainmenu.navbar-mode-tile {
                 top: 50%;
                 left: 50%;
                 margin-left: -(@mainmenu-icon-dimension / 2);
-                margin-top: -(
-                        (@mainmenu-tile-dimension - @mainmenu-tile-label-height) /
-                            2
-                    ) - @tile-bottom-offset;
+                margin-top: -((@mainmenu-tile-dimension - @mainmenu-tile-label-height) / 2) - @tile-bottom-offset;
                 width: @mainmenu-icon-dimension;
                 height: @mainmenu-icon-dimension;
-                i,
-                img {
-                    margin: 0;
-                }
+                i, img { margin: 0; }
             }
 
             .nav-label {
@@ -477,6 +464,7 @@ nav#layout-mainmenu.navbar-mode-tile {
                     z-index: 2;
                 }
             }
+
         }
 
         li.active {
@@ -511,7 +499,7 @@ nav#layout-mainmenu {
             line-height: @mainmenu-mode-collapse-height;
             width: @mainmenu-mode-collapse-height;
             text-align: center;
-            opacity: 0.7;
+            opacity: .7;
 
             i {
                 line-height: @mainmenu-mode-collapse-height;
@@ -563,9 +551,7 @@ nav#layout-mainmenu.navbar-mode-collapse {
         right: 13px;
     }
 
-    ul.nav {
-        display: none;
-    }
+    ul.nav { display: none; }
 
     .menu-toggle {
         display: inline-block;
@@ -642,8 +628,7 @@ html.mobile {
 nav#layout-mainmenu.navbar ul li:hover,
 .mainmenu-collapsed li:hover {
     a {
-        &:active,
-        &:focus {
+        &:active, &:focus {
             color: @color-mainmenu-active !important;
         }
     }
@@ -655,6 +640,7 @@ nav#layout-mainmenu.navbar ul li:hover,
 
 nav#layout-mainmenu.navbar ul li,
 .mainmenu-collapsed li {
+
     // Used by account menu
     &.highlight > a {
         color: @color-mainmenu-active !important;

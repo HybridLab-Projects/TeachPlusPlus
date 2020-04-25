@@ -4,15 +4,15 @@
 // Component list
 // --------------------------------------------------
 
-@color-component-list-bg: @brand-secondary;
-@color-component-bg: #ffffff;
-@color-component-text: #475354;
-@color-component-hover-bg: #3498db;
-@color-component-hover-text: #ffffff;
-@color-component-placeholder: #e0e0e0;
-@color-group-bg: #f1f3f4;
-@color-error-component-bg: #ab2a1c;
-@color-error-component-text: #ffffff;
+@color-component-list-bg:       @brand-secondary;
+@color-component-bg:            #ffffff;
+@color-component-text:          #475354;
+@color-component-hover-bg:      #3498db;
+@color-component-hover-text:    #ffffff;
+@color-component-placeholder:   #e0e0e0;
+@color-group-bg:                #f1f3f4;
+@color-error-component-bg:      #ab2a1c;
+@color-error-component-text:    #ffffff;
 
 .component-lego-icon() {
     position: absolute;
@@ -95,8 +95,7 @@ div.control-componentlist div.components div.layout-cell {
     &.placeholder > div {
         background: @color-component-placeholder;
         color: @color-component-placeholder;
-        &:before,
-        &:after {
+        &:before, &:after {
             color: @color-component-placeholder !important;
             text-shadow: none !important;
         }
@@ -182,7 +181,7 @@ div.control-componentlist {
                 min-width: 170px;
 
                 &.popover-highlight {
-                    border-right-color: rgba(0, 0, 0, 0);
+                    border-right-color: rgba(0,0,0,0);
                     background: @color-component-bg!important;
                     color: @color-component-text!important;
                     &:before {
@@ -233,30 +232,26 @@ div.control-componentlist {
                     color: @close-color;
                     font-size: 17px;
                     font-weight: @close-font-weight;
-                    .opacity(0.3);
+                    .opacity(.3);
 
                     &:hover {
-                        .opacity(0.5);
+                        .opacity(.5);
                         text-decoration: none;
                     }
                 }
             }
 
             &.adding > div {
-                .translate(0, -100px) !important;
+                .translate(0, -100px)!important;
             }
         }
     }
 }
 
 .draggable-component-item {
-    .opacity(0.6);
-    span.alias {
-        display: none;
-    }
-    a.remove {
-        display: none;
-    }
+    .opacity(.6);
+    span.alias { display: none; }
+    a.remove { display: none; }
 }
 
 .component-list .components {
@@ -264,12 +259,8 @@ div.control-componentlist {
         div.layout-row {
             div.layout-cell {
                 border-top: 1px solid @color-panel-light;
-                span.alias {
-                    display: none;
-                }
-                a.remove {
-                    display: none;
-                }
+                span.alias { display: none; }
+                a.remove { display: none; }
 
                 &:last-child > div {
                     border-right: none;
@@ -298,9 +289,7 @@ div.control-componentlist {
             &:first-child {
                 div.layout-cell {
                     > div {
-                        &:before {
-                            display: none;
-                        }
+                        &:before {display: none;}
                     }
                 }
             }
@@ -376,9 +365,7 @@ div.control-componentlist {
 
 .touch {
     div.control-componentlist div.components div.layout-cell {
-        > div:hover,
-        > div:active,
-        > div:active:focus {
+        > div:hover, > div:active, > div:active:focus {
             .disable-component-list-hover();
         }
     }
@@ -399,9 +386,7 @@ div.control-componentlist {
 // }
 
 body.drag div.control-componentlist div.components div.layout-cell {
-    > div,
-    > div:hover,
-    > div:active {
+    > div, > div:hover, > div:active {
         .disable-component-list-hover();
-    }
+   }
 }

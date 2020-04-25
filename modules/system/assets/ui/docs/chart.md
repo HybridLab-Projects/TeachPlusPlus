@@ -1,7 +1,6 @@
 # Chart
 
 <a name="pie-chart" class="anchor" href="#pie-chart"></a>
-
 ## Pie chart
 
 The pie chart outputs information as a circle diagram, with optional label in the center. Example markup:
@@ -21,7 +20,6 @@ The pie chart outputs information as a circle diagram, with optional label in th
 ![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true) {.img-responsive .frame}
 
 <a name="line-chart" class="anchor" href="#line-chart"></a>
-
 ## Line chart
 
 The next example shows a line chart markup. Data sets are defined with the SPAN elements inside the chart element.
@@ -42,7 +40,6 @@ The next example shows a line chart markup. Data sets are defined with the SPAN 
 ![image](https://github.com/octobercms/docs/blob/master/images/line-chart.png?raw=true) {.img-responsive .frame}
 
 <a name="bar-chart" class="anchor" href="#bar-chart"></a>
-
 ## Bar chart
 
 The next example shows a bar chart markup. The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
@@ -87,8 +84,8 @@ The next example shows a bar chart markup. The **wrap-legend** class is optional
         </ul>
     </div>
 
-<a name="bar-chart" class="anchor" href="#bar-chart"></a>
 
+<a name="bar-chart" class="anchor" href="#bar-chart"></a>
 ## Status list
 
 A list of statuses and values

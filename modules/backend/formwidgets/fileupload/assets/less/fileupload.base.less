@@ -1,8 +1,7 @@
 .uploader-object-active() {
     background: @fileupload-object-active-bg !important;
 
-    i,
-    p.size {
+    i, p.size {
         color: #ecf0f1;
     }
 
@@ -22,7 +21,7 @@
     height: @fileupload-progress-bar-height;
     background-color: @fileupload-progress-bar-bg;
     border-radius: @border-radius-base;
-    .box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
+    .box-shadow(inset 0 1px 2px rgba(0,0,0,.1));
 
     .upload-progress {
         float: left;
@@ -32,15 +31,15 @@
         color: @fileupload-progress-bar-color;
         background-color: #5fb6f5;
         .box-shadow(none);
-        .transition(width 0.6s ease);
+        .transition(width .6s ease);
     }
 }
 
 .uploader-block-button() {
     display: block;
-    border: 2px dashed #bdc3c7;
+    border: 2px dashed #BDC3C7;
     background-clip: content-box;
-    background-color: #f9f9f9;
+    background-color: #F9F9F9;
     position: relative;
     outline: none;
 
@@ -60,7 +59,7 @@
             height: 22px;
             width: 22px;
             line-height: 22px;
-            color: #bdc3c7;
+            color: #BDC3C7;
         }
 
         &.large-icon {
@@ -81,18 +80,18 @@
     }
 
     &:hover {
-        border: 2px dashed #1f99dc;
+        border: 2px dashed #1F99DC;
 
         .upload-button-icon:before {
-            color: #1f99dc;
+            color: #1F99DC;
         }
     }
 
     &:focus {
-        border: 2px dashed #1f99dc;
+        border: 2px dashed #1F99DC;
 
         .upload-button-icon:before {
-            color: #1f99dc;
+            color: #1F99DC;
         }
     }
 }
@@ -117,11 +116,13 @@
 //
 
 .field-fileupload {
+
     //
     // Uploaded item
     //
 
     .upload-object {
+
         .border-radius(3px);
         position: relative;
         outline: none;
@@ -136,7 +137,7 @@
 
         .icon-container {
             display: table;
-            opacity: 0.6;
+            opacity: .6;
 
             i {
                 color: #95a5a6;
@@ -158,7 +159,7 @@
 
         h4 {
             font-size: 13px;
-            color: #2a3e51;
+            color: #2A3E51;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -181,9 +182,7 @@
         p.size {
             font-size: 12px;
             color: #95a5a6;
-            strong {
-                font-weight: 400;
-            }
+            strong { font-weight: 400; }
         }
 
         .meta {
@@ -204,6 +203,7 @@
             font-size: 13px;
             text-decoration: none;
         }
+
     }
 
     //
@@ -216,9 +216,9 @@
         }
 
         .icon-container:after {
-            background-image: url("../../../../../system/assets/ui/images/loader-transparent.svg");
+            background-image: url('../../../../../system/assets/ui/images/loader-transparent.svg');
             position: absolute;
-            content: " ";
+            content: ' ';
             width: 40px;
             height: 40px;
             left: 50%;
@@ -237,7 +237,7 @@
             }
             .icon-container:after {
                 opacity: 0;
-                .transition(opacity 0.3s ease);
+                .transition(opacity .3s ease);
             }
         }
 
@@ -258,11 +258,11 @@
 
         &.is-loading {
             .icon-container {
-                opacity: 0.6;
+                opacity: .6;
             }
             .icon-container:after {
                 opacity: 1;
-                .transition(opacity 0.3s ease);
+                .transition(opacity .3s ease);
             }
         }
     }
@@ -276,15 +276,13 @@
 
         .progress-bar {
             opacity: 0;
-            .transition(opacity 0.3s ease);
+            .transition(opacity .3s ease);
         }
 
         &:hover {
             h4 a,
             .meta .upload-remove-button,
-            .meta .drag-handle {
-                display: block;
-            }
+            .meta .drag-handle { display: block; }
         }
     }
 
@@ -297,9 +295,8 @@
 
         .icon-container {
             opacity: 1;
-            > img,
-            > i {
-                opacity: 0.5;
+            > img, > i {
+                opacity: .5;
             }
         }
 
@@ -329,7 +326,7 @@
 
         .upload-object.dragged {
             position: absolute;
-            .opacity(0.5);
+            .opacity(.5);
             z-index: 2000;
             .uploader-toolbar {
                 display: none;
@@ -359,9 +356,7 @@
         .upload-object.is-success {
             h4 a,
             .meta .upload-remove-button,
-            .meta .drag-handle {
-                display: block !important;
-            }
+            .meta .drag-handle { display: block !important; }
         }
     }
 }
@@ -371,9 +366,9 @@
 //
 
 .fileupload-config-form {
-    .fileupload-url-button {
+    .fileupload-url-button{
         padding-left: 0;
-        > i {
+         > i {
             color: #666;
         }
     }
@@ -381,70 +376,19 @@
     .file-upload-modal-image-header {
         // Photoshop transparent background
         // Based on: http://lea.verou.me/css3patterns/#checkerboard
-        background-color: #fefefe;
-        background-image: -webkit-linear-gradient(
-                45deg,
-                #cbcbcb 25%,
-                transparent 25%,
-                transparent 75%,
-                #cbcbcb 75%,
-                #cbcbcb
-            ),
-            -webkit-linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent
-                        75%, #cbcbcb 75%, #cbcbcb);
-        background-image: -moz-linear-gradient(
-                45deg,
-                #cbcbcb 25%,
-                transparent 25%,
-                transparent 75%,
-                #cbcbcb 75%,
-                #cbcbcb
-            ),
-            -moz-linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent
-                        75%, #cbcbcb 75%, #cbcbcb);
-        background-image: -o-linear-gradient(
-                45deg,
-                #cbcbcb 25%,
-                transparent 25%,
-                transparent 75%,
-                #cbcbcb 75%,
-                #cbcbcb
-            ),
-            -o-linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent
-                        75%, #cbcbcb 75%, #cbcbcb);
-        background-image: -ms-linear-gradient(
-                45deg,
-                #cbcbcb 25%,
-                transparent 25%,
-                transparent 75%,
-                #cbcbcb 75%,
-                #cbcbcb
-            ),
-            -ms-linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent
-                        75%, #cbcbcb 75%, #cbcbcb);
-        background-image: linear-gradient(
-                45deg,
-                #cbcbcb 25%,
-                transparent 25%,
-                transparent 75%,
-                #cbcbcb 75%,
-                #cbcbcb
-            ),
-            linear-gradient(
-                45deg,
-                #cbcbcb 25%,
-                transparent 25%,
-                transparent 75%,
-                #cbcbcb 75%,
-                #cbcbcb
-            );
+        background-color: #FEFEFE;
+        background-image: -webkit-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB), -webkit-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB);
+        background-image: -moz-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB), -moz-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB);
+        background-image: -o-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB), -o-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB);
+        background-image: -ms-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB), -ms-linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB);
+        background-image: linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB), linear-gradient(45deg, #CBCBCB 25%, transparent 25%, transparent 75%, #CBCBCB 75%, #CBCBCB);
         -webkit-background-size: 20px 20px;
         -moz-background-size: 20px 20px;
         background-size: 20px 20px;
         background-position: 0 0, 10px 10px;
 
-        &,
-        img {
+
+        &, img {
             .border-top-radius(2px);
         }
 
@@ -452,14 +396,13 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: #bdc3c7;
-            opacity: 0.7;
+            background: #BDC3C7;
+            opacity: .7;
             height: 24px;
             width: 22px;
 
-            &:hover,
-            &:focus {
-                opacity: 0.9;
+            &:hover, &:focus {
+                opacity: .9;
             }
         }
     }

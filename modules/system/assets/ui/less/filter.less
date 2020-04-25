@@ -10,13 +10,13 @@
 // Filters
 // --------------------------------------------------
 
-@color-filter-bg: #ecf0f1;
-@color-filter-bg-active: #6aab55;
-@color-filter-border: #d7dbdd;
-@color-filter-text: rgba(0, 0, 0, 0.6);
-@color-filter-text-active: #000000;
-@color-filter-items-bg: #fafafa;
-@color-filter-items-bg-hover: #4da7e8;
+@color-filter-bg:                            #ECF0F1;
+@color-filter-bg-active:                     #6AAB55;
+@color-filter-border:                        #D7DBDD;
+@color-filter-text:                          rgba(0,0,0,.6);
+@color-filter-text-active:                   #000000;
+@color-filter-items-bg:                      #fafafa;
+@color-filter-items-bg-hover:                #4da7e8;
 
 //
 // Filters
@@ -85,17 +85,16 @@
             .filter-setting {
                 padding-left: 5px;
                 padding-right: 5px;
-                color: #fff;
+                color: #FFF;
                 background-color: @color-filter-bg-active;
                 .border-radius(4px);
-                .transition(~"color 1s, background-color 1s");
+                .transition(~'color 1s, background-color 1s');
             }
         }
 
         &.checkbox {
             padding-left: 35px;
-            &,
-            label {
+            &, label {
                 margin-bottom: 0;
             }
 
@@ -104,15 +103,14 @@
             }
 
             &:after {
-                content: "";
+                content: '';
             }
         }
 
         &.text {
             padding: 0 10px;
 
-            &,
-            label {
+            &, label {
                 margin: 0;
             }
 
@@ -124,7 +122,7 @@
             }
 
             &:after {
-                content: "";
+                content: '';
             }
 
             .loading-indicator {
@@ -134,10 +132,8 @@
             }
         }
 
-        &:hover,
-        &.active {
-            &,
-            &.custom-checkbox label {
+        &:hover, &.active {
+            &, &.custom-checkbox label {
                 color: @color-filter-text-active;
             }
 
@@ -154,8 +150,7 @@
     > .filter-has-popover {
         display: inline-block;
         padding: (@padding-standard / 2);
-        .filter-label {
-        }
+        .filter-label {}
         .filter-setting {
             display: inline-block;
             .transition(color 0.6s);
@@ -170,21 +165,17 @@
             .filter-setting {
                 padding-left: 5px;
                 padding-right: 5px;
-                color: #fff;
+                color: #FFF;
                 background-color: @color-filter-bg-active;
                 .border-radius(4px);
-                .transition(~"color 1s, background-color 1s");
+                .transition(~'color 1s, background-color 1s');
             }
         }
 
         &:hover {
             color: #000;
-            .filter-label {
-                color: @color-filter-text;
-            }
-            &.active .filter-setting {
-                background-color: darken(@color-filter-bg-active, 5%);
-            }
+            .filter-label { color: @color-filter-text; }
+            &.active .filter-setting { background-color: darken(@color-filter-bg-active, 5%); }
         }
     }
 }
@@ -212,18 +203,16 @@
         }
     }
 
-    .filter-items,
-    .filter-active-items {
+    .filter-items, .filter-active-items {
         color: @color-filter-text;
         font-size: @font-size-base - 1;
-        ul,
-        li {
+        ul, li {
             list-style-type: none;
-            margin: 0;
-            padding: 0;
+            margin:0;
+            padding:0;
         }
         li {
-            .transition(~"color 0.6s, background-color 0.3s");
+            .transition(~'color 0.6s, background-color 0.3s');
         }
         a {
             text-decoration: none;
@@ -239,7 +228,7 @@
 
             &:hover {
                 background-color: @color-filter-items-bg-hover;
-                color: #ffffff;
+                color: #FFFFFF;
             }
         }
     }
@@ -250,9 +239,7 @@
 
         background-color: @color-filter-items-bg;
         border-bottom: 1px solid @color-filter-border;
-        a:before {
-            .icon(@plus);
-        }
+        a:before { .icon(@plus); }
 
         li.loading {
             padding: 7px;
@@ -260,25 +247,19 @@
                 display: block;
                 height: 20px;
                 width: 20px;
-                background-image: url("@{loader-image-path}/loader-transparent.svg");
+                background-image: url('@{loader-image-path}/loader-transparent.svg');
                 background-size: 20px 20px;
                 background-position: 50% 50%;
                 .animation(spin 1s linear infinite);
             }
         }
 
-        li.animate-enter {
-            .animation(fadeInUp 0.5s);
-        }
+        li.animate-enter { .animation(fadeInUp .5s); }
     }
 
     .filter-active-items {
-        a:before {
-            .icon(@times);
-        }
-        li.animate-enter {
-            .animation(fadeInDown 0.5s);
-        }
+        a:before { .icon(@times); }
+        li.animate-enter { .animation(fadeInDown .5s); }
     }
 
     &.control-filter-box-popover {

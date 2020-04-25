@@ -5,29 +5,15 @@
     position: relative;
     border: 2px solid @color-form-field-border;
     .border-radius(@border-radius-base);
-    textarea {
-        .opacity(0);
-    }
+    textarea { .opacity(0); }
 
-    &.editor-focus {
-        border: 2px solid @color-form-field-border-focus;
-    }
+    &.editor-focus { border: 2px solid @color-form-field-border-focus; }
 
-    &.size-tiny {
-        min-height: @size-tiny;
-    }
-    &.size-small {
-        min-height: @size-small;
-    }
-    &.size-large {
-        min-height: @size-large;
-    }
-    &.size-huge {
-        min-height: @size-huge;
-    }
-    &.size-giant {
-        min-height: @size-giant;
-    }
+    &.size-tiny { min-height: @size-tiny; }
+    &.size-small { min-height: @size-small; }
+    &.size-large { min-height: @size-large; }
+    &.size-huge { min-height: @size-huge; }
+    &.size-giant { min-height: @size-giant; }
 
     .ace_search {
         font-family: @font-family-base;
@@ -40,9 +26,9 @@
             outline: none !important;
 
             .ace_search_field {
-                border: 0.0625rem solid red;
-                -webkit-box-shadow: 0 0 0.1875rem 0.125rem red;
-                box-shadow: 0 0 0.1875rem 0.125rem red;
+                border: .0625rem solid red;
+                -webkit-box-shadow: 0 0 .1875rem .125rem red;
+                box-shadow: 0 0 .1875rem .125rem red;
                 z-index: 1;
                 position: relative;
             }
@@ -59,15 +45,10 @@
         bottom: 10px;
         right: 25px;
         z-index: @zindex-form;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0,0,0,.8);
         border-radius: 5px;
 
-        > ul,
-        ul > li {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+        > ul, ul > li { list-style-type: none; padding: 0; margin: 0; }
         > ul > li {
             float: left;
 
@@ -96,8 +77,7 @@
                     font-size: 15px;
                 }
             }
-            &:hover,
-            &:focus {
+            &:hover, &:focus {
                 > i {
                     .opacity(1);
                     color: #fff;
@@ -117,11 +97,7 @@
         .editor-toolbar {
             z-index: @zindex-fullscreen + 2;
         }
-        .editor-code {
-            .border-radius(0);
-        }
-        .ace_search {
-            z-index: @zindex-fullscreen + 3;
-        }
+        .editor-code { .border-radius(0); }
+        .ace_search { z-index: @zindex-fullscreen + 3; }
     }
 }

@@ -15,4 +15,4 @@ Lines 4120-4124. Added new method:
 ```
 
 Filed an issue: https://github.com/select2/select2/issues/3774
-The issue was closed by the developers - the problem is going to be fixed in the upcoming 4.0.1 release.
+The issue was closed by the developers - the problem is going to be fixed in the upcoming 4.0.1 release. 

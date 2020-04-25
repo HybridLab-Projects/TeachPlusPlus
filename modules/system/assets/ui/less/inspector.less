@@ -12,13 +12,13 @@
 // Inspector
 // --------------------------------------------------
 
-@color-inspector-bg: #f2f2f2;
-@color-inspector-value-bg: #ffffff;
-@color-inspector-active-bg: #ffffff;
-@color-inspector-text: #333333;
-@color-inspector-input-text: #385487;
-@color-inspector-grid: #c8cccd;
-@color-inspector-changed: #c03f31;
+@color-inspector-bg:                         #f2f2f2;
+@color-inspector-value-bg:                   #ffffff;
+@color-inspector-active-bg:                  #ffffff;
+@color-inspector-text:                       #333333;
+@color-inspector-input-text:                 #385487;
+@color-inspector-grid:                       #c8cccd;
+@color-inspector-changed:                    #c03f31;
 
 //
 // Inspector
@@ -43,8 +43,7 @@
     table-layout: fixed;
     .border-bottom-radius(2px);
 
-    td,
-    th {
+    td, th {
         padding: 5px 12px;
         font-size: 12px;
         width: 50%;
@@ -61,14 +60,10 @@
     }
 
     tr:last-child {
-        td,
-        th {
-            border-bottom: none;
-        }
+        td, th { border-bottom: none; }
 
         td {
-            &,
-            input[type="text"] {
+            &, input[type=text] {
                 .border-radius(0 0 2px 0);
             }
         }
@@ -85,25 +80,20 @@
     }
 
     tr.invalid th {
-        color: #c03f31 !important;
+        color: #c03f31!important;
     }
 
     tr.control-group {
         .user-select(none);
 
-        th,
-        td {
+        th, td {
             cursor: pointer;
         }
     }
 
     tr {
-        &.collapsed {
-            display: none;
-        }
-        &.expanded {
-            display: table-row;
-        }
+        &.collapsed {display: none;}
+        &.expanded {display: table-row;}
     }
 
     &.has-groups {
@@ -125,21 +115,22 @@
         background: @color-inspector-value-bg;
 
         &.text {
-            input[type="text"] {
+
+            input[type=text] {
                 &::-webkit-input-placeholder {
-                    font-weight: normal !important;
+                    font-weight: normal!important;
                     color: #b5babd;
                 }
                 &:-moz-placeholder {
-                    font-weight: normal !important;
+                    font-weight: normal!important;
                     color: #b5babd;
                 }
                 &::-moz-placeholder {
-                    font-weight: normal !important;
+                    font-weight: normal!important;
                     color: #b5babd;
                 }
                 &:-ms-input-placeholder {
-                    font-weight: normal !important;
+                    font-weight: normal!important;
                     color: #b5babd;
                 }
             }
@@ -153,7 +144,7 @@
             padding: 0;
 
             .autocomplete-container {
-                input[type="text"] {
+                input[type=text] {
                     padding: 5px 12px;
                 }
 
@@ -172,7 +163,7 @@
         }
 
         &.trigger-cell {
-            padding: 0 !important;
+            padding: 0!important;
 
             a.trigger {
                 display: block;
@@ -200,7 +191,7 @@
         }
 
         &.dropdown {
-            padding: 0 !important;
+            padding: 0!important;
         }
 
         select {
@@ -220,7 +211,7 @@
                 position: absolute;
 
                 .transition(left 0.2s);
-                .transform( ~"translateZ(0)");
+                .transform( ~'translateZ(0)');
                 will-change: transform;
 
                 div.controls {
@@ -277,7 +268,7 @@
 
         &.active {
             div.external-param-editor-container {
-                div.external-editor {
+               div.external-editor {
                     div.controls {
                         input {
                             background: white;
@@ -287,8 +278,7 @@
             }
         }
 
-        &.dropdown,
-        &.trigger-cell {
+        &.dropdown, &.trigger-cell {
             div.external-param-editor-container div.external-editor {
                 height: 100%;
                 margin: 0;
@@ -367,7 +357,7 @@
         }
     }
 
-    input[type="text"] {
+    input[type=text] {
         display: block;
         width: 100%;
         border: none;
@@ -411,8 +401,7 @@
             .border-radius(0) !important;
             border: none !important;
 
-            .select2-selection {
-            }
+            .select2-selection {}
         }
 
         .select2-selection__rendered {
@@ -424,7 +413,7 @@
     tr.changed {
         td {
             font-weight: 600;
-            input[type="text"] {
+            input[type=text] {
                 font-weight: 600;
             }
 
@@ -433,6 +422,7 @@
             }
         }
     }
+
 }
 
 div.control-popover {
@@ -441,8 +431,7 @@ div.control-popover {
             background: @color-inspector-bg;
             border: none;
 
-            &:before,
-            &:after {
+            &:before, &:after {
                 display: none;
             }
         }
@@ -450,15 +439,14 @@ div.control-popover {
 
     &.hero {
         .inspector-fields {
-            th,
-            td {
+            th, td {
                 padding: 9px 12px;
-                font-weight: 600 !important;
+                font-weight: 600!important;
                 font-size: 13px;
             }
 
             td {
-                font-weight: 400 !important;
+                font-weight: 400!important;
             }
 
             div.custom-select.select2-container .select2-selection {
@@ -470,8 +458,8 @@ div.control-popover {
 
     &.inspector-temporary-placement {
         visibility: hidden;
-        left: 0 !important;
-        top: 0 !important;
+        left: 0!important;
+        top: 0!important;
     }
 }
 
@@ -539,7 +527,7 @@ div.inspector-dictionary-container {
         tbody tr {
             td {
                 width: 50%;
-                padding: 0 !important;
+                padding: 0!important;
                 border-bottom: 1px solid #e0e0e0;
 
                 div {
@@ -603,8 +591,7 @@ div.inspector-dictionary-container {
         }
     }
 
-    span,
-    a {
+    span, a {
         text-decoration: none;
         position: absolute;
         top: 12px;
@@ -669,8 +656,7 @@ ul.autocomplete.dropdown-menu.inspector-autocomplete {
                 padding: 5px 12px 5px;
             }
 
-            li > i,
-            li > img {
+            li > i, li > img {
                 margin-left: 6px;
             }
         }

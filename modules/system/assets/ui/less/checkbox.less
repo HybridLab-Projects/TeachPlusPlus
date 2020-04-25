@@ -11,17 +11,17 @@
 
 @import "checkbox.balloon.less";
 
-@color-checkbox-checked: #1f99dc;
+@color-checkbox-checked:                        #1F99DC;
 
-@color-checkbox-icon: #ffffff;
-@color-checkbox-border: @input-border;
+@color-checkbox-icon:                           #FFFFFF;
+@color-checkbox-border:                         @input-border;
 
-@color-checkbox-switch-bg: #f6f6f6;
-@color-checkbox-switch-on: #76a544;
-@color-checkbox-switch-off: #bb2424;
+@color-checkbox-switch-bg:                      #f6f6f6;
+@color-checkbox-switch-on:                      #76A544;
+@color-checkbox-switch-off:                     #BB2424;
 
-@color-label-green: @color-checkbox-switch-on;
-@color-label-red: @color-checkbox-switch-off;
+@color-label-green:                             @color-checkbox-switch-on;
+@color-label-red:                               @color-checkbox-switch-off;
 
 //
 // Checkbox
@@ -41,8 +41,8 @@
     padding-left: 23px;
     margin-top: 0;
 
-    input[type="radio"],
-    input[type="checkbox"] {
+    input[type=radio],
+    input[type=checkbox] {
         display: none;
     }
 
@@ -69,7 +69,7 @@
             position: absolute;
             left: -3px;
             top: 0;
-            background-color: #ffffff;
+            background-color: #FFFFFF;
             border: 1px solid @color-checkbox-border;
             .box-shadow(@input-box-shadow);
         }
@@ -82,7 +82,7 @@
         }
     }
 
-    input[type="radio"]:checked + label {
+    input[type=radio]:checked + label {
         &:before {
             border-color: @color-checkbox-checked;
 
@@ -91,7 +91,7 @@
         }
 
         &:after {
-            content: "";
+            content: '';
             width: 12px;
             height: 12px;
             background-color: @color-checkbox-checked;
@@ -103,7 +103,7 @@
         }
     }
 
-    input[type="radio"][data-radio-color="green"]:checked + label {
+    input[type=radio][data-radio-color=green]:checked + label {
         &:before {
             border-color: @color-label-green;
         }
@@ -113,7 +113,7 @@
         }
     }
 
-    input[type="radio"][data-radio-color="red"]:checked + label {
+    input[type=radio][data-radio-color=red]:checked + label {
         &:before {
             border-color: @color-label-red;
         }
@@ -123,8 +123,8 @@
         }
     }
 
-    input[type="checkbox"]:indeterminate + label:before,
-    input[type="checkbox"]:checked + label:before {
+    input[type=checkbox]:indeterminate + label:before,
+    input[type=checkbox]:checked + label:before {
         border-color: @color-checkbox-checked;
         background-color: @color-checkbox-checked;
         font-size: 12px;
@@ -133,11 +133,11 @@
         .box-shadow(none);
     }
 
-    input[type="checkbox"]:checked + label:before {
+    input[type=checkbox]:checked + label:before {
         .icon(@check);
     }
 
-    input[type="checkbox"]:indeterminate + label:before {
+    input[type=checkbox]:indeterminate + label:before {
         .icon(@minus);
     }
 
@@ -223,12 +223,8 @@
     cursor: pointer;
     .border-radius(3px);
 
-    * {
-        .box-sizing(border-box);
-    }
-    &.disabled {
-        .opacity(0.5);
-    }
+    * { .box-sizing(border-box); }
+    &.disabled { .opacity(.5); }
     .slide-button {
         z-index: @zindex-checkbox - 1;
         display: block;
@@ -265,12 +261,10 @@
             ~ .slide-button {
                 right: 4px;
             }
-            ~ span {
-                background-color: @color-checkbox-switch-on;
-            }
+            ~ span { background-color: @color-checkbox-switch-on; }
             ~ span span {
                 &:first-of-type {
-                    color: #ffffff;
+                    color: #FFFFFF;
                     display: block;
                 }
                 &:last-of-type {
@@ -280,9 +274,7 @@
             }
         }
         &[disabled] {
-            ~ span {
-                background-color: #666666 !important;
-            }
+            ~ span { background-color: #666666 !important; }
         }
     }
 
@@ -307,7 +299,7 @@
             .box-sizing(border-box);
             &:last-child {
                 left: 28px;
-                color: #ffffff;
+                color: #FFFFFF;
                 display: block;
             }
             &:first-of-type {

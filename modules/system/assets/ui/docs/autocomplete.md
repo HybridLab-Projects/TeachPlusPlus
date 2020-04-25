@@ -13,7 +13,7 @@ Autocomplete control.
 ## JavaScript API
 
 ```js
-$("input").autocomplete({
-    source: { something: "Something", else: "Else" },
-});
+$('input').autocomplete({
+    source: { something: 'Something', else: 'Else' }
+})
 ```

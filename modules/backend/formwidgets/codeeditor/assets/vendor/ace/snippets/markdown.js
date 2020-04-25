@@ -1,34 +1,29 @@
-ace.define("ace/snippets/markdown", ["require", "exports", "module"], function (
-    require,
-    exports,
-    module
-) {
-    "use strict";
+ace.define("ace/snippets/markdown",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
-    exports.snippetText =
-        '# Markdown\n\
+exports.snippetText = "# Markdown\n\
 \n\
 # Includes octopress (http://octopress.org/) snippets\n\
 \n\
 snippet [\n\
-	[${1:text}](http://${2:address} "${3:title}")\n\
+	[${1:text}](http://${2:address} \"${3:title}\")\n\
 snippet [*\n\
-	[${1:link}](${2:`@*`} "${3:title}")${4}\n\
+	[${1:link}](${2:`@*`} \"${3:title}\")${4}\n\
 \n\
 snippet [:\n\
-	[${1:id}]: http://${2:url} "${3:title}"\n\
+	[${1:id}]: http://${2:url} \"${3:title}\"\n\
 snippet [:*\n\
-	[${1:id}]: ${2:`@*`} "${3:title}"\n\
+	[${1:id}]: ${2:`@*`} \"${3:title}\"\n\
 \n\
 snippet ![\n\
-	![${1:alttext}](${2:/images/image.jpg} "${3:title}")\n\
+	![${1:alttext}](${2:/images/image.jpg} \"${3:title}\")\n\
 snippet ![*\n\
-	![${1:alt}](${2:`@*`} "${3:title}")${4}\n\
+	![${1:alt}](${2:`@*`} \"${3:title}\")${4}\n\
 \n\
 snippet ![:\n\
-	![${1:id}]: ${2:url} "${3:title}"\n\
+	![${1:id}]: ${2:url} \"${3:title}\"\n\
 snippet ![:*\n\
-	![${1:id}]: ${2:`@*`} "${3:title}"\n\
+	![${1:id}]: ${2:`@*`} \"${3:title}\"\n\
 \n\
 snippet ===\n\
 regex /^/=+/=*//\n\
@@ -92,8 +87,9 @@ snippet youtube\n\
 \n\
 snippet pullquote\n\
 	{% pullquote %}\n\
-	${1:text} {" ${2:quote} "} ${3:text}\n\
+	${1:text} {\" ${2:quote} \"} ${3:text}\n\
 	{% endpullquote %}\n\
-';
-    exports.scope = "markdown";
+";
+exports.scope = "markdown";
+
 });

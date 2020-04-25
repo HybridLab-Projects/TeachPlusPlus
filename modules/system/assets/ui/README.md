@@ -1,6 +1,6 @@
 # October Storm
 
-Welcome to the client-side framework designed exclusively for the OctoberCMS back-end area, referred to as _October Storm_. The library is quite large as it has many features and it is not really itended to be used outside of October.
+Welcome to the client-side framework designed exclusively for the OctoberCMS back-end area, referred to as *October Storm*. The library is quite large as it has many features and it is not really itended to be used outside of October.
 
 ## Design consideration
 
@@ -12,9 +12,9 @@ Compiling JavaScript depends on October's asset combiner as the `=require` direc
 
 Components are a mixture of CSS and JavaScript (Controls), or can be solely style-based (Styles) or solely script-based (Scripts).
 
-Each component has a _strong name_, for example the loading indicator has the name `loader`. For complex components, they can be broken in to child components, for example `loader.stripe`. Not all child components can be used independently of their parents, but this is certainly possible and a nice idea.
+Each component has a *strong name*, for example the loading indicator has the name `loader`. For complex components, they can be broken in to child components, for example `loader.stripe`. Not all child components can be used independently of their parents, but this is certainly possible and a nice idea.
 
-> _Note_: Documentation for each component can be found in the **docs/** directory.
+> *Note*: Documentation for each component can be found in the **docs/** directory.
 
 ## Naming conventions
 
@@ -28,7 +28,7 @@ The appearance of a control can be modified using additional CSS classes. These 
 
 The above uses two modifiers; one to make it purple and one to declare that it is sortable. In the above example, the class `is-purple` is not recommended because it is a variable attribute as opposed to a binary one. Here are some common words used for attributes and their meanings:
 
--   **flush**: The control will use no margin, padding and/or border to the controls or containers surrounding it. Eg: `list-flush`
--   **inset**: The control will use a negative margin on the left or right side to negate a padded container. Eg: `list-inset`
--   **offset**: The control will use a positive margin or padding on the left or right to assist a container with padding. Eg: `list-offset`
--   **padded**: The control will use padding all around. Eg: `list-padded`
+- **flush**: The control will use no margin, padding and/or border to the controls or containers surrounding it. Eg: `list-flush`
+- **inset**: The control will use a negative margin on the left or right side to negate a padded container. Eg: `list-inset`
+- **offset**: The control will use a positive margin or padding on the left or right to assist a container with padding. Eg: `list-offset`
+- **padded**: The control will use padding all around. Eg: `list-padded`

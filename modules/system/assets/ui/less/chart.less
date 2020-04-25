@@ -1,3 +1,4 @@
+
 //
 // Dependencies
 // --------------------------------------------------
@@ -9,17 +10,17 @@
 // Chart
 // --------------------------------------------------
 
-@color-status-list-text: #7e8c8d;
+@color-status-list-text:                     #7e8c8d;
 
-@color-chart-tooltip-bg: #000000;
-@color-chart-tooltip-text: #ffffff;
+@color-chart-tooltip-bg:                     #000000;
+@color-chart-tooltip-text:                   #ffffff;
 
-@color-scoreboard-title: #666666;
-@color-scoreboard-description: #999999;
-@color-scoreboard-body: #666666;
-@color-scoreboard-icon: #e5a91a;
-@color-scoreboard-positive: #95b753;
-@color-scoreboard-negative: #cc3300;
+@color-scoreboard-title:                     #666666;
+@color-scoreboard-description:               #999999;
+@color-scoreboard-body:                      #666666;
+@color-scoreboard-icon:                      #e5a91a;
+@color-scoreboard-positive:                  #95b753;
+@color-scoreboard-negative:                  #cc3300;
 
 .control-chart-non-centered() {
     text-align: left;
@@ -163,8 +164,7 @@
     .control-chart-non-centered();
 }
 
-#flotTip,
-#chart-tooltip {
+#flotTip, #chart-tooltip {
     white-space: nowrap;
     padding: 7px 10px;
     background: @color-chart-tooltip-bg;
@@ -233,8 +233,7 @@
             color: @color-scoreboard-negative;
         }
 
-        &.negative,
-        &.positive {
+        &.negative, &.positive {
             &:after {
                 font-size: 17px;
                 vertical-align: top;
@@ -246,15 +245,11 @@
 
         &.negative {
             color: @color-scoreboard-negative;
-            &:after {
-                .icon(@angle-double-down);
-            }
+            &:after{.icon(@angle-double-down)};
         }
         &.positive {
             color: @color-scoreboard-positive;
-            &:after {
-                .icon(@angle-double-up);
-            }
+            &:after{.icon(@angle-double-up)};
         }
 
         &.description {
@@ -284,8 +279,7 @@
                 margin-right: 10px;
             }
 
-            &.negative,
-            &.positive {
+            &.negative, &.positive {
                 &:after {
                     top: -8px;
                 }
@@ -338,24 +332,12 @@
         .status-text {
             margin: 0 5px;
 
-            &.muted {
-                color: @text-muted;
-            }
-            &.primary {
-                .text-emphasis-variant(@brand-primary);
-            }
-            &.success {
-                .text-emphasis-variant(@state-success-text);
-            }
-            &.info {
-                .text-emphasis-variant(@state-info-text);
-            }
-            &.warning {
-                .text-emphasis-variant(@state-warning-text);
-            }
-            &.danger {
-                .text-emphasis-variant(@state-danger-text);
-            }
+            &.muted { color: @text-muted; }
+            &.primary { .text-emphasis-variant(@brand-primary); }
+            &.success { .text-emphasis-variant(@state-success-text); }
+            &.info { .text-emphasis-variant(@state-info-text); }
+            &.warning { .text-emphasis-variant(@state-warning-text); }
+            &.danger { .text-emphasis-variant(@state-danger-text); }
         }
 
         .status-label {
@@ -390,24 +372,12 @@
         .status-icon,
         .status-label {
             background: #aaa;
-            &.success {
-                background: @brand-success;
-            }
-            &.primary {
-                background: @brand-primary;
-            }
-            &.warning {
-                background: @brand-warning;
-            }
-            &.danger {
-                background: @brand-danger;
-            }
-            &.info {
-                background: @brand-info;
-            }
-            &.link {
-                background: transparent;
-            }
+            &.success { background: @brand-success; }
+            &.primary { background: @brand-primary; }
+            &.warning { background: @brand-warning; }
+            &.danger { background: @brand-danger; }
+            &.info { background: @brand-info; }
+            &.link { background: transparent; }
         }
     }
 }

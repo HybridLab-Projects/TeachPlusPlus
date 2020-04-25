@@ -1,12 +1,12 @@
 @import "../../../../assets/less/core/boot.less";
 
-@color-permissioneditor-section-border: #dbe1e3;
-@color-permissioneditor-permission-border: #ecf0f1;
+@color-permissioneditor-section-border:         #DBE1E3;
+@color-permissioneditor-permission-border:      #ECF0F1;
 
 .permissioneditor {
     position: relative;
 
-    margin: 0 - (@padding-standard);
+    margin: 0 -(@padding-standard);
 
     &.control-disabled {
         .permissions-overlay {
@@ -50,7 +50,7 @@
             border-bottom: 1px solid @color-permissioneditor-permission-border;
             .user-select(none);
 
-            &.permission-value {
+            &.permission-value{
                 text-align: center;
             }
 
@@ -80,8 +80,7 @@
             }
         }
 
-        th,
-        td {
+        th, td {
             &:first-child {
                 padding-left: @padding-standard;
             }
@@ -94,11 +93,10 @@
         .custom-radio,
         .custom-checkbox,
         .custom-switch {
-            display: inline-block;
+            display: inline-block;;
             padding-left: 0;
 
-            &,
-            label {
+            &, label {
                 margin-bottom: 0;
             }
 
@@ -128,7 +126,7 @@
 
         tr.disabled {
             td.permission-name {
-                color: #aaa;
+                color: #AAA;
             }
         }
 

@@ -4,8 +4,7 @@
 // Stripe loading indicator
 // --------------------------------------------------
 
-body.oc-loading,
-body.oc-loading * {
+body.oc-loading, body.oc-loading * {
     cursor: wait !important;
 }
 
@@ -13,6 +12,7 @@ body.oc-loading * {
 @stripe-loader-height: 5px;
 
 .stripe-loading-indicator {
+
     height: @stripe-loader-height;
     background: transparent;
     position: fixed;
@@ -22,8 +22,7 @@ body.oc-loading * {
     overflow: hidden;
     z-index: 2000;
 
-    .stripe,
-    .stripe-loaded {
+    .stripe, .stripe-loaded {
         height: @stripe-loader-height;
         display: block;
         background: @stripe-loader-color;
@@ -44,15 +43,15 @@ body.oc-loading * {
 
     &.loaded {
         .opacity(0);
-        .transition(opacity 0.4s linear);
-        .transition-delay(0.3s);
+        .transition(opacity .4s linear);
+        .transition-delay(.3s);
         .stripe {
             animation-play-state: paused;
         }
         .stripe-loaded {
             .opacity(1);
             transform: translate3d(0, 0, 0);
-            .transition(transform 0.3s linear);
+            .transition(transform .3s linear);
         }
     }
 
@@ -65,11 +64,11 @@ body.oc-loading * {
 // Flash Messages
 // --------------------------------------------------
 
-@color-flash-success-bg: #8da85e;
-@color-flash-error-bg: #cc3300;
-@color-flash-warning-bg: #f0ad4e;
-@color-flash-info-bg: #5fb6f5;
-@color-flash-text: #ffffff;
+@color-flash-success-bg:                     #8da85e;
+@color-flash-error-bg:                       #cc3300;
+@color-flash-warning-bg:                     #f0ad4e;
+@color-flash-info-bg:                        #5fb6f5;
+@color-flash-text:                           #ffffff;
 
 body > p.flash-message {
     position: fixed;
@@ -82,34 +81,26 @@ body > p.flash-message {
     padding: 10px 30px 10px 15px;
     z-index: @zindex-flashmessage;
     word-wrap: break-word;
-    text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 -1px 0px rgba(0,0,0,.15);
     text-align: center;
     .box-shadow(@overlay-box-shadow);
     .border-radius(@border-radius-base);
 
     &.fade {
         .opacity(0);
-        .transition(~"all 0.5s, width 0s");
-        .transform(~"scale(0.9)");
+        .transition(~'all 0.5s, width 0s');
+        .transform(~'scale(0.9)');
     }
 
     &.fade.in {
         .opacity(1);
-        .transform( ~"scale(1)");
+        .transform( ~'scale(1)');
     }
 
-    &.success {
-        background: @color-flash-success-bg;
-    }
-    &.error {
-        background: @color-flash-error-bg;
-    }
-    &.warning {
-        background: @color-flash-warning-bg;
-    }
-    &.info {
-        background: @color-flash-info-bg;
-    }
+    &.success { background: @color-flash-success-bg; }
+    &.error { background: @color-flash-error-bg; }
+    &.warning { background: @color-flash-warning-bg; }
+    &.info { background: @color-flash-info-bg; }
 
     button.close {
         float: none;
@@ -120,7 +111,7 @@ body > p.flash-message {
         font-size: 21px;
         line-height: 1;
         font-weight: bold;
-        .opacity(0.2);
+        .opacity(.2);
 
         padding: 0;
         cursor: pointer;
@@ -134,7 +125,7 @@ body > p.flash-message {
             color: white;
             text-decoration: none;
             cursor: pointer;
-            .opacity(0.5);
+            .opacity(.5);
         }
     }
 }
@@ -164,63 +155,41 @@ body > p.flash-message {
 // Element Loader
 // --------------------------------------------------
 
-a.oc-loading,
-button.oc-loading,
-span.oc-loading {
+a.oc-loading, button.oc-loading, span.oc-loading {
     &:after {
-        content: "";
+        content: '';
         display: inline-block;
         vertical-align: middle;
-        margin-left: 0.4em;
+        margin-left: .4em;
         height: 1em;
         width: 1em;
         animation: oc-rotate-loader 0.8s infinite linear;
-        border: 0.2em solid currentColor;
+        border: .2em solid currentColor;
         border-right-color: transparent;
         border-radius: 50%;
-        .opacity(0.5);
+        .opacity(.5);
     }
 }
 
 @-moz-keyframes oc-rotate-loader {
-    0% {
-        -moz-transform: rotate(0deg);
-    }
-    100% {
-        -moz-transform: rotate(360deg);
-    }
+    0%    { -moz-transform: rotate(0deg); }
+    100%  { -moz-transform: rotate(360deg); }
 }
 @-webkit-keyframes oc-rotate-loader {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
+    0%    { -webkit-transform: rotate(0deg); }
+    100%  { -webkit-transform: rotate(360deg); }
 }
 @-o-keyframes oc-rotate-loader {
-    0% {
-        -o-transform: rotate(0deg);
-    }
-    100% {
-        -o-transform: rotate(360deg);
-    }
+    0%    { -o-transform: rotate(0deg); }
+    100%  { -o-transform: rotate(360deg); }
 }
 @-ms-keyframes oc-rotate-loader {
-    0% {
-        -ms-transform: rotate(0deg);
-    }
-    100% {
-        -ms-transform: rotate(360deg);
-    }
+    0%    { -ms-transform: rotate(0deg); }
+    100%  { -ms-transform: rotate(360deg); }
 }
 @keyframes oc-rotate-loader {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+    0%    { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
 }
 
 //
@@ -232,9 +201,7 @@ span.oc-loading {
 
 .infinite-class (@index, @val) when (@index < 101) {
     @tmpSelector: ~"@{index}%";
-    @{tmpSelector} {
-        transform: translateX(-@val);
-    }
+    @{tmpSelector} { transform: translateX(-@val); }
     .infinite-class(@index + 10, @val - @val / 2);
 }
 

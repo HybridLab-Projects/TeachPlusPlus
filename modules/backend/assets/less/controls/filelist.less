@@ -7,16 +7,15 @@
         > li.group {
             > ul {
                 > li > a {
-                    padding-left: (@level+2) * @offset-base;
-                    margin-left: -1 * @level* @offset-base;
+                    padding-left: (@level+2)*@offset-base;
+                    margin-left: -1*@level*@offset-base;
                 }
 
                 .listPaddings(@level - 1, @offset-base);
             }
         }
     }
-    .listPaddings (0, 27px) {
-    }
+    .listPaddings (0, 27px) {}
 
     p.no-data {
         padding: 22px 0;
@@ -53,7 +52,7 @@
                     top: 0;
                     background: @color-list-active-border;
                     display: block;
-                    content: " ";
+                    content: ' ';
                 }
             }
 
@@ -62,13 +61,9 @@
                 padding: 10px 45px 10px 20px;
                 outline: none;
 
-                &:hover,
-                &:focus,
-                &:active {
-                    text-decoration: none;
-                }
+                &:hover, &:focus, &:active {text-decoration: none;}
 
-                span {
+                span { 
                     display: block;
 
                     &.title {
@@ -94,8 +89,7 @@
             }
 
             &.group {
-                > h4,
-                > div.group > h4 {
+                > h4, > div.group > h4 {
                     font-weight: normal;
                     font-size: @font-size-base;
                     margin-top: 0;
@@ -108,12 +102,9 @@
                         position: relative;
                         outline: none;
 
-                        &:hover {
-                            background: transparent;
-                        }
+                        &:hover { background: transparent; }
 
-                        &:before,
-                        &:after {
+                        &:before, &:after {
                             width: 10px;
                             height: 10px;
                             display: block;
@@ -134,7 +125,7 @@
                             top: 9px;
                             color: @color-list-arrow;
                             .icon(@caret-right);
-                            .transform( ~"rotate(90deg) translate(5px, 0)" );
+                            .transform( ~'rotate(90deg) translate(5px, 0)' );
                             .transition(all 0.1s ease);
                         }
                     }
@@ -152,14 +143,12 @@
                     .listPaddings(10, 27px);
                 }
 
-                &[data-status="collapsed"] {
-                    > h4 a:before,
-                    > div.group > h4 a:before {
-                        .transform(~"rotate(0deg) translate(3px, 0)");
+                &[data-status=collapsed] {
+                    > h4 a:before, > div.group > h4 a:before {
+                        .transform(~'rotate(0deg) translate(3px, 0)');
                     }
 
-                    & > ul,
-                    & > div.subitems {
+                    & > ul, & > div.subitems {
                         display: none;
                     }
                 }
@@ -175,7 +164,7 @@
                     height: 21px;
 
                     &.open a.control {
-                        display: block !important;
+                        display: block!important; 
                         &:before {
                             visibility: visible;
                             display: block;
@@ -208,12 +197,11 @@
             }
 
             &:hover {
-                > div.controls,
-                > a.control {
-                    display: block !important;
+                > div.controls, > a.control {
+                    display: block!important;
 
                     > a.control {
-                        display: block !important;
+                        display: block!important;
                     }
                 }
             }
@@ -252,8 +240,7 @@
         .a-hover() {
             background: @color-filelist-hero-hover-bg;
             border-bottom: 1px solid @color-filelist-hero-hover-bg !important;
-            span.title,
-            span.description {
+            span.title, span.description {
                 color: @color-filelist-hero-hover-text !important;
             }
 
@@ -265,8 +252,7 @@
         .a-active() {
             background: @color-filelist-hero-active-bg;
             border-bottom: 1px solid @color-filelist-hero-active-bg !important;
-            span.title,
-            span.description {
+            span.title, span.description {
                 color: @color-filelist-hero-active-text !important;
             }
 
@@ -329,7 +315,7 @@
 
                         > span.borders {
                             &:before {
-                                content: " ";
+                                content: ' ';
                                 position: absolute;
                                 width: 100%;
                                 height: 1px;
@@ -338,9 +324,7 @@
                                 background-color: @color-list-active;
                             }
 
-                            &:before {
-                                top: -1px;
-                            }
+                            &:before {top: -1px;}
                         }
 
                         &:hover > span.borders:before {
