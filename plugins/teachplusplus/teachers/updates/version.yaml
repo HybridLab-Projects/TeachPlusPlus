@@ -55,5 +55,11 @@
     - 'Updated table teachplusplus_teachers_subjects'
     - builder_table_update_teachplusplus_teachers_subjects_5.php
 1.0.22:
-    - 'Seeding'
+    - Seeding
     - Seeder.php
+1.0.23:
+    - 'Created table teachplusplus_teachers_report'
+    - builder_table_create_teachplusplus_teachers_report.php
+1.0.24:
+    - 'Updated table teachplusplus_teachers_report'
+    - builder_table_update_teachplusplus_teachers_reports.php

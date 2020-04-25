@@ -6,6 +6,7 @@ use Teachplusplus\Teachers\Models\Like;
 use Teachplusplus\Teachers\Models\Subject;
 use Teachplusplus\Teachers\Models\Teacher;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Teachplusplus\Teachers\Models\Report;
 
 Route::group(['prefix' => 'api', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function () {
     Route::get('teacher', function () {
@@ -41,7 +42,7 @@ Route::group(['prefix' => 'api', 'middleware' => '\Tymon\JWTAuth\Middleware\GetU
         
         return $feedback;
     });
-  
+
     Route::post('like', function () {
         $feedbackId = request()->input('feedback_id');
         $token = request()->input('token');
@@ -61,4 +62,21 @@ Route::group(['prefix' => 'api', 'middleware' => '\Tymon\JWTAuth\Middleware\GetU
             $like->save();
         }
     });
+
+    Route::post('report', function () {
+        $feedbackId = request()->input('feedback_id');
+        $token = request()->input('token');
+        
+
+        $feedback = Feedback::find($feedbackId);
+        $user = JWTAuth::toUser($token);
+
+        
+            $report = Report::create();
+            $report->feedback()->associate($feedback);
+            $report->user()->associate($user);
+            $report->save();
+        
+        }
+    );
 });
