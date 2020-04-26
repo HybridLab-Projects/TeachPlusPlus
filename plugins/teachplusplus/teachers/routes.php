@@ -7,7 +7,7 @@ use Teachplusplus\Teachers\Models\Teacher;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Teachplusplus\Teachers\Models\Report;
 
-Route::group(['prefix' => 'api', /*'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'*/], function () {
+Route::group(['prefix' => 'api', 'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'], function () {
     Route::get('teacher', function () {
         $teachers = Teacher::with(['subjects', 'feedbacks.likes.user', 'feedbacks.author', 'feedbacks.subject', 'feedbacks.subject', 'feedbacks.reports', 'feedbacks' => function ($query) {
             $query->where('banned', false);

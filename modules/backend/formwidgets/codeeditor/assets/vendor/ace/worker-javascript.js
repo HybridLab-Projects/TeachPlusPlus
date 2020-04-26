@@ -6480,11 +6480,12 @@ ace.define(
 
                                     hasOwnScope = true;
                                     state.funct["(scope)"].stack();
-                                    state.funct[
-                                        "(scope)"
-                                    ].block.addBreakLabel(t.value, {
-                                        token: state.tokens.curr,
-                                    });
+                                    state.funct["(scope)"].block.addBreakLabel(
+                                        t.value,
+                                        {
+                                            token: state.tokens.curr,
+                                        }
+                                    );
 
                                     if (
                                         !state.tokens.next.labelled &&

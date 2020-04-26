@@ -237,9 +237,9 @@ if (window.jQuery.request !== undefined) {
                         jqXHR
                     );
                 } else {
-                /*
-                 * Standard error with standard response text
-                 */
+                    /*
+                     * Standard error with standard response text
+                     */
                     errorMsg = jqXHR.responseText
                         ? jqXHR.responseText
                         : jqXHR.statusText;
