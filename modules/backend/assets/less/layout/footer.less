@@ -11,7 +11,8 @@
     background-color: @color-footer;
     border-top: 1px solid @color-footer-border;
 
-    .brand, .tagline {
+    .brand,
+    .tagline {
         margin: 10px;
         height: (@footer-height - 20) + 0px;
         line-height: (@footer-height - 20) + 0px;
@@ -20,13 +21,17 @@
     .brand {
         float: left;
         font-size: 16px;
-        .logo { margin: 0 10px; }
-        .name { }
+        .logo {
+            margin: 0 10px;
+        }
+        .name {
+        }
     }
 
     .tagline {
         float: right;
-        p { color: lighten(@color-footer-text, 20%); }
+        p {
+            color: lighten(@color-footer-text, 20%);
+        }
     }
 }
-

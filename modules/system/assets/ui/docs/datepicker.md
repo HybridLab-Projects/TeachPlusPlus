@@ -75,9 +75,9 @@ Renders a date picker, time picker, or both. The input associated to each contro
 The date picker handles timezone and locale preferences automatically. Locale preferences will provide the date format for the region. The timezone setting is used to convert the chosen value to a uniform timezone, commonly UTC. These features are not enabled by default and require adding `<meta />` tags to the page.
 
 ```html
-<meta name="app-timezone" content="UTC">
-<meta name="backend-timezone" content="Australia/Sydney">
-<meta name="backend-locale" content="en-au">
+<meta name="app-timezone" content="UTC" />
+<meta name="backend-timezone" content="Australia/Sydney" />
+<meta name="backend-locale" content="en-au" />
 ```
 
 When a date is selected, it will be converted from the `backend-timezone` to the `app-timezone` for normalized storage.
@@ -86,17 +86,17 @@ When a date is selected, it will be converted from the `backend-timezone` to the
 
 ## Supported data attributes
 
-- data-control="datepicker" - enables the plugin on an element
-- data-format="YYYY-MM-DD" - display format
-- data-min-date="value" - minimum date to allow
-- data-max-date="value" - maximum date to allow
-- data-year-range="10" - range of years to display
+-   data-control="datepicker" - enables the plugin on an element
+-   data-format="YYYY-MM-DD" - display format
+-   data-min-date="value" - minimum date to allow
+-   data-max-date="value" - maximum date to allow
+-   data-year-range="10" - range of years to display
 
 ## JavaScript API
 
 ```js
-$('div#datepicker').datePicker({
-    format: 'YYYY-MM-DD',
-    yearRange: 10
-})
+$("div#datepicker").datePicker({
+    format: "YYYY-MM-DD",
+    yearRange: 10,
+});
 ```

@@ -1,4 +1,3 @@
-
 //
 // Dependencies
 // --------------------------------------------------
@@ -17,9 +16,16 @@ div.scoreboard {
     padding: 0;
 
     .horizontal-scroll-indicators(@color-scroll-indicator);
-    &:before, &:after { margin-top: -10px; }
-    &:before { left: 7px; }
-    &:after { right: 10px; }
+    &:before,
+    &:after {
+        margin-top: -10px;
+    }
+    &:before {
+        left: 7px;
+    }
+    &:after {
+        right: 10px;
+    }
 
     div.scoreboard-item {
         display: inline-block;
@@ -45,11 +51,15 @@ div.scoreboard {
 
             li {
                 padding-left: 18px;
-                & > i { margin-left: -18px; }
+                & > i {
+                    margin-left: -18px;
+                }
             }
         }
 
-        .canvas + ul { margin-left: 0; }
+        .canvas + ul {
+            margin-left: 0;
+        }
     }
 
     .scoreboard-offset {

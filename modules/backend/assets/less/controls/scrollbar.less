@@ -13,7 +13,7 @@
     overflow: hidden;
     height: 100%;
 
-    >.scrollbar-scrollbar {
+    > .scrollbar-scrollbar {
         position: absolute;
         z-index: 100;
         .scrollbar-track {
@@ -36,7 +36,7 @@
     }
 
     &.vertical {
-        >.scrollbar-scrollbar {
+        > .scrollbar-scrollbar {
             right: 0;
             margin-right: 5px;
             width: @scrollbar-thumb-size;
@@ -51,20 +51,21 @@
                 }
             }
 
-            &:active, &:hover {
+            &:active,
+            &:hover {
                 width: @scrollbar-thumb-size + 2px;
-                .transition(width .3s);
+                .transition(width 0.3s);
                 .scrollbar-track,
                 .scrollbar-thumb {
                     width: @scrollbar-thumb-size + 2px;
-                    .transition(width .3s);
+                    .transition(width 0.3s);
                 }
             }
         }
     }
 
     &.horizontal {
-        >.scrollbar-scrollbar {
+        > .scrollbar-scrollbar {
             margin: 0 0 5px;
             clear: both;
             height: @scrollbar-thumb-size;
@@ -79,13 +80,14 @@
                 }
             }
 
-            &:active, &:hover {
+            &:active,
+            &:hover {
                 height: @scrollbar-thumb-size + 2px;
-                .transition(height .3s);
+                .transition(height 0.3s);
                 .scrollbar-track,
                 .scrollbar-thumb {
                     height: @scrollbar-thumb-size + 2px;
-                    .transition(height .3s);
+                    .transition(height 0.3s);
                 }
             }
         }
@@ -100,13 +102,15 @@ html.mobile {
 }
 
 .no-touch .control-scrollbar {
-    >.scrollbar-scrollbar {
+    > .scrollbar-scrollbar {
         opacity: 0;
         .transition(opacity 0.3s);
     }
 
-    &:active >.scrollbar-scrollbar,
-    &:hover >.scrollbar-scrollbar {opacity: 1;}
+    &:active > .scrollbar-scrollbar,
+    &:hover > .scrollbar-scrollbar {
+        opacity: 1;
+    }
 }
 
 @media (max-width: @screen-sm) {
@@ -117,7 +121,7 @@ html.mobile {
                 height: auto;
 
                 .scrollbar-scrollbar {
-                    display: none!important;
+                    display: none !important;
                 }
             }
         }

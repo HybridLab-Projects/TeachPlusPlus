@@ -1,8 +1,8 @@
 # Inspector control
 
-Inspector is a visual configuration tool that is used in several places of October back-end. The most known usage of Inspector is the CMS components configuration feature, but Inspector is not limited with the CMS. In fact, it's a universal tool that can be used with any element on a back-end page. 
+Inspector is a visual configuration tool that is used in several places of October back-end. The most known usage of Inspector is the CMS components configuration feature, but Inspector is not limited with the CMS. In fact, it's a universal tool that can be used with any element on a back-end page.
 
-The Inspector loads the configuration schema from an inspectable element, builds the user interface, and writes values entered by users back to the inspectable element. The first version of Inspector was supporting only a few scalar value types - strings and Booleans, without an option to edit any complex data. 
+The Inspector loads the configuration schema from an inspectable element, builds the user interface, and writes values entered by users back to the inspectable element. The first version of Inspector was supporting only a few scalar value types - strings and Booleans, without an option to edit any complex data.
 
 The current version of Inspector allows to edit any imaginable data structures, including cases where users create enumerable data elements right in the Inspector interface.
 
@@ -12,23 +12,21 @@ This section describes the client-side Inspector API without going into details 
 
 Clicking an inspectable element displays Inspector for that element. Any HTML element could be made inspectable by adding data attributes to it. The required attributes are:
 
-* `data-inspectable` - indicates that Inspector should be created when the element is clicked.
-* `data-inspector-title` - sets the Inspector popup title.
-* `data-inspector-config` - contains the Inspector configuration JSON string. If this attribute is not specified, the configuration is loaded from the server, see the [Dynamic configuration and dynamic items](#dynamic-configuration-and-dynamic-items) section below.
+-   `data-inspectable` - indicates that Inspector should be created when the element is clicked.
+-   `data-inspector-title` - sets the Inspector popup title.
+-   `data-inspector-config` - contains the Inspector configuration JSON string. If this attribute is not specified, the configuration is loaded from the server, see the [Dynamic configuration and dynamic items](#dynamic-configuration-and-dynamic-items) section below.
 
 Inspectable elements should also contain a hidden input element used by Inspector for reading and writing values. The input element should be marked with the `data-inspector-values` data attribute.
 
 Example inspectable element markup:
 
 ```html
-<div 
-    data-inspectable 
-    data-inspector-title="Some inspectable element" 
-    data-inspector-description="Some description">
-        <input 
-            data-inspector-values
-            type="hidden" 
-            value="JSON"/>
+<div
+    data-inspectable
+    data-inspector-title="Some inspectable element"
+    data-inspector-description="Some description"
+>
+    <input data-inspector-values type="hidden" value="JSON" />
 </div>
 ```
 
@@ -36,28 +34,28 @@ Example inspectable element markup:
 
 There are several optional data attributes and features that could be defined in an inspectable element or in elements around it:
 
-* `data-inspector-offset` - sets offset, in pixels, for the Inspector popup.
-* `data-inspector-offset-x` - sets horizontal offset, in pixels, for the Inspector popup.
-* `data-inspector-offset-y` - sets vertical offset, in pixels, for the Inspector popup.
-* `data-inspector-placement` - sets defines placement for the Inspector popup, optional. If omitted, Inspector evaluates a placement automatically. Supported values: top, bottom, left, top.
-* `data-inspector-fallback-placement` - sets less preferable placement for the Inspector popup, optional. This value is used if Inspector can't use the placement specified in data-inspector-placement. Supported values: top, bottom, left, top. 
-* `data-inspector-external-parameters` - if this attribute exists in any parent element of the inspectable element, the external parameters editors will be enabled in Inspector (unless property-specific rules cancel the external editor).
+-   `data-inspector-offset` - sets offset, in pixels, for the Inspector popup.
+-   `data-inspector-offset-x` - sets horizontal offset, in pixels, for the Inspector popup.
+-   `data-inspector-offset-y` - sets vertical offset, in pixels, for the Inspector popup.
+-   `data-inspector-placement` - sets defines placement for the Inspector popup, optional. If omitted, Inspector evaluates a placement automatically. Supported values: top, bottom, left, top.
+-   `data-inspector-fallback-placement` - sets less preferable placement for the Inspector popup, optional. This value is used if Inspector can't use the placement specified in data-inspector-placement. Supported values: top, bottom, left, top.
+-   `data-inspector-external-parameters` - if this attribute exists in any parent element of the inspectable element, the external parameters editors will be enabled in Inspector (unless property-specific rules cancel the external editor).
 
 ### Dynamic configuration and dynamic items
 
-In case if the `data-inspector-config` attribute is missing in the inspectable element Inspector tries to load its configuration from the server. An important note - there should be a FORM element wrapping inspectable elements in order to use any dynamic features of Inspector. 
+In case if the `data-inspector-config` attribute is missing in the inspectable element Inspector tries to load its configuration from the server. An important note - there should be a FORM element wrapping inspectable elements in order to use any dynamic features of Inspector.
 
 The AJAX request used for loading the configuration from the server is named `onGetInspectorConfiguration`. The handler should be defined in the back-end controller and should return an array containing the Inspector configuration (in the PHP equivalent of the JSON configuration structure described later in this section), inspector title and description. Example of a server-side AJAX dynamic configuration request handler:
 
 ```php
 public function onGetInspectorConfiguration()
 {
-    // Load and use some values from the posted form 
+    // Load and use some values from the posted form
     //
     $someValue = Request::input('someValue');
-    
+
     ... do some processing ...
-    
+
     return [
         'configuration' => [
             'properties'  => [list of properties],
@@ -68,7 +66,7 @@ public function onGetInspectorConfiguration()
 }
 ```
 
-Some Inspector editors - (drop-down, set, autocomplete) support static and dynamic options. Dynamic options are requested from the server, rather than being defined in the configuration JSON string. For using this feature, the inspectable element must have the `data-inspector-class` attribute defined. The attribute value should contain a name of a PHP class corresponding to the inspectable element. 
+Some Inspector editors - (drop-down, set, autocomplete) support static and dynamic options. Dynamic options are requested from the server, rather than being defined in the configuration JSON string. For using this feature, the inspectable element must have the `data-inspector-class` attribute defined. The attribute value should contain a name of a PHP class corresponding to the inspectable element.
 
 The server-side controller should use the `Backend\Traits\InspectableContainer` trait in order to provide the dynamic options loading. The inspectable PHP class (specified with `data-inspector-class`) must either have a method `get[Property]Options()`, where the [Property] part corresponds the name of the dynamic property, or `getPropertyOptions($propertyName)` method that is more universal and accepts the property name as a parameter. The methods should return the `options` array containing associative arrays with keys `option` and `value`. Example:
 
@@ -93,9 +91,10 @@ By default Inspector is displayed in a popup, but there's an option to display i
 
 ```html
 <div data-inspector-container=".inspector-container">
-   <div class="inspector-container"></div>
-   <div data-inspectable ... ...>
-   <div data-inspectable ... ...>
+    <div class="inspector-container"></div>
+    <div data-inspectable ... ...>
+        <div data-inspectable ... ...></div>
+    </div>
 </div>
 ```
 
@@ -125,19 +124,19 @@ Inspector configuration, defined with `data-inspector-config` attribute or loade
 This configuration creates two text fields with titles "First name" and "Last name". When the data is saved back to the inspectable element (to the `data-inspector-values` hidden input element), it would have the following format:
 
 ```json
-{"firstName":"John", "lastName":"Smith"}
+{ "firstName": "John", "lastName": "Smith" }
 ```
 
 Each property should have attributes `property`, `title` and `type`. The `type` attribute defines a type of an editor that should be created for the property. The supported editors are described further.
 
 Other attributes supported by all (or most of the) property types are:
 
-* `description` - description string, which is available in a tooltip displayed when a user overs the 'i' icon in the property editor.
-* `group` - allows to group multiple properties. The attribute should contain a group name. Groups could be collapsed by users, making the Inspector interface less cluttered.
-* `showExternalParam` - enables the inspector parameter editor for the property. External parameters are currently used only by the CMS. Note that some property types do not support external property editors. See also `data-inspector-external-parameters` attribute described above.
-* `placeholder` - text to display in the editor if property value is empty.
-* `validation` - validation configuration. See the complete validation description below.
-* `default` - default property value. The property value format depends on the property type - for the `string` type it's an array, for `stringList` type it's an array of strings. See more details below.
+-   `description` - description string, which is available in a tooltip displayed when a user overs the 'i' icon in the property editor.
+-   `group` - allows to group multiple properties. The attribute should contain a group name. Groups could be collapsed by users, making the Inspector interface less cluttered.
+-   `showExternalParam` - enables the inspector parameter editor for the property. External parameters are currently used only by the CMS. Note that some property types do not support external property editors. See also `data-inspector-external-parameters` attribute described above.
+-   `placeholder` - text to display in the editor if property value is empty.
+-   `validation` - validation configuration. See the complete validation description below.
+-   `default` - default property value. The property value format depends on the property type - for the `string` type it's an array, for `stringList` type it's an array of strings. See more details below.
 
 All other configuration properties are specific for different property types.
 
@@ -157,7 +156,7 @@ String editor allows entering a single line of a text and represented with a sim
 The editor generates string values:
 
 ```json
-{"firstName":"Sam"}
+{ "firstName": "Sam" }
 ```
 
 ### Text editor
@@ -176,7 +175,7 @@ Text editor allows entering multi-line long text values in a popup window. The e
 The editor generates string values:
 
 ```json
-{"description":"This is a description"}
+{ "description": "This is a description" }
 ```
 
 ### String list editor
@@ -192,10 +191,10 @@ Allows users to enter lists of strings. The editor opens in a popup window and d
 }
 ```
 
-A value generated by the editor is an array of strings, for example: 
+A value generated by the editor is an array of strings, for example:
 
 ```json
-{"items":["String 1","String 2","String 3"]}
+{ "items": ["String 1", "String 2", "String 3"] }
 ```
 
 ### Autocomplete editor
@@ -216,7 +215,7 @@ The items are specified as a key-value object. The `items` parameter is optional
 Values generated by the editor are strings. Example:
 
 ```json
-{"condition":"start"}
+{ "condition": "start" }
 ```
 
 Fields of this type do not support external property editors.
@@ -237,7 +236,7 @@ Properties of this type are represented with a checkbox in the Inspector UI. Thi
 Values generated by the editor are 0 (unchecked) or 1 (checked). Example:
 
 ```json
-{"enabled":1}
+{ "enabled": 1 }
 ```
 
 ### Dropdown editor
@@ -261,10 +260,10 @@ Displays a drop-down list. Options for the drop-down list can be specified stati
 
 The `options` attribute should be a key-value object. If the attribute is not specified, Inspector will try to load options from the server - see [Dynamic configuration and dynamic items](#dynamic-configuration-and-dynamic-items) section above.
 
-The editor generates a string value corresponding to the selected option, for example: 
+The editor generates a string value corresponding to the selected option, for example:
 
 ```json
-{"action":"hide"}
+{ "action": "hide" }
 ```
 
 ### Dictionary editor
@@ -276,14 +275,14 @@ Dictionary editor allows to create key-value pairs with a simple user interface 
     "property": "options",
     "title": "Options",
     "type": "dictionary",
-    "default": {"option1": "Option 1"}
+    "default": { "option1": "Option 1" }
 }
 ```
 
-The editor generates an object value, for example: 
+The editor generates an object value, for example:
 
 ```json
-{"options":{"option1":"Option 1","option2":"Option 2"}}
+{ "options": { "option1": "Option 1", "option2": "Option 2" } }
 ```
 
 The dictionary editor supports validation for the entire set (`required` and `length` validators) and for keys and values separately. See the [validation description](#defining-the-validation-rules) further in this document. The `validationKey` and `validationValue` define validation for keys and values, for example:
@@ -312,7 +311,7 @@ The dictionary editor supports validation for the entire set (`required` and `le
     },
     "validationValue": {
         "regex": {
-            "pattern": "^[a-zA-Z0-9]+$", 
+            "pattern": "^[a-zA-Z0-9]+$",
             "message": "Values can contain only Latin letters and digits"
         }
     }
@@ -321,7 +320,7 @@ The dictionary editor supports validation for the entire set (`required` and `le
 
 ### Object editor
 
-Allows to define an object with specific properties editable by users. Object properties are specified with the `properties` attribute. The value of the attribute is an array, which has exactly the same structure as the Inspector properties array. 
+Allows to define an object with specific properties editable by users. Object properties are specified with the `properties` attribute. The value of the attribute is an array, which has exactly the same structure as the Inspector properties array.
 
 ```json
 {
@@ -343,22 +342,22 @@ Allows to define an object with specific properties editable by users. Object pr
             "property": "country",
             "title": "Country",
             "type": "dropdown",
-            "options": {"us": "US", "ca": "Canada"}
+            "options": { "us": "US", "ca": "Canada" }
         }
     ]
 }
 ```
 
-The example above creates an object with three properties. Two of them are displayed as text fields, and the third as a drop-down. 
+The example above creates an object with three properties. Two of them are displayed as text fields, and the third as a drop-down.
 
 Object editor values are objects. Example:
 
 ```json
 {
     "address": {
-        "streetAddress":"321-210 Second ave",
-        "city":"Springfield",
-        "country":"us"
+        "streetAddress": "321-210 Second ave",
+        "city": "Springfield",
+        "country": "us"
     }
 }
 ```
@@ -396,7 +395,7 @@ Object editors do not support the external property editor feature.
 
 ### Object list editor
 
-The object list editor allows users to create multiple objects with a pre-defined structure. For example, it could be used for creating a list of person, where each person has a name and address. 
+The object list editor allows users to create multiple objects with a pre-defined structure. For example, it could be used for creating a list of person, where each person has a name and address.
 
 The properties of objects that can be created with the editor are defined with `itemProperties` parameter. The parameter should contain an array of properties, similar to Inspector configuration array. Another required parameter is `titleProperty`, which identifies a property that should be used as a title in Inspector UI. Example configuration:
 
@@ -429,10 +428,10 @@ By default the value created by the editor of this type is a non-associative arr
 
 ```json
 {
-    "people":[
-        {"fullName":"John Smith","address":"Palo Alto"},
-        {"fullName":"Bart Simpson","address":"Springfield"}
-     ]
+    "people": [
+        { "fullName": "John Smith", "address": "Palo Alto" },
+        { "fullName": "Bart Simpson", "address": "Springfield" }
+    ]
 }
 ```
 
@@ -469,16 +468,16 @@ The `login` property in the example above will be used as a key in the result va
 
 ```json
 {
-    "people":{
-        "john":{"fullName":"John Smith","address":"Palo Alto"},
-        "bart":{"fullName":"Bart Simpson","address":"Springfield"}
+    "people": {
+        "john": { "fullName": "John Smith", "address": "Palo Alto" },
+        "bart": { "fullName": "Bart Simpson", "address": "Springfield" }
     }
 }
 ```
 
 ### Set editor
 
-The set editor allows users to select multiple predefined options with checkboxes. Set items can be specified statically with the configuration, using the `items` parameter, or loaded dynamically. Example with static items definition: 
+The set editor allows users to select multiple predefined options with checkboxes. Set items can be specified statically with the configuration, using the `items` parameter, or loaded dynamically. Example with static items definition:
 
 ```json
 {
@@ -502,7 +501,7 @@ Set editors do not support the external property editor feature.
 
 ## Defining the validation rules
 
-Inspector support several validation rules that can be applied to properties. Validation rules can be applied to top-level properties as well as to internal property definitions of object and object list editors. There are two ways to define validation rules - the legacy syntax and the new syntax. 
+Inspector support several validation rules that can be applied to properties. Validation rules can be applied to top-level properties as well as to internal property definitions of object and object list editors. There are two ways to define validation rules - the legacy syntax and the new syntax.
 
 The legacy syntax is supported for the backwards compatibility with existing CMS components definitions. This syntax will always be supported, but it's limited, and cannot be mixed with the new syntax. Example of the legacy syntax:
 
@@ -557,7 +556,7 @@ Checks if a value is not empty. The validator can be used with any editor, inclu
 
 ### regex validator
 
-Validates string values with a regular expression. The validator can  be use only with string-typed editors. Example:
+Validates string values with a regular expression. The validator can be use only with string-typed editors. Example:
 
 ```json
 {
@@ -604,17 +603,17 @@ Checks if the value is integer and can optionally validate if the value is withi
 
 Supported parameters:
 
-* `allowNegative` - optional, determines if negative values are allowed. By default negative values are not allowed.
-* `min` - optional object, defines the minimum allowed value and error message. Object fields:
-    * `value` - defines the minimum value.
-    * `message` - optional, defines the error message.
-* `max` - optional object, defines the maximum allowed value and error message. Object fields:
-    * `value` - defines the maximum value.
-    * `message` - optional, defines the error message.
+-   `allowNegative` - optional, determines if negative values are allowed. By default negative values are not allowed.
+-   `min` - optional object, defines the minimum allowed value and error message. Object fields:
+    -   `value` - defines the minimum value.
+    -   `message` - optional, defines the error message.
+-   `max` - optional object, defines the maximum allowed value and error message. Object fields:
+    -   `value` - defines the maximum value.
+    -   `message` - optional, defines the error message.
 
 ### float validator
 
-Checks if the value is a floating point number. The parameters for this validator match the parameters of the **integer** validator described above. Example: 
+Checks if the value is a floating point number. The parameters for this validator match the parameters of the **integer** validator described above. Example:
 
 ```json
 {
@@ -631,11 +630,11 @@ Checks if the value is a floating point number. The parameters for this validato
 
 Valid floating point number formats:
 
-* 10
-* 10.302
-* -10 (if `allowNegative` is `true`)
-* -10.84 (if `allowNegative` is `true`)
- 
+-   10
+-   10.302
+-   -10 (if `allowNegative` is `true`)
+-   -10.84 (if `allowNegative` is `true`)
+
 ### length validator
 
 Checks if a string, array or object is not shorter or longer than specified values. This validator can work with the string, text, set, string list, dictionary and object list editors. In multiple-value editors (set, string list, dictionary and object list) it validates the number of items created in the editor.
@@ -664,12 +663,12 @@ Checks if a string, array or object is not shorter or longer than specified valu
 
 Supported parameters:
 
-* `min` - optional object, defines the minimum allowed length and error message. Object fields:
-    * `value` - defines the minimum value.
-    * `message` - optional, defines the error message.
-* `max` - optional object, defines the maximum allowed length and error message. Object fields:
-    * `value` - defines the maximum value.
-    * `message` - optional, defines the error message.
+-   `min` - optional object, defines the minimum allowed length and error message. Object fields:
+    -   `value` - defines the minimum value.
+    -   `message` - optional, defines the error message.
+-   `max` - optional object, defines the maximum allowed length and error message. Object fields:
+    -   `value` - defines the maximum value.
+    -   `message` - optional, defines the error message.
 
 ## Inspector events
 
@@ -684,19 +683,25 @@ The `change` event is triggered after Inspector applies updated values to the in
 The `showing.oc.inspector` event is triggered before Inspector is displayed. The event handler can optionally stop the process with calling `ev.isDefaultPrevented()`. Example - prevent Inspector showing:
 
 ```js
-$(document).on('showing.oc.inspector', 'div[data-inspectable]', function(ev, data){
-    ev.preventDefault()
-})
+$(document).on("showing.oc.inspector", "div[data-inspectable]", function (
+    ev,
+    data
+) {
+    ev.preventDefault();
+});
 ```
 
-The handler could  perform any required processing, even asynchronous, and then call the callback function passed to the handler, to continue showing the Inspector. In this case the handler should call `ev.stopPropagation()` method to stop the default Inspector initialization. Example - continue showing after some processing:
+The handler could perform any required processing, even asynchronous, and then call the callback function passed to the handler, to continue showing the Inspector. In this case the handler should call `ev.stopPropagation()` method to stop the default Inspector initialization. Example - continue showing after some processing:
 
 ```js
-$(document).on('showing.oc.inspector', 'div[data-inspectable]', function(ev, data){
-    ev.stopPropagation()
+$(document).on("showing.oc.inspector", "div[data-inspectable]", function (
+    ev,
+    data
+) {
+    ev.stopPropagation();
     // The callback function can be called asynchronously
-    data.callback()
-})
+    data.callback();
+});
 ```
 
 ### hiding.oc.inspector
@@ -704,19 +709,25 @@ $(document).on('showing.oc.inspector', 'div[data-inspectable]', function(ev, dat
 The `hiding.oc.inspector` is called before Inspector hiding process starts. The handler can stop the hiding with calling `ev.preventDefault()`. Example:
 
 ```js
-$(document).on('hiding.oc.inspector', 'div[data-inspectable]', function(ev, data){
-    if (!confirm('Allow hiding?')) {
-        ev.preventDefault()
+$(document).on("hiding.oc.inspector", "div[data-inspectable]", function (
+    ev,
+    data
+) {
+    if (!confirm("Allow hiding?")) {
+        ev.preventDefault();
     }
-})
+});
 ```
 
 The values entered in Inspector are available through the `values` element of the second handler argument:
 
 ```js
-$(document).on('hiding.oc.inspector', 'div[data-inspectable]', function(ev, data){
-   console.log(data.values)
-})
+$(document).on("hiding.oc.inspector", "div[data-inspectable]", function (
+    ev,
+    data
+) {
+    console.log(data.values);
+});
 ```
 
 ### hidden.oc.inspector

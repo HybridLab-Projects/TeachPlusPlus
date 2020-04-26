@@ -10,11 +10,11 @@
 // Popover
 // --------------------------------------------------
 
-@color-popover-bg:                           #ffffff;
-@color-popover-border:                       rgba(0,0,0,.15);
-@color-popover-head-bg:                      #f9f9f9;
-@color-popover-head-text:                    #2a3e51;
-@color-popover-danger-bg:                    #ab2a1c;
+@color-popover-bg: #ffffff;
+@color-popover-border: rgba(0, 0, 0, 0.15);
+@color-popover-head-bg: #f9f9f9;
+@color-popover-head-text: #2a3e51;
+@color-popover-danger-bg: #ab2a1c;
 
 div.control-popover {
     position: absolute;
@@ -24,22 +24,23 @@ div.control-popover {
     z-index: @zindex-popover;
     visibility: hidden;
 
-    &.in, &.fade {
+    &.in,
+    &.fade {
         visibility: visible;
     }
 
     &.fade {
         & > div {
             .opacity(0);
-            .transition(~'all 0.3s, width 0s');
-            .transform(~'scale(0.7)');
+            .transition(~"all 0.3s, width 0s");
+            .transform(~"scale(0.7)");
         }
     }
 
     &.fade.in {
         & > div {
             .opacity(1);
-            .transform( ~'scale(1)');
+            .transform( ~"scale(1)");
         }
     }
 
@@ -50,12 +51,17 @@ div.control-popover {
         .border-top-radius(5px);
         .border-bottom-radius(2px);
 
-        &:after, &:before {
+        &:after,
+        &:before {
             position: absolute;
         }
 
-        &:after { z-index: @zindex-popover + 1; }
-        &:before { z-index: @zindex-popover; }
+        &:after {
+            z-index: @zindex-popover + 1;
+        }
+        &:before {
+            z-index: @zindex-popover;
+        }
     }
 
     &.placement-bottom > div {
@@ -189,7 +195,7 @@ div.control-popover {
             }
 
             &:before {
-                .transform(~'rotate(270deg)');
+                .transform(~"rotate(270deg)");
             }
         }
     }
@@ -219,25 +225,29 @@ div.control-popover {
         }
 
         &.placement-bottom {
-            > div:after, .popover-head:before {
+            > div:after,
+            .popover-head:before {
                 .triangle(up, 15px, 8px, @color-popover-danger-bg);
             }
         }
 
         &.placement-top {
-            > div:after, .popover-head:before {
+            > div:after,
+            .popover-head:before {
                 .triangle(down, 15px, 8px, @color-popover-danger-bg);
             }
         }
 
         &.placement-left {
-            > div:after, .popover-head:before {
+            > div:after,
+            .popover-head:before {
                 .triangle(right, 8px, 15px, @color-popover-danger-bg);
             }
         }
 
         &.placement-right {
-            > div:after, .popover-head:before {
+            > div:after,
+            .popover-head:before {
                 .triangle(left, 8px, 15px, @color-popover-danger-bg);
             }
         }
@@ -245,7 +255,7 @@ div.control-popover {
         .popover-head {
             color: #fff;
             background-color: @color-popover-danger-bg;
-            border-bottom: 2px solid rgba(255,255,255,.15);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 
             .close {
                 color: #fff;
@@ -262,7 +272,9 @@ div.control-popover {
 .popover-highlight {
     position: relative;
     z-index: (@zindex-popover - 2) !important;
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
         z-index: (@zindex-popover - 2) !important;
     }
 }
@@ -279,7 +291,6 @@ div.popover-overlay {
 
 @media (max-width: @screen-xs) {
     body.popover-open {
-
         overflow: hidden;
 
         .control-popover {
@@ -299,7 +310,8 @@ div.popover-overlay {
                 padding: 0;
                 min-height: 100%;
 
-                &:before, &:after {
+                &:before,
+                &:after {
                     display: none;
                 }
             }

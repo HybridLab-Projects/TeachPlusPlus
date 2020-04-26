@@ -2,7 +2,6 @@
 // Forms
 // --------------------------------------------------
 
-
 // Normalize non-controls
 //
 // Restyle and baseline non-control form elements.
@@ -89,7 +88,6 @@ output {
     color: @input-color;
 }
 
-
 // Common form controls
 //
 // Shared size and type resets for form controls. Apply `.form-control` to any
@@ -116,7 +114,8 @@ output {
     display: block;
     width: 100%;
     height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-    padding: (@padding-base-vertical) @padding-base-horizontal (@padding-base-vertical + 1);
+    padding: (@padding-base-vertical) @padding-base-horizontal
+        (@padding-base-vertical + 1);
     font-size: @input-font-size;
     line-height: @line-height-base;
     color: @input-color;
@@ -155,7 +154,6 @@ output {
     }
 }
 
-
 // Search inputs in iOS
 //
 // This overrides the extra rounded corners on search inputs in iOS so that our
@@ -167,7 +165,6 @@ input[type="search"] {
     -webkit-appearance: none;
 }
 
-
 // Special styles for iOS date input
 //
 // In Mobile Safari, date inputs require a pixel line-height that matches the
@@ -177,7 +174,6 @@ input[type="date"] {
     line-height: @input-height-base;
 }
 
-
 // Form groups
 //
 // Designed to help with the organization and spacing of vertical forms. For
@@ -186,7 +182,6 @@ input[type="date"] {
 .form-group {
     margin-bottom: 15px;
 }
-
 
 // Checkboxes and radios
 //
@@ -248,7 +243,6 @@ input[type="checkbox"],
     }
 }
 
-
 // Form control sizing
 //
 // Build on `.form-control` with modifier classes to decrease or increase the
@@ -261,7 +255,6 @@ input[type="checkbox"],
 .input-lg {
     .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
 }
-
 
 // Form control feedback states
 //
@@ -279,7 +272,9 @@ input[type="checkbox"],
     // Feedback icon (requires .glyphicon classes)
     .form-control-feedback {
         position: absolute;
-        top: (@line-height-computed + 5); // Height of the `label` and its margin
+        top: (
+            @line-height-computed + 5
+        ); // Height of the `label` and its margin
         right: 0;
         display: block;
         width: @input-height-base;
@@ -300,7 +295,6 @@ input[type="checkbox"],
     .form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
 }
 
-
 // Static form control text
 //
 // Apply class to a `p` element to make any string of text align with labels in
@@ -309,7 +303,6 @@ input[type="checkbox"],
 .form-control-static {
     margin-bottom: 0; // Remove default margin from `p`
 }
-
 
 // Help text
 //
@@ -340,7 +333,6 @@ label + .help-block.before-field {
 // Heads up! This is mixin-ed into `.navbar-form` in navbars.less.
 
 .form-inline {
-
     // Kick in the inline
     @media (min-width: @screen-sm-min) {
         // Inline-block all the things for "inline"
@@ -393,14 +385,12 @@ label + .help-block.before-field {
     }
 }
 
-
 // Horizontal forms
 //
 // Horizontal forms are built on grid classes and allow you to create forms with
 // labels on the left and inputs on the right.
 
 .form-horizontal {
-
     // Consistent vertical alignment of labels, radios, and checkboxes
     .control-label,
     .radio,
@@ -409,7 +399,9 @@ label + .help-block.before-field {
     .checkbox-inline {
         margin-top: 0;
         margin-bottom: 0;
-        padding-top: (@padding-base-vertical + 1); // Default padding plus a border
+        padding-top: (
+            @padding-base-vertical + 1
+        ); // Default padding plus a border
     }
     // Account for padding we're adding to ensure the alignment and of help text
     // and other content below items
