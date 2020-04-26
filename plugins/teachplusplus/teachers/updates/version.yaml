@@ -66,3 +66,6 @@
 1.0.25:
     - 'Updated table teachplusplus_teachers_feedbacks'
     - builder_table_update_teachplusplus_teachers_feedbacks.php
+1.0.26:
+    - 'Updated table teachplusplus_teachers_feedbacks'
+    - builder_table_update_teachplusplus_teachers_feedbacks_2.php

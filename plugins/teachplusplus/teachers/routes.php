@@ -1,6 +1,5 @@
 <?php
 
-use RainLab\User\Models\User;
 use Teachplusplus\Teachers\Models\Feedback;
 use Teachplusplus\Teachers\Models\Like;
 use Teachplusplus\Teachers\Models\Subject;
@@ -11,7 +10,7 @@ use Teachplusplus\Teachers\Models\Report;
 Route::group(['prefix' => 'api', /*'middleware' => '\Tymon\JWTAuth\Middleware\GetUserFromToken'*/], function () {
     Route::get('teacher', function () {
         $teachers = Teacher::with(['subjects', 'feedbacks.likes.user', 'feedbacks.author', 'feedbacks.subject', 'feedbacks.subject', 'feedbacks.reports', 'feedbacks' => function ($query) {
-            $query->where('banned', false)->orWhere('banned', null);
+            $query->where('banned', false);
         }])->get();
         
 
@@ -76,12 +75,16 @@ Route::group(['prefix' => 'api', /*'middleware' => '\Tymon\JWTAuth\Middleware\Ge
             $feedback = Feedback::find($feedbackId);
             $user = JWTAuth::toUser($token);
 
+            if (Report::where(['feedback_id' => $feedback->id, 'user_id' => $user->id])->exists()) {
+                return 'Cannot report the same feedback multiple times.';
+            }
+
             $report = Report::create();
             $report->feedback()->associate($feedback);
             $report->user()->associate($user);
             $report->save();
 
-            if ($feedback->reports()->count() >= 2) {
+            if ($feedback->reports()->count() == 3) {
                 $feedback->banned = true;
                 $feedback->save();
             }

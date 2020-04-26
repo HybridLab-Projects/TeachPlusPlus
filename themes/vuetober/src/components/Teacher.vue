@@ -117,8 +117,12 @@
                           alt=""
                         >
                       </div>
-                      <div>
-                        <b-link @click="reportFeedback(feedback)">
+                      <div class="mt-2">
+                        <b-link
+                          @click="reportFeedback(feedback)"
+                          class="text-muted"
+                        >
+                          <b-icon-exclamation-octagon />
                           Nahlásiť nevhodný feedback
                         </b-link>
                       </div>
@@ -182,6 +186,15 @@
                           :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
                           alt=""
                         >
+                      </div>
+                      <div class="mt-2">
+                        <b-link
+                          @click="reportFeedback(feedback)"
+                          class="text-muted"
+                        >
+                          <b-icon-exclamation-octagon />
+                          Nahlásiť nevhodný feedback
+                        </b-link>
                       </div>
                     </b-list-group-item>
                   </b-list-group>
@@ -321,5 +334,7 @@ export default {
 .like-avatar {
   width: 32px;
 }
-
+.text-report {
+  font-size: 0.875rem;
+}
 </style>
