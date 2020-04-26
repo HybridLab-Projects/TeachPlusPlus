@@ -23,3 +23,7 @@ navigation:
                 label: Likes
                 url: teachplusplus/teachers/likes
                 icon: icon-thumbs-up
+            report:
+                label: Reports
+                url: teachplusplus/teachers/reports
+                icon: icon-warning

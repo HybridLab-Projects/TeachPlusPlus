@@ -117,6 +117,11 @@
                           alt=""
                         >
                       </div>
+                      <div>
+                        <b-link @click="reportFeedback(feedback)">
+                          Nahlásiť nevhodný feedback
+                        </b-link>
+                      </div>
                     </b-list-group-item>
                   </b-list-group>
                 </b-col>
@@ -263,6 +268,9 @@ export default {
     },
     likeFeedback(feedback) {
       this.$store.dispatch('like', feedback);
+    },
+    reportFeedback(feedback) {
+      this.$store.dispatch('report', feedback);
     },
     toTime(time) {
       Moment.locale('sk');
