@@ -30,6 +30,7 @@ class Feedback extends Model
 
     public $hasMany = [
         'likes' => 'Teachplusplus\Teachers\Models\Like',
+        'reports' => 'Teachplusplus\Teachers\Models\Report'
     ];
 
 

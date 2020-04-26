@@ -1,0 +1,10 @@
+name: Reports
+form: $/teachplusplus/teachers/models/report/fields.yaml
+modelClass: Teachplusplus\Teachers\Models\Report
+defaultRedirect: teachplusplus/teachers/reports
+create:
+    redirect: 'teachplusplus/teachers/reports/update/:id'
+    redirectClose: teachplusplus/teachers/reports
+update:
+    redirect: teachplusplus/teachers/reports
+    redirectClose: teachplusplus/teachers/reports
