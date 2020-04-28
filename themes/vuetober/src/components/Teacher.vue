@@ -119,12 +119,19 @@
                       </div>
                       <div class="mt-2">
                         <b-link
+                          v-if="!feedback.reports.some((f) => +f.user_id === +user.id)"
                           @click="reportFeedback(feedback)"
                           class="text-muted"
                         >
                           <b-icon-exclamation-octagon />
                           Nahlásiť nevhodný feedback
                         </b-link>
+                        <p
+                          v-else
+                          class="text-muted"
+                        >
+                          Ďakujeme za nahlásenie.
+                        </p>
                       </div>
                     </b-list-group-item>
                   </b-list-group>
@@ -189,12 +196,19 @@
                       </div>
                       <div class="mt-2">
                         <b-link
+                          v-if="!feedback.reports.some((f) => +f.user_id === +user.id)"
                           @click="reportFeedback(feedback)"
                           class="text-muted"
                         >
                           <b-icon-exclamation-octagon />
                           Nahlásiť nevhodný feedback
                         </b-link>
+                        <p
+                          v-else
+                          class="text-muted"
+                        >
+                          Ďakujeme za nahlásenie.
+                        </p>
                       </div>
                     </b-list-group-item>
                   </b-list-group>

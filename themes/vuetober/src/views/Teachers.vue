@@ -33,7 +33,9 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('fetchTeachers');
+    this.$store.dispatch('fetchTeachers').then(
+      () => this.$store.dispatch('selectTeacher', this.id),
+    );
   },
   beforeRouteUpdate(to, from, next) {
     this.$store.dispatch('fetchTeachers').then(() => {
