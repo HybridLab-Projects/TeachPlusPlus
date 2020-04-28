@@ -1,7 +1,7 @@
 <template>
   <b-container
     fluid
-    class="alll px-0 pl-5"
+    class="px-0 pl-5"
   >
     <b-row class="cont-color">
       <b-col
@@ -16,7 +16,7 @@
           >
             Čo je to, <strong>Teach++</strong>
           </h2>
-          <p class="text-white popis">
+          <p class="text-white description">
             <strong>
               Zanechaj učiteľovi spätnú väzbu, vďaka ktorej bude hodina pre obe strany príjemnejšia!
             </strong>
@@ -84,25 +84,38 @@ export default {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .content-container {
     .header {
-      font-size: 3rem;
+      font-size: 2.7rem;
     }
   }
 }
 
 @media screen and (max-width: 700px) {
-  .content-container {
-    .header {
-      font-size: 2rem;
-    }
+  .header {
+    font-size: 2rem;
+  }
 
-    .popis {
-      width: 75%;
-      font-size: 1rem;
-      margin: 0;
-    }
+  .description {
+    width: 75%;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .cont-color {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
+    border-radius: 0px;
+  }
+
+  .cont-img-pic {
+    display: none;
+  }
+
+  .info-cont {
+    margin-left: auto;
   }
 }
 
@@ -119,9 +132,5 @@ export default {
 
 .footer-text {
   font-size: 0.875rem;
-}
-
-.alll {
-  overflow-x: none;
 }
 </style>
