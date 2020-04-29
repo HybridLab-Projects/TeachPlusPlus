@@ -6,7 +6,7 @@
     <b-row class="cont-color">
       <b-col
         cols="5"
-        class="pl-5 justify-container-center"
+        class="pl-5 justify-container-center test"
       >
         <div
           class="content-container pl-5"
@@ -78,7 +78,7 @@ export default {
   z-index: 100;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .content-container {
     padding-top: 5rem;
   }
@@ -112,10 +112,6 @@ export default {
 
   .cont-img-pic {
     display: none;
-  }
-
-  .info-cont {
-    margin-left: auto;
   }
 }
 
