@@ -7,7 +7,6 @@
       toggleable="lg"
       type="danger"
       variant="light"
-      fixed="top"
     >
       <b-navbar-brand
         to="/"
