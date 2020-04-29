@@ -6,7 +6,7 @@
         cols="6"
       >
         <div class="test">
-          <h1 class="d-flex justify-content-center mt-5 pt-5 mb-3 test2">
+          <h1 class="d-flex justify-content-center mb-3 test2">
             Registrácia
           </h1>
           <ValidationObserver
@@ -94,14 +94,16 @@
         </div>
       </b-col>
       <b-col
-        class="d-flex justify-content-center p-0 mb-5 cont_img"
+        class="d-flex justify-content-center p-0 mb-5"
         cols="6"
       >
-        <img
-          class="cont_img_pic"
-          :src="require(`@/assets/img/Group.svg`)"
-          alt
-        >
+        <div class="cont_img">
+          <img
+            class="cont_img_pic"
+            :src="require(`@/assets/img/Group.svg`)"
+            alt
+          >
+        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -156,11 +158,18 @@ export default {
   }
 
   .cont_img_pic {
-    height: 75vh;
+    height: auto;
+    width: 100%;
     transform: translateX(-25%) translateY(15%);
   }
 
   .test2 {
     color: #5352f6;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .cont_img_pic {
+      display: none;
+    }
   }
 </style>

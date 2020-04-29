@@ -2,7 +2,7 @@
   <b-container fluid>
     <b-row>
       <b-col
-        class="my-auto input-column"
+        class="d-flex my-auto input-column"
         cols="6"
       >
         <div class="testing">
@@ -98,6 +98,10 @@ export default {
     color: #5352f6;
   }
 
+  .testing {
+    margin-top: 5rem;
+  }
+
   .cont_img {
     background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
     border-radius: 150px 0px 150px 150px;
@@ -112,10 +116,6 @@ export default {
 
 
   @media screen and (max-width: 768px) {
-    .testing {
-      margin-top: 5rem;
-    }
-
     .cont_img_pic {
       display: none;
     }
