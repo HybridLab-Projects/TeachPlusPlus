@@ -2,16 +2,23 @@
   <b-container fluid>
     <b-row>
       <b-col
-        class="d-flex my-auto input-column"
-        cols="6"
+        class="d-flex justify-content-center my-auto input-column"
+        cols="12"
+        md="6"
       >
-        <div class="testing">
+        <div class="testing w-100">
           <h1 class="d-flex justify-content-center test2 mb-5">
             Prihlásenie
           </h1>
           <div class="d-flex justify-content-center">
-            <ValidationObserver v-slot="{ passes }">
-              <b-form @submit.enter.prevent="passes(onLogin)">
+            <ValidationObserver
+              v-slot="{ passes }"
+              class=""
+            >
+              <b-form
+                @submit.enter.prevent="passes(onLogin)"
+                class=""
+              >
                 <BTextInputWithValidation
                   rules="required"
                   type="text"
@@ -51,7 +58,7 @@
           </div>
         </div>
       </b-col>
-      <div class="d-flex justify-content-center col-md-6 p-0 mb-5 cont_img">
+      <div class="d-flex justify-content-center col-md-6 p-0 mb-5 cont-img">
         <img
           class="cont_img_pic"
           :src="require(`@/assets/img/Group.svg`)"
@@ -102,7 +109,7 @@ export default {
     margin-top: 5rem;
   }
 
-  .cont_img {
+  .cont-img {
     background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
     border-radius: 150px 0px 150px 150px;
     z-index: -1;

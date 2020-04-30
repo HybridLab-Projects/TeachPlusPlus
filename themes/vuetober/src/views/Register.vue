@@ -2,8 +2,9 @@
   <b-container fluid>
     <b-row class="mt-5">
       <b-col
-        class="d-flex justify-content-center text-dark"
-        cols="6"
+        class="d-flex justify-content-center my-auto text-dark"
+        cols="12"
+        lg="6"
       >
         <div class="test">
           <h1 class="d-flex justify-content-center mb-3 test2">
@@ -167,7 +168,7 @@ export default {
     color: #5352f6;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 992px) {
     .cont_img_pic {
       display: none;
     }
