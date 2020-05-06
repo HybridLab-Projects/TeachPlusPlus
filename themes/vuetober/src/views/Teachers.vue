@@ -45,6 +45,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+  .all {
+    column-width: 81px;
+  }
   .searchbg {
     background-color: #fff;
     height: 100vh;
@@ -52,5 +55,6 @@ export default {
 
   .teacherbg {
     background-color: #f8f5f3;
+    width: auto;
   }
 </style>
