@@ -13,7 +13,7 @@
           <div class="d-flex justify-content-center">
             <ValidationObserver
               v-slot="{ passes }"
-              class=""
+              class="m-0"
             >
               <b-form
                 @submit.enter.prevent="passes(onLogin)"
@@ -122,7 +122,7 @@ export default {
   }
 
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     .cont_img_pic {
       display: none;
     }

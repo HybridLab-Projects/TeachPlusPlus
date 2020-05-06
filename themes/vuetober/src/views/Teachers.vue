@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <b-row>
+    <b-row class="all">
       <b-col
         cols="3"
         class="searchbg"
@@ -44,7 +44,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
   .searchbg {
     background-color: #fff;
