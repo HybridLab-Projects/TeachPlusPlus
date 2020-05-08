@@ -56,5 +56,6 @@ export default {
   .teacherbg {
     background-color: #f8f5f3;
     width: auto;
+    overflow-x: hidden;
   }
 </style>
