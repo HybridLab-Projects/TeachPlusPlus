@@ -83,4 +83,10 @@ export default {
     box-shadow: none;
     width: 30vw;
   }
+
+  @media screen and (max-width: 425px) {
+    input {
+      width: 60vw;
+    }
+  }
 </style>

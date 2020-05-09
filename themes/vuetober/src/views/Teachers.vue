@@ -53,7 +53,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
 .searchbg {
   background-color: #fff;

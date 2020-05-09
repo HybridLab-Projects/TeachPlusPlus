@@ -1,7 +1,7 @@
 <template>
   <div class="pl-5 test">
     <b-row class="mt-3">
-      <b-col class="d-flex justify-content-end align-items-center">
+      <b-col class="d-flex justify-content-end align-items-center head">
         <b-link
           class="pr-5 my-auto text-muted font-weight-bold"
           @click="logout"
@@ -26,7 +26,7 @@
       v-if="selectedTeacher.id"
     >
       <b-row class="mt-5">
-        <b-col class="d-flex align-items-center">
+        <b-col class="d-flex align-items-center name">
           <img
             class="mb-4"
             :src="require(`@/assets/img/teacher.png`)"
@@ -330,12 +330,24 @@ export default {
   background: #888;
 }
 
+.test {
+  background-color: #f8f5f3;
+}
+
 .time {
   font-size: 0.75em;
 }
 
 .feeder {
   overflow: auto;
+}
+
+.name {
+  min-width: 800px;
+}
+
+.head {
+  min-width: 500px;
 }
 
 .icon-btn {
@@ -348,6 +360,7 @@ export default {
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
+  min-width: 600px;
 }
 
 .footer-text {
