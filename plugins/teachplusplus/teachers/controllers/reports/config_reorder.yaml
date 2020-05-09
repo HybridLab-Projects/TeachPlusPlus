@@ -1,0 +1,4 @@
+title: Reports
+modelClass: Teachplusplus\Teachers\Models\Report
+toolbar:
+    buttons: reorder_toolbar

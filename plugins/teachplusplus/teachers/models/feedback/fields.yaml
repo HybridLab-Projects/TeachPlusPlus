@@ -23,3 +23,7 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
+    banned:
+        label: Skrytý
+        span: auto
+        type: checkbox

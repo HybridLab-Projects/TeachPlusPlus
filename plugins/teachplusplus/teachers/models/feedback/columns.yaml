@@ -16,3 +16,14 @@ columns:
     teacher_id:
         label: teacher_id
         type: number
+    banned:
+        label: banned
+        type: text
+        searchable: true
+        sortable: true
+    author_id:
+        label: author_id
+        type: number
+    subject_id:
+        label: subject_id
+        type: number

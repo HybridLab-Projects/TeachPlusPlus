@@ -137,6 +137,18 @@ export default new Vuex.Store({
           throw err;
         });
     },
+    report({ dispatch, state }, { id }) {
+      return Axios(
+        { url: '/api/report', data: { feedback_id: id, token: state.token }, method: 'POST' },
+      )
+        .then((data) => {
+          console.log('reported', data);
+          dispatch('fetchTeachers');
+        }).catch((err) => {
+          console.log(err);
+          throw err;
+        });
+    },
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
