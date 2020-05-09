@@ -74,12 +74,16 @@
                       :key="feedback.id"
                       class="d-flex flex-column align-items-end mb-4 border-0 shadow"
                     >
-                      <div class="d-flex align-items-center w-100">
-                        <img
-                          class="mr-4 rounded-circle user-avatar"
+                      <div
+                        class="d-flex align-items-center w-100"
+                        id="likeAvatarRecent"
+                      >
+                        <b-avatar
+                          class="mr-4"
                           :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
+                          variant="light"
+                          size="lg"
+                        />
                         <div class="p-2 mr-auto">
                           <div class="text-break">
                             <p class="text-secondary mb-1 font-weight-light time">
@@ -109,13 +113,14 @@
                         </b-link>
                       </div>
                       <div class="d-flex">
-                        <img
+                        <b-avatar
                           v-for="like in feedback.likes"
                           :key="like.id"
-                          class="rounded-circle like-avatar ml-1"
+                          class="ml-1"
                           :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
+                          variant="light"
+                          v-b-tooltip:likeAvatarRecent="`${like.user.name} ${like.user.surname}`"
+                        />
                       </div>
                       <div class="mt-2">
                         <b-link
@@ -152,12 +157,16 @@
                       class="d-flex flex-column align-items-end mb-4 border-0 shadow"
                     >
                       <div class="d-flex align-items-center w-100">
-                        <img
-                          class="mr-4 rounded-circle user-avatar"
+                        <b-avatar
+                          class="mr-4"
                           :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
-                          alt=""
+                          variant="light"
+                          size="lg"
+                        />
+                        <div
+                          class="p-2 mr-auto"
+                          id="likeAvatarLikes"
                         >
-                        <div class="p-2 mr-auto">
                           <div class="text-break">
                             <p class="text-secondary mb-1 font-weight-light time">
                               {{ toTime(feedback.created_at) }} -
@@ -186,13 +195,14 @@
                         </b-link>
                       </div>
                       <div class="d-flex">
-                        <img
+                        <b-avatar
                           v-for="like in feedback.likes"
                           :key="like.id"
-                          class="rounded-circle like-avatar ml-1"
+                          class="ml-1"
                           :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
+                          variant="light"
+                          v-b-tooltip:likeAvatarLikes="`${like.user.name} ${like.user.surname}`"
+                        />
                       </div>
                       <div class="mt-2">
                         <b-link
@@ -222,11 +232,12 @@
     <div v-else>
       <b-row class="">
         <b-col class="d-flex align-items-center">
-          <img
-            class="mb-4 user-avatar rounded-circle"
+          <b-avatar
+            class="mb-4"
             :src="`https://avatars.dicebear.com/v2/avataaars/${user.email}.svg?options[mood][]=happy`"
-            alt=""
-          >
+            variant="light"
+            size="lg"
+          />
           <div class="my-auto ml-4">
             <p class="text-muted font-weight-bold">
               SPŠE Hálova
@@ -303,6 +314,9 @@ export default {
       Moment.locale('sk');
       return Moment(Moment.utc(time)).local().format('DD. MMMM YYYY, H:mm');
     },
+    tooltipName(like) {
+      return `${like.user.name} ${like.user.surname}`;
+    },
   },
 };
 </script>
@@ -341,13 +355,6 @@ export default {
   border-top: 1px #D7D7E8 solid;
 }
 
-.user-avatar {
-  width: 64px;
-}
-
-.like-avatar {
-  width: 32px;
-}
 .text-report {
   font-size: 0.875rem;
 }
