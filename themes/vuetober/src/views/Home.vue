@@ -1,15 +1,15 @@
 <template>
   <b-container
     fluid
-    class="px-0 pl-5"
+    class="pl-md-5 whole"
   >
-    <b-row class="cont-color">
+    <b-row class=" cont-color">
       <b-col
         cols="5"
         class="pl-5 justify-container-center test"
       >
         <div
-          class="content-container pl-5"
+          class="content-container pl-lg-5"
         >
           <h2
             class="display-4 header mb-4 text-white"
@@ -73,7 +73,6 @@ export default {
   padding-top: 10rem;
   padding-left: 0px;
   max-width: 550px;
-  min-width: 430px;
   position: absolute;
   z-index: 100;
 }
@@ -90,17 +89,24 @@ export default {
       font-size: 2.7rem;
     }
   }
+
+  .cont-color {
+    padding-bottom: 30px;
+    border-radius: 0px 0px 50px 7rem;
+  }
 }
 
 @media screen and (max-width: 700px) {
-  .header {
-    font-size: 2rem;
-  }
+  .content-container {
+    .header {
+      font-size: 3rem;
+    }
 
-  .description {
-    width: 75%;
-    font-size: 1rem;
-    margin: 0;
+    .description {
+      width: 70vw;
+      font-size: 1.3rem;
+      margin: 0;
+    }
   }
 
   .cont-color {
