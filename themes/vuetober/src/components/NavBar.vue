@@ -46,7 +46,7 @@
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav
-          class="ml-auto"
+          class="ml-auto action"
           v-else
         >
           <p
@@ -78,6 +78,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 1100px) {
+  .custombtn {
+    margin-right: 9rem;
+  }
+}
+
 .brand {
   color: #000;
 }
