@@ -1,13 +1,13 @@
 <template>
   <div>
     <b-button
-      v-b-toggle.sidebar-1
+      v-b-toggle.sidebar-search
       squared
     >
       <b-icon-list />
     </b-button>
     <b-sidebar
-      id="sidebar-1"
+      id="sidebar-search"
       shadow
     >
       <div class="d-flex align-items-center mt-3">
