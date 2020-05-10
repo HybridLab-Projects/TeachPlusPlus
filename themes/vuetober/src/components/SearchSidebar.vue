@@ -73,7 +73,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Search',
+  name: 'SearchSidebar',
   data() {
     return {
       searchTeacher: '',

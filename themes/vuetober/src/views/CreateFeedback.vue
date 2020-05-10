@@ -145,7 +145,7 @@ import BSelectWithValidation from '@/components/inputs/BSelectWithValidation.vue
 import BTextAreaWithValidation from '@/components/inputs/BTextAreaWithValidation.vue';
 
 export default {
-  name: 'Feedback',
+  name: 'CreateFeedback',
   components: {
     BSelectWithValidation,
     BTextAreaWithValidation,

@@ -41,7 +41,7 @@ const routes = [
   {
     path: '/feedback',
     name: 'Feedback',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Feedback.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/CreateFeedback.vue'),
     beforeEnter: (to, from, next) => {
       if (!store.getters.isLoggedIn) { next({ name: 'Login' }); } else next();
     },
