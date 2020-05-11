@@ -13,7 +13,7 @@
           <div class="d-flex justify-content-center">
             <ValidationObserver
               v-slot="{ passes }"
-              class="m-0"
+              class=""
             >
               <b-form
                 @submit.enter.prevent="passes(onLogin)"
@@ -23,9 +23,9 @@
                   rules="required"
                   type="text"
                   label=""
-                  name="Používateľské meno"
-                  v-model="user.username"
-                  placeholder="Zadaj používateľské meno"
+                  name="Email"
+                  v-model="user.email"
+                  placeholder="Zadaj email"
                   class=""
                 />
 
@@ -58,13 +58,17 @@
           </div>
         </div>
       </b-col>
-      <div class="d-flex justify-content-center col-md-6 p-0 mb-5 cont-img">
+      <b-col
+        class="d-flex justify-content-center p-0 mb-5 cont-img d-none d-md-block"
+        cols="0"
+        md="6"
+      >
         <img
-          class="cont_img_pic"
+          class="cont_img_pic d-none d-md-block"
           :src="require(`@/assets/img/Group.svg`)"
           alt
         >
-      </div>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -82,7 +86,7 @@ export default {
   data() {
     return {
       user: {
-        username: '',
+        email: '',
         password: '',
       },
       error: '',
@@ -119,13 +123,6 @@ export default {
     height: auto;
     width: 100%;
     transform: translateX(-40%) translateY(20%);
-  }
-
-
-  @media screen and (max-width: 767px) {
-    .cont_img_pic {
-      display: none;
-    }
   }
 
 </style>

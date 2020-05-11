@@ -3,10 +3,9 @@
 use RainLab\User\Models\User as UserModel;
 
 Route::group(['prefix' => 'api'], function () {
-
     Route::post('login', function (Request $request) {
         $credentials = [
-            'username' => Request::get('username'),
+            'email' => Request::get('email'),
             'password' => Request::get('password'),
         ];
 

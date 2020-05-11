@@ -18,7 +18,7 @@
             {{ feedback.subject.subject_name }}
           </p>
           <h6 class="font-weight-bold">
-            {{ feedback.author.username }}
+            {{ feedback.author.name }} {{ feedback.author.surname }}
           </h6>
           <div>
             {{ feedback.feedback }}
