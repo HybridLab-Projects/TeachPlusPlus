@@ -1,16 +1,17 @@
 <template>
   <div>
     <b-button
-      v-b-toggle.sidebar-1
+      v-b-toggle.sidebar-search
       squared
     >
       <b-icon-list />
     </b-button>
     <b-sidebar
-      id="sidebar-1"
+      id="sidebar-search"
+      backdrop
       shadow
     >
-      <div class="d-flex align-items-center mt-3">
+      <div class="d-flex align-items-center mt-3 ml-2">
         <b-img
           class="pb-3 w-50"
           :src="require(`@/assets/img/Logo.svg`)"
@@ -60,11 +61,11 @@
           </b-list-group-item>
         </b-list-group>
       </div>
-      <div>
+      <template v-slot:footer>
         <p class="footer-text text-center text-muted mt-5">
           &copy; 2020 Všetky práva vyhradené <strong>TEACH++</strong>
         </p>
-      </div>
+      </template>
     </b-sidebar>
   </div>
 </template>
@@ -73,7 +74,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Search',
+  name: 'SearchSidebar',
   data() {
     return {
       searchTeacher: '',
@@ -148,10 +149,9 @@ input.form-control[type=text]:focus:not([readonly]) {
 }
 
 .search {
-  height: calc(100vh - 20rem);
+  height: calc(100vh - 22rem);
   overflow-y: scroll;
   overflow-x: none;
-  padding-right: 10px;
 }
 
 .searchbar {

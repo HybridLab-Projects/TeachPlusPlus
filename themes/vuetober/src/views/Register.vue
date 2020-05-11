@@ -4,7 +4,7 @@
       <b-col
         class="d-flex justify-content-center my-auto text-dark"
         cols="12"
-        lg="6"
+        md="6"
       >
         <div class="test">
           <h1 class="d-flex justify-content-center mb-3 test2">
@@ -30,15 +30,6 @@
                 name="Priezvisko"
                 v-model="user.surname"
                 placeholder="Zadaj priezvisko"
-              />
-
-              <BTextInputWithValidation
-                rules="required"
-                type="text"
-                label=""
-                name="Používateľské meno"
-                v-model="user.username"
-                placeholder="Zadaj používateľské meno"
               />
 
               <BTextInputWithValidation
@@ -95,12 +86,13 @@
         </div>
       </b-col>
       <b-col
-        class="d-flex justify-content-center p-0 mb-5"
-        cols="6"
+        class="d-flex justify-content-center p-0 mb-5 d-none d-md-block"
+        cols="0"
+        md="6"
       >
-        <div class="cont_img">
+        <div class="cont_img d-none d-md-block">
           <img
-            class="cont_img_pic"
+            class="cont_img_pic d-none d-md-block"
             :src="require(`@/assets/img/Group.svg`)"
             alt
           >
@@ -127,7 +119,6 @@ export default {
       user: {
         name: '',
         surname: '',
-        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -166,11 +157,5 @@ export default {
 
   .test2 {
     color: #5352f6;
-  }
-
-  @media screen and (max-width: 992px) {
-    .cont_img_pic {
-      display: none;
-    }
   }
 </style>
