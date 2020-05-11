@@ -1,17 +1,20 @@
 <template>
-  <b-container fluid>
-    <b-row>
+  <b-container
+    fluid
+    class=""
+  >
+    <b-row class="">
       <b-col
         cols="0"
         xl="3"
-        class="searchbg d-none d-xl-block"
+        class="searchbg vh-100 d-none d-xl-block"
       >
         <Search />
       </b-col>
       <b-col
         cols="12"
         xl="9"
-        class="teacherbg"
+        class="teacherbg vh-100"
       >
         <SearchSidebar class="d-block d-xl-none fixed-top" />
         <Teacher />
@@ -54,7 +57,6 @@ export default {
 <style lang="scss" scoped>
 .searchbg {
   background-color: #fff;
-  height: 100vh;
 }
 
 .teacherbg {

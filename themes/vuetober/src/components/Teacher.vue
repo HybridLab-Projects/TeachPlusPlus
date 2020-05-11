@@ -1,12 +1,12 @@
 <template>
-  <div class="pl-5 test">
+  <div class="pl-xl-5 test">
     <b-row class="mt-3">
       <b-col class="d-flex justify-content-end align-items-center head">
         <b-link
           class="pr-5 my-auto text-muted font-weight-bold"
           @click="logout"
         >
-          Odhlásenie z aplikácie
+          Odhlásiť sa
           <b-icon-box-arrow-right
             font-scale="1.5"
             shift-v="-2"
@@ -14,7 +14,7 @@
         </b-link>
         <b-button
           variant="danger"
-          class="py-3 px-5"
+          class="py-xl-3 px-xl-5 py-2"
           to="/feedback"
         >
           Pridať feedback
@@ -25,17 +25,18 @@
       v-if="selectedTeacher.id"
     >
       <b-row class="mt-5">
-        <b-col class="d-flex align-items-center name">
-          <img
+        <b-col class="d-flex align-items-center">
+          <b-avatar
             class="mb-4"
             :src="require(`@/assets/img/teacher.png`)"
-            alt=""
-          >
+            variant="light"
+            size="5rem"
+          />
           <div class="my-auto ml-4">
             <p class="text-muted font-weight-bold">
               SPŠE Hálova
             </p>
-            <h1 class="font-weight-bold">
+            <h1 class="font-weight-bold text-wrap">
               {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
             </h1>
             <div class="d-flex align-items-center">
@@ -68,7 +69,7 @@
             >
               <b-row>
                 <b-col
-                  class="pr-5 feeder"
+                  class=""
                 >
                   <b-list-group class="feedbacks">
                     <FeedbackItem
@@ -82,11 +83,11 @@
               </b-row>
             </b-tab>
             <b-tab
-              title="Zoradiť podľa počtu hlasov"
+              title="Počet hlasov"
             >
               <b-row>
                 <b-col
-                  class="pr-5 feeder"
+                  class=""
                 >
                   <b-list-group class="feedbacks">
                     <FeedbackItem
@@ -110,7 +111,7 @@
             class="mb-4"
             :src="`https://avatars.dicebear.com/v2/avataaars/${user.email}.svg?options[mood][]=happy`"
             variant="light"
-            size="lg"
+            size="5rem"
           />
           <div class="my-auto ml-4">
             <p class="text-muted font-weight-bold">
@@ -198,24 +199,17 @@ export default {
   background-color: #f8f5f3;
 }
 
-.feeder {
-  overflow: auto;
-}
-
 .name {
   min-width: 800px;
 }
 
-.head {
-  min-width: 500px;
-}
 
 .feedbacks {
-  height: calc(100vh - 365px);
+  height: calc(100vh - 390px);
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
-  min-width: 600px;
+
 }
 
 .footer-text {
