@@ -19,11 +19,7 @@
         >
       </b-navbar-brand>
 
-      <b-navbar-toggle
-        target="nav-collapse"
-      >
-        <b-icon-list />
-      </b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse" />
 
       <b-collapse
         id="nav-collapse"
@@ -50,13 +46,13 @@
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav
-          class="ml-auto action"
+          class="ml-auto"
           v-else
         >
           <p
             class="my-auto text-muted mr-3 font-weight-bold"
           >
-            Už máš účet?
+            Máš už účet?
           </p>
           <b-nav-item
             to="/login"
@@ -82,12 +78,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media screen and (max-width: 1100px) {
-  .custombtn {
-    margin-right: 9rem;
-  }
-}
-
 .brand {
   color: #000;
 }

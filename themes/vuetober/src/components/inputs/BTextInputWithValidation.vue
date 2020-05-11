@@ -82,6 +82,7 @@ export default {
     border-bottom: 1px solid gray;
     box-shadow: none;
     width: 30vw;
+    min-width: 255px;
   }
 
   @media screen and (max-width: 425px) {
