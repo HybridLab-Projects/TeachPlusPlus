@@ -3,7 +3,7 @@
     fluid
     class="pl-md-5 whole"
   >
-    <b-row class=" cont-color">
+    <b-row class="cont-color">
       <b-col
         cols="5"
         class="pl-5 justify-container-center test"
@@ -97,6 +97,9 @@ export default {
 }
 
 @media screen and (max-width: 700px) {
+  .whole {
+    height: 100vh;
+  }
   .content-container {
     text-align: center;
 
