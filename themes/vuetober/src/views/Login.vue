@@ -2,61 +2,73 @@
   <b-container fluid>
     <b-row>
       <b-col
-        class="my-auto"
-        cols="6"
+        class="d-flex justify-content-center my-auto input-column"
+        cols="12"
+        md="6"
       >
-        <h1 class="d-flex justify-content-center test2 mb-5">
-          Prihlásenie
-        </h1>
-        <div class="d-flex justify-content-center">
-          <ValidationObserver v-slot="{ passes }">
-            <b-form @submit.enter.prevent="passes(onLogin)">
-              <BTextInputWithValidation
-                rules="required"
-                type="text"
-                label=""
-                name="Používateľské meno"
-                v-model="user.username"
-                placeholder="Zadaj používateľské meno"
+        <div class="testing w-100">
+          <h1 class="d-flex justify-content-center test2 mb-5">
+            Prihlásenie
+          </h1>
+          <div class="d-flex justify-content-center">
+            <ValidationObserver
+              v-slot="{ passes }"
+              class=""
+            >
+              <b-form
+                @submit.enter.prevent="passes(onLogin)"
                 class=""
-              />
-
-              <BTextInputWithValidation
-                rules="required|min:8|upperCase|containsNumber"
-                type="password"
-                label=""
-                name="Heslo"
-                vid="user.password"
-                v-model="user.password"
-                placeholder="Zadaj heslo"
-              />
-
-              <b-button
-                class="shadow font-weight-bold py-10 px-5 mt-5"
-                type="submit"
-                variant="danger"
               >
-                Odoslať
-              </b-button>
-              <b-alert
-                show
-                variant="danger"
-                v-if="error"
-              >
-                {{ error }}
-              </b-alert>
-            </b-form>
-          </ValidationObserver>
+                <BTextInputWithValidation
+                  rules="required"
+                  type="text"
+                  label=""
+                  name="Email"
+                  v-model="user.email"
+                  placeholder="Zadaj email"
+                  class=""
+                />
+
+                <BTextInputWithValidation
+                  rules="required|min:8|upperCase|containsNumber"
+                  type="password"
+                  label=""
+                  name="Heslo"
+                  vid="user.password"
+                  v-model="user.password"
+                  placeholder="Zadaj heslo"
+                />
+
+                <b-button
+                  class="shadow font-weight-bold py-10 px-5 mt-5"
+                  type="submit"
+                  variant="danger"
+                >
+                  Odoslať
+                </b-button>
+                <b-alert
+                  show
+                  variant="danger"
+                  v-if="error"
+                >
+                  {{ error }}
+                </b-alert>
+              </b-form>
+            </ValidationObserver>
+          </div>
         </div>
       </b-col>
-      <div class="col-md-2 p-0" />
-      <div class="d-flex justify-content-center col-md-4 p-0 mb-5 cont_img">
+      <b-col
+        class="d-flex justify-content-center p-0 mb-5 cont-img d-none d-md-block"
+        cols="0"
+        md="6"
+      >
         <img
-          class="cont_img_pic"
+          class="cont_img_pic d-none d-md-block"
           :src="require(`@/assets/img/Group.svg`)"
           alt
         >
-      </div>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -74,7 +86,7 @@ export default {
   data() {
     return {
       user: {
-        username: '',
+        email: '',
         password: '',
       },
       error: '',
@@ -97,14 +109,19 @@ export default {
     color: #5352f6;
   }
 
-  .cont_img {
+  .testing {
+    margin-top: 5rem;
+  }
+
+  .cont-img {
     background: linear-gradient(45deg, #5352f6 0%, #8381fd 100%);
     border-radius: 150px 0px 150px 150px;
     z-index: -1;
   }
 
   .cont_img_pic {
-    height: 80vh;
+    height: auto;
+    width: 100%;
     transform: translateX(-40%) translateY(20%);
   }
 

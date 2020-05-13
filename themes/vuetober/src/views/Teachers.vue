@@ -1,16 +1,22 @@
 <template>
-  <b-container fluid>
-    <b-row>
+  <b-container
+    fluid
+    class=""
+  >
+    <b-row class="">
       <b-col
-        cols="3"
-        class="searchbg"
+        cols="0"
+        xl="3"
+        class="searchbg vh-100 d-none d-xl-block"
       >
         <Search />
       </b-col>
       <b-col
-        cols="9"
-        class="teacherbg"
+        cols="12"
+        xl="9"
+        class="teacherbg vh-100"
       >
+        <SearchSidebar class="d-block d-xl-none fixed-top" />
         <Teacher />
       </b-col>
     </b-row>
@@ -18,12 +24,14 @@
 </template>
 <script>
 import Search from '@/components/Search.vue';
+import SearchSidebar from '@/components/SearchSidebar.vue';
 import Teacher from '@/components/Teacher.vue';
 
 export default {
   name: 'Teachers',
   components: {
     Search,
+    SearchSidebar,
     Teacher,
   },
   props: {
@@ -46,14 +54,12 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
-  .searchbg {
-    background-color: #fff;
-    height: 100vh;
-  }
+.searchbg {
+  background-color: #fff;
+}
 
-  .teacherbg {
-    background-color: #f8f5f3;
-  }
+.teacherbg {
+  background-color: #f8f5f3;
+}
 </style>

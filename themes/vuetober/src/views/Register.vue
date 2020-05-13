@@ -2,11 +2,12 @@
   <b-container fluid>
     <b-row class="mt-5">
       <b-col
-        class="d-flex justify-content-center text-dark"
-        cols="6"
+        class="d-flex justify-content-center my-auto text-dark"
+        cols="12"
+        md="6"
       >
         <div class="test">
-          <h1 class="d-flex justify-content-center mt-5 pt-5 mb-3 test2">
+          <h1 class="d-flex justify-content-center mb-3 test2">
             Registrácia
           </h1>
           <ValidationObserver
@@ -29,15 +30,6 @@
                 name="Priezvisko"
                 v-model="user.surname"
                 placeholder="Zadaj priezvisko"
-              />
-
-              <BTextInputWithValidation
-                rules="required"
-                type="text"
-                label=""
-                name="Používateľské meno"
-                v-model="user.username"
-                placeholder="Zadaj používateľské meno"
               />
 
               <BTextInputWithValidation
@@ -94,14 +86,17 @@
         </div>
       </b-col>
       <b-col
-        class="d-flex justify-content-center p-0 mb-5 cont_img"
-        cols="6"
+        class="d-flex justify-content-center p-0 mb-5 d-none d-md-block"
+        cols="0"
+        md="6"
       >
-        <img
-          class="cont_img_pic"
-          :src="require(`@/assets/img/Group.svg`)"
-          alt
-        >
+        <div class="cont_img d-none d-md-block">
+          <img
+            class="cont_img_pic d-none d-md-block"
+            :src="require(`@/assets/img/Group.svg`)"
+            alt
+          >
+        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -124,7 +119,6 @@ export default {
       user: {
         name: '',
         surname: '',
-        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -156,7 +150,8 @@ export default {
   }
 
   .cont_img_pic {
-    height: 75vh;
+    height: auto;
+    width: 100%;
     transform: translateX(-25%) translateY(15%);
   }
 

@@ -7,7 +7,6 @@
       toggleable="lg"
       type="danger"
       variant="light"
-      fixed="top"
     >
       <b-navbar-brand
         to="/"
@@ -20,7 +19,9 @@
         >
       </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse" />
+      <b-navbar-toggle target="nav-collapse">
+        <b-icon-list />
+      </b-navbar-toggle>
 
       <b-collapse
         id="nav-collapse"
@@ -53,7 +54,7 @@
           <p
             class="my-auto text-muted mr-3 font-weight-bold"
           >
-            Máš už účet?
+            Už máš účet?
           </p>
           <b-nav-item
             to="/login"

@@ -1,16 +1,18 @@
 <template>
   <div>
-    <b-row class="mt-3">
-      <b-col class="d-flex align-items-center">
+    <b-sidebar
+      id="sidebar-search"
+      backdrop
+      shadow
+    >
+      <div class="d-flex align-items-center mt-3 ml-2">
         <b-img
           class="pb-3 w-50"
           :src="require(`@/assets/img/Logo.svg`)"
           alt=""
         />
-      </b-col>
-    </b-row>
-    <b-row class="upper-search">
-      <b-col>
+      </div>
+      <div>
         <b-input-group class="mt-2 mb-5">
           <b-input-group-prepend
             is-text
@@ -26,10 +28,8 @@
             v-model="searchTeacher"
           />
         </b-input-group>
-      </b-col>
-    </b-row>
-    <b-row class="names">
-      <b-col class="p-0">
+      </div>
+      <div class="p-0 teachers">
         <h6 class="text-secondary ml-4 mb-4 font-weight-bold">
           Zoznam učiteľov
         </h6>
@@ -37,7 +37,7 @@
           <b-list-group-item
             v-for="teacher in teachers"
             :key="teacher.id"
-            class="d-flex align-items-center search-it p-3"
+            class="d-flex align-items-center test2 p-3"
             @click="selectTeacher(teacher)"
             :class="{ active: teacher.id === selectedTeacher.id}"
           >
@@ -54,15 +54,13 @@
             </b-badge>
           </b-list-group-item>
         </b-list-group>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
+      </div>
+      <template v-slot:footer>
         <p class="footer-text text-center text-muted mt-5">
           &copy; 2020 Všetky práva vyhradené <strong>TEACH++</strong>
         </p>
-      </b-col>
-    </b-row>
+      </template>
+    </b-sidebar>
   </div>
 </template>
 
@@ -70,7 +68,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Search',
+  name: 'SearchSidebar',
   data() {
     return {
       searchTeacher: '',
@@ -109,43 +107,23 @@ $darkerbgColor: #D7D7E8;
   background: #888;
 }
 
-.upper-search {
-  min-width: 150px;
-
-  .bg-search {
-    background-color: $bgColor;
-  }
-
-  .searchbar {
-    border: none;
-  }
-
-  input.form-control[type=text]:focus:not([readonly]) {
-    border-bottom: 1px solid $purpleColor;
-    box-shadow: 0 1px 0 0 $purpleColor;
-    border-radius: 1px;
-  }
+.teacher-name {
+  font-size: 0.875rem;
 }
 
-.names {
-  min-width: 200px;
-  z-index: -3;
+input.form-control[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid $purpleColor;
+  box-shadow: 0 1px 0 0 $purpleColor;
+  border-radius: 1px;
+}
 
-  .teacher-name {
-    font-size: 0.875rem;
-  }
+.bg-search {
+  background-color: $bgColor;
+}
 
-  .search-it {
-    border: none;
-    border-bottom: 1px solid $darkerbgColor;
-  }
-
-  .search {
-    height: calc(100vh - 20rem);
-    overflow-y: scroll;
-    overflow-x: none;
-    padding-right: 10px;
-  }
+.test2 {
+  border: none;
+  border-bottom: 1px solid $darkerbgColor;
 }
 
 .list-group-item.active {
@@ -162,5 +140,15 @@ $darkerbgColor: #D7D7E8;
 
 .footer-text {
   font-size: 0.875rem;
+}
+
+.search {
+  height: calc(100vh - 22rem);
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+.searchbar {
+  border: none;
 }
 </style>

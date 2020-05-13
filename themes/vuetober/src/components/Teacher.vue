@@ -1,12 +1,22 @@
 <template>
-  <div class="pl-5 test">
+  <div class="pl-xl-5 test">
     <b-row class="mt-3">
-      <b-col class="d-flex justify-content-end align-items-center">
+      <b-col class="d-flex justify-content-end align-items-center head mb-3 mb-xl-0">
+        <div class="d-xl-none d-block mr-auto d-flex">
+          <b-button
+            v-b-toggle.sidebar-search
+          >
+            <b-icon-list />
+          </b-button>
+          <p class="ml-2 my-auto text-muted font-weight-bold d-none d-sm-block">
+            Zobraziť učiteľov
+          </p>
+        </div>
         <b-link
-          class="pr-5 my-auto text-muted font-weight-bold"
+          class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
           @click="logout"
         >
-          Odhlásenie z aplikácie
+          Odhlásiť sa
           <b-icon-box-arrow-right
             font-scale="1.5"
             shift-v="-2"
@@ -14,7 +24,7 @@
         </b-link>
         <b-button
           variant="danger"
-          class="py-3 px-5"
+          class="py-xl-3 px-xl-5 py-2"
           to="/feedback"
         >
           Pridať feedback
@@ -22,21 +32,21 @@
       </b-col>
     </b-row>
     <div
-      class=""
       v-if="selectedTeacher.id"
     >
       <b-row class="mt-5">
         <b-col class="d-flex align-items-center">
-          <img
+          <b-avatar
             class="mb-4"
             :src="require(`@/assets/img/teacher.png`)"
-            alt=""
-          >
+            variant="light"
+            size="5rem"
+          />
           <div class="my-auto ml-4">
             <p class="text-muted font-weight-bold">
               SPŠE Hálova
             </p>
-            <h1 class="font-weight-bold">
+            <h1 class="font-weight-bold text-wrap">
               {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
             </h1>
             <div class="d-flex align-items-center">
@@ -54,7 +64,10 @@
           </div>
         </b-col>
       </b-row>
-      <b-row class="mt-5">
+      <b-row
+        class="mt-5"
+        id="tooltip"
+      >
         <b-col>
           <b-tabs
             content-class="mt-4"
@@ -66,151 +79,33 @@
             >
               <b-row>
                 <b-col
-                  class="pr-5 feeder"
+                  class=""
                 >
                   <b-list-group class="feedbacks">
-                    <b-list-group-item
+                    <FeedbackItem
                       v-for="feedback in sortedByDate"
+                      :feedback="feedback"
                       :key="feedback.id"
-                      class="d-flex flex-column align-items-end mb-4 border-0 shadow"
-                    >
-                      <div class="d-flex align-items-center w-100">
-                        <img
-                          class="mr-4 rounded-circle user-avatar"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
-                        <div class="p-2 mr-auto">
-                          <div class="text-break">
-                            <p class="text-secondary mb-1 font-weight-light time">
-                              {{ toTime(feedback.created_at) }} -
-                              {{ feedback.subject.subject_name }}
-                            </p>
-                            <h6 class="font-weight-bold">
-                              {{ feedback.author.username }}
-                            </h6>
-                            <div>
-                              {{ feedback.feedback }}
-                            </div>
-                          </div>
-                        </div>
-                        <p class="font-weight-bold my-0 pr-2 pl-5">
-                          {{ feedback.likes.length }}
-                        </p>
-                        <b-link @click="likeFeedback(feedback)">
-                          <b-icon-heart
-                            variant="danger"
-                            v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
-                          />
-                          <b-icon-heart-fill
-                            variant="danger"
-                            v-else
-                          />
-                        </b-link>
-                      </div>
-                      <div class="d-flex">
-                        <img
-                          v-for="like in feedback.likes"
-                          :key="like.id"
-                          class="rounded-circle like-avatar ml-1"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
-                      </div>
-                      <div class="mt-2">
-                        <b-link
-                          v-if="!feedback.reports.some((f) => +f.user_id === +user.id)"
-                          @click="reportFeedback(feedback)"
-                          class="text-muted"
-                        >
-                          <b-icon-exclamation-octagon />
-                          Nahlásiť nevhodný feedback
-                        </b-link>
-                        <p
-                          v-else
-                          class="text-muted"
-                        >
-                          Ďakujeme za nahlásenie.
-                        </p>
-                      </div>
-                    </b-list-group-item>
+                      :user="user"
+                    />
                   </b-list-group>
                 </b-col>
               </b-row>
             </b-tab>
             <b-tab
-              title="Zoradiť podľa počtu hlasov"
+              title="Počet hlasov"
             >
               <b-row>
                 <b-col
-                  class="pr-5 feeder"
+                  class=""
                 >
                   <b-list-group class="feedbacks">
-                    <b-list-group-item
+                    <FeedbackItem
                       v-for="feedback in sortedByLikes"
+                      :feedback="feedback"
                       :key="feedback.id"
-                      class="d-flex flex-column align-items-end mb-4 border-0 shadow"
-                    >
-                      <div class="d-flex align-items-center w-100">
-                        <img
-                          class="mr-4 rounded-circle user-avatar"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
-                        <div class="p-2 mr-auto">
-                          <div class="text-break">
-                            <p class="text-secondary mb-1 font-weight-light time">
-                              {{ toTime(feedback.created_at) }} -
-                              {{ feedback.subject.subject_name }}
-                            </p>
-                            <h6 class="font-weight-bold">
-                              {{ feedback.author.username }}
-                            </h6>
-                            <div>
-                              {{ feedback.feedback }}
-                            </div>
-                          </div>
-                        </div>
-                        <p class="font-weight-bold my-0 pr-2 pl-5">
-                          {{ feedback.likes.length }}
-                        </p>
-                        <b-link @click="likeFeedback(feedback)">
-                          <b-icon-heart
-                            variant="danger"
-                            v-if="!feedback.likes.some((f) => +f.user_id === +user.id)"
-                          />
-                          <b-icon-heart-fill
-                            variant="danger"
-                            v-else
-                          />
-                        </b-link>
-                      </div>
-                      <div class="d-flex">
-                        <img
-                          v-for="like in feedback.likes"
-                          :key="like.id"
-                          class="rounded-circle like-avatar ml-1"
-                          :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
-                          alt=""
-                        >
-                      </div>
-                      <div class="mt-2">
-                        <b-link
-                          v-if="!feedback.reports.some((f) => +f.user_id === +user.id)"
-                          @click="reportFeedback(feedback)"
-                          class="text-muted"
-                        >
-                          <b-icon-exclamation-octagon />
-                          Nahlásiť nevhodný feedback
-                        </b-link>
-                        <p
-                          v-else
-                          class="text-muted"
-                        >
-                          Ďakujeme za nahlásenie.
-                        </p>
-                      </div>
-                    </b-list-group-item>
+                      :user="user"
+                    />
                   </b-list-group>
                 </b-col>
               </b-row>
@@ -220,13 +115,14 @@
       </b-row>
     </div>
     <div v-else>
-      <b-row class="">
+      <b-row>
         <b-col class="d-flex align-items-center">
-          <img
-            class="mb-4 user-avatar rounded-circle"
+          <b-avatar
+            class="mb-4"
             :src="`https://avatars.dicebear.com/v2/avataaars/${user.email}.svg?options[mood][]=happy`"
-            alt=""
-          >
+            variant="light"
+            size="5rem"
+          />
           <div class="my-auto ml-4">
             <p class="text-muted font-weight-bold">
               SPŠE Hálova
@@ -263,12 +159,15 @@
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex';
 import Moment from 'moment';
+import FeedbackItem from '@/components/FeedbackItem.vue';
 
 export default {
   name: 'Teacher',
+  components: {
+    FeedbackItem,
+  },
   computed: {
     ...mapGetters({
       selectedTeacher: 'getSelectedTeacher',
@@ -293,16 +192,6 @@ export default {
           this.$router.push('/');
         });
     },
-    likeFeedback(feedback) {
-      this.$store.dispatch('like', feedback);
-    },
-    reportFeedback(feedback) {
-      this.$store.dispatch('report', feedback);
-    },
-    toTime(time) {
-      Moment.locale('sk');
-      return Moment(Moment.utc(time)).local().format('DD. MMMM YYYY, H:mm');
-    },
   },
 };
 </script>
@@ -316,39 +205,25 @@ export default {
   background: #888;
 }
 
-.time {
-  font-size: 0.75em;
+.test {
+  background-color: #f8f5f3;
 }
 
-.feeder {
-  overflow: auto;
+.name {
+  min-width: 800px;
 }
 
-.icon-btn {
-  background-color: white;
-  border: none;
-}
 
 .feedbacks {
-  height: calc(100vh - 365px);
+  height: calc(100vh - 390px);
   overflow-y: scroll;
   overflow-x: none;
   padding-right: 10px;
+
 }
 
 .footer-text {
   font-size: 0.875rem;
   border-top: 1px #D7D7E8 solid;
-}
-
-.user-avatar {
-  width: 64px;
-}
-
-.like-avatar {
-  width: 32px;
-}
-.text-report {
-  font-size: 0.875rem;
 }
 </style>

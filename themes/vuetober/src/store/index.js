@@ -11,7 +11,7 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     teachers: [],
-    selectedTeacher: [],
+    selectedTeacher: {},
   },
   mutations: {
     auth_request(state) {
