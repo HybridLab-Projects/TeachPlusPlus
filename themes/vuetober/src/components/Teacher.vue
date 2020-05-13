@@ -1,9 +1,9 @@
 <template>
   <div class="pl-xl-5 test">
     <b-row class="mt-3">
-      <b-col class="d-flex justify-content-end mt-3 align-items-center head">
+      <b-col class="d-flex justify-content-end align-items-center head">
         <b-link
-          class="pr-xl-5 pr-3 my-auto text-muted font-weight-bold"
+          class="pr-5 my-auto text-muted font-weight-bold"
           @click="logout"
         >
           Odhlásiť sa
