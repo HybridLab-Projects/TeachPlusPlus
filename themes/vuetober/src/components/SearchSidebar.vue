@@ -1,11 +1,5 @@
 <template>
   <div>
-    <b-button
-      v-b-toggle.sidebar-search
-      squared
-    >
-      <b-icon-list />
-    </b-button>
     <b-sidebar
       id="sidebar-search"
       backdrop

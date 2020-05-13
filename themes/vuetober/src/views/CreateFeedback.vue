@@ -14,20 +14,22 @@
         cols="12"
         xl="9"
       >
-        <FeedbackHelpSidebar class="d-inline d-xl-none fixed-top" />
-        <div class="mt-4">
-          <b-link
-            :to="`/teachers/${this.getSelectedTeacher.id}`"
-            class="d-flex justify-content-end mt-3"
-          >
-            <p class="text-muted my-auto mr-2 font-weight-bold">
-              Vrátiť sa späť
-            </p>
-            <b-icon-x-circle-fill
-              variant="secondary"
-              font-scale="1.5"
-            />
-          </b-link>
+        <div class="mt-3">
+          <div class="d-flex justify-content-between justify-content-xl-end">
+            <FeedbackHelpSidebar class="d-inline d-xl-none my-auto" />
+            <b-link
+              :to="`/teachers/${this.getSelectedTeacher.id}`"
+              class="d-flex justify-content-end mt-3 my-auto"
+            >
+              <p class="text-muted my-auto mr-2 font-weight-bold">
+                Vrátiť sa späť
+              </p>
+              <b-icon-x-circle-fill
+                variant="secondary"
+                font-scale="1.5"
+              />
+            </b-link>
+          </div>
 
           <div class="d-flex align-items-center">
             <div class="ml-0 ml-xl-5 mb-3 w-100">

@@ -3,11 +3,10 @@
     <div class="d-flex">
       <b-button
         v-b-toggle.sidebar-help
-        squared
       >
         <b-icon-list />
       </b-button>
-      <p class="my-auto ml-1">
+      <p class="my-auto ml-2 d-none d-sm-block text-muted font-weight-bold">
         Zobraziť nápovedu
       </p>
     </div>
