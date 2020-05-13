@@ -5,18 +5,19 @@
   >
     <b-row class="cont-color">
       <b-col
-        cols="5"
-        class="pl-5 justify-container-center test"
+        cols="12"
+        md="5"
+        class="pl-sm-5"
       >
         <div
-          class="content-container pl-lg-5"
+          class="content-container px-center pl-lg-5"
         >
           <h2
             class="display-4 header mb-4 text-white"
           >
             Čo je to, <strong>Teach++</strong>
           </h2>
-          <p class="text-white description">
+          <p class="text-white description mb-xs-5">
             <strong>
               Zanechaj učiteľovi spätnú väzbu, vďaka ktorej bude hodina pre obe strany príjemnejšia!
             </strong>
@@ -32,7 +33,8 @@
         </div>
       </b-col>
       <b-col
-        cols="7"
+        cols="0"
+        md="7"
         class="justify-content-center"
       >
         <img
@@ -108,9 +110,7 @@ export default {
     }
 
     .description {
-      width: 70vw;
-      font-size: 1.3rem;
-      margin: 0;
+      font-size: 1.1rem;
     }
   }
 
