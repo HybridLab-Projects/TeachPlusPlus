@@ -14,9 +14,19 @@
         cols="12"
         xl="9"
       >
+        <FeedbackHelpSidebar />
         <div class="mt-3">
           <div class="d-flex justify-content-between justify-content-xl-end">
-            <FeedbackHelpSidebar class="d-inline d-xl-none my-auto" />
+            <div class="d-flex d-xl-none">
+              <b-button
+                v-b-toggle.sidebar-help
+              >
+                <b-icon-list />
+              </b-button>
+              <p class="my-auto ml-2 d-none d-sm-block text-muted font-weight-bold">
+                Zobraziť nápovedu
+              </p>
+            </div>
             <b-link
               :to="`/teachers/${this.getSelectedTeacher.id}`"
               class="d-flex justify-content-end mt-3 my-auto"
