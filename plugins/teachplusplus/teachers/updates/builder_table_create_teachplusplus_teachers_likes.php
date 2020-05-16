@@ -11,8 +11,8 @@ class BuilderTableCreateTeachplusplusTeachersLikes extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->integer('user_id');
-            $table->integer('feedback_id');
+            $table->integer('user_id')->nullable()->change();;
+            $table->integer('feedback_id')->nullable()->change();;
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
@@ -21,5 +21,7 @@ class BuilderTableCreateTeachplusplusTeachersLikes extends Migration
     public function down()
     {
         Schema::dropIfExists('teachplusplus_teachers_likes');
+        $table->integer('user_id')->nullable(false)->change();
+        $table->integer('feedback_id')->nullable(false)->change();
     }
 }

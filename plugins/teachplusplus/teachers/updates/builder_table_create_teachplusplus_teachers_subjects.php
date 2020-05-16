@@ -12,11 +12,18 @@ class BuilderTableCreateTeachplusplusTeachersSubjects extends Migration
             $table->increments('id')->unsigned();
             $table->string('name');
             $table->string('short');
+
+            $table->renameColumn('name', 'subject_name');
+            $table->integer('feedback_id')->nullable();
+            $table->dropColumn('feedback_id');
         });
     }
     
     public function down()
     {
         Schema::dropIfExists('teachplusplus_teachers_subjects');
+
+        $table->renameColumn('subject_name', 'name');
+        $table->dropColumn('feedback_id')->nullable();
     }
 }

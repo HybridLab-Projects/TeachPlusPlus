@@ -15,11 +15,15 @@ class BuilderTableCreateTeachplusplusTeachersReport extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('feedback_id')->nullable();
             $table->integer('user_id')->nullable();
+            
         });
+        Schema::rename('teachplusplus_teachers_report', 'teachplusplus_teachers_reports');
     }
     
     public function down()
     {
         Schema::dropIfExists('teachplusplus_teachers_report');
+        Schema::rename('teachplusplus_teachers_reports', 'teachplusplus_teachers_report');
+
     }
 }
