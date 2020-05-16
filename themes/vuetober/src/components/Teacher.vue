@@ -119,7 +119,7 @@
         <b-col class="d-flex align-items-center">
           <b-avatar
             class="mb-4"
-            :src="`https://avatars.dicebear.com/v2/avataaars/${user.email}.svg?options[mood][]=happy`"
+            :src="`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`"
             variant="light"
             size="5rem"
           />
@@ -128,19 +128,12 @@
               SPŠE Hálova
             </p>
             <h1 class="font-weight-bold">
-              Vitaj {{ user.name }} {{ user.surname }}
+              Vitaj {{ user.username }}
             </h1>
             <div class="d-flex align-items-center">
               <p class="text-muted my-auto mr-3">
                 Vyber si učiteľa, ktorého feedbacky chceš prezerať!
               </p>
-              <b-badge
-                variant="primary my-auto mr-1"
-                v-for="subject in selectedTeacher.subjects"
-                :key="subject.id"
-              >
-                {{ subject.short }}
-              </b-badge>
             </div>
           </div>
         </b-col>
