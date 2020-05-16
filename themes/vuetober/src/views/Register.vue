@@ -15,21 +15,12 @@
           >
             <b-form @submit.enter.prevent="passes(onRegister)">
               <BTextInputWithValidation
-                rules="required|alpha"
+                rules="required"
                 type="text"
                 label=""
-                name="Meno"
-                v-model="user.name"
-                placeholder="Zadaj meno"
-              />
-
-              <BTextInputWithValidation
-                rules="required|alpha"
-                type="text"
-                label=""
-                name="Priezvisko"
-                v-model="user.surname"
-                placeholder="Zadaj priezvisko"
+                name="Používateľské meno"
+                v-model="user.username"
+                placeholder="Zadaj používateľské meno"
               />
 
               <BTextInputWithValidation
@@ -46,19 +37,10 @@
                 type="password"
                 label=""
                 name="Heslo"
-                vid="user.password"
                 v-model="user.password"
                 placeholder="Zadaj heslo"
               />
 
-              <BTextInputWithValidation
-                rules="required|min:8|confirmed:user.password"
-                type="password"
-                label=""
-                name="Potvrdenie hesla"
-                v-model="user.password_confirmation"
-                placeholder="Potvrď heslo"
-              />
               <BCheckboxWithValidation
                 v-model="user.agree"
                 :rules="{ required: { allowFalse: false } }"
@@ -117,8 +99,7 @@ export default {
   data() {
     return {
       user: {
-        name: '',
-        surname: '',
+        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -131,6 +112,7 @@ export default {
     onRegister() {
       this.error = '';
       const { user } = this;
+      user.password_confirmation = user.password;
       this.$store
         .dispatch('register', user)
         .then(() => this.$router.push('/teachers'))

@@ -23,9 +23,9 @@
                   rules="required"
                   type="text"
                   label=""
-                  name="Email"
-                  v-model="user.email"
-                  placeholder="Zadaj email"
+                  name="Používateľské meno"
+                  v-model="user.username"
+                  placeholder="Zadaj používateľské meno"
                   class=""
                 />
 
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       user: {
-        email: '',
+        username: '',
         password: '',
       },
       error: '',
