@@ -44,11 +44,9 @@ export function created(router, store) {
   Axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.log('toto je interceptor');
-      if (error.response.status === 401) {
-        console.log('toto je inside interceptora');
-        store.dispatch('logout');
-        router.push('/');
+      if ((error.response.status === 401 && error.response.data.error === 'token_expired')
+      || (error.response.status === 400 && error.response.data.error === 'token_invalid')) {
+        store.dispatch('logout').finally(() => router.push('/'));
       }
       return Promise.reject(error);
     },
