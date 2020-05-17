@@ -30,7 +30,7 @@
                 />
 
                 <BTextInputWithValidation
-                  rules="required|min:8|upperCase|containsNumber"
+                  rules="required"
                   type="password"
                   label=""
                   name="Heslo"
@@ -46,16 +46,16 @@
                 >
                   Odoslať
                 </b-button>
-                <b-alert
-                  show
-                  variant="danger"
-                  v-if="error"
-                >
-                  {{ error }}
-                </b-alert>
               </b-form>
             </ValidationObserver>
           </div>
+          <b-alert
+            show
+            variant="danger"
+            v-if="error"
+          >
+            {{ error }}
+          </b-alert>
         </div>
       </b-col>
       <b-col
@@ -98,7 +98,9 @@ export default {
       const { user } = this;
       this.$store.dispatch('login', user)
         .then(() => this.$router.push('/teachers'))
-        .catch((err) => { this.error = err.response.data.error; });
+        .catch((err) => {
+          this.error = err.response.data.error;
+        });
     },
   },
 };

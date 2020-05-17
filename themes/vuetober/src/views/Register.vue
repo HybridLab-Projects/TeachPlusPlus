@@ -55,16 +55,16 @@
               >
                 Odoslať
               </b-button>
-              <b-alert
-                show
-                variant="danger"
-                v-if="error"
-                class="mt-3"
-              >
-                {{ error }}
-              </b-alert>
             </b-form>
           </ValidationObserver>
+          <b-alert
+            show
+            variant="danger"
+            v-if="error"
+            class="mt-3"
+          >
+            {{ error }}
+          </b-alert>
         </div>
       </b-col>
       <b-col
