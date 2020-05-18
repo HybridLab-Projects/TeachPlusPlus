@@ -23,14 +23,14 @@
                   rules="required"
                   type="text"
                   label=""
-                  name="Email"
-                  v-model="user.email"
-                  placeholder="Zadaj email"
+                  name="Používateľské meno"
+                  v-model="user.username"
+                  placeholder="Zadaj používateľské meno"
                   class=""
                 />
 
                 <BTextInputWithValidation
-                  rules="required|min:8|upperCase|containsNumber"
+                  rules="required"
                   type="password"
                   label=""
                   name="Heslo"
@@ -46,16 +46,16 @@
                 >
                   Odoslať
                 </b-button>
-                <b-alert
-                  show
-                  variant="danger"
-                  v-if="error"
-                >
-                  {{ error }}
-                </b-alert>
               </b-form>
             </ValidationObserver>
           </div>
+          <b-alert
+            show
+            variant="danger"
+            v-if="error"
+          >
+            {{ error }}
+          </b-alert>
         </div>
       </b-col>
       <b-col
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       user: {
-        email: '',
+        username: '',
         password: '',
       },
       error: '',
@@ -98,7 +98,9 @@ export default {
       const { user } = this;
       this.$store.dispatch('login', user)
         .then(() => this.$router.push('/teachers'))
-        .catch((err) => { this.error = err.response.data.error; });
+        .catch((err) => {
+          this.error = err.response.data.error;
+        });
     },
   },
 };

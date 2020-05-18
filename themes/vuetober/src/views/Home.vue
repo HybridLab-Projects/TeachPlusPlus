@@ -1,7 +1,7 @@
 <template>
   <b-container
     fluid
-    class="pl-md-5 whole"
+    class="pl-md-5 wh-100"
   >
     <b-row class="cont-color">
       <b-col
@@ -99,9 +99,6 @@ export default {
 }
 
 @media screen and (max-width: 700px) {
-  .whole {
-    height: 100vh;
-  }
   .content-container {
     text-align: center;
 

@@ -7,7 +7,7 @@
     >
       <b-avatar
         class="mr-4"
-        :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.email}.svg?options[mood][]=happy`"
+        :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.username}.svg?options[mood][]=happy`"
         variant="light"
         size="lg"
       />
@@ -18,7 +18,7 @@
             {{ feedback.subject.subject_name }}
           </p>
           <h6 class="font-weight-bold">
-            {{ feedback.author.name }} {{ feedback.author.surname }}
+            {{ feedback.author.username }}
           </h6>
           <div>
             {{ feedback.feedback }}
@@ -46,9 +46,9 @@
         v-for="like in feedback.likes"
         :key="like.id"
         class="ml-1"
-        :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.email}.svg?options[mood][]=happy`"
+        :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.username}.svg?options[mood][]=happy`"
         variant="light"
-        v-b-tooltip:tooltip="`${like.user.name} ${like.user.surname}`"
+        v-b-tooltip:tooltip="`${like.user.username}`"
       />
     </div>
     <div class="mt-2">
