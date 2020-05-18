@@ -7,10 +7,9 @@ class BuilderTableCreateTeachplusplusTeachersSubjects extends Migration
 {
     public function up()
     {
-        Schema::create('teachplusplus_teachers_subjects', function($table)
-        {
+        Schema::create('teachplusplus_teachers_subjects', function ($table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('short');
             $table->string('subject_name');
         });
