@@ -7,10 +7,9 @@ class BuilderTableCreateTeachplusplusTeachersReports extends Migration
 {
     public function up()
     {
-        Schema::create('teachplusplus_teachers_reports', function($table)
-        {
+        Schema::create('teachplusplus_teachers_reports', function ($table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('feedback_id')->nullable();
