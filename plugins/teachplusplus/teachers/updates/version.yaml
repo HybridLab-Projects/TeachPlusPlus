@@ -12,6 +12,7 @@
     - builder_table_create_teachplusplus_teachers_likes.php
     - 'Created table teachplusplus_teachers_extend_user'
     - builder_table_create_teachplusplus_teachers_extend_user.php
-    - 'Created table teachplusplus_teachers_report'
-    - builder_table_create_teachplusplus_teachers_report.php- Seeding
+    - 'Created table teachplusplus_teachers_reports'
+    - builder_table_create_teachplusplus_teachers_reports.php
+    - Seeding
     - Seeder.php
