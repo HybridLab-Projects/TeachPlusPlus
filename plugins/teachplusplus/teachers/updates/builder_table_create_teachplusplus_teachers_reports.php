@@ -3,12 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateTeachplusplusTeachersReport extends Migration
+class BuilderTableCreateTeachplusplusTeachersReports extends Migration
 {
     public function up()
     {
-        Schema::create('teachplusplus_teachers_report', function($table)
-        {
+        Schema::create('teachplusplus_teachers_reports', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
@@ -20,6 +19,6 @@ class BuilderTableCreateTeachplusplusTeachersReport extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('teachplusplus_teachers_report');
+        Schema::dropIfExists('teachplusplus_teachers_reports');
     }
 }

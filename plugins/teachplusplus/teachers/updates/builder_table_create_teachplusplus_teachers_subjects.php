@@ -10,8 +10,8 @@ class BuilderTableCreateTeachplusplusTeachersSubjects extends Migration
         Schema::create('teachplusplus_teachers_subjects', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->string('name');
             $table->string('short');
+            $table->string('subject_name');
         });
     }
     
