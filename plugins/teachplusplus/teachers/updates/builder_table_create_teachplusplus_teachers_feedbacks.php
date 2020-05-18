@@ -10,12 +10,12 @@ class BuilderTableCreateTeachplusplusTeachersFeedbacks extends Migration
         Schema::create('teachplusplus_teachers_feedbacks', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->text('feedback')->nullable();
             $table->integer('teacher_id')->nullable();
             $table->integer('author_id')->nullable();
             $table->integer('subject_id')->nullable();
-            $table->boolean('banned')->default(0);
+            $table->boolean('banned')->default(false);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
