@@ -11,10 +11,10 @@ class BuilderTableCreateTeachplusplusTeachersLikes extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->integer('user_id');
-            $table->integer('feedback_id');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('feedback_id')->nullable();
         });
     }
     
