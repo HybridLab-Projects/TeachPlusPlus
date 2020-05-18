@@ -10,7 +10,7 @@ class BuilderTableCreateTeachplusplusTeachersLikes extends Migration
         Schema::create('teachplusplus_teachers_likes', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();;
+            $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('user_id')->nullable();
