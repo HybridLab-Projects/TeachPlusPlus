@@ -6,7 +6,7 @@
           <b-button
             v-b-toggle.sidebar-search
           >
-            <b-icon-list />
+            <b-icon-person />
           </b-button>
           <p class="ml-2 my-auto text-muted font-weight-bold d-none d-sm-block">
             Zobraziť učiteľov
