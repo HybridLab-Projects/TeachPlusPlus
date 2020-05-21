@@ -56,7 +56,7 @@
               </b-badge>
             </div>
             <b-button
-              class="mt-3 bg-info"
+              class="mt-3 bg-info d-xl-none d-block"
               v-b-toggle.sidebar-search
             >
               <b-icon-person /> Zobraziť učiteľov
@@ -136,7 +136,7 @@
               </p>
             </div>
             <b-button
-              class="mt-3 bg-info"
+              class="mt-3 bg-info d-xl-none d-block"
               v-b-toggle.sidebar-search
             >
               <b-icon-person /> Zobraziť učiteľov
