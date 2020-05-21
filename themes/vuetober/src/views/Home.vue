@@ -71,12 +71,9 @@ export default {
 }
 
 .content-container {
-  width: auto;
   padding-top: 10rem;
   padding-left: 0px;
   max-width: 550px;
-  position: absolute;
-  z-index: 100;
 }
 
 @media screen and (max-width: 1100px) {
