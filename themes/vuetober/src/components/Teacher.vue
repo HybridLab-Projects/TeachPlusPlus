@@ -14,7 +14,7 @@
           Pridať feedback
         </b-button>
         <b-link
-          class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
+          class="pl-3 pl-xl-5 my-auto text-muted font-weight-bold"
           @click="logout"
         >
           <b-icon-box-arrow-right
