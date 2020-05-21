@@ -216,6 +216,7 @@ export default {
 .feedbacks {
   height: calc(100vh - 390px);
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   overflow-x: none;
   padding-right: 10px;
 
