@@ -80,8 +80,11 @@ export default new Vuex.Store({
   },
   getters: {
     getTeachers: (state) => (search) => state.teachers
-      .filter((teacher) => teacher.surname.toLowerCase().includes(search)
-        || teacher.name.toLowerCase().includes(search)),
+      .filter((teacher) => teacher.surname.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .includes(search.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
+        || teacher.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .includes(search.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''))),
     getTeacherById: (state) => (id) => state.teachers.find((teacher) => teacher.id === id),
     getSelectedTeacher: (state) => state.selectedTeacher,
   },

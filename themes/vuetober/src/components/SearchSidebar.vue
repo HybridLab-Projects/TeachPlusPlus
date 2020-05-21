@@ -80,7 +80,8 @@ export default {
       selectedTeacher: 'getSelectedTeacher',
     }),
     teachers() {
-      return this.getTeachers(this.searchTeacher.toLowerCase());
+      return this.getTeachers(this.searchTeacher)
+        .sort((a, b) => a.surname.localeCompare(b.surname));
     },
   },
   methods: {
