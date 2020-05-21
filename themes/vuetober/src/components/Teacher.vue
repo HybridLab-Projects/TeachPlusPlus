@@ -1,34 +1,25 @@
 <template>
   <div class="pl-xl-5 test">
     <b-row class="mt-3">
-      <b-col class="d-flex justify-content-end align-items-center head mb-3 mb-xl-0">
-        <div class="d-xl-none d-block mr-auto d-flex">
-          <b-button
-            v-b-toggle.sidebar-search
-          >
-            <b-icon-person />
-          </b-button>
-          <p class="ml-2 my-auto text-muted font-weight-bold d-none d-sm-block">
-            Zobraziť učiteľov
-          </p>
-        </div>
-        <b-link
-          class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
-          @click="logout"
-        >
-          Odhlásiť sa
-          <b-icon-box-arrow-right
-            font-scale="1.5"
-            shift-v="-2"
-          />
-        </b-link>
+      <b-col class="d-flex justify-content-between align-items-center head mb-3 mb-xl-0">
         <b-button
           variant="danger"
           class="py-xl-3 px-xl-5 py-2"
           to="/feedback"
         >
+          <b-icon-bookmark-plus />
           Pridať feedback
         </b-button>
+        <b-link
+          class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
+          @click="logout"
+        >
+          <b-icon-box-arrow-right
+            font-scale="1.5"
+            shift-v="-2"
+          />
+          Odhlásiť sa
+        </b-link>
       </b-col>
     </b-row>
     <div
@@ -61,6 +52,12 @@
                 {{ subject.short }}
               </b-badge>
             </div>
+            <b-button
+              class="mt-3 bg-info"
+              v-b-toggle.sidebar-search
+            >
+              <b-icon-person /> Zobraziť učiteľov
+            </b-button>
           </div>
         </b-col>
       </b-row>
@@ -135,6 +132,12 @@
                 Vyber si učiteľa, ktorého feedbacky chceš prezerať!
               </p>
             </div>
+            <b-button
+              class="mt-3 bg-info"
+              v-b-toggle.sidebar-search
+            >
+              <b-icon-person /> Zobraziť učiteľov
+            </b-button>
           </div>
         </b-col>
       </b-row>
