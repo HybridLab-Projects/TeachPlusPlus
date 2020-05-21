@@ -1,7 +1,7 @@
 <template>
   <div class="pl-xl-5 test">
     <b-row class="mt-3">
-      <b-col class="d-flex justify-content-between align-items-center head mb-3 mb-xl-0">
+      <b-col class="d-flex justify-content-between justify-content-md-end align-items-center head mb-3 mb-xl-0">
         <b-button
           variant="danger"
           class="py-xl-3 px-xl-5 py-2"
