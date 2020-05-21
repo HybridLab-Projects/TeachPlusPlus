@@ -6,7 +6,7 @@
       class="d-flex align-items-center w-100"
     >
       <b-avatar
-        class="mr-4"
+        class="mr-4 avatar-author"
         :src="`https://avatars.dicebear.com/v2/avataaars/${feedback.author.username}.svg?options[mood][]=happy`"
         variant="light"
         size="lg"
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <p class="font-weight-bold my-0 pr-2 pl-5">
+      <p class="font-weight-bold my-0 pr-2 pl-1 pl-md-5">
         {{ feedback.likes.length }}
       </p>
       <b-link @click="likeFeedback(feedback)">
@@ -45,7 +45,7 @@
       <b-avatar
         v-for="like in feedback.likes"
         :key="like.id"
-        class="ml-1"
+        class="ml-1 avatar-like"
         :src="`https://avatars.dicebear.com/v2/avataaars/${like.user.username}.svg?options[mood][]=happy`"
         variant="light"
         v-b-tooltip:tooltip="`${like.user.username}`"
@@ -106,5 +106,11 @@ export default {
 }
 .text-report {
   font-size: 0.875rem;
+}
+.avatar-author {
+  min-width: 56px;
+}
+.avatar-like {
+  min-width: 40px;
 }
 </style>

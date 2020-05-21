@@ -37,7 +37,7 @@
       <b-row class="mt-5">
         <b-col class="d-flex align-items-center">
           <b-avatar
-            class="mb-4"
+            class="mb-4 avatar-teacher"
             :src="require(`@/assets/img/teacher.png`)"
             variant="light"
             size="5rem"
@@ -118,7 +118,7 @@
       <b-row>
         <b-col class="d-flex align-items-center">
           <b-avatar
-            class="mb-4"
+            class="mb-4 avatar-user"
             :src="`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`"
             variant="light"
             size="5rem"
@@ -218,5 +218,9 @@ export default {
 .footer-text {
   font-size: 0.875rem;
   border-top: 1px #D7D7E8 solid;
+}
+
+.avatar-teacher, .avatar-user {
+  min-width: 80px;
 }
 </style>
