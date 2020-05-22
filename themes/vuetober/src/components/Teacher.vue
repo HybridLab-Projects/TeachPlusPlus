@@ -2,7 +2,7 @@
   <div class="pl-xl-5 test">
     <b-row class="mt-3">
       <b-col
-        class="d-flex justify-content-between justify-content-md-end
+        class="d-flex justify-content-between justify-content-md-start flex-md-row-reverse
       align-items-center mb-3 mb-xl-0"
       >
         <b-button
@@ -14,14 +14,14 @@
           Pridať feedback
         </b-button>
         <b-link
-          class="pl-3 pl-xl-5 my-auto text-muted font-weight-bold"
+          class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
           @click="logout"
         >
+          Odhlásiť sa
           <b-icon-box-arrow-right
             font-scale="1.5"
             shift-v="-2"
           />
-          Odhlásiť sa
         </b-link>
       </b-col>
     </b-row>
