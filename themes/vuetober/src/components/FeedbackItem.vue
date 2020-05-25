@@ -1,6 +1,6 @@
 <template>
   <b-list-group-item
-    class="d-flex flex-column align-items-end mb-4 border-0 shadow"
+    class="mb-4 border-0 shadow"
   >
     <div
       class="d-flex align-items-center w-100"
@@ -40,7 +40,7 @@
       </b-link>
     </div>
     <div
-      class="d-flex"
+      class="d-flex justify-content-end"
     >
       <b-avatar
         v-for="like in feedback.likes"
@@ -51,7 +51,7 @@
         v-b-tooltip:tooltip="`${like.user.username}`"
       />
     </div>
-    <div class="mt-2">
+    <div class="mt-2 d-flex justify-content-end">
       <b-link
         v-if="!feedback.reports.some((report) => +report.user_id === user.id)"
         @click="reportFeedback(feedback)"
