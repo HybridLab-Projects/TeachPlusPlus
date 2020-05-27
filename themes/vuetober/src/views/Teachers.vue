@@ -14,7 +14,7 @@
       <b-col
         cols="12"
         xl="9"
-        class="teacherbg vh-100"
+        class="teacherbg"
       >
         <SearchSidebar class="d-block d-xl-none fixed-top" />
         <Teacher />

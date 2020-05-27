@@ -212,14 +212,15 @@ export default {
   min-width: 800px;
 }
 
+@media screen and (min-width: 768px) {
+  .feedbacks {
+    height: calc(100vh - 420px);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: none;
+    padding-right: 10px;
 
-.feedbacks {
-  height: calc(100vh - 390px);
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: none;
-  padding-right: 10px;
-
+  }
 }
 
 .footer-text {
