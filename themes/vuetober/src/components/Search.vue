@@ -3,9 +3,9 @@
     <b-row class="mt-3">
       <b-col class="d-flex align-items-center">
         <b-img
-          class="pb-3 w-50"
+          class="pb-3"
           :src="require(`@/assets/img/Logo.svg`)"
-          alt=""
+          fluid
         />
       </b-col>
     </b-row>

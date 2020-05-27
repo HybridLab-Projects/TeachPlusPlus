@@ -2,27 +2,73 @@
   <div class="pl-xl-5 test">
     <b-row class="mt-3">
       <b-col
-        class="d-flex justify-content-between justify-content-md-start flex-md-row-reverse
-      align-items-center mb-3 mb-xl-0"
+        class="mb-3 mb-xl-0"
       >
-        <b-button
-          variant="danger"
-          class="py-xl-3 px-xl-5 py-2"
-          to="/feedback"
+        <div
+          class="d-none d-md-flex justify-content-start
+          flex-row-reverse align-items-center"
         >
-          <b-icon-bookmark-plus />
-          Pridať feedback
-        </b-button>
-        <b-link
-          class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
-          @click="logout"
+          <b-button
+            variant="danger"
+            class="py-xl-3 px-xl-5 py-2"
+            to="/feedback"
+          >
+            <b-icon-bookmark-plus />
+            Pridať feedback
+          </b-button>
+          <b-link
+            class="pr-3 pr-xl-5 my-auto text-muted font-weight-bold"
+            @click="logout"
+          >
+            Odhlásiť sa
+            <b-icon-box-arrow-right
+              font-scale="1.5"
+              shift-v="-2"
+            />
+          </b-link>
+        </div>
+        <b-navbar
+          toggleable="sm"
+          type="light"
+          variant="light"
+          fixed="top"
+          class="d-md-none"
         >
-          Odhlásiť sa
-          <b-icon-box-arrow-right
-            font-scale="1.5"
-            shift-v="-2"
-          />
-        </b-link>
+          <b-navbar-brand href="#">
+            {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
+          </b-navbar-brand>
+
+          <b-navbar-toggle target="nav-collapse" />
+
+          <b-collapse
+            id="nav-collapse"
+            is-nav
+          >
+            <b-navbar-nav
+              class="ml-auto justify-content-between justify-content-md-start flex-md-row-reverse
+      align-items-center"
+            >
+              <b-button
+                variant="danger"
+                class="py-xl-3 px-xl-5 py-2"
+                to="/feedback"
+              >
+                <b-icon-bookmark-plus />
+                Pridať feedback
+              </b-button>
+              <b-link
+                class="pl-3 my-auto text-muted font-weight-bold"
+                @click="logout"
+              >
+                Odhlásiť sa
+                <b-icon-box-arrow-right
+                  font-scale="1.5"
+                  shift-v="-2"
+                />
+              </b-link>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
       </b-col>
     </b-row>
     <div
@@ -214,7 +260,7 @@ export default {
 
 @media screen and (min-width: 768px) {
   .feedbacks {
-    height: calc(100vh - 420px);
+    height: calc(100vh - 400px);
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     overflow-x: none;
