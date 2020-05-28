@@ -9,8 +9,6 @@ import { ValidationProvider, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import { messages } from 'vee-validate/dist/locale/sk.json';
 
-import VueGtag from 'vue-gtag';
-
 import router from './router';
 import store from './store';
 
@@ -19,12 +17,6 @@ const custom = {
   setup() {
     Vue.use(BootstrapVue);
     Vue.use(IconsPlugin);
-
-    Vue.use(VueGtag, {
-      config: { id: 'UA-167888903-1' },
-      appName: 'TeachPlusPlus',
-      pageTrackerScreenviewEnabled: true,
-    }, router);
 
     Object.keys(rules).forEach((rule) => {
       extend(rule, {
@@ -65,7 +57,6 @@ const custom = {
       },
     );
   },
-
 };
 
 export default custom;
