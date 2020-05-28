@@ -24,8 +24,7 @@ const custom = {
       config: {
         id: 'UA-167852978-1',
       },
-      router,
-    });
+    }, router);
 
     Object.keys(rules).forEach((rule) => {
       extend(rule, {
