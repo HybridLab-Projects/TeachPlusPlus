@@ -23,12 +23,6 @@ const custom = {
     Vue.use(VueGtag, {
       config: { id: 'UA-167888903-1' },
       appName: 'TeachPlusPlus',
-      pageTrackerTemplate(to) {
-        return {
-          page_title: to.name,
-          page_path: to.path,
-        };
-      },
       pageTrackerScreenviewEnabled: true,
     }, router);
 
