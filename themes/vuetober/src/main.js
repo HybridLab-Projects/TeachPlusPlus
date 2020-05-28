@@ -4,9 +4,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import { setup, created } from './custom';
+import Custom from './custom';
 
-setup();
+Custom.setup();
 
 Vue.config.productionTip = false;
 
@@ -15,6 +15,6 @@ new Vue({
   store,
   render: (h) => h(App),
   created() {
-    created(router, store);
+    Custom.created();
   },
 }).$mount('#app');
