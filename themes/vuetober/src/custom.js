@@ -9,6 +9,8 @@ import { ValidationProvider, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import { messages } from 'vee-validate/dist/locale/sk.json';
 
+import SmartlookClient from 'smartlook-client';
+
 import router from './router';
 import store from './store';
 
@@ -45,6 +47,8 @@ const custom = {
         token
       }`;
     }
+
+    SmartlookClient.init('fc12e3b81c44e9f5321d50d48848f14a85ac8786');
 
     Axios.interceptors.response.use(
       (response) => response,
