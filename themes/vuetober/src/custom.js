@@ -21,7 +21,7 @@ const custom = {
     Vue.use(IconsPlugin);
 
     Vue.use(VueGtag, {
-      config: { id: 'UA-167852978-1' },
+      config: { id: 'UA-167888903-1' },
       appName: 'TeachPlusPlus',
       pageTrackerScreenviewEnabled: true,
     }, router);
