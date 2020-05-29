@@ -11,6 +11,7 @@ import { messages } from 'vee-validate/dist/locale/sk.json';
 
 import SmartlookClient from 'smartlook-client';
 
+
 import router from './router';
 import store from './store';
 
