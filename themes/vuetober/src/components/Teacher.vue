@@ -32,11 +32,11 @@
           type="light"
           variant="light"
           fixed="top"
-          class="d-lg-none"
+          class="d-xl-none"
         >
           <b-navbar-brand class="d-flex">
             <b-button
-              class="mt-4 mr-2 bg-info d-xl-none d-inline my-auto"
+              class="mt-3 mr-3 bg-info d-xl-none d-inline my-auto"
               v-b-toggle.sidebar-search
             >
               <b-icon-person />
@@ -53,7 +53,7 @@
             is-nav
           >
             <b-navbar-nav
-              class="ml-auto justify-content-between justify-content-lg-start flex-lg-row-reverse
+              class="ml-auto justify-content-between justify-content-xl-start flex-xl-row-reverse
       align-items-center"
             >
               <b-button
@@ -260,7 +260,7 @@ export default {
   min-width: 800px;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 1200px) {
   .feedbacks {
     height: calc(100vh - 400px);
     overflow-y: scroll;
