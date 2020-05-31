@@ -2,10 +2,10 @@
   <div class="pl-xl-5 test">
     <b-row class="mt-3">
       <b-col
-        class="mb-3 mb-xl-0"
+        class="mb-5 mb-xl-0"
       >
         <div
-          class="d-none d-md-flex justify-content-start
+          class="d-none d-lg-flex justify-content-start
           flex-row-reverse align-items-center"
         >
           <b-button
@@ -32,10 +32,18 @@
           type="light"
           variant="light"
           fixed="top"
-          class="d-md-none"
+          class="d-lg-none"
         >
-          <b-navbar-brand href="#">
-            {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
+          <b-navbar-brand class="d-flex">
+            <b-button
+              class="mt-4 mr-2 bg-info d-xl-none d-inline my-auto"
+              v-b-toggle.sidebar-search
+            >
+              <b-icon-person />
+            </b-button>
+            <p class="my-auto">
+              {{ selectedTeacher.name }} {{ selectedTeacher.surname }}
+            </p>
           </b-navbar-brand>
 
           <b-navbar-toggle target="nav-collapse" />
@@ -45,7 +53,7 @@
             is-nav
           >
             <b-navbar-nav
-              class="ml-auto justify-content-between justify-content-md-start flex-md-row-reverse
+              class="ml-auto justify-content-between justify-content-lg-start flex-lg-row-reverse
       align-items-center"
             >
               <b-button
@@ -101,12 +109,6 @@
                 {{ subject.short }}
               </b-badge>
             </div>
-            <b-button
-              class="mt-3 bg-info d-xl-none d-block"
-              v-b-toggle.sidebar-search
-            >
-              <b-icon-person /> Zobraziť učiteľov
-            </b-button>
           </div>
         </b-col>
       </b-row>
@@ -258,7 +260,7 @@ export default {
   min-width: 800px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 960px) {
   .feedbacks {
     height: calc(100vh - 400px);
     overflow-y: scroll;
