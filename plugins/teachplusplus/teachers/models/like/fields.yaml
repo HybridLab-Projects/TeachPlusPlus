@@ -1,0 +1,13 @@
+fields:
+    feedback:
+        label: Feedback
+        nameFrom: feedback
+        descriptionFrom: description
+        span: auto
+        type: relation
+    user:
+        label: Používateľ
+        nameFrom: username
+        descriptionFrom: description
+        span: auto
+        type: relation

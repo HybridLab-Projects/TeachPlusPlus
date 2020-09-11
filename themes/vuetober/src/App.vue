@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar />
+    <NavBar v-if="!['Teachers', 'Feedback'].includes($route.name)" />
     <router-view />
   </div>
 </template>
@@ -9,6 +9,7 @@
 import NavBar from '@/components/NavBar.vue';
 
 export default {
+  name: 'App',
   components: {
     NavBar,
   },
@@ -16,5 +17,8 @@ export default {
 </script>
 
 <style lang="scss">
-
+* {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+  font-family: 'Inter', sans-serif;
+}
 </style>

@@ -1,0 +1,29 @@
+columns:
+    id:
+        label: id
+        type: number
+        sortable: true
+    feedback:
+        label: Feedbacks
+        type: text
+        sortable: true
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    teacher_id:
+        label: teacher_id
+        type: number
+    banned:
+        label: banned
+        type: text
+        searchable: true
+        sortable: true
+    author_id:
+        label: author_id
+        type: number
+    subject_id:
+        label: subject_id
+        type: number

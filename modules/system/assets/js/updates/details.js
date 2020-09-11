@@ -2,24 +2,21 @@
  * Details page
  */
 
-+function ($) { "use strict";
++(function ($) {
+    "use strict";
 
     var UpdateDetails = function () {
-        this.init()
-    }
+        this.init();
+    };
 
-    UpdateDetails.prototype.init = function() {
+    UpdateDetails.prototype.init = function () {
+        $(document).ready(function () {
+            $(".plugin-details-content pre").addClass("prettyprint");
+            prettyPrint();
+        });
+    };
 
-        $(document).ready(function() {
-            $('.plugin-details-content pre').addClass('prettyprint')
-            prettyPrint()
-        })
+    if ($.oc === undefined) $.oc = {};
 
-    }
-
-    if ($.oc === undefined)
-        $.oc = {}
-
-    $.oc.updateDetails = new UpdateDetails;
-
-}(window.jQuery);
+    $.oc.updateDetails = new UpdateDetails();
+})(window.jQuery);

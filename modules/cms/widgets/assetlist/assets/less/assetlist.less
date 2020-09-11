@@ -11,7 +11,8 @@
         .border-radius(@border-radius-base);
     }
 
-    p.parent, ul li {
+    p.parent,
+    ul li {
         font-weight: 300;
         line-height: 150%;
         margin-bottom: 0;
@@ -27,7 +28,7 @@
                 top: 0;
                 background: @color-list-active-border;
                 display: block;
-                content: ' ';
+                content: " ";
             }
         }
 
@@ -41,7 +42,11 @@
             color: @color-text-title;
             font-size: 14px;
 
-            &:hover, &:focus, &:active {text-decoration: none;}
+            &:hover,
+            &:focus,
+            &:active {
+                text-decoration: none;
+            }
 
             span {
                 display: block;
@@ -60,7 +65,8 @@
             }
         }
 
-        &.directory, &.parent {
+        &.directory,
+        &.parent {
             a.link {
                 padding-left: 40px;
 
@@ -85,7 +91,7 @@
                 word-wrap: break-word;
 
                 &:before {
-                    content: '';
+                    content: "";
                     height: 1px;
                     display: block;
                     position: absolute;
@@ -95,7 +101,6 @@
                     height: 1px;
                     background: #ecf0f1;
                 }
-
 
                 &:after {
                     font-size: 13px;
@@ -133,7 +138,10 @@
             position: relative;
             list-style: none;
 
-            &.active a.link, a.link:hover {background: @color-list-active;}
+            &.active a.link,
+            a.link:hover {
+                background: @color-list-active;
+            }
             &.active a.link {
                 position: relative;
                 &:after {
@@ -144,7 +152,7 @@
                     top: 0;
                     background: @color-list-active-border;
                     display: block;
-                    content: ' ';
+                    content: " ";
                 }
             }
 
@@ -158,7 +166,7 @@
                     height: 21px;
 
                     &.open a.control {
-                        display: block!important; 
+                        display: block !important;
                         &:before {
                             visibility: visible;
                             display: block;
@@ -191,11 +199,12 @@
 
             &:hover {
                 background: @color-list-active;
-                div.controls, a.control {
-                    display: block!important;
+                div.controls,
+                a.control {
+                    display: block !important;
 
                     > a.control {
-                        display: block!important;
+                        display: block !important;
                     }
                 }
             }
@@ -231,6 +240,5 @@
         &.goBackward ul {
             .translate(350px, 0);
         }
-
     }
 }

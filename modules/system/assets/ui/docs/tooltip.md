@@ -3,6 +3,7 @@
 Tooltips are an alternative to the standard browser title tooltip.
 
 ## Tooltip markup
+
 A standard tooltip
 
     <div class="tooltip fade top in">
@@ -11,6 +12,7 @@ A standard tooltip
     </div>
 
 ## Spawning tooltips
+
 Tooltips can be automatically created when the mouse enters an element using the `data-toggle="tooltip"` tag.
 
     <a

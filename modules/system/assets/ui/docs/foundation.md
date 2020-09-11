@@ -2,10 +2,10 @@
 
 The foundation libraries are the core base of all scripts and controls. The goals of this library are:
 
-- Well structured and readable code.
-- Don't leave references to DOM elements.
-- Unbind all event handlers.
-- Write high-performance code (in cases when it's needed).
+-   Well structured and readable code.
+-   Don't leave references to DOM elements.
+-   Unbind all event handlers.
+-   Write high-performance code (in cases when it's needed).
 
 That's especially important on pages where users spend much time interacting with the page, like the CMS and Pages sections, but all back-end controls should follow these rules, because we never know when they are used.
 
@@ -26,7 +26,7 @@ If any of that components are not released we have these problems:
 ## This is how to deal with those problems:
 
 1. Remove the JavaScript object - usually by removing the data from the control's root element: `this.$el.removeData('oc.myControl')`
-Clean all references to DOM elements. Usually it's done by assigning NULL to corresponding object properties.
+   Clean all references to DOM elements. Usually it's done by assigning NULL to corresponding object properties.
 1. Watch for any references caught by closures (or - better do not use closures, see below).
 1. Unbind event handlers.
 
@@ -63,28 +63,28 @@ If a class should be disposable (all UI controls should be disposable), the clas
 Example of a disposable class:
 
 ```js
-+function ($) { "use strict";
++function ($) {
+    "use strict";
     var Base = $.oc.foundation.base,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
-    var SomeDisposableClass = function(element) {
-        this.$el = $(element)
+    var SomeDisposableClass = function (element) {
+        this.$el = $(element);
 
-        Base.call(this)
-        this.init()
-    }
+        Base.call(this);
+        this.init();
+    };
 
-    SomeDisposableClass.prototype = Object.create(BaseProto)
-    SomeDisposableClass.prototype.constructor = SomeDisposableClass
+    SomeDisposableClass.prototype = Object.create(BaseProto);
+    SomeDisposableClass.prototype.constructor = SomeDisposableClass;
 
-    SomeDisposableClass.prototype.init = function () {
-    }
+    SomeDisposableClass.prototype.init = function () {};
 
     SomeDisposableClass.prototype.dispose = function () {
-        this.$el = null
-        BaseProto.dispose.call(this)
-    }
-}
+        this.$el = null;
+        BaseProto.dispose.call(this);
+    };
+};
 ```
 
 A couple of important things to note:
@@ -157,79 +157,91 @@ UI controls should support two ways of disposing - with calling their `dispose()
 
 ## Full example of a jQuery plugin that creates a disposable control
 
-We already have a boilerplate code for jQuery code. Disposable controls approach just extends it. Don't forget to remove the  data associated with controls from their DOM elements.
+We already have a boilerplate code for jQuery code. Disposable controls approach just extends it. Don't forget to remove the data associated with controls from their DOM elements.
 
 ```js
-+function ($) { "use strict";
++(function ($) {
+    "use strict";
     var Base = $.oc.foundation.base,
-        BaseProto = Base.prototype
+        BaseProto = Base.prototype;
 
     var SomeDisposableControl = function (element, options) {
-        this.$el = $(element)
-        this.options = options || {}
+        this.$el = $(element);
+        this.options = options || {};
 
-        $.oc.foundation.controlUtils.markDisposable(element)
-        Base.call(this)
-        this.init()
-    }
+        $.oc.foundation.controlUtils.markDisposable(element);
+        Base.call(this);
+        this.init();
+    };
 
-    SomeDisposableControl.prototype = Object.create(BaseProto)
-    SomeDisposableControl.prototype.constructor = SomeDisposableControl
+    SomeDisposableControl.prototype = Object.create(BaseProto);
+    SomeDisposableControl.prototype.constructor = SomeDisposableControl;
 
-    SomeDisposableControl.prototype.init = function() {
-        this.$el.on('click', this.proxy(this.onClick))
-        this.$el.one('dispose-control', this.proxy(this.dispose))
-    }
+    SomeDisposableControl.prototype.init = function () {
+        this.$el.on("click", this.proxy(this.onClick));
+        this.$el.one("dispose-control", this.proxy(this.dispose));
+    };
 
-    SomeDisposableControl.prototype.dispose = function() {
-        this.$el.off('click', this.proxy(this.onClick))
-        this.$el.off('dispose-control', this.proxy(this.dispose))
-        this.$el.removeData('oc.someDisposableControl')
+    SomeDisposableControl.prototype.dispose = function () {
+        this.$el.off("click", this.proxy(this.onClick));
+        this.$el.off("dispose-control", this.proxy(this.dispose));
+        this.$el.removeData("oc.someDisposableControl");
 
-        this.$el = null
+        this.$el = null;
 
-        // In some cases options could contain callbacks, 
+        // In some cases options could contain callbacks,
         // so it's better to clean them up too.
-        this.options = null
+        this.options = null;
 
-        BaseProto.dispose.call(this)
-    }
+        BaseProto.dispose.call(this);
+    };
 
     SomeDisposableControl.DEFAULTS = {
-        someParam: null
-    }
+        someParam: null,
+    };
 
     // PLUGIN DEFINITION
     // ============================
 
-    var old = $.fn.someDisposableControl
+    var old = $.fn.someDisposableControl;
 
     $.fn.someDisposableControl = function (option) {
-        var args = Array.prototype.slice.call(arguments, 1), items, result
+        var args = Array.prototype.slice.call(arguments, 1),
+            items,
+            result;
 
         items = this.each(function () {
-            var $this   = $(this)
-            var data    = $this.data('oc.someDisposableControl')
-            var options = $.extend({}, SomeDisposableControl.DEFAULTS, $this.data(), typeof option == 'object' && option)
-            if (!data) $this.data('oc.someDisposableControl', (data = new SomeDisposableControl(this, options)))
-            if (typeof option == 'string') result = data[option].apply(data, args)
-            if (typeof result != 'undefined') return false
-        })
+            var $this = $(this);
+            var data = $this.data("oc.someDisposableControl");
+            var options = $.extend(
+                {},
+                SomeDisposableControl.DEFAULTS,
+                $this.data(),
+                typeof option == "object" && option
+            );
+            if (!data)
+                $this.data(
+                    "oc.someDisposableControl",
+                    (data = new SomeDisposableControl(this, options))
+                );
+            if (typeof option == "string")
+                result = data[option].apply(data, args);
+            if (typeof result != "undefined") return false;
+        });
 
-        return result ? result : items
-    }
+        return result ? result : items;
+    };
 
-    $.fn.someDisposableControl.Constructor = SomeDisposableControl
+    $.fn.someDisposableControl.Constructor = SomeDisposableControl;
 
     $.fn.someDisposableControl.noConflict = function () {
-        $.fn.someDisposableControl = old
-        return this
-    }
+        $.fn.someDisposableControl = old;
+        return this;
+    };
 
     // Add this only if required
-    $(document).render(function (){
-        $('[data-some-disposable-control]').someDisposableControl()
-    })
-
-}(window.jQuery);
+    $(document).render(function () {
+        $("[data-some-disposable-control]").someDisposableControl();
+    });
+})(window.jQuery);
 ```

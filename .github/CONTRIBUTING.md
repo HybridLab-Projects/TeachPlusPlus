@@ -2,12 +2,12 @@
 
 Thank you for your interest in contributing to the OctoberCMS project. We appreciate any assistance that community members and users of OctoberCMS are willing to provide. You can contribute to the project in several different ways:
 
-- [Reporting a Security Vulnerability](#reporting-a-security-vulnerability)
-- [Reporting an issue with OctoberCMS](#reporting-an-issue-with-octobercms)
-  - [Reporting an issue with an OctoberCMS plugin](#reporting-an-issue-with-an-octobercms-plugin)
-- [Making a Feature Request](#making-a-feature-request)
-- [Making a Pull Request](#making-a-pull-request)
-- [Testing Pull Requests](#testing-a-pull-request)
+-   [Reporting a Security Vulnerability](#reporting-a-security-vulnerability)
+-   [Reporting an issue with OctoberCMS](#reporting-an-issue-with-octobercms)
+    -   [Reporting an issue with an OctoberCMS plugin](#reporting-an-issue-with-an-octobercms-plugin)
+-   [Making a Feature Request](#making-a-feature-request)
+-   [Making a Pull Request](#making-a-pull-request)
+-   [Testing Pull Requests](#testing-a-pull-request)
 
 ## Reporting a Security Vulnerability
 
@@ -15,21 +15,21 @@ Please review [our security policy](https://github.com/octobercms/october/securi
 
 ## Reporting an issue with OctoberCMS
 
->**NOTE:** If your issue is related to an OctoberCMS plugin, please see the [Reporting an issue with an OctoberCMS plugin](#reporting-an-issue-with-an-octobercms-plugin) section below.
+> **NOTE:** If your issue is related to an OctoberCMS plugin, please see the [Reporting an issue with an OctoberCMS plugin](#reporting-an-issue-with-an-octobercms-plugin) section below.
 
 We work hard to process bugs that are reported, to assist with this please ensure the following details are always included:
 
-- **Summary**: Make sure your summary reflects what the problem is and where it is. Provide as much detail as possible, the more information we have to work with the more likely it is that your problem can be solved.
+-   **Summary**: Make sure your summary reflects what the problem is and where it is. Provide as much detail as possible, the more information we have to work with the more likely it is that your problem can be solved.
 
-- **Reproduce steps**: Clearly mention the steps to reproduce the bug.
+-   **Reproduce steps**: Clearly mention the steps to reproduce the bug.
 
-- **Expected behavior**: Describe how OctoberCMS should behave on above mentioned steps.
+-   **Expected behavior**: Describe how OctoberCMS should behave on above mentioned steps.
 
-- **Actual behavior**: What is the actual result on running above steps i.e. the bug behavior - **include any error messages**.
+-   **Actual behavior**: What is the actual result on running above steps i.e. the bug behavior - **include any error messages**.
 
 If possible, please provide any screenshots or GIFs of the issue occurring to provide us with additional context to determine the cause of the issue.
 
->**NOTE**: If you're reporting an issue that you intend to fix yourself, you can skip the Issue step and just submit a Pull Request that fixes the issue (along with a detailed description of the original problem) instead.
+> **NOTE**: If you're reporting an issue that you intend to fix yourself, you can skip the Issue step and just submit a Pull Request that fixes the issue (along with a detailed description of the original problem) instead.
 
 #### Here's how to report an issue on GitHub
 
@@ -47,7 +47,7 @@ If you find out your bug is actually a duplicate of another bug and only notice 
 
 #### Reporting an issue with an OctoberCMS plugin
 
->Please don't use the main GitHub for reporting issues with plugins.
+> Please don't use the main GitHub for reporting issues with plugins.
 
 If you have found a bug in a plugin, the best place to report it is with the [plugin author](https://octobercms.com/plugins).
 
@@ -59,13 +59,13 @@ We do our best to attend to all reported issues. If you have an important issue 
 
 ## Making a Feature Request
 
->**NOTE:** Please don't use GitHub issues for suggesting a new feature. If you have a feature idea, the best place to suggest it is the [OctoberCMS website forum](https://octobercms.com/forum/chan/feature-requests).
+> **NOTE:** Please don't use GitHub issues for suggesting a new feature. If you have a feature idea, the best place to suggest it is the [OctoberCMS website forum](https://octobercms.com/forum/chan/feature-requests).
 
 Only use GitHub if you are planning on contributing a new feature and developing it. If you want to discuss your idea first, before "officially" posting it anywhere, you can always join us on [IRC](https://octobercms.com/chat) or [Slack](https://octobercms.slack.com).
 
 #### GitHub feature requests
 
-Feature Requests submitted as GitHub Issues specifically mean *"I'd like to see this feature, I'm going to be working on some code to implement it."* It is more like a Pre-Pull Request, in which a developer signifies that he or she wants to see a feature implemented that they think would be really great, and they're committed to coding it.
+Feature Requests submitted as GitHub Issues specifically mean _"I'd like to see this feature, I'm going to be working on some code to implement it."_ It is more like a Pre-Pull Request, in which a developer signifies that he or she wants to see a feature implemented that they think would be really great, and they're committed to coding it.
 
 It's a great way to launch discussions on the developer side of things because both the core team and the community developer get a chance to talk about the technical side of the feature implementation. It's a great way to exchange ideas about how the logic could work in code.
 
@@ -75,10 +75,10 @@ Your contributions to the project are very welcome. If you would like to fix a b
 
 To help us merge your Pull Request, please make sure you follow these points:
 
-- Describe the problem clearly in the Pull Request description
-- Please make your fix on the `develop` branch. This makes merging much easier.
-- Do not edit compiled asset files such as `october.css`, `framework.css`, etc. directly. Instead, edit the LESS files inside the `less/` directory and then run `php artisan october:util compile assets` from the project root and commit the changed LESS files as well as the recompiled asset files.
-- For any change that you make, **please also add a test case(s)** in the `tests/unit` directory. This helps us understand the issue and make sure that it will stay fixed forever.
+-   Describe the problem clearly in the Pull Request description
+-   Please make your fix on the `develop` branch. This makes merging much easier.
+-   Do not edit compiled asset files such as `october.css`, `framework.css`, etc. directly. Instead, edit the LESS files inside the `less/` directory and then run `php artisan october:util compile assets` from the project root and commit the changed LESS files as well as the recompiled asset files.
+-   For any change that you make, **please also add a test case(s)** in the `tests/unit` directory. This helps us understand the issue and make sure that it will stay fixed forever.
 
 Thank you for your contributions!
 
@@ -123,9 +123,9 @@ If Git reports that your changes have conflicts, you will need to resolve the ch
 
 Please ensure that your Pull Request satisfies the following coding standards:
 
-- [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
-- [PSR 1 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
-- [PSR 0 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
+-   [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
+-   [PSR 1 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
+-   [PSR 0 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md)
 
 To validate your changes against our coding standards, you may run `./vendor/bin/phpcs -nq --extensions="php"` in your development folder.
 

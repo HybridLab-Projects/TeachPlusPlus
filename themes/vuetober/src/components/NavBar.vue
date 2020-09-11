@@ -5,28 +5,66 @@
   >
     <b-navbar
       toggleable="lg"
-      type="dark"
-      variant="info"
+      type="danger"
+      variant="light"
     >
-      <b-navbar-brand to="/">
-        Teach++
+      <b-navbar-brand
+        to="/"
+        class="brand"
+      >
+        <img
+          :src="require(`@/assets/img/Logo.svg`)"
+          alt=""
+          class="w-50"
+        >
       </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse" />
+      <b-navbar-toggle target="nav-collapse">
+        <b-icon-list />
+      </b-navbar-toggle>
 
       <b-collapse
         id="nav-collapse"
         is-nav
       >
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item to="register">
-            Registrácia
-          </b-nav-item>
-
-          <b-nav-item
-            to="login"
+        <b-navbar-nav
+          class="ml-auto"
+          v-if="this.$route.path !== '/register'"
+        >
+          <p
+            class="my-auto text-muted mr-3 font-weight-bold"
           >
-            Prihlásenie
+            Ešte nemáš účet?
+          </p>
+          <b-nav-item
+            to="/register"
+          >
+            <b-button
+              variant="outline-primary"
+              class="font-weight-bold px-3 custombtn"
+            >
+              Registruj sa
+            </b-button>
+          </b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav
+          class="ml-auto"
+          v-else
+        >
+          <p
+            class="my-auto text-muted mr-3 font-weight-bold"
+          >
+            Už máš účet?
+          </p>
+          <b-nav-item
+            to="/login"
+          >
+            <b-button
+              variant="outline-primary"
+              class="font-weight-bold px-3 custombtn"
+            >
+              Prihlás sa
+            </b-button>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -35,11 +73,18 @@
 </template>
 
 <script>
+
 export default {
   name: 'NavBar',
 };
 </script>
 
 <style lang="scss" scoped>
+.brand {
+  color: #000;
+}
 
+.navbar-toggler-icon {
+  color: #000;
+}
 </style>

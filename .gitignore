@@ -3,9 +3,9 @@
 composer.phar
 .DS_Store
 .idea
-.env
 .env.*.php
 .env.php
+.env
 php_errors.log
 nginx-error.log
 nginx-access.log
@@ -19,6 +19,7 @@ composer.lock
 package-lock.json
 /node_modules
 _ide_helper.php
+_ide_helper_models.php
 
 # for netbeans
 nbproject

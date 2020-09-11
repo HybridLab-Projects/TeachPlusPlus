@@ -1,0 +1,8 @@
+themes/vuetober
+/vendor
+*.php
+*.htm
+*.html
+*.yaml
+*.yml
+*.ts

@@ -1,0 +1,29 @@
+plugin:
+    name: 'teachplusplus.teachers::lang.plugin.name'
+    description: 'teachplusplus.teachers::lang.plugin.description'
+    author: TeachPlusPlus
+    icon: oc-icon-book
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Teachers
+        url: teachplusplus/teachers/teachers
+        icon: icon-users
+        sideMenu:
+            side-menu-item:
+                label: Subjects
+                url: teachplusplus/teachers/subjects
+                icon: icon-list
+    feedback:
+        label: Feedbacks
+        url: teachplusplus/teachers/feedbacks
+        icon: icon-comment
+        sideMenu:
+            likes:
+                label: Likes
+                url: teachplusplus/teachers/likes
+                icon: icon-thumbs-up
+            report:
+                label: Reports
+                url: teachplusplus/teachers/reports
+                icon: icon-warning

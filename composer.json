@@ -3,7 +3,12 @@
     "description": "OctoberCMS",
     "homepage": "https://octobercms.com",
     "type": "project",
-    "keywords": ["october", "cms", "octobercms", "laravel"],
+    "keywords": [
+        "october",
+        "cms",
+        "octobercms",
+        "laravel"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -39,7 +44,7 @@
         "october/backend": "~1.0",
         "october/cms": "~1.0",
         "laravel/framework": "^5.5.40",
-        "wikimedia/composer-merge-plugin": "dev-master"
+        "wikimedia/composer-merge-plugin": "1.4.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.7",
@@ -47,7 +52,8 @@
         "phpunit/phpunit-selenium": "~1.2",
         "meyfa/phpunit-assert-gd": "1.1.0",
         "squizlabs/php_codesniffer": "3.*",
-        "jakub-onderka/php-parallel-lint": "^1.0"
+        "jakub-onderka/php-parallel-lint": "^1.0",
+        "barryvdh/laravel-ide-helper": "^2.6"
     },
     "autoload-dev": {
         "classmap": [

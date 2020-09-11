@@ -26,10 +26,11 @@
     background: white;
     border: 1px solid #eee;
 
-    >.form-group:last-child {
+    > .form-group:last-child {
         padding-bottom: 0;
 
-        .radio, .checkbox {
+        .radio,
+        .checkbox {
             margin-bottom: 0;
         }
     }
@@ -41,9 +42,12 @@
 
     // Style primary tabs
     .control-tabs.primary-tabs {
-        > ul.nav-tabs, > div > ul.nav-tabs, > div > div > ul.nav-tabs {
+        > ul.nav-tabs,
+        > div > ul.nav-tabs,
+        > div > div > ul.nav-tabs {
             > li a > span.title {
-                &:before, &:after {
+                &:before,
+                &:after {
                     background: white;
                 }
             }
@@ -60,7 +64,8 @@
 // Nice forms
 //
 
-.form-elements, .form-tabless-fields {
+.form-elements,
+.form-tabless-fields {
     .clearfix();
 }
 
@@ -78,18 +83,27 @@
         background-repeat: no-repeat;
         background-position: right -2px;
         padding-right: 30px !important;
-        background-image: url('@{image-path}/bitmap-icons.png');
+        background-image: url("@{image-path}/bitmap-icons.png");
 
-        &.plus { background-position: right -124px; }
-        &.search { background-position: right -84px; }
-        &.user { background-position: right -41px; }
-        &.lock { background-position: right 0; }
+        &.plus {
+            background-position: right -124px;
+        }
+        &.search {
+            background-position: right -84px;
+        }
+        &.user {
+            background-position: right -41px;
+        }
+        &.lock {
+            background-position: right 0;
+        }
     }
 
     &.growable {
         width: 110px;
         //.transition(width 0.2s);
-        &:focus, &:active {
+        &:focus,
+        &:active {
             width: 200px !important;
         }
 
@@ -97,7 +111,8 @@
             width: 40px;
             text-indent: -999px;
 
-            &:focus, &:active {
+            &:focus,
+            &:active {
                 text-indent: 0;
                 width: 100px !important;
             }
@@ -116,7 +131,8 @@
         display: none;
     }
 
-    &, &.layout-item {
+    &,
+    &.layout-item {
         padding-bottom: @padding-standard;
         margin-bottom: 0;
     }
@@ -176,7 +192,9 @@
     }
 
     &.number-field {
-        > .form-control { text-align: right; }
+        > .form-control {
+            text-align: right;
+        }
     }
 
     &.radio-align {
@@ -194,7 +212,8 @@
     }
 
     &.field-slim {
-        &.span-left, &.span-right {
+        &.span-left,
+        &.span-right {
             width: 50%;
         }
     }
@@ -212,7 +231,8 @@
             top: 34px;
             font-size: 16px;
             color: @color-input-sidebar-control;
-            &:hover, &:focus {
+            &:hover,
+            &:focus {
                 text-decoration: none;
                 color: @link-color;
                 outline: none;
@@ -222,7 +242,6 @@
 }
 
 .form-group-preview {
-
     .form-control {
         background-color: @color-form-field-preview-bg;
         color: @color-form-field-preview-text;
@@ -235,7 +254,9 @@
 
     .custom-checkbox,
     .custom-radio {
-        label { cursor: default; }
+        label {
+            cursor: default;
+        }
     }
 }
 
@@ -262,13 +283,21 @@
     }
 
     &.right-align {
-        > .icon { right: 0; }
-        input { padding-right: 32px !important; }
+        > .icon {
+            right: 0;
+        }
+        input {
+            padding-right: 32px !important;
+        }
     }
 
     &.left-align {
-        > .icon { left: 0; }
-        input { padding-left: 32px !important; }
+        > .icon {
+            left: 0;
+        }
+        input {
+            padding-left: 32px !important;
+        }
     }
 }
 
@@ -278,7 +307,7 @@
     padding-bottom: 7px;
 
     > h4 {
-        color: rgba(0,0,0,.6);
+        color: rgba(0, 0, 0, 0.6);
     }
 
     > p:first-child,
@@ -299,7 +328,7 @@
             font-size: 12px;
             margin: 2px 8px 0;
             float: right;
-            color: rgba(0,0,0,.4);
+            color: rgba(0, 0, 0, 0.4);
             .transition(all 0.3s);
             .scaleAxes(1, 1);
         }
@@ -321,11 +350,21 @@
 
 .field-textarea {
     resize: vertical;
-    &.size-tiny { min-height: @size-tiny; }
-    &.size-small { min-height: @size-small; }
-    &.size-large { min-height: @size-large; }
-    &.size-huge { min-height: @size-huge; }
-    &.size-giant { min-height: @size-giant; }
+    &.size-tiny {
+        min-height: @size-tiny;
+    }
+    &.size-small {
+        min-height: @size-small;
+    }
+    &.size-large {
+        min-height: @size-large;
+    }
+    &.size-huge {
+        min-height: @size-huge;
+    }
+    &.size-giant {
+        min-height: @size-giant;
+    }
 }
 
 .field-checkboxlist {
@@ -381,7 +420,9 @@
     }
 
     // All others
-    .checkbox ~ .checkbox { margin-top: 0; }
+    .checkbox ~ .checkbox {
+        margin-top: 0;
+    }
 }
 
 .field-recordfinder {
@@ -494,7 +535,8 @@ body.slim-container {
 
 @media (max-width: @form-breakpoint-max) {
     .form-group {
-        &.span-left, &.span-right {
+        &.span-left,
+        &.span-right {
             width: 100%;
             clear: none;
         }
@@ -505,7 +547,10 @@ body.slim-container {
 // Select2
 //
 
-.select2-container--default .select2-selection--single .select2-selection__arrow b {
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow
+    b {
     border: none;
 }
 
@@ -517,13 +562,14 @@ body.slim-container {
 // Controls inside toolbar
 //
 
-[data-control=toolbar] {
+[data-control="toolbar"] {
     .form-control {
         display: inline-block;
         margin-right: 15px;
     }
 
-    input[type=text].form-control, label {
+    input[type="text"].form-control,
+    label {
         position: relative;
         top: 5px;
     }

@@ -1,1 +1,1 @@
-console.log('Legitimate file');
+console.log("Legitimate file");

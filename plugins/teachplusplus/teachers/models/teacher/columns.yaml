@@ -1,0 +1,14 @@
+columns:
+    id:
+        label: id
+        type: number
+    name:
+        label: Meno
+        type: text
+        searchable: true
+        sortable: true
+    surname:
+        label: Priezvisko
+        type: text
+        searchable: true
+        sortable: true

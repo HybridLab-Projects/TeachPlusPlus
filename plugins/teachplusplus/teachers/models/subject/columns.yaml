@@ -1,0 +1,14 @@
+columns:
+    id:
+        label: id
+        type: number
+    subject_name:
+        label: Predmet
+        type: text
+        searchable: true
+        sortable: true
+    short:
+        label: Skratka
+        type: text
+        searchable: true
+        sortable: true

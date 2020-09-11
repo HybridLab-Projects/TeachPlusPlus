@@ -1,1 +1,1 @@
-Be brave, be **bold**, live *italic*
+Be brave, be **bold**, live _italic_
