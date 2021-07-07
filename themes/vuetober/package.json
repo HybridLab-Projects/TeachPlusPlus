@@ -14,7 +14,7 @@
     "core-js": "^3.6.5",
     "moment": "^2.26.0",
     "smartlook-client": "^4.4.0",
-    "vee-validate": "^3.3.0",
+    "vee-validate": "^4.4.5",
     "vue": "^2.6.11",
     "vue-gtag": "^1.6.2",
     "vue-router": "^3.3.1",
